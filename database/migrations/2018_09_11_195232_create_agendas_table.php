@@ -22,7 +22,6 @@ class CreateAgendasTable extends Migration
             $table->unsignedInteger('time_allocated');
             $table->unsignedInteger('presenter');
             $table->unsignedInteger('owner');
-//            $table->enum('agenda_status', ['Adopted', 'Rejected']);
             $table->tinyInteger('agenda_status')->default(0);
             $table->text('conclusion');
             $table->timestamps();

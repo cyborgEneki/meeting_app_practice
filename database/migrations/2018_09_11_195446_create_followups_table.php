@@ -20,7 +20,6 @@ class CreateFollowupsTable extends Migration
             $table->text('action');
             $table->unsignedInteger('owner');
             $table->dateTime('timeline');
-//            $table->enum('status', ['Done', 'Pending']);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

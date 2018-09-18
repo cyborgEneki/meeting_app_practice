@@ -104,7 +104,7 @@ $factory->define(App\Agenda::class, function ($faker) {
         'owner' => function () {
             return factory('App\User')->create()->id;
         },
-        'agenda_status' => $faker->randomDigit,
+        'agenda_status' => $faker->numberBetween($min = 0, $max = 1),
         'conclusion' => $faker->paragraph,
     ];
 });
@@ -119,7 +119,7 @@ $factory->define(App\Followup::class, function ($faker) {
             return factory('App\User')->create()->id;
         },
         'timeline' => $faker->dateTime,
-        'status' => $faker->randomDigit,
+        'status' => $faker->numberBetween($min = 0, $max = 1),
     ];
 });
 
