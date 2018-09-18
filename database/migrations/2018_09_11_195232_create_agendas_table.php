@@ -37,7 +37,5 @@ class CreateAgendasTable extends Migration
     public function down()
     {
         Schema::dropIfExists('agendas');
-
-        Schema::dropIfExists('users');
     }
 }

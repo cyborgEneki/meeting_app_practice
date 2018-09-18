@@ -62,10 +62,10 @@ class CreateMeetingsTable extends Migration
     {
         Schema::dropIfExists('meetings');
 
-        Schema::dropIfExists('meetingseries');
-
-        Schema::dropIfExists('venues');
-
-        Schema::dropIfExists('media');
+//        Schema::dropIfExists('meetingseries');
+//
+//        Schema::dropIfExists('venues');
+//
+//        Schema::dropIfExists('media');
     }
 }

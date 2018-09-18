@@ -34,7 +34,5 @@ class CreateFollowupsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('followups');
-
-        Schema::dropIfExists('users');
     }
 }
