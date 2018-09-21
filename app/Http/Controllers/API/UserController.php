@@ -62,8 +62,6 @@ class UserController extends Controller
         $success['last_name'] = $user->last_name;
         $success['phone_number'] = $user->phone_number;
 
-        dd($user);
-
         return response()->json(['success' => $success], $this->successStatus);
     }
 
