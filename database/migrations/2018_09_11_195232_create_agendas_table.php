@@ -22,7 +22,7 @@ class CreateAgendasTable extends Migration
             $table->unsignedInteger('time_allocated');
             $table->unsignedInteger('presenter');
             $table->unsignedInteger('owner');
-            $table->tinyInteger('agenda_status')->default(0);
+            $table->boolean('agenda_status');
             $table->text('conclusion');
             $table->timestamps();
         });
