@@ -33,4 +33,9 @@ class Meeting extends Model
         return $this->belongsToMany('App\User', 'meeting_user',
             'meeting_id', 'user_id');
     }
+
+    public function agendas()
+    {
+        return $this->hasMany('App\Agenda');
+    }
 }

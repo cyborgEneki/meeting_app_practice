@@ -24,4 +24,9 @@ class Agenda extends Model
     {
         return $this->hasMany('App\Discussion');
     }
+
+    public function followups()
+    {
+        return $this->hasMany('App\Followup');
+    }
 }

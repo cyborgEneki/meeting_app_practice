@@ -8,7 +8,7 @@ class Note extends Model
 {
     protected $fillable = ['topic', 'description'];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
