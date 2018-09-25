@@ -25,8 +25,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('details', 'API\UserController@details');
 });
 
-Route::get('meetings', 'MeetingController@index');
-Route::get('meetings/{id}', 'MeetingController@show');
-Route::post('meetings', 'MeetingController@store');
-Route::put('meetings/{id}', 'MeetingController@update');
-Route::delete('meetings/{id}', 'MeetingController@delete');
+Route::apiResource('meetings', 'MeetingController');
