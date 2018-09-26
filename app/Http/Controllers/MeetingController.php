@@ -34,7 +34,7 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-//        dd(Auth::id(), $meeting->creator);
+        dd(Auth::id(), $meeting->creator);
 
         if (Auth::user() !== $meeting->creator) {
             return response()->json(['error' => 'You can only edit meetings that you create.'], 403);
