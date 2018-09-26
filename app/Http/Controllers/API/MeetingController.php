@@ -6,9 +6,17 @@ use App\Meeting;
 use Illuminate\Http\Request;
 use App\Http\Resources\MeetingResource;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\MeetingRepositoryInterface;
 
 class MeetingController extends Controller
 {
+    private $meetingRepo;
+
+    public function __construct(MeetingRepositoryInterface $meetingRepository)
+    {
+        $this->meetingRepo = $meetingRepository;
+    }
+
     public function index()
     {
         return MeetingResource::collection(Meeting::all());
@@ -17,14 +25,16 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
 
-        $meeting = Meeting::create($request->all());
+//        $meeting = Meeting::create($request->all());
 
-        return new MeetingResource($meeting);
+        $meeting = $this->meetingRepo->createMeeting($request->all());
+
+        return response()->json($meeting, 201);
     }
 
     public function show(Meeting $meeting)
     {
-        return new MeetingResource($meeting);
+        return response()->json($meeting, 200);
     }
 
     /**
@@ -34,9 +44,7 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        dd(Auth::id(), $meeting->creator);
-
-        if (Auth::user() !== $meeting->creator) {
+        if (Auth::id() !== $meeting->creator) {
             return response()->json(['error' => 'You can only edit meetings that you create.'], 403);
         }
 
