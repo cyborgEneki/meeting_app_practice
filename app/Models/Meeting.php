@@ -6,7 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meeting extends Model
 {
-    protected $fillable = ['name','date','start_time', 'end_time', 'creator', 'facilitator', 'time_keeper'];
+    protected $fillable =
+        [
+            'name',
+            'date',
+            'start_time',
+            'end_time',
+            'creator',
+            'facilitator',
+            'time_keeper',
+            'media_id',
+            'venue_id',
+            'meetingtype_id',
+            'meetingseries_id'
+        ];
 
     public function venue()
     {
@@ -18,7 +31,7 @@ class Meeting extends Model
         return $this->belongsTo('App\Media');
     }
 
-    public function meetingstype()
+    public function meetingtypes()
     {
         return $this->belongsTo('App\Meetingtype');
     }
@@ -28,10 +41,19 @@ class Meeting extends Model
         return $this->belongsTo('App\Meetingseries');
     }
 
-    public function users()
+    public function facilitator()
     {
-        return $this->belongsToMany('App\User', 'meeting_user',
-            'meeting_id', 'user_id');
+        return $this->belongsTo('App\User','facilitator');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator');
+    }
+
+    public function time_keeper()
+    {
+        return $this->belongsTo('App\User', 'time_keeper');
     }
 
     public function agendas()

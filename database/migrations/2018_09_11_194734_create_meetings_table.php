@@ -34,7 +34,7 @@ class CreateMeetingsTable extends Migration
 
         Schema::create('meetings', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('venue_id');
+            $table->unsignedInteger('venue_id')->nullable();
             $table->foreign('venue_id')->references('id')->on('venues');
             $table->unsignedInteger('media_id');
             $table->foreign('media_id')->references('id')->on('media');
