@@ -60,8 +60,13 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
+        if (Auth::id() !== $meeting->creator)
+        {
+            return response()->json(['error' => 'You can only delete meetings that you create.'], 403);
+        }
+
         $this->meeting->deleteMeeting($meeting);
 
-        return response()->json(null, 204);
+        return response()->json(['success' => 'You have successfully deleted your meeting.'], 204);
     }
 }

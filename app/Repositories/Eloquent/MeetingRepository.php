@@ -29,9 +29,13 @@ class MeetingRepository implements MeetingRepositoryInterface
         return $meeting->update($request->all());
     }
 
+    /**
+     * @param Meeting $meeting
+     * @return bool|null
+     * @throws \Exception
+     */
     public function deleteMeeting(Meeting $meeting)
     {
-        /** @var TYPE_NAME $meeting */
-        return $meeting->delete();
+        return $meeting->delete($meeting);
     }
 }

@@ -47,8 +47,11 @@ class CreateMeetingsTable extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->unsignedInteger('creator');
+            $table->foreign('creator')->references('id')->on('users');
             $table->unsignedInteger('facilitator');
+            $table->foreign('facilitator')->references('id')->on('users');
             $table->unsignedInteger('time_keeper');
+            $table->foreign('time_keeper')->references('id')->on('users');
             $table->timestamps();
         });
     }

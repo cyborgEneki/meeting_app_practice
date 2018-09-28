@@ -16,7 +16,7 @@ class CreateFollowupsTable extends Migration
         Schema::create('followups', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('agenda_id');
-            $table->foreign('agenda_id')->references('id')->on('agendas');
+            $table->foreign('agenda_id')->references('id')->on('agendas')->onDelete('cascade');
             $table->text('action');
             $table->unsignedInteger('owner');
             $table->dateTime('timeline');

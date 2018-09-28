@@ -48,9 +48,7 @@ class DatabaseSeeder extends Seeder
             $user->meetingseries()->saveMany(factory(App\Meetingseries::class, 2)->make());
         });
 
-        factory(App\Meeting::class, 2)->create()->each(function ($meeting) {
-            $meeting->users()->saveMany(factory(App\User::class, 2)->make());
-        });
+        factory(App\Meeting::class, 2)->create();
 
         factory(App\User::class, 2)->create()->each(function ($user) {
             $user->meetings()->saveMany(factory(App\Meeting::class, 2)->make());
