@@ -10,11 +10,10 @@ use App\Repositories\MeetingRepositoryInterface;
 
 class MeetingController extends Controller
 {
-    private $meetingRepo;
 
-    public function __construct(MeetingRepositoryInterface $meetingRepository)
+    public function __construct(MeetingRepositoryInterface $meeting)
     {
-        $this->meetingRepo = $meetingRepository;
+        $this->meeting = $meeting;
     }
 
     public function index()
@@ -24,12 +23,9 @@ class MeetingController extends Controller
 
     public function store(Request $request)
     {
+        $meetings = $this->meeting->createMeeting($request->all());
 
-//        $meeting = Meeting::create($request->all());
-
-        $meeting = $this->meetingRepo->createMeeting($request->all());
-
-        return response()->json($meeting, 201);
+        return response()->json($meetings, 201);
     }
 
     public function show(Meeting $meeting)
