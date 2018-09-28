@@ -23,13 +23,15 @@ class MeetingController extends Controller
 
     public function store(Request $request)
     {
-        $meetings = $this->meeting->createMeeting($request->all());
+        $meetings = $this->meeting->createMeeting($request);
 
         return response()->json($meetings, 201);
     }
 
     public function show(Meeting $meeting)
     {
+//        $meeting = Meeting::find($meeting);
+
         return response()->json($meeting, 200);
     }
 
@@ -40,11 +42,12 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        if (Auth::id() !== $meeting->creator) {
+        if (Auth::id() !== $meeting->creator)
+        {
             return response()->json(['error' => 'You can only edit meetings that you create.'], 403);
         }
 
-        $meeting->update($request->all());
+        $this->meeting->updateMeeting($request, $meeting);
 
         return response()->json(['You have successfully updated your meeting.'], 200);
     }
@@ -56,7 +59,7 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        $meeting->delete();
+        $this->meeting->deleteMeeting($meeting);
 
         return response()->json(null, 204);
     }

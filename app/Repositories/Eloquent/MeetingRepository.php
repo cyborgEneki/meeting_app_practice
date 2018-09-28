@@ -9,11 +9,24 @@ namespace App\Repositories;
  */
 
 use App\Meeting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MeetingRepository implements MeetingRepositoryInterface
 {
     public function createMeeting($request)
     {
         return Meeting::create($request->all());
+    }
+
+    public function updateMeeting(Request $request, Meeting $meeting)
+    {
+        return $meeting->update($request->all());
+    }
+
+    public function deleteMeeting(Meeting $meeting)
+    {
+        /** @var TYPE_NAME $meeting */
+        return $meeting->delete();
     }
 }
