@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Meeting;
 use Illuminate\Http\Request;
-use App\Http\Resources\MeetingResource;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
 
 class MeetingController extends Controller
 {
+
+    protected $meeting;
 
     public function __construct(MeetingRepositoryInterface $meeting)
     {
@@ -18,7 +19,9 @@ class MeetingController extends Controller
 
     public function index()
     {
-        return MeetingResource::collection(Meeting::all());
+        $meetings = $this->meeting->allMeetings();
+
+        return response()->json($meetings);
     }
 
     public function store(Request $request)
@@ -30,8 +33,6 @@ class MeetingController extends Controller
 
     public function show(Meeting $meeting)
     {
-//        $meeting = Meeting::find($meeting);
-
         return response()->json($meeting, 200);
     }
 

@@ -8,12 +8,17 @@ namespace App\Repositories;
  * Time: 10:57 PM
  */
 
+use App\Http\Resources\MeetingResource;
 use App\Meeting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class MeetingRepository implements MeetingRepositoryInterface
 {
+    public function allMeetings()
+    {
+        return MeetingResource::collection(Meeting::all());
+    }
+
     public function createMeeting($request)
     {
         return Meeting::create($request->all());

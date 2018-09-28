@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 interface MeetingRepositoryInterface
 {
+    public function allMeetings();
+
     public function createMeeting($request);
 
     public function updateMeeting(Request $request, Meeting $meeting);
