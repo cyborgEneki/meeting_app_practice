@@ -6,18 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agenda extends Model
 {
-    protected $fillable = ['topic', 'description', 'time_allocated', 'presenter', 'owner',
-        'agenda_status', 'conclusion'];
+    protected $fillable =
+        [
+            'meeting_id',
+            'topic',
+            'description',
+            'time_allocated',
+            'presenter',
+            'owner',
+            'agenda_status',
+            'conclusion'
+        ];
 
     public function meeting()
     {
         return $this->belongsTo('App\Meeting');
     }
 
-    public function users()
+    public function presenter()
     {
-        return $this->belongsToMany('App\User', 'agenda_user',
-            'agenda_id', 'user_id');
+        return $this->belongsTo('App\User', 'presenter');
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo('App\User', 'owner');
     }
 
     public function discussions()

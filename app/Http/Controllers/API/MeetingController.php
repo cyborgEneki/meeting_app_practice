@@ -21,7 +21,7 @@ class MeetingController extends Controller
     {
         $meetings = $this->meetingRepository->allMeetings();
 
-        return response()->json($meetings);
+        return response()->json($meetings, 200);
     }
 
     public function store(Request $request)

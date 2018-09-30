@@ -57,7 +57,7 @@ class MeetingtypeController extends Controller
     {
         $meetingtypes = $this->meetingtypeRepository->updateMeetingtype($request, $meetingtype);
 
-        return response()->json($meetingtype, 200);
+        return response()->json($meetingtypes, 200);
     }
 
     /**
@@ -70,6 +70,6 @@ class MeetingtypeController extends Controller
     {
         $meetingtypes = $this->meetingtypeRepository->deleteMeetingtype($meetingtype);
 
-        return response()->json($meetingtype, 204);
+        return response()->json($meetingtypes, 204);
     }
 }
