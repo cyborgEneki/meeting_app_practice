@@ -9,7 +9,7 @@ interface MeetingRepositoryInterface
 {
     public function allMeetings();
 
-    public function createMeeting($request);
+    public function createMeeting(Request $request);
 
     public function updateMeeting(Request $request, Meeting $meeting);
 

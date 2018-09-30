@@ -19,7 +19,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         return MeetingResource::collection(Meeting::all());
     }
 
-    public function createMeeting($request)
+    public function createMeeting(Request $request)
     {
         return Meeting::create($request->all());
     }

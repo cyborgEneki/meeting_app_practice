@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Note;
+use App\Repositories\NoteRepositoryInterface;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
+    protected $notesRepository;
+
+    public function __construct(NoteRepositoryInterface $notesRepository)
+    {
+        $this->notesRepository = $notesRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,9 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $notes = $this->notesRepository->allNotes();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($notes);
     }
 
     /**
@@ -35,7 +35,9 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notes = $this->notesRepository->createNote($request);
+
+        return response()->json($notes, 201);
     }
 
     /**
@@ -46,18 +48,7 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Note  $note
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Note $note)
-    {
-        //
+        return response()->json($note, 200);
     }
 
     /**
@@ -69,7 +60,9 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $this->notesRepository->updateNote($request, $note);
+
+        return response()->json($note, 200);
     }
 
     /**
@@ -80,6 +73,8 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $this->notesRepository->deleteNote($note);
+
+        return response()->json($note, 204);
     }
 }

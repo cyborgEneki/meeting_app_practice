@@ -10,23 +10,23 @@ use App\Repositories\MeetingRepositoryInterface;
 class MeetingController extends Controller
 {
 
-    protected $meeting;
+    protected $meetingRepository;
 
-    public function __construct(MeetingRepositoryInterface $meeting)
+    public function __construct(MeetingRepositoryInterface $meetingRepository)
     {
-        $this->meeting = $meeting;
+        $this->meetingRepository = $meetingRepository;
     }
 
     public function index()
     {
-        $meetings = $this->meeting->allMeetings();
+        $meetings = $this->meetingRepository->allMeetings();
 
         return response()->json($meetings);
     }
 
     public function store(Request $request)
     {
-        $meetings = $this->meeting->createMeeting($request);
+        $meetings = $this->meetingRepository->createMeeting($request);
 
         return response()->json($meetings, 201);
     }
@@ -48,7 +48,7 @@ class MeetingController extends Controller
             return response()->json(['error' => 'You can only edit meetings that you create.'], 403);
         }
 
-        $this->meeting->updateMeeting($request, $meeting);
+        $this->meetingRepository->updateMeeting($request, $meeting);
 
         return response()->json(['You have successfully updated your meeting.'], 200);
     }
@@ -65,7 +65,7 @@ class MeetingController extends Controller
             return response()->json(['error' => 'You can only delete meetings that you create.'], 403);
         }
 
-        $this->meeting->deleteMeeting($meeting);
+        $this->meetingRepository->deleteMeeting($meeting);
 
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 204);
     }
