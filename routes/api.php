@@ -27,5 +27,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('notes', 'NoteController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
     Route::apiResource('agendas', 'AgendaController');
+    Route::apiResource('followups', 'FollowupController');
 });
 

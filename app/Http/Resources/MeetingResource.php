@@ -15,7 +15,6 @@ class MeetingResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
             'my_name' => $this->name,
             'date' => $this->date,
             'start_time' => $this->start_time,
@@ -23,8 +22,6 @@ class MeetingResource extends JsonResource
             'creator' => $this->creator,
             'facilitator' => $this->facilitator,
             'time_keeper' => $this->time_keeper,
-            'created_at' => (string) $this->created_at,
-            'updated_at' => (string) $this->updated_at,
             'venue_id' => $this->venue_id,
             'media_id' => $this->media_id,
             'meetingtype_id' => $this->meetingtype_id,
