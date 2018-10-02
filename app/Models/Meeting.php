@@ -60,4 +60,10 @@ class Meeting extends Model
     {
         return $this->hasMany('App\Agenda');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'meeting_user',
+            'meeting_id', 'user_id');
+    }
 }
