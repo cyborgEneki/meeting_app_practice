@@ -28,5 +28,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('meetingtypes', 'MeetingtypeController');
     Route::apiResource('agendas', 'AgendaController');
     Route::apiResource('followups', 'FollowupController');
+    Route::post('/send', 'EmailController@send');
 });
 
