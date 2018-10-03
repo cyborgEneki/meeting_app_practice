@@ -9,19 +9,22 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\Meeting;
 
 class MeetingAlert
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $meeting;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Meeting $meeting
      */
-    public function __construct()
+    public function __construct(Meeting $meeting)
     {
-        //
+        $this->meeting = $meeting;
     }
 
     /**
