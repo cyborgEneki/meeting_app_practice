@@ -6,6 +6,7 @@ use App\Meeting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
+use App\Events\MeetingAlert;
 
 class MeetingController extends Controller
 {
@@ -24,11 +25,18 @@ class MeetingController extends Controller
         return response()->json($meetings, 200);
     }
 
-    public function store(Request $request)
+    /**
+     * @param Request $request
+     * @param $meeting
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(Request $request, Meeting $meeting)
     {
-        $meetings = $this->meetingRepository->createMeeting($request);
+        $this->meetingRepository->createMeeting($request);
 
-        return response()->json($meetings, 201);
+        event(new MeetingAlert($meeting));
+
+        return response()->json(['message' => 'Meeting created successfully.'], 201);
     }
 
     public function show(Meeting $meeting)

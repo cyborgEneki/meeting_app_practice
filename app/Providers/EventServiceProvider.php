@@ -18,9 +18,9 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
-    protected $subscribe = [
-      'App\Listeners\MeetingAlertSubscriber',
-    ];
+//    protected $subscribe = [
+//      'App\Listeners\MeetingAlertSubscriber',
+//    ];
 
     /**
      * Register any events for your application.

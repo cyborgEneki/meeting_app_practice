@@ -21,6 +21,11 @@ class Meeting extends Model
             'meetingseries_id'
         ];
 
+    protected $events =
+        [
+            'created' => Events\MeetingAlert::class
+        ];
+
     public function venue()
     {
         return $this->belongsTo('App\Venue');
@@ -43,7 +48,7 @@ class Meeting extends Model
 
     public function facilitator()
     {
-        return $this->belongsTo('App\User','facilitator');
+        return $this->belongsTo('App\User', 'facilitator');
     }
 
     public function creator()
