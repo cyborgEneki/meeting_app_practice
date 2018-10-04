@@ -44,7 +44,7 @@ class MeetingController extends Controller
 
     public function show($id)
     {
-        $meetings = Meeting::find($id);
+        $meetings = $this->meetingRepository->showMeeting($id);
 
         return new MeetingResource($meetings);
     }

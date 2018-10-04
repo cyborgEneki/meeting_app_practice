@@ -24,6 +24,11 @@ class MeetingRepository implements MeetingRepositoryInterface
         return Meeting::create($request->all());
     }
 
+    public function showMeeting($id)
+    {
+        return Meeting::find($id);
+    }
+
     public function updateMeeting(Request $request, Meeting $meeting)
     {
         return $meeting->update($request->all());
