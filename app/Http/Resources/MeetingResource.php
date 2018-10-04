@@ -15,7 +15,7 @@ class MeetingResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'my_name' => $this->name,
+            'name' => $this->name,
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
@@ -26,6 +26,7 @@ class MeetingResource extends JsonResource
             'media_id' => $this->media_id,
             'meetingtype_id' => $this->meetingtype_id,
             'meetingseries_id' => $this->meetingseries_id,
+            'users' => $this->users,
         ];
     }
 }

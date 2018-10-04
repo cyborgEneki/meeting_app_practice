@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MeetingResource;
 use App\Meeting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,8 @@ class MeetingController extends Controller
     {
         $meetings = $this->meetingRepository->allMeetings();
 
+        dd($meetings);
+
         return response()->json($meetings, 200);
     }
 
@@ -39,9 +42,11 @@ class MeetingController extends Controller
         return response()->json(['message' => 'Meeting created successfully.'], 201);
     }
 
-    public function show(Meeting $meeting)
+    public function show($id)
     {
-        return response()->json($meeting, 200);
+        $meetings = Meeting::find($id);
+
+        return new MeetingResource($meetings);
     }
 
     /**

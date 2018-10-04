@@ -13,7 +13,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(App\Meetingseries::class, 3)->create()->each(function($meetingseries) {
-            factory(App\Meeting::class, 10)->create(['meetingseries_id' =>$meetingseries->id]);
+            factory(App\Meeting::class, 5)->create(['meetingseries_id' => $meetingseries->id]);
+        });
+
+        factory(App\Venue::class, 3)->create()->each(function ($venue) {
+            factory(App\Meeting::class, 5)->create(['venue_id' => $venue->id]);
+        });
+
+        factory(App\Media::class, 3)->create()->each(function ($media) {
+            factory(App\Meeting::class, 5)->create(['media_id' => $media->id]);
+        });
+
+        factory(App\Meetingtype::class, 3)->create()->each(function ($meetingtype) {
+            factory(App\Meeting::class, 5)->create(['meetingtype_id' => $meetingtype->id]);
         });
 
         factory(App\User::class, 40)->create()->each(function ($user) {
