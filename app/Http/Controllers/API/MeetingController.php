@@ -23,9 +23,7 @@ class MeetingController extends Controller
     {
         $meetings = $this->meetingRepository->allMeetings();
 
-        dd($meetings);
-
-        return response()->json($meetings, 200);
+        return $meetings;
     }
 
     /**
@@ -46,7 +44,7 @@ class MeetingController extends Controller
     {
         $meetings = $this->meetingRepository->showMeeting($id);
 
-        return new MeetingResource($meetings);
+        return $meetings;
     }
 
     /**

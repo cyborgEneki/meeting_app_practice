@@ -9,7 +9,7 @@ class MeetingResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
@@ -26,7 +26,7 @@ class MeetingResource extends JsonResource
             'media_id' => $this->media_id,
             'meetingtype_id' => $this->meetingtype_id,
             'meetingseries_id' => $this->meetingseries_id,
-            'users' => $this->users,
+            'users' => $this->users
         ];
     }
 }
