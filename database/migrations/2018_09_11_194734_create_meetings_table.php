@@ -25,13 +25,6 @@ class CreateMeetingsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('meetingseries', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('frequency');
-            $table->timestamps();
-        });
-
         Schema::create('meetings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('venue_id')->nullable();
@@ -64,8 +57,6 @@ class CreateMeetingsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('meetings');
-
-        Schema::dropIfExists('meetingseries');
 
         Schema::dropIfExists('venues');
 

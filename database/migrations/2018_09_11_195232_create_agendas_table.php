@@ -22,8 +22,6 @@ class CreateAgendasTable extends Migration
             $table->unsignedInteger('time_allocated');
             $table->unsignedInteger('presenter');
             $table->foreign('presenter')->references('id')->on('users');
-            $table->unsignedInteger('owner');
-            $table->foreign('owner')->references('id')->on('users');
             $table->boolean('agenda_status');
             $table->text('conclusion');
             $table->timestamps();

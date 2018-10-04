@@ -28,7 +28,7 @@ class Meeting extends Model
 
     public function venue()
     {
-        return $this->belongsTo('App\Venue');
+        return $this->belongsTo('App\Venue', 'venue_id');
     }
 
     public function media()

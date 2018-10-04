@@ -9,49 +9,53 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        $users = factory(App\User::class, 10)->create();
-
-        $users->each(function ($user) {
-            factory(App\Note::class, 2)->create(['user_id' => $user->id]);
+        factory(App\Meetingseries::class, 3)->create()->each(function($meetingseries) {
+            factory(App\Meeting::class, 10)->create(['meetingseries_id' =>$meetingseries->id]);
         });
 
-        $agendas = factory(App\Agenda::class, 3)->create();
-
-        $agendas->each(function ($agenda) {
-            factory(App\Discussion::class, 2)->create(['agenda_id' => $agenda->id]);
-            factory(App\Followup::class, 2)->create(['agenda_id' => $agenda->id]);
+        factory(App\User::class, 40)->create()->each(function ($user) {
+            factory(App\Note::class, 20)->create(['user_id' => $user->id]);
         });
 
-        factory(App\Followup::class, 2)->create()->each(function ($followup) {
-            $followup->users()->saveMany(factory(App\User::class, 2)->make());
+        factory(App\Followup::class, 20)->create();
+
+        factory(App\Agenda::class, 10)->create()->each(function($agenda) {
+            factory(App\Discussion::class, 5)->create(['agenda_id' => $agenda->id]);
         });
 
-        factory(App\User::class, 2)->create()->each(function ($user) {
-            $user->followups()->saveMany(factory(App\Followup::class, 2)->make());
+        $meetings = App\Meeting::all();
+
+        App\User::all()->each(function ($user) use ($meetings) {
+            $user->meetings()->attach(
+                $meetings->random(rand(1, 3))->pluck('id')->toArray()
+            );
         });
 
-        factory(App\Agenda::class, 2)->create()->each(function ($agenda) {
-            $agenda->users()->saveMany(factory(App\User::class, 2)->make());
+        $agendas = App\Agenda::all();
+
+        App\User::all()->each(function ($user) use ($agendas) {
+            $user->agendas()->attach(
+                $agendas->random(rand(1, 3))->pluck('id')->toArray()
+            );
         });
 
-        factory(App\User::class, 2)->create()->each(function ($user) {
-            $user->agendas()->saveMany(factory(App\Agenda::class, 2)->make());
+        $followups = App\Followup::all();
+
+        App\User::all()->each(function ($user) use ($followups) {
+            $user->followups()->attach(
+                $followups->random(rand(1, 3))->pluck('id')->toArray()
+            );
         });
 
-        factory(App\Meetingseries::class, 2)->create()->each(function ($meetingseries) {
-            $meetingseries->users()->saveMany(factory(App\User::class, 2)->make());
-        });
+        $meetingseries = App\Meetingseries::all();
 
-        factory(App\User::class, 2)->create()->each(function ($user) {
-            $user->meetingseries()->saveMany(factory(App\Meetingseries::class, 2)->make());
-        });
-
-        factory(App\Meeting::class, 2)->create();
-
-        factory(App\User::class, 2)->create()->each(function ($user) {
-            $user->meetings()->saveMany(factory(App\Meeting::class, 2)->make());
+        App\User::all()->each(function ($user) use ($meetingseries) {
+            $user->meetingseries()->attach(
+                $meetingseries->random(rand(1, 3))->pluck('id')->toArray()
+            );
         });
     }
 }
