@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\MeetingResource;
 use App\Meeting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

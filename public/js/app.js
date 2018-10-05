@@ -614,7 +614,6 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-<<<<<<< HEAD
 /* 4 */
 /***/ (function(module, exports) {
 
@@ -925,10 +924,6 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-=======
-/* 4 */,
-/* 5 */,
->>>>>>> master
 /* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -14329,7 +14324,6 @@ window.Vue = __webpack_require__(39);
 
 Vue.component('example-component', __webpack_require__(42));
 
-<<<<<<< HEAD
 Vue.component('passport-clients', __webpack_require__(45));
 
 Vue.component('passport-authorized-clients', __webpack_require__(51));
@@ -14338,10 +14332,6 @@ Vue.component('passport-personal-access-tokens', __webpack_require__(56));
 
 var app = new Vue({
     el: '#app'
-=======
-var app = new Vue({
-  el: '#app'
->>>>>>> master
 });
 
 /***/ }),
@@ -47688,13 +47678,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted.');
-<<<<<<< HEAD
 
         axios.get('/api/user').then(function (response) {
             console.log(response.data);
         });
-=======
->>>>>>> master
     }
 });
 
@@ -47742,7 +47729,6 @@ if (false) {
 }
 
 /***/ }),
-<<<<<<< HEAD
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49903,24 +49889,6 @@ if (false) {
 }
 
 /***/ }),
-=======
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
->>>>>>> master
 /* 61 */
 /***/ (function(module, exports) {
 
