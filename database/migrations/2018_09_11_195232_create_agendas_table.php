@@ -16,13 +16,13 @@ class CreateAgendasTable extends Migration
         Schema::create('agendas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('meeting_id');
-            $table->foreign('meeting_id')->references('id')->on('meetings');
+            $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
             $table->string('topic');
             $table->text('description');
             $table->unsignedInteger('time_allocated');
             $table->unsignedInteger('presenter');
-            $table->unsignedInteger('owner');
-            $table->tinyInteger('agenda_status')->default(0);
+            $table->foreign('presenter')->references('id')->on('users');
+            $table->boolean('agenda_status');
             $table->text('conclusion');
             $table->timestamps();
         });

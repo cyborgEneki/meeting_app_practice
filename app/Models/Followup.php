@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Followup extends Model
 {
-    protected $fillable = ['action', 'owner', 'timeline', 'status'];
+    protected $fillable = ['agenda_id', 'action', 'owner', 'timeline', 'status'];
 
     public function agenda()
     {

@@ -1,0 +1,9 @@
+HTTP/1.1 419 unknown status
+Server: nginx/1.14.0 (Ubuntu)
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: no-cache, private
+date: Thu, 20 Sep 2018 19:06:05 GMT
+Set-Cookie: laravel_session=eyJpdiI6IkNDYTdYZnRLWFBcL1Q2V0k2bnhkWDlBPT0iLCJ2YWx1ZSI6InAySFVWS2ViRElOVnpiK0prNVU4TmMxS3puNlhoT1ZNVmQyWk1zbXZHTFpzQjF1ZWJCNWMwaGtoaFc2YlwvU3ZqIiwibWFjIjoiNDM1Y2I4ODBlY2Y0NmU0MTY0ZDY4MDJlNWQzZDFiYWM0YzJhMGE0NzQxOWNjMGRjMzBiM2ExZjFlZDk3Nzg3MCJ9; expires=Thu, 20-Sep-2018 21:06:05 GMT; Max-Age=7200; path=/; httponly
+

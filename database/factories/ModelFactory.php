@@ -101,9 +101,6 @@ $factory->define(App\Agenda::class, function ($faker) {
         'presenter' => function () {
             return factory('App\User')->create()->id;
         },
-        'owner' => function () {
-            return factory('App\User')->create()->id;
-        },
         'agenda_status' => $faker->numberBetween($min = 0, $max = 1),
         'conclusion' => $faker->paragraph,
     ];

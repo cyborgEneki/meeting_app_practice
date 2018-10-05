@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable
+class  User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'second_name', 'last_name', 'phone_number', 'email', 'password',
+        'first_name', 'middle_name', 'last_name', 'phone_number', 'email', 'password',
     ];
 
     /**
@@ -49,5 +50,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Meeting', 'meeting_user',
             'user_id', 'meeting_id');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany('App\Note');
     }
 }

@@ -1,0 +1,3 @@
+<div>
+    {{ $meeting->name }}
+</div>

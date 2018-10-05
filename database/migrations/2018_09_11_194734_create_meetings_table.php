@@ -13,25 +13,6 @@ class CreateMeetingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('media', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
-        });
-
-        Schema::create('venues', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->timestamps();
-        });
-
-        Schema::create('meetingseries', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('frequency');
-            $table->timestamps();
-        });
-
         Schema::create('meetings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('venue_id');
@@ -47,8 +28,11 @@ class CreateMeetingsTable extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->unsignedInteger('creator');
+            $table->foreign('creator')->references('id')->on('users');
             $table->unsignedInteger('facilitator');
+            $table->foreign('facilitator')->references('id')->on('users');
             $table->unsignedInteger('time_keeper');
+            $table->foreign('time_keeper')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -61,11 +45,5 @@ class CreateMeetingsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('meetings');
-
-        Schema::dropIfExists('meetingseries');
-
-        Schema::dropIfExists('venues');
-
-        Schema::dropIfExists('media');
     }
 }

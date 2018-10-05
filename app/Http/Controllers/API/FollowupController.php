@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Followup;
+use App\Repositories\FollowupRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FollowupController extends Controller
 {
+    protected $followupRepository;
+
+    public function __construct(FollowupRepositoryInterface $followupRepository)
+    {
+        $this->followupRepository = $followupRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +23,9 @@ class FollowupController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $followups = $this->followupRepository->allFollowups();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($followups, 200);
     }
 
     /**
@@ -35,7 +36,9 @@ class FollowupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $followups = $this->followupRepository->createFollowup($request);
+
+        return response()->json($followups, 201);
     }
 
     /**
@@ -46,18 +49,7 @@ class FollowupController extends Controller
      */
     public function show(Followup $followup)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Followup  $followup
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Followup $followup)
-    {
-        //
+        return response()->json($followup, 200);
     }
 
     /**
@@ -69,7 +61,9 @@ class FollowupController extends Controller
      */
     public function update(Request $request, Followup $followup)
     {
-        //
+        $followups = $this->followupRepository->updateFollowup($request, $followup);
+
+        return response()->json($followups, 200);
     }
 
     /**
@@ -80,6 +74,8 @@ class FollowupController extends Controller
      */
     public function destroy(Followup $followup)
     {
-        //
+        $followups = $this->followupRepository->deleteFollowup($followup);
+
+        return response()->json($followups, 204);
     }
 }
