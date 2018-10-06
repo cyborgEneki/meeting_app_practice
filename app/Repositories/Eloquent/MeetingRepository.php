@@ -10,7 +10,6 @@ namespace App\Repositories;
 
 use App\Http\Resources\MeetingResource;
 use App\Meeting;
-use App\User;
 use Illuminate\Http\Request;
 
 class MeetingRepository implements MeetingRepositoryInterface
@@ -20,14 +19,15 @@ class MeetingRepository implements MeetingRepositoryInterface
         return MeetingResource::collection(Meeting::all());
     }
 
+    /**
+     * @param Request $request
+     * @return MeetingResource
+     */
     public function createMeeting(Request $request)
     {
         $meeting = Meeting::create($request->all());
 
         $meeting->save();
-
-        $user = User::find([3, 4]);
-        $meeting->users()->attach($user);
 
         return new MeetingResource($meeting);
     }

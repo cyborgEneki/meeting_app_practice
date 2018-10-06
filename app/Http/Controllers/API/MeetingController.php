@@ -30,9 +30,11 @@ class MeetingController extends Controller
      * @param $meeting
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request, Meeting $meeting)
+    public function store(Request $request)
     {
-        $this->meetingRepository->createMeeting($request);
+        $meeting = $this->meetingRepository->createMeeting($request);
+
+        $meeting->users()->attach($request->users);
 
         event(new MeetingAlert($meeting));
 
