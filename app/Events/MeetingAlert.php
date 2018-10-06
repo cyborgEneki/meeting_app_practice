@@ -9,7 +9,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use App\Meeting;
+use App\Http\Resources\MeetingResource;
 
 class MeetingAlert
 {
@@ -17,12 +17,7 @@ class MeetingAlert
 
     public $meeting;
 
-    /**
-     * Create a new event instance.
-     *
-     * @param Meeting $meeting
-     */
-    public function __construct(Meeting $meeting)
+    public function __construct(MeetingResource $meeting)
     {
         $this->meeting = $meeting;
     }
