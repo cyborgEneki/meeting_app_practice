@@ -26,7 +26,8 @@ class MeetingResource extends JsonResource
             'media_id' => $this->media_id,
             'meetingtype_id' => $this->meetingtype_id,
             'meetingseries_id' => $this->meetingseries_id,
-            'users' => $this->users
+            'users' => $this->users,
+            'agendas' =>$this->agendas
         ];
     }
 }
