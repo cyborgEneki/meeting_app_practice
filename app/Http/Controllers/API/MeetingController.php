@@ -10,21 +10,17 @@ use App\Events\MeetingAlert;
 
 class MeetingController extends Controller
 {
-
     protected $meetingRepository;
 
     public function __construct(MeetingRepositoryInterface $meetingRepository)
     {
         $this->meetingRepository = $meetingRepository;
     }
-
     public function index()
     {
         $meetings = $this->meetingRepository->allMeetings();
-
         return $meetings;
     }
-
     /**
      * @param Request $request
      * @param $meeting
@@ -33,18 +29,13 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
         $meeting = $this->meetingRepository->createMeeting($request);
-
-        $meeting->users()->attach($request->users);
-
         event(new MeetingAlert($meeting));
-
         return response()->json(['message' => 'Meeting created successfully.'], 201);
     }
 
     public function show($id)
     {
         $meetings = $this->meetingRepository->showMeeting($id);
-
         return $meetings;
     }
 
@@ -78,7 +69,6 @@ class MeetingController extends Controller
         }
 
         $this->meetingRepository->deleteMeeting($meeting);
-
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 204);
     }
 }
