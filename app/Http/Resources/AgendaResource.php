@@ -20,10 +20,10 @@ class AgendaResource extends JsonResource
                 'topic' => $this->topic,
                 'description' => $this->description,
                 'time_allocated' => $this->time_allocated,
-                'presenter' => $this->presenter,
-                'owner' => $this->owner,
+                'user_id' => $this->user_id,
                 'agenda_status' => $this->agenda_status,
-                'conclusion' => $this->conclusion
+                'conclusion' => $this->conclusion,
+                'followups' => $this->followups,
             ];
     }
 }

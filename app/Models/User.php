@@ -36,8 +36,7 @@ class  User extends Authenticatable
 
     public function agendas()
     {
-        return $this->belongsToMany('App\Agenda', 'agenda_user',
-            'user_id', 'agenda_id');
+        return $this->hasMany('App\Agenda');
     }
 
     public function meetingseries()

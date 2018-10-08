@@ -9,11 +9,9 @@ namespace App\Repositories;
  * Time: 10:57 PM
  */
 
-use App\Agenda;
 use App\Http\Resources\MeetingResource;
 use App\Meeting;
 use Illuminate\Http\Request;
-use App\Repositories\AgendaRepository;
 
 class MeetingRepository implements MeetingRepositoryInterface
 {

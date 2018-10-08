@@ -12,7 +12,7 @@ class Agenda extends Model
             'topic',
             'description',
             'time_allocated',
-            'owner',
+            'user_id',
             'agenda_status',
             'conclusion'
         ];
@@ -22,9 +22,9 @@ class Agenda extends Model
         return $this->belongsTo('App\Meeting');
     }
 
-    public function owner()
+    public function user()
     {
-        return $this->belongsTo('App\User', 'owner');
+        return $this->belongsTo('App\User');
     }
 
     public function discussions()

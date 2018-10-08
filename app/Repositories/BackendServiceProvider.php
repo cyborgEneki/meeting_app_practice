@@ -27,5 +27,8 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->app->bind('App\Repositories\FollowupRepositoryInterface',
             'App\Repositories\FollowupRepository');
+
+        $this->app->bind('App\Repositories\DiscussionRepositoryInterface',
+            'App\Repositories\DiscussionRepository');
     }
 }
