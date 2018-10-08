@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+
 /**
  * Created by PhpStorm.
  * User: jeneki
@@ -12,13 +13,22 @@ use App\Agenda;
 use App\Http\Resources\MeetingResource;
 use App\Meeting;
 use Illuminate\Http\Request;
+use App\Repositories\AgendaRepository;
 
 class MeetingRepository implements MeetingRepositoryInterface
 {
+    protected $agendaRepository;
+
+    public function __construct(AgendaRepository $agendaRepository)
+    {
+        $this->agendaRepository = $agendaRepository;
+    }
+
     public function allMeetings()
     {
         return MeetingResource::collection(Meeting::all());
     }
+
     /**
      * @param Request $request
      * @return MeetingResource
@@ -29,18 +39,23 @@ class MeetingRepository implements MeetingRepositoryInterface
 
         $meeting->users()->attach($request->users);
 
-        $agenda = Agenda::create($request->all());
-//        $meeting->agendas()->save($agenda);
-        $meeting->agendas()->attach($request->agendas);
+        foreach ($request->agendas as $agendadata)
+        {
+            $agendadata['meeting_id'] =$meeting->id;
+            $agendarequest = new Request($agendadata);
+            $this->agendaRepository->createAgenda($agendarequest);
+        }
 
         $meeting->save();
         return new MeetingResource($meeting);
     }
+
     public function showMeeting($id)
     {
         $meetings = Meeting::find($id);
         return new MeetingResource($meetings);
     }
+
     public function updateMeeting(Request $request, Meeting $meeting)
     {
         $updatedMeeting = $meeting->update($request->all());
@@ -48,6 +63,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         $meeting->users()->sync($request->agendas);
         return new MeetingResource($updatedMeeting);
     }
+
     /**
      * @param Meeting $meeting
      * @return bool|null

@@ -71,4 +71,18 @@ class Meeting extends Model
         return $this->belongsToMany('App\User', 'meeting_user',
             'meeting_id', 'user_id');
     }
+    public function scopeAddAgenda($id)
+    {
+        $meeting = Meeting::find($id);
+        $agenda = Agenda::create([
+            'meeting_id' => $meeting->id,
+            'topic' => request('topic'),
+            'description' => request('description'),
+            'time_allocated' => request('time_allocated'),
+            'presenter' => request('presenter'),
+            'agenda_status' => request('agenda_status'),
+            'conclusion' => request('conclusion')
+        ]);
+        return $agenda;
+    }
 }
