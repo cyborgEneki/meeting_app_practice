@@ -20,8 +20,8 @@ class CreateAgendasTable extends Migration
             $table->string('topic');
             $table->text('description');
             $table->unsignedInteger('time_allocated');
-            $table->unsignedInteger('presenter');
-            $table->foreign('presenter')->references('id')->on('users');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('agenda_status');
             $table->text('conclusion');
             $table->timestamps();

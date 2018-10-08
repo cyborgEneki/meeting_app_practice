@@ -98,7 +98,7 @@ $factory->define(App\Agenda::class, function ($faker) {
         'topic' => $faker->word,
         'description' => $faker->paragraph,
         'time_allocated' => $faker->randomDigit,
-        'presenter' => function () {
+        'user_id' => function () {
             return factory('App\User')->create()->id;
         },
         'agenda_status' => $faker->numberBetween($min = 0, $max = 1),

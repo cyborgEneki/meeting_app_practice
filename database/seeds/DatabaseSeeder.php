@@ -32,6 +32,10 @@ class DatabaseSeeder extends Seeder
             factory(App\Note::class, 20)->create(['user_id' => $user->id]);
         });
 
+        factory(App\User::class, 10)->create()->each(function ($user) {
+            factory(App\Agenda::class, 20)->create(['user_id' => $user->id]);
+        });
+
         factory(App\Followup::class, 20)->create();
 
         factory(App\Agenda::class, 10)->create()->each(function($agenda) {
@@ -43,14 +47,6 @@ class DatabaseSeeder extends Seeder
         App\User::all()->each(function ($user) use ($meetings) {
             $user->meetings()->attach(
                 $meetings->random(rand(1, 3))->pluck('id')->toArray()
-            );
-        });
-
-        $agendas = App\Agenda::all();
-
-        App\User::all()->each(function ($user) use ($agendas) {
-            $user->agendas()->attach(
-                $agendas->random(rand(1, 3))->pluck('id')->toArray()
             );
         });
 
