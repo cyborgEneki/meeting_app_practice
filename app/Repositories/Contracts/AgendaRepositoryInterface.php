@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 
 interface AgendaRepositoryInterface
 {
-    public function allAgendas();
+    public function allAgendas($meetingId);
 
     public function createAgenda(Request $request);
 
-    public function updateAgenda(Request $request, Agenda $agenda);
+    public function updateAgenda(Request $request, Agenda $agenda, $meetingId);
 
-    public function deleteAgenda(Agenda $agenda);
+    public function deleteAgenda(Agenda $agenda, $meetingId);
 }

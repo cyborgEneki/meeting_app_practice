@@ -60,7 +60,7 @@ class MeetingRepository implements MeetingRepositoryInterface
     {
         $updatedMeeting = $meeting->update($request->all());
         $meeting->users()->sync($request->users);
-        $meeting->users()->sync($request->agendas);
+
         return new MeetingResource($updatedMeeting);
     }
 

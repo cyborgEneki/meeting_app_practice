@@ -27,9 +27,8 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('meetings', 'MeetingController');
     Route::apiResource('notes', 'NoteController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
-    Route::apiResource('agendas', 'AgendaController');
+    Route::apiResource('meetings/{meetingId}/agendas', 'AgendaController');
     Route::apiResource('followups', 'FollowupController');
-    Route::get('meetings/{meetingId}/agendas', 'AgendaMeetingController@index');
     Route::post('/send', 'EmailController@send');
 });
 

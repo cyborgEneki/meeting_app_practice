@@ -9,13 +9,15 @@
 namespace App\Repositories;
 
 use App\Agenda;
+use App\Meeting;
 use App\Http\Resources\AgendaResource;
 use Illuminate\Http\Request;
 
 class AgendaRepository implements AgendaRepositoryInterface
 {
-    public function allAgendas()
+    public function allAgendas($meetingId)
     {
+        Meeting::find($meetingId);
         return AgendaResource::collection(Agenda::all());
     }
 
@@ -24,18 +26,21 @@ class AgendaRepository implements AgendaRepositoryInterface
         return Agenda::create($request->all());
     }
 
-    public function updateAgenda(Request $request, Agenda $agenda)
+    public function updateAgenda(Request $request, Agenda $agenda, $meetingId)
     {
+        Meeting::find($meetingId);
         return $agenda->update($request->all());
     }
 
     /**
      * @param Agenda $agenda
+     * @param $meetingId
      * @return bool|null
      * @throws \Exception
      */
-    public function deleteAgenda(Agenda $agenda)
+    public function deleteAgenda(Agenda $agenda, $meetingId)
     {
+        Meeting::find($meetingId);
         return $agenda->delete($agenda);
     }
 }
