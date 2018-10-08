@@ -9,7 +9,6 @@
 namespace App\Repositories;
 
 use App\Discussion;
-use App\Http\Resources\AgendaResource;
 use App\Http\Resources\DiscussionResource;
 use Illuminate\Http\Request;
 
@@ -31,7 +30,7 @@ class DiscussionRepository implements DiscussionRepositoryInterface
     }
 
     /**
-     * @param Note $note
+     * @param Discussion $discussion
      * @return bool|null
      * @throws \Exception
      */

@@ -14,14 +14,27 @@ use Illuminate\Http\Request;
 
 class MeetingtypeRepository implements MeetingtypeRepositoryInterface
 {
-    public function allMeetingtype()
+    protected $meetingRepository;
+
+    public function __construct(MeetingRepository $meetingRepository)
+    {
+        $this->meetingRepository = $meetingRepository;
+    }
+
+    public function allMeetingtypes()
     {
         return MeetingtypeResource::collection(Meetingtype::all());
     }
 
     public function createMeetingtype(Request $request)
     {
-        return Meetingtype::create($request->all());
+        $meetingtype = Meetingtype::create($request->all());
+
+        foreach ($request->meetings as $meetingData) {
+            $meetingData['meetingtype_id'] = $meetingtype->id;
+            $meetingRequest = new Request($meetingData);
+            $this->meetingRepository->create($meetingRequest);
+        }
     }
 
     public function updateMeetingtype(Request $request, Meetingtype $meetingtype)

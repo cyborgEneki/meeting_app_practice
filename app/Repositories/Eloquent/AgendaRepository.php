@@ -9,7 +9,6 @@
 namespace App\Repositories;
 
 use App\Agenda;
-use App\Followup;
 use App\Meeting;
 use App\Http\Resources\AgendaResource;
 use Illuminate\Http\Request;
@@ -19,11 +18,8 @@ class AgendaRepository implements AgendaRepositoryInterface
     protected $followupRepository;
     protected $discussionRepository;
 
-    public function __construct
-    (
-        FollowupRepository $followupRepository,
-        DiscussionRepository $discussionRepository
-    )
+    public function __construct(FollowupRepository $followupRepository,
+        DiscussionRepository $discussionRepository)
     {
         $this->followupRepository = $followupRepository;
         $this->discussionRepository = $discussionRepository;
@@ -54,9 +50,8 @@ class AgendaRepository implements AgendaRepositoryInterface
         return new AgendaResource($agenda);
     }
 
-    public function updateAgenda(Request $request, Agenda $agenda, $meetingId)
+    public function updateAgenda(Request $request, Agenda $agenda)
     {
-        Meeting::find($meetingId);
         return $agenda->update($request->all());
     }
 
@@ -66,9 +61,8 @@ class AgendaRepository implements AgendaRepositoryInterface
      * @return bool|null
      * @throws \Exception
      */
-    public function deleteAgenda(Agenda $agenda, $meetingId)
+    public function deleteAgenda(Agenda $agenda)
     {
-        Meeting::find($meetingId);
         return $agenda->delete($agenda);
     }
 }

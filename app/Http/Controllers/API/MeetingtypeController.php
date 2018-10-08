@@ -23,7 +23,7 @@ class MeetingtypeController extends Controller
      */
     public function index()
     {
-        $meetingtypes = $this->meetingtypeRepository->allMeetingtype();
+        $meetingtypes = $this->meetingtypeRepository->allMeetingtypes();
 
         return response()->json($meetingtypes, 200);
     }

@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 interface MeetingtypeRepositoryInterface
 {
-    public function allMeetingtype();
+    public function allMeetingtypes();
 
     public function createMeetingtype(Request $request);
 

@@ -17,7 +17,7 @@ interface AgendaRepositoryInterface
 
     public function createAgenda(Request $request);
 
-    public function updateAgenda(Request $request, Agenda $agenda, $meetingId);
+    public function updateAgenda(Request $request, Agenda $agenda);
 
-    public function deleteAgenda(Agenda $agenda, $meetingId);
+    public function deleteAgenda(Agenda $agenda);
 }
