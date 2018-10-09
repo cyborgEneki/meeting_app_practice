@@ -15,38 +15,15 @@ use Illuminate\Http\Request;
 
 class AgendaRepository implements AgendaRepositoryInterface
 {
-    protected $followupRepository;
-    protected $discussionRepository;
-
-    public function __construct(FollowupRepository $followupRepository,
-        DiscussionRepository $discussionRepository)
+    public function allMeetingAgendas($meetingId)
     {
-        $this->followupRepository = $followupRepository;
-        $this->discussionRepository = $discussionRepository;
-    }
-
-    public function allAgendas($meetingId)
-    {
-        Meeting::find($meetingId);
-        return AgendaResource::collection(Agenda::all());
+        $agendas = Agenda::where("meeting_id", $meetingId)->get();
+        return AgendaResource::collection($agendas);
     }
 
     public function createAgenda(Request $request)
     {
         $agenda = Agenda::create($request->all());
-
-        foreach ($request->followups as $followupData) {
-            $followupData['agenda_id'] = $agenda->id;
-            $followupRequest = new Request($followupData);
-            $this->followupRepository->create($followupRequest);
-        }
-
-        foreach ($request->discussions as $discussionData) {
-            $discussionData['agenda_id'] = $agenda->id;
-            $discussionRequest = new Request($discussionData);
-            $this->discussionRepository->create($discussionRequest);
-        }
-        $agenda->save();
         return new AgendaResource($agenda);
     }
 

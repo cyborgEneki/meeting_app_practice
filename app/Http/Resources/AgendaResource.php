@@ -24,6 +24,7 @@ class AgendaResource extends JsonResource
                 'agenda_status' => $this->agenda_status,
                 'conclusion' => $this->conclusion,
                 'followups' => $this->followups,
+                'discussion' => $this->discussions,
             ];
     }
 }

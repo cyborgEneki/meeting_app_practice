@@ -21,9 +21,9 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($meetingId)
     {
-        $agendas = $this->agendaRepository->allAgendas();
+        $agendas = $this->agendaRepository->allMeetingAgendas($meetingId);
 
         return response()->json($agendas, 200);
     }
@@ -47,8 +47,9 @@ class AgendaController extends Controller
      * @param Agenda $agenda
      * @return \Illuminate\Http\Response
      */
-    public function show(Agenda $agenda)
+    public function show($meetingId, $agendaId)
     {
+        $agenda = Agenda::with('meeting')->where('meeting_id', $meetingId)->find('id', $agendaId);
         return response()->json($agenda, 200);
     }
 
