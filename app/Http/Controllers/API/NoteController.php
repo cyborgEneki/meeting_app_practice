@@ -27,11 +27,11 @@ class NoteController extends Controller
         return response()->json($notes);
     }
 
-    public function getMeetingNoteUser()
+    public function getMeetingNotes($meetingId)
     {
-        $notes = $this->notesRepository->allMeetingNoteUser();
+        $notes = $this->notesRepository->allMeetingNotes($meetingId);
 
-        return response()->json($notes);
+        return $notes;
     }
 
     /**

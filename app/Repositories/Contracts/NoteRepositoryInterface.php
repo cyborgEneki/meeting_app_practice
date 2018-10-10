@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 interface NoteRepositoryInterface {
     public function allNotes();
 
+    public function allMeetingNotes($meetingId);
+
     public function createNote(Request $request);
 
     public function updateNote(Request $request, Note $note);
