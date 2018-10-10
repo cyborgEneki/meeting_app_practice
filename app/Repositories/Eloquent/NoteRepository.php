@@ -19,6 +19,11 @@ class NoteRepository implements NoteRepositoryInterface
         return NoteResource::collection(Note::all());
     }
 
+    public function allMeetingNoteUser()
+    {
+        $meetings = Meeting::
+    }
+
     public function createNote(Request $request)
     {
         return Note::create($request->all());

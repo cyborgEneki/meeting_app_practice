@@ -55,6 +55,9 @@ $factory->define(App\Note::class, function ($faker) {
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
+        'meeting_id' => function () {
+            return factory('App\Meeting')->create()->id;
+        },
         'topic' => $faker->word,
         'description' => $faker->paragraph,
     ];

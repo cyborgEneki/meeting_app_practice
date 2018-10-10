@@ -27,6 +27,13 @@ class NoteController extends Controller
         return response()->json($notes);
     }
 
+    public function getMeetingNoteUser()
+    {
+        $notes = $this->notesRepository->allMeetingNoteUser();
+
+        return response()->json($notes);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

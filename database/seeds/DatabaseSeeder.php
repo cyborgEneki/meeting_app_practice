@@ -32,6 +32,10 @@ class DatabaseSeeder extends Seeder
             factory(App\Note::class, 20)->create(['user_id' => $user->id]);
         });
 
+        factory(App\Meeting::class, 10)->create()->each(function ($meeting) {
+            factory(App\Note::class, 10)->create(['meeting_id' => $meeting->id]);
+        });
+
         factory(App\User::class, 10)->create()->each(function ($user) {
             factory(App\Agenda::class, 20)->create(['user_id' => $user->id]);
         });

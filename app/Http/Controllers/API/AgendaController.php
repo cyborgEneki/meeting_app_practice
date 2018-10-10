@@ -22,9 +22,9 @@ class AgendaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($meetingId)
+    public function index()
     {
-        $agendas = $this->agendaRepository->allMeetingAgendas($meetingId);
+        $agendas = $this->agendaRepository->allMeetingAgendas();
 
         return response()->json($agendas, 200);
     }
