@@ -17,6 +17,8 @@ class Agenda extends Model
             'conclusion'
         ];
 
+    public $appends = ['user'];
+
     public function meeting()
     {
         return $this->belongsTo('App\Meeting');
@@ -35,5 +37,10 @@ class Agenda extends Model
     public function followups()
     {
         return $this->hasMany('App\Followup');
+    }
+
+    public function getUserAttribute()
+    {
+        return $this->user()->first();
     }
 }
