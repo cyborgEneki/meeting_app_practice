@@ -22,6 +22,12 @@ class MeetingController extends Controller
         $meetings = $this->meetingRepository->allMeetings();
         return $meetings;
     }
+
+    public function indexSimpleMeetings()
+    {
+        $meetings = $this->meetingRepository->allSimpleMeetings();
+        return $meetings;
+    }
     /**
      * @param Request $request
      * @param $meeting

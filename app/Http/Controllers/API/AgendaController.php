@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Agenda;
+use App\Http\Resources\AgendaResource;
 use App\Repositories\AgendaRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,7 @@ class AgendaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -45,12 +46,18 @@ class AgendaController extends Controller
      * Display the specified resource.
      *
      * @param Agenda $agenda
-     * @return \Illuminate\Http\Response
+     * @return AgendaResource
      */
-    public function show($meetingId, $agendaId)
+//    public function show($meetingId, $agendaId)
+//    {
+//        $agenda = Agenda::with('meeting')->where('meeting_id', $meetingId)->find('id', $agendaId);
+//        return response()->json($agenda, 200);
+//    }
+
+    public function show($id)
     {
-        $agenda = Agenda::with('meeting')->where('meeting_id', $meetingId)->find('id', $agendaId);
-        return response()->json($agenda, 200);
+        $agenda = Agenda::find($id);
+        return new AgendaResource($agenda);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Agenda;
 use App\Followup;
 use App\Http\Resources\FollowupResource;
 use Illuminate\Http\Request;

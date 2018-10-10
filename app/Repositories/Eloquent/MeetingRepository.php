@@ -10,6 +10,7 @@ namespace App\Repositories;
  */
 
 use App\Http\Resources\MeetingResource;
+use App\Http\Resources\MeetingWithoutRelatedDataResource;
 use App\Meeting;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,11 @@ class MeetingRepository implements MeetingRepositoryInterface
     public function allMeetings()
     {
         return MeetingResource::collection(Meeting::all());
+    }
+
+    public function allSimpleMeetings()
+    {
+        return MeetingWithoutRelatedDataResource::collection(Meeting::all());
     }
 
     /**
@@ -50,8 +56,8 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function showMeeting($id)
     {
-        $meetings = Meeting::find($id);
-        return new MeetingResource($meetings);
+        $meeting = Meeting::find($id);
+        return new MeetingResource($meeting);
     }
 
     public function updateMeeting(Request $request, Meeting $meeting)
