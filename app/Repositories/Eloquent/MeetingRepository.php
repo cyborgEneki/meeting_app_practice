@@ -56,7 +56,7 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function showMeeting($id)
     {
-        $meeting = Meeting::find($id);
+        $meeting = Meeting::findOrFail($id);
         return new MeetingResource($meeting);
     }
 
