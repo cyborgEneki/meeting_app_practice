@@ -77,6 +77,6 @@ class MeetingController extends Controller
         }
 
         $this->meetingRepository->deleteMeeting($meeting);
-        return response()->json(['success' => 'You have successfully deleted your meeting.'], 204);
+        return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 }

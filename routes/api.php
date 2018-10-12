@@ -32,5 +32,6 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('discussions', 'DiscussionController');
     Route::apiResource('agendas', 'AgendaController');
     Route::get('simplemeetings', 'MeetingController@indexSimpleMeetings');
-    Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingusernote');
+    Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingUserNote');
+    Route::apiResource('meetings.users', 'MeetingUserController');
 });

@@ -18,7 +18,7 @@ class CreateFollowupUserTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('followup_id');
-            $table->foreign('followup_id')->references('id')->on('followups')->onDelete('cascade');
+            $table->foreign('followup_id')->references('id')->on('followups');
             $table->timestamps();
         });
     }
