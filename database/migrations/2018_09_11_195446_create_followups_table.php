@@ -18,7 +18,6 @@ class CreateFollowupsTable extends Migration
             $table->unsignedInteger('agenda_id');
             $table->foreign('agenda_id')->references('id')->on('agendas');
             $table->text('action');
-            $table->unsignedInteger('owner');
             $table->dateTime('timeline');
             $table->boolean('status');
             $table->timestamps();

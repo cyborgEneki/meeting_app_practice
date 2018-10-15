@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meetingseries extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'frequency'];
 
     public function users()
     {

@@ -16,6 +16,7 @@ class DiscussionResource extends JsonResource
     {
         return
             [
+                'id' => $this->id,
                 'description' => $this->description,
             ];
     }

@@ -55,9 +55,8 @@ class MeetingseriesController extends Controller
      */
     public function update(Request $request, Meetingseries $meetingseries)
     {
-        $meetingseries = $this->meetingseriesRepository->updateMeetingseries($request, $meetingseries);
-
-        return $meetingseries;
+        $this->meetingseriesRepository->updateMeetingseries($request, $meetingseries);
+        return response()->json(['You have successfully updated the meeting series.'], 200);
     }
 
     /**

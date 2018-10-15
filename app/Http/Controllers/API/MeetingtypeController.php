@@ -55,9 +55,8 @@ class MeetingtypeController extends Controller
      */
     public function update(Request $request, Meetingtype $meetingtype)
     {
-        $meetingtypes = $this->meetingtypeRepository->updateMeetingtype($request, $meetingtype);
-
-        return response()->json($meetingtypes, 200);
+        $this->meetingtypeRepository->updateMeetingtype($request, $meetingtype);
+        return response()->json(['You have successfully updated this meeting type.'], 200);
     }
 
     /**

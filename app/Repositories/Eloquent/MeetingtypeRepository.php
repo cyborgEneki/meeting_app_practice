@@ -29,12 +29,7 @@ class MeetingtypeRepository implements MeetingtypeRepositoryInterface
     public function createMeetingtype(Request $request)
     {
         $meetingtype = Meetingtype::create($request->all());
-
-        foreach ($request->meetings as $meetingData) {
-            $meetingData['meetingtype_id'] = $meetingtype->id;
-            $meetingRequest = new Request($meetingData);
-            $this->meetingRepository->create($meetingRequest);
-        }
+        return new MeetingtypeResource($meetingtype);
     }
 
     public function updateMeetingtype(Request $request, Meetingtype $meetingtype)

@@ -28,7 +28,8 @@ class AgendaRepository implements AgendaRepositoryInterface
 
     public function updateAgenda(Request $request, Agenda $agenda)
     {
-        return $agenda->update($request->all());
+        $agenda = $agenda->update($request->all());
+        return new AgendaResource($agenda);
     }
 
     /**

@@ -115,9 +115,6 @@ $factory->define(App\Followup::class, function ($faker) {
             return factory('App\Agenda')->create()->id;
         },
         'action' => $faker->word,
-        'owner' => function () {
-            return factory('App\User')->create()->id;
-        },
         'timeline' => $faker->dateTime,
         'status' => $faker->numberBetween($min = 0, $max = 1),
     ];

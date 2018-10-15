@@ -15,9 +15,9 @@ class FollowupResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'agenda_id' => $this->agenda_id,
             'action' => $this->action,
-            'owner' => $this->owner,
             'timeline' => $this->timeline,
             'status' => $this->status,
         ];

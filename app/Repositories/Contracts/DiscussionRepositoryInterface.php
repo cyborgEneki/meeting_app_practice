@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 interface DiscussionRepositoryInterface {
     public function allDiscussions();
 
+    public function showDiscussion($id);
+
     public function createDiscussion(Request $request);
 
     public function updateDiscussion(Request $request, Discussion $discussion);

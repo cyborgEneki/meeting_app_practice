@@ -68,8 +68,7 @@ class NoteController extends Controller
     public function update(Request $request, Note $note)
     {
         $this->notesRepository->updateNote($request, $note);
-
-        return response()->json($note, 200);
+        return response()->json(['You have successfully updated your notes.'], 200);
     }
 
     /**

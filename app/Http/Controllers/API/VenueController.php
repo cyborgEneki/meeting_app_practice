@@ -40,7 +40,7 @@ class VenueController extends Controller
     public function update(Request $request, Venue $venue)
     {
         $venue = $this->venueRepository->updateVenue($request, $venue);
-        return $venue;
+        return response()->json(['You have successfully updated the venue.'], 200);
     }
 
     public function destroy(Venue $venue)

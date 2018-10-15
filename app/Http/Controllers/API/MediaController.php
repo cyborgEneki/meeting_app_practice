@@ -40,8 +40,8 @@ class MediaController extends Controller
 
     public function update(Request $request, Media $media)
     {
-        $media = $this->mediaRepository->updateMedia($request, $media);
-        return $media;
+        $this->mediaRepository->updateMedia($request, $media);
+        return response()->json(['You have successfully updated this media.'], 200);
     }
 
     public function destroy(Media $media)

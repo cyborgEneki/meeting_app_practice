@@ -19,14 +19,22 @@ class DiscussionRepository implements DiscussionRepositoryInterface
         return DiscussionResource::collection(Discussion::all());
     }
 
+    public function showDiscussion($id)
+    {
+        $discussion = Discussion::findOrFail($id);
+        return new DiscussionResource($discussion);
+    }
+
     public function createDiscussion(Request $request)
     {
-        return Discussion::create($request->all());
+        $discussion = Discussion::create($request->all());
+        return new DiscussionResource($discussion);
     }
 
     public function updateDiscussion(Request $request, Discussion $discussion)
     {
-        return $discussion->update($request->all());
+        $discussion = $discussion->update($request->all());
+        return new DiscussionResource($discussion);
     }
 
     /**
