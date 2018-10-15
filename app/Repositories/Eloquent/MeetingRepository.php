@@ -44,9 +44,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         $request['creator'] = Auth::id();
         $meeting = Meeting::create($request->all());
 
-//        $meeting->users()->attach($request->users);
-//        $meeting->venue()->attach($request->venue);
-//        $meeting->media()->attach($request->media);
+        $meeting->users()->attach($request->users);
 
         foreach ($request->agendas as $agendadata)
         {
@@ -69,8 +67,6 @@ class MeetingRepository implements MeetingRepositoryInterface
     {
         $meeting = $meeting->update($request->all());
         $meeting->users()->sync($request->users);
-        $meeting->venue()->sync($request->venue);
-        $meeting->media()->sync($request->media);
 
         return new MeetingResource($meeting);
     }
@@ -83,8 +79,6 @@ class MeetingRepository implements MeetingRepositoryInterface
     public function deleteMeeting(Meeting $meeting)
     {
         $meeting->users()->detach();
-        $meeting->venue()->detach();
-        $meeting->media()->detach();
         return $meeting->delete($meeting);
     }
 
