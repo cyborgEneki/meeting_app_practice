@@ -29,6 +29,8 @@ class MeetingResource extends JsonResource
             'meetingseries_id' => $this->meetingseries_id,
             'users' => UserResource::collection($this->users),
             'agendas' =>AgendaResource::collection($this->agendas),
+            'venue' => VenueResource::collection($this->venue),
+            'media' => MediaResource::collection($this->media),
         ];
     }
 }

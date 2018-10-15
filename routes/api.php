@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,11 +25,15 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('meetings', 'MeetingController');
     Route::apiResource('meetings.agendas', 'AgendaController');
     Route::apiResource('notes', 'NoteController');
+    Route::apiResource('venue', 'VenueController');
+    Route::apiResource('media', 'MediaController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
+    Route::apiResource('meetingseries', 'MeetingseriesController');
     Route::apiResource('followups', 'FollowupController');
     Route::apiResource('discussions', 'DiscussionController');
     Route::apiResource('agendas', 'AgendaController');
     Route::get('simplemeetings', 'MeetingController@indexSimpleMeetings');
     Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingUserNote');
-    Route::apiResource('meetings.users', 'MeetingUserController');
+    Route::delete('meetings/{meetingId}/users/{userId}', 'MeetingController@detachUser');
+    Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
 });

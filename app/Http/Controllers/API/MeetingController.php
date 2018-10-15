@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Meeting;
+use App\User;
 use App\Repositories\AgendaRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -78,5 +79,17 @@ class MeetingController extends Controller
 
         $this->meetingRepository->deleteMeeting($meeting);
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
+    }
+
+    public function attachUser($meetingId, $userId)
+    {
+        $this->meetingRepository->addUser($meetingId, $userId);
+        return response()->json(['success' => 'User added to meeting_user'], 200);
+    }
+
+    public function detachUser($meetingId, $userId)
+    {
+        $this->meetingRepository->removeUser($meetingId, $userId);
+        return response()->json(['success' => 'User deleted from meeting_user'], 200);
     }
 }

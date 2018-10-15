@@ -10,6 +10,7 @@ namespace App\Repositories;
  */
 
 use App\Http\Resources\MeetingResource;
+use App\User;
 use App\Http\Resources\MeetingWithoutRelatedDataResource;
 use App\Meeting;
 use Illuminate\Http\Request;
@@ -42,6 +43,8 @@ class MeetingRepository implements MeetingRepositoryInterface
         $meeting = Meeting::create($request->all());
 
         $meeting->users()->attach($request->users);
+        $meeting->venue()->attach($request->venue);
+        $meeting->media()->attach($request->media);
 
         foreach ($request->agendas as $agendadata)
         {
@@ -62,10 +65,12 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function updateMeeting(Request $request, Meeting $meeting)
     {
-        $updatedMeeting = $meeting->update($request->all());
+        $meeting = $meeting->update($request->all());
         $meeting->users()->sync($request->users);
+        $meeting->venue()->sync($request->venue);
+        $meeting->media()->sync($request->media);
 
-        return new MeetingResource($updatedMeeting);
+        return new MeetingResource($meeting);
     }
 
     /**
@@ -76,6 +81,22 @@ class MeetingRepository implements MeetingRepositoryInterface
     public function deleteMeeting(Meeting $meeting)
     {
         $meeting->users()->detach();
+        $meeting->venue()->detach();
+        $meeting->media()->detach();
         return $meeting->delete($meeting);
+    }
+
+    public function addUser($meetingId, $userId)
+    {
+        $meeting = Meeting::findOrFail($meetingId);
+        $meeting->users()->attach($userId);
+        return $meeting;
+    }
+
+    public function removeUser($meetingId, $userId)
+    {
+        $meeting = Meeting::findOrFail($meetingId);
+        $meeting->users()->detach($userId);
+        return $meeting;
     }
 }
