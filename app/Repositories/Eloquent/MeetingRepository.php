@@ -14,6 +14,7 @@ use App\User;
 use App\Http\Resources\MeetingWithoutRelatedDataResource;
 use App\Meeting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MeetingRepository implements MeetingRepositoryInterface
 {
@@ -40,11 +41,12 @@ class MeetingRepository implements MeetingRepositoryInterface
      */
     public function createMeeting(Request $request)
     {
+        $request['creator'] = Auth::id();
         $meeting = Meeting::create($request->all());
 
-        $meeting->users()->attach($request->users);
-        $meeting->venue()->attach($request->venue);
-        $meeting->media()->attach($request->media);
+//        $meeting->users()->attach($request->users);
+//        $meeting->venue()->attach($request->venue);
+//        $meeting->media()->attach($request->media);
 
         foreach ($request->agendas as $agendadata)
         {
