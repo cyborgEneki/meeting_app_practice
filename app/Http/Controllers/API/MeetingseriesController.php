@@ -68,7 +68,6 @@ class MeetingseriesController extends Controller
     public function destroy(Meetingseries $meetingseries)
     {
         $meetingseries = $this->meetingseriesRepository->deleteMeetingseries($meetingseries);
-
-        return $meetingseries;
+        return response()->json(['You have successfully deleted the meeting series.'],  200);
     }
 }

@@ -16,32 +16,6 @@ class AgendaController extends Controller
     {
         $this->agendaRepository = $agendaRepository;
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $agendas = $this->agendaRepository->allMeetingAgendas();
-
-        return response()->json($agendas, 200);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $agenda = $this->agendaRepository->createAgenda($request);
-
-        return response()->json($agenda, 201);
-    }
-
     /**
      * Display the specified resource.
      *
@@ -81,8 +55,7 @@ class AgendaController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
-        $agendas = $this->agendaRepository->deleteAgenda($agenda);
-
-        return response()->json($agendas, 204);
+        $this->agendaRepository->deleteAgenda($agenda);
+        return response()->json(['You have successfully deleted your agenda.'],  200);
     }
 }

@@ -34,6 +34,7 @@ class CreateMeetingsTable extends Migration
             $table->unsignedInteger('time_keeper');
             $table->foreign('time_keeper')->references('id')->on('users');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

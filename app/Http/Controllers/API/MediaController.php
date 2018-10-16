@@ -46,7 +46,7 @@ class MediaController extends Controller
 
     public function destroy(Media $media)
     {
-        $media = $this->mediaRepository->deleteMedia($media);
-        return $media;
+        $this->mediaRepository->deleteMedia($media);
+        return response()->json(['You have successfully deleted this media.'],  200);
     }
 }

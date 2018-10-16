@@ -80,7 +80,6 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         $this->notesRepository->deleteNote($note);
-
-        return response()->json($note, 204);
+        return response()->json(['You have successfully deleted this note.'],  200);
     }
 }

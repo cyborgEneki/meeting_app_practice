@@ -148,7 +148,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         App\Repositories\BackendServiceProvider::class,
-
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Package Service Providers...

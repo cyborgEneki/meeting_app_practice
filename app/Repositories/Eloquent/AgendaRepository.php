@@ -15,17 +15,6 @@ use Illuminate\Http\Request;
 
 class AgendaRepository implements AgendaRepositoryInterface
 {
-    public function allMeetingAgendas()
-    {
-        return AgendaResource::collection(Agenda::all());
-    }
-
-    public function createAgenda(Request $request)
-    {
-        $agenda = Agenda::create($request->all());
-        return new AgendaResource($agenda);
-    }
-
     public function updateAgenda(Request $request, Agenda $agenda)
     {
         $agenda = $agenda->update($request->all());

@@ -40,7 +40,7 @@ class DiscussionController extends Controller
 
     public function destroy(Discussion $discussion)
     {
-        $discussion = $this->discussionRepository->deleteDiscussion($discussion);
-        return $discussion;
+        $this->discussionRepository->deleteDiscussion($discussion);
+        return response()->json(['You have successfully deleted this discussion.'],  200);
     }
 }

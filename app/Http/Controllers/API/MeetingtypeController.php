@@ -67,8 +67,7 @@ class MeetingtypeController extends Controller
      */
     public function destroy(Meetingtype $meetingtype)
     {
-        $meetingtypes = $this->meetingtypeRepository->deleteMeetingtype($meetingtype);
-
-        return response()->json($meetingtypes, 204);
+        $this->meetingtypeRepository->deleteMeetingtype($meetingtype);
+        return response()->json(['You have successfully deleted this meeting type.'],  200);
     }
 }

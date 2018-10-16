@@ -19,6 +19,7 @@ class MeetingController extends Controller
     {
         $this->meetingRepository = $meetingRepository;
     }
+
     public function index()
     {
         $meetings = $this->meetingRepository->allMeetings();
@@ -30,6 +31,7 @@ class MeetingController extends Controller
         $meetings = $this->meetingRepository->allSimpleMeetings();
         return $meetings;
     }
+
     /**
      * @param Request $request
      * @param $meeting
@@ -55,13 +57,7 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        if (Auth::id() !== $meeting->creator)
-        {
-            return response()->json(['error' => 'You can only edit meetings that you create.'], 403);
-        }
-
         $this->meetingRepository->updateMeeting($request, $meeting);
-
         return response()->json(['You have successfully updated your meeting.'], 200);
     }
 
@@ -72,11 +68,6 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        if (Auth::id() !== $meeting->creator)
-        {
-            return response()->json(['error' => 'You can only delete meetings that you create.'], 403);
-        }
-
         $this->meetingRepository->deleteMeeting($meeting);
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }

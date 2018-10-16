@@ -39,13 +39,13 @@ class VenueController extends Controller
 
     public function update(Request $request, Venue $venue)
     {
-        $venue = $this->venueRepository->updateVenue($request, $venue);
+        $this->venueRepository->updateVenue($request, $venue);
         return response()->json(['You have successfully updated the venue.'], 200);
     }
 
     public function destroy(Venue $venue)
     {
-        $venue = $this->venueRepository->deleteVenue($venue);
-        return $venue;
+        $this->venueRepository->deleteVenue($venue);
+        return response()->json(['You have successfully deleted this venue.'],  200);
     }
 }

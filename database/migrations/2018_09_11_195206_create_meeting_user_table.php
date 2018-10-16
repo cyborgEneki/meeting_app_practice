@@ -21,6 +21,7 @@ class CreateMeetingUserTable extends Migration
             $table->foreign('meeting_id')->references('id')->on('meetings');
             $table->enum('attendance_status', ['Present', 'Absent', 'Absent with Apology']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

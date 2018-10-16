@@ -18,6 +18,7 @@ class CreateMeetingseriesTable extends Migration
             $table->string('name');
             $table->string('frequency');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

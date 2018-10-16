@@ -73,8 +73,7 @@ class FollowupController extends Controller
      */
     public function destroy(Followup $followup)
     {
-        $followups = $this->followupRepository->deleteFollowup($followup);
-
-        return response()->json($followups, 204);
+        $this->followupRepository->deleteFollowup($followup);
+        return response()->json(['You have successfully deleted the followup.'],  200);
     }
 }
