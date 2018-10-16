@@ -55,6 +55,9 @@ $factory->define(App\Note::class, function ($faker) {
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
+        'meeting_id' => function () {
+            return factory('App\Meeting')->create()->id;
+        },
         'topic' => $faker->word,
         'description' => $faker->paragraph,
     ];
@@ -98,7 +101,7 @@ $factory->define(App\Agenda::class, function ($faker) {
         'topic' => $faker->word,
         'description' => $faker->paragraph,
         'time_allocated' => $faker->randomDigit,
-        'presenter' => function () {
+        'user_id' => function () {
             return factory('App\User')->create()->id;
         },
         'agenda_status' => $faker->numberBetween($min = 0, $max = 1),
@@ -112,9 +115,6 @@ $factory->define(App\Followup::class, function ($faker) {
             return factory('App\Agenda')->create()->id;
         },
         'action' => $faker->word,
-        'owner' => function () {
-            return factory('App\User')->create()->id;
-        },
         'timeline' => $faker->dateTime,
         'status' => $faker->numberBetween($min = 0, $max = 1),
     ];

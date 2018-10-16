@@ -23,7 +23,7 @@ class MeetingtypeController extends Controller
      */
     public function index()
     {
-        $meetingtypes = $this->meetingtypeRepository->allMeetingtype();
+        $meetingtypes = $this->meetingtypeRepository->allMeetingtypes();
 
         return response()->json($meetingtypes, 200);
     }
@@ -55,9 +55,8 @@ class MeetingtypeController extends Controller
      */
     public function update(Request $request, Meetingtype $meetingtype)
     {
-        $meetingtypes = $this->meetingtypeRepository->updateMeetingtype($request, $meetingtype);
-
-        return response()->json($meetingtypes, 200);
+        $this->meetingtypeRepository->updateMeetingtype($request, $meetingtype);
+        return response()->json(['You have successfully updated this meeting type.'], 200);
     }
 
     /**
@@ -68,8 +67,7 @@ class MeetingtypeController extends Controller
      */
     public function destroy(Meetingtype $meetingtype)
     {
-        $meetingtypes = $this->meetingtypeRepository->deleteMeetingtype($meetingtype);
-
-        return response()->json($meetingtypes, 204);
+        $this->meetingtypeRepository->deleteMeetingtype($meetingtype);
+        return response()->json(['You have successfully deleted this meeting type.'],  200);
     }
 }

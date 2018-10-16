@@ -4,12 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MeetingResource extends JsonResource
+class MeetingWithoutRelatedDataResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function toArray($request)
@@ -27,10 +27,6 @@ class MeetingResource extends JsonResource
             'media_id' => $this->media_id,
             'meetingtype_id' => $this->meetingtype_id,
             'meetingseries_id' => $this->meetingseries_id,
-            'users' => UserResource::collection($this->users),
-            'agendas' =>AgendaResource::collection($this->agendas),
-            'venue' => $this->venue,
-            'media' => $this->media
         ];
     }
 }

@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Meeting extends Model
 {
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
     protected $fillable =
         [
             'name',
@@ -28,7 +32,12 @@ class Meeting extends Model
 
     public function venue()
     {
-        return $this->belongsTo('App\Venue', 'venue_id');
+        return $this->belongsTo('App\Venue');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany('App\Note');
     }
 
     public function media()
@@ -70,5 +79,19 @@ class Meeting extends Model
     {
         return $this->belongsToMany('App\User', 'meeting_user',
             'meeting_id', 'user_id');
+    }
+    public function scopeAddAgenda($id)
+    {
+        $meeting = Meeting::find($id);
+        $agenda = Agenda::create([
+            'meeting_id' => $meeting->id,
+            'topic' => request('topic'),
+            'description' => request('description'),
+            'time_allocated' => request('time_allocated'),
+            'presenter' => request('presenter'),
+            'agenda_status' => request('agenda_status'),
+            'conclusion' => request('conclusion')
+        ]);
+        return $agenda;
     }
 }

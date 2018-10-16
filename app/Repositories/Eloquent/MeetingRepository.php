@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories;
+
 /**
  * Created by PhpStorm.
  * User: jeneki
@@ -8,46 +9,68 @@ namespace App\Repositories;
  * Time: 10:57 PM
  */
 
-use App\Agenda;
 use App\Http\Resources\MeetingResource;
+use App\User;
+use App\Http\Resources\MeetingWithoutRelatedDataResource;
 use App\Meeting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MeetingRepository implements MeetingRepositoryInterface
 {
+    protected $agendaRepository;
+
+    public function __construct(AgendaRepository $agendaRepository)
+    {
+        $this->agendaRepository = $agendaRepository;
+    }
+
     public function allMeetings()
     {
         return MeetingResource::collection(Meeting::all());
     }
+
+    public function allSimpleMeetings()
+    {
+        return MeetingWithoutRelatedDataResource::collection(Meeting::all());
+    }
+
     /**
      * @param Request $request
      * @return MeetingResource
      */
     public function createMeeting(Request $request)
     {
+        $request['creator'] = Auth::id();
         $meeting = Meeting::create($request->all());
 
         $meeting->users()->attach($request->users);
 
-        $agenda = Agenda::create($request->all());
-//        $meeting->agendas()->save($agenda);
-        $meeting->agendas()->attach($request->agendas);
+        foreach ($request->agendas as $agendadata)
+        {
+            $agendadata['meeting_id'] =$meeting->id;
+            $agendarequest = new Request($agendadata);
+            $this->agendaRepository->createAgenda($agendarequest);
+        }
 
         $meeting->save();
         return new MeetingResource($meeting);
     }
+
     public function showMeeting($id)
     {
-        $meetings = Meeting::find($id);
-        return new MeetingResource($meetings);
+        $meeting = Meeting::findOrFail($id);
+        return new MeetingResource($meeting);
     }
+
     public function updateMeeting(Request $request, Meeting $meeting)
     {
-        $updatedMeeting = $meeting->update($request->all());
+        $meeting = $meeting->update($request->all());
         $meeting->users()->sync($request->users);
-        $meeting->users()->sync($request->agendas);
-        return new MeetingResource($updatedMeeting);
+
+        return new MeetingResource($meeting);
     }
+
     /**
      * @param Meeting $meeting
      * @return bool|null
@@ -57,5 +80,19 @@ class MeetingRepository implements MeetingRepositoryInterface
     {
         $meeting->users()->detach();
         return $meeting->delete($meeting);
+    }
+
+    public function addUser($meetingId, $userId)
+    {
+        $meeting = Meeting::findOrFail($meetingId);
+        $meeting->users()->attach($userId);
+        return $meeting;
+    }
+
+    public function removeUser($meetingId, $userId)
+    {
+        $meeting = Meeting::findOrFail($meetingId);
+        $meeting->users()->detach($userId);
+        return $meeting;
     }
 }

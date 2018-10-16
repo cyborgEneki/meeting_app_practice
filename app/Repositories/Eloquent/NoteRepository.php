@@ -11,12 +11,18 @@ namespace App\Repositories;
 use App\Http\Resources\NoteResource;
 use App\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteRepository implements NoteRepositoryInterface
 {
     public function allNotes()
     {
         return NoteResource::collection(Note::all());
+    }
+
+    public function allMeetingNotes($meetingId)
+    {
+        return Note::where('user_id', Auth::id())->where('meeting_id', $meetingId)->first();
     }
 
     public function createNote(Request $request)

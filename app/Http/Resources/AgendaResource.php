@@ -16,14 +16,16 @@ class AgendaResource extends JsonResource
     {
         return
             [
+                'id' => $this->id,
                 'meeting_id' => $this->meeting_id,
+                'user_id' => $this->user_id,
                 'topic' => $this->topic,
                 'description' => $this->description,
                 'time_allocated' => $this->time_allocated,
-                'presenter' => $this->presenter,
-                'owner' => $this->owner,
                 'agenda_status' => $this->agenda_status,
-                'conclusion' => $this->conclusion
+                'conclusion' => $this->conclusion,
+                'followups' => FollowupResource::collection($this->followups),
+                'discussion' => DiscussionResource::collection($this->discussions),
             ];
     }
 }

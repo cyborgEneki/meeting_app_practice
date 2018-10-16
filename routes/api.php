@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,17 +15,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'auth:api'], function ()
+{
     Route::post('details', 'API\UserController@details');
     Route::apiResource('meetings', 'MeetingController');
+    Route::apiResource('meetings.agendas', 'AgendaController');
     Route::apiResource('notes', 'NoteController');
+    Route::apiResource('venues', 'VenueController');
+    Route::apiResource('media', 'MediaController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
-    Route::apiResource('agendas', 'AgendaController');
+    Route::apiResource('meetingseries', 'MeetingseriesController');
     Route::apiResource('followups', 'FollowupController');
-    Route::post('/send', 'EmailController@send');
+    Route::apiResource('discussions', 'DiscussionController');
+    Route::apiResource('agendas', 'AgendaController');
+    Route::apiresource('roles','RoleController');
+    Route::apiresource('users','UserController');
+    Route::get('simplemeetings', 'MeetingController@indexSimpleMeetings');
+    Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingUserNote');
+    Route::delete('meetings/{meetingId}/users/{userId}', 'MeetingController@detachUser');
+    Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
 });
-

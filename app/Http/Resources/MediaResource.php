@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FollowupResource extends JsonResource
+class MediaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,10 +16,7 @@ class FollowupResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'agenda_id' => $this->agenda_id,
-            'action' => $this->action,
-            'timeline' => $this->timeline,
-            'status' => $this->status,
+            'name' => $this->name
         ];
     }
 }

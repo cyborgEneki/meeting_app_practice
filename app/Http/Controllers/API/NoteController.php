@@ -27,6 +27,13 @@ class NoteController extends Controller
         return response()->json($notes);
     }
 
+    public function getMeetingNotes($meetingId)
+    {
+        $notes = $this->notesRepository->allMeetingNotes($meetingId);
+
+        return $notes;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -61,8 +68,7 @@ class NoteController extends Controller
     public function update(Request $request, Note $note)
     {
         $this->notesRepository->updateNote($request, $note);
-
-        return response()->json($note, 200);
+        return response()->json(['You have successfully updated your notes.'], 200);
     }
 
     /**
@@ -74,7 +80,6 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         $this->notesRepository->deleteNote($note);
-
-        return response()->json($note, 204);
+        return response()->json(['You have successfully deleted this note.'],  200);
     }
 }

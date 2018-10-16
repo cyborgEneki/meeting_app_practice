@@ -20,6 +20,7 @@ class CreateMeetingseriesUserTable extends Migration
             $table->unsignedInteger('meetingseries_id');
             $table->foreign('meetingseries_id')->references('id')->on('meetingseries');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

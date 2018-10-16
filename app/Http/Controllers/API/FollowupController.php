@@ -61,9 +61,8 @@ class FollowupController extends Controller
      */
     public function update(Request $request, Followup $followup)
     {
-        $followups = $this->followupRepository->updateFollowup($request, $followup);
-
-        return response()->json($followups, 200);
+        $this->followupRepository->updateFollowup($request, $followup);
+        return response()->json(['You have successfully updated your followup.'], 200);
     }
 
     /**
@@ -74,8 +73,7 @@ class FollowupController extends Controller
      */
     public function destroy(Followup $followup)
     {
-        $followups = $this->followupRepository->deleteFollowup($followup);
-
-        return response()->json($followups, 204);
+        $this->followupRepository->deleteFollowup($followup);
+        return response()->json(['You have successfully deleted the followup.'],  200);
     }
 }

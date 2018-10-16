@@ -9,28 +9,21 @@
 namespace App\Repositories;
 
 use App\Agenda;
+use App\Meeting;
 use App\Http\Resources\AgendaResource;
 use Illuminate\Http\Request;
 
 class AgendaRepository implements AgendaRepositoryInterface
 {
-    public function allAgendas()
-    {
-        return AgendaResource::collection(Agenda::all());
-    }
-
-    public function createAgenda(Request $request)
-    {
-        return Agenda::create($request->all());
-    }
-
     public function updateAgenda(Request $request, Agenda $agenda)
     {
-        return $agenda->update($request->all());
+        $agenda = $agenda->update($request->all());
+        return new AgendaResource($agenda);
     }
 
     /**
      * @param Agenda $agenda
+     * @param $meetingId
      * @return bool|null
      * @throws \Exception
      */

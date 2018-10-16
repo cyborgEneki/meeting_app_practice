@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discussion extends Model
 {
-    protected $fillable = ['description'];
+    protected $fillable = ['description', 'agenda_id'];
 
     public function agenda()
     {

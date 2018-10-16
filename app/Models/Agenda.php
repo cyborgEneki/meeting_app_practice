@@ -12,25 +12,21 @@ class Agenda extends Model
             'topic',
             'description',
             'time_allocated',
-            'presenter',
+            'user_id',
             'agenda_status',
             'conclusion'
         ];
+
+    public $appends = ['user'];
 
     public function meeting()
     {
         return $this->belongsTo('App\Meeting');
     }
 
-    public function presenter()
+    public function user()
     {
-        return $this->belongsTo('App\User', 'presenter');
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany('App\User', 'agenda_user',
-            'agenda_id', 'user_id');
+        return $this->belongsTo('App\User');
     }
 
     public function discussions()
@@ -41,5 +37,10 @@ class Agenda extends Model
     public function followups()
     {
         return $this->hasMany('App\Followup');
+    }
+
+    public function getUserAttribute()
+    {
+        return $this->user()->first();
     }
 }

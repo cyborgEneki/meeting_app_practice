@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Meeting;
+use App\User;
+use App\Repositories\AgendaRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
@@ -16,11 +19,19 @@ class MeetingController extends Controller
     {
         $this->meetingRepository = $meetingRepository;
     }
+
     public function index()
     {
         $meetings = $this->meetingRepository->allMeetings();
         return $meetings;
     }
+
+    public function indexSimpleMeetings()
+    {
+        $meetings = $this->meetingRepository->allSimpleMeetings();
+        return $meetings;
+    }
+
     /**
      * @param Request $request
      * @param $meeting
@@ -46,13 +57,7 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        if (Auth::id() !== $meeting->creator)
-        {
-            return response()->json(['error' => 'You can only edit meetings that you create.'], 403);
-        }
-
         $this->meetingRepository->updateMeeting($request, $meeting);
-
         return response()->json(['You have successfully updated your meeting.'], 200);
     }
 
@@ -63,12 +68,19 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        if (Auth::id() !== $meeting->creator)
-        {
-            return response()->json(['error' => 'You can only delete meetings that you create.'], 403);
-        }
-
         $this->meetingRepository->deleteMeeting($meeting);
-        return response()->json(['success' => 'You have successfully deleted your meeting.'], 204);
+        return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
+    }
+
+    public function attachUser($meetingId, $userId)
+    {
+        $this->meetingRepository->addUser($meetingId, $userId);
+        return response()->json(['success' => 'User added to meeting_user'], 200);
+    }
+
+    public function detachUser($meetingId, $userId)
+    {
+        $this->meetingRepository->removeUser($meetingId, $userId);
+        return response()->json(['success' => 'User deleted from meeting_user'], 200);
     }
 }
