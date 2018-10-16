@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MeetingtypeRequest;
 use App\Meetingtype;
 use App\Repositories\MeetingtypeRepositoryInterface;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class MeetingtypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MeetingtypeRequest $request)
     {
         $meetingtypes = $this->meetingtypeRepository->createMeetingtype($request);
 

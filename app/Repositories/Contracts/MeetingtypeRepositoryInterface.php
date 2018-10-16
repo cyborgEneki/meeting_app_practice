@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\MeetingtypeRequest;
 use App\Meetingtype;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ interface MeetingtypeRepositoryInterface
 {
     public function allMeetingtypes();
 
-    public function createMeetingtype(Request $request);
+    public function createMeetingtype(MeetingtypeRequest $request);
 
     public function updateMeetingtype(Request $request, Meetingtype $meetingtype);
 
