@@ -13,7 +13,7 @@ class NoteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,6 +26,13 @@ class NoteRequest extends FormRequest
         return [
             'topic' => 'required',
             'description' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'topic.required' => 'Topic is required!',
+            'description.required' => 'Description is required!',
         ];
     }
 }

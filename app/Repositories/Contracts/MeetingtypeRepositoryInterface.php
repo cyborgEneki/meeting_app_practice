@@ -18,7 +18,7 @@ interface MeetingtypeRepositoryInterface
 
     public function createMeetingtype(MeetingtypeRequest $request);
 
-    public function updateMeetingtype(Request $request, Meetingtype $meetingtype);
+    public function updateMeetingtype(MeetingtypeRequest $request, Meetingtype $meetingtype);
 
     public function deleteMeetingtype(Meetingtype $meetingtype);
 }

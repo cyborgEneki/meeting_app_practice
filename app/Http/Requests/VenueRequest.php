@@ -13,7 +13,7 @@ class VenueRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,12 @@ class VenueRequest extends FormRequest
     {
         return [
             'name' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Please name the venue before continuing',
         ];
     }
 }

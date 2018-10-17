@@ -9,6 +9,7 @@ namespace App\Repositories;
  * Time: 10:57 PM
  */
 
+use App\Http\Requests\MeetingRequest;
 use App\Http\Resources\MeetingResource;
 use App\User;
 use App\Http\Resources\MeetingWithoutRelatedDataResource;
@@ -39,7 +40,7 @@ class MeetingRepository implements MeetingRepositoryInterface
      * @param Request $request
      * @return MeetingResource
      */
-    public function createMeeting(Request $request)
+    public function createMeeting(MeetingRequest $request)
     {
         $request['creator'] = Auth::id();
         $meeting = Meeting::create($request->all());
@@ -63,7 +64,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         return new MeetingResource($meeting);
     }
 
-    public function updateMeeting(Request $request, Meeting $meeting)
+    public function updateMeeting(MeetingRequest $request, Meeting $meeting)
     {
         $meeting = $meeting->update($request->all());
         $meeting->users()->sync($request->users);

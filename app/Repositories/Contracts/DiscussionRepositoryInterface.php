@@ -9,6 +9,7 @@
 namespace App\Repositories;
 
 use App\Discussion;
+use App\Http\Requests\DiscussionRequest;
 use Illuminate\Http\Request;
 
 interface DiscussionRepositoryInterface {
@@ -16,9 +17,9 @@ interface DiscussionRepositoryInterface {
 
     public function showDiscussion($id);
 
-    public function createDiscussion(Request $request);
+    public function createDiscussion(DiscussionRequest $request);
 
-    public function updateDiscussion(Request $request, Discussion $discussion);
+    public function updateDiscussion(DiscussionRequest $request, Discussion $discussion);
 
     public function deleteDiscussion(Discussion $discussion);
 }

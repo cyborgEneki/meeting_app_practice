@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,6 +29,16 @@ class UserRequest extends FormRequest
             'last_name' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'first_name.required' => 'A first name is required!',
+            'middle_name.required' => 'A middle name is required!',
+            'last_name.required' => 'A last name is required!',
+            'email.required' => 'An email is required before continuing!',
+            'phone_number.required' => 'A phone number is required before continuing!',
         ];
     }
 }

@@ -13,7 +13,7 @@ class MediaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,12 @@ class MediaRequest extends FormRequest
     {
         return [
             'name' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Please give this media a name.',
         ];
     }
 }

@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -39,7 +40,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(UserRequest $request)
     {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',

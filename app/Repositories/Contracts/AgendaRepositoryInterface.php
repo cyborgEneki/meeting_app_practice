@@ -9,11 +9,12 @@
 namespace App\Repositories;
 
 use App\Agenda;
+use App\Http\Requests\AgendaRequest;
 use Illuminate\Http\Request;
 
 interface AgendaRepositoryInterface
 {
-    public function updateAgenda(Request $request, Agenda $agenda);
+    public function updateAgenda(AgendaRequest $request, Agenda $agenda);
 
     public function deleteAgenda(Agenda $agenda);
 }

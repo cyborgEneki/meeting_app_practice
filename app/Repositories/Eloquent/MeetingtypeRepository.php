@@ -33,7 +33,7 @@ class MeetingtypeRepository implements MeetingtypeRepositoryInterface
         return new MeetingtypeResource($meetingtype);
     }
 
-    public function updateMeetingtype(Request $request, Meetingtype $meetingtype)
+    public function updateMeetingtype(MeetingtypeRequest $request, Meetingtype $meetingtype)
     {
         return $meetingtype->update($request->all());
     }

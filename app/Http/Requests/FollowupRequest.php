@@ -13,7 +13,7 @@ class FollowupRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,6 +27,15 @@ class FollowupRequest extends FormRequest
             'action' => 'required',
             'timeline' => 'required',
             'status' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'action.required' => 'Action is required!',
+            'timeline.required' => 'The timeline is required!',
+            'status.required' => 'Insert a status before continuing!',
         ];
     }
 }

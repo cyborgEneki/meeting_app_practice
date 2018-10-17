@@ -13,7 +13,7 @@ class DiscussionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,12 @@ class DiscussionRequest extends FormRequest
     {
         return [
             'discussion' => 'required'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'discussion.required' => 'You must enter a discussion before submission!',
         ];
     }
 }

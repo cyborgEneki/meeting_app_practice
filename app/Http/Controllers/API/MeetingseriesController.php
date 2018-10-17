@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MeetingseriesRequest;
 use App\Meetingseries;
 use App\Repositories\MeetingseriesRepositoryInterface;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class MeetingseriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MeetingseriesRequest $request)
     {
         $meetingseries = $this->meetingseriesRepository->createMeetingseries($request);
 
@@ -53,7 +54,7 @@ class MeetingseriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meetingseries $meetingseries)
+    public function update(MeetingseriesRequest $request, Meetingseries $meetingseries)
     {
         $this->meetingseriesRepository->updateMeetingseries($request, $meetingseries);
         return response()->json(['You have successfully updated the meeting series.'], 200);

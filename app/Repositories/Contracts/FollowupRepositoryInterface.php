@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Followup;
+use App\Http\Requests\FollowupRequest;
 use Illuminate\Http\Request;
 
 /**
@@ -17,9 +18,9 @@ interface FollowupRepositoryInterface
 {
     public function allFollowups();
 
-    public function createFollowup(Request $request);
+    public function createFollowup(FollowupRequest $request);
 
-    public function updateFollowup(Request $request, Followup $followup);
+    public function updateFollowup(FollowupRequest $request, Followup $followup);
 
     public function deleteFollowup(Followup $followup);
 }

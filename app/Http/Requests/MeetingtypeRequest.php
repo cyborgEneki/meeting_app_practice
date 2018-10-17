@@ -34,5 +34,4 @@ class MeetingtypeRequest extends FormRequest
             'name.required' => 'Name is required!',
         ];
     }
-
 }

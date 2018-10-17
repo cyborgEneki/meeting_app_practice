@@ -13,7 +13,7 @@ class MeetingseriesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,6 +26,13 @@ class MeetingseriesRequest extends FormRequest
         return [
             'name' => 'required',
             'frequency' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Kindly name this meeting series before continuing',
+            'frequency.required' => 'Frequency is required!',
         ];
     }
 }

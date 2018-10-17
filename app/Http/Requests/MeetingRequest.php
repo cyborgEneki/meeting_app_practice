@@ -13,7 +13,7 @@ class MeetingRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -31,7 +31,17 @@ class MeetingRequest extends FormRequest
             'creator' => 'required',
             'facilitator' => 'required',
             'time_keeper' => 'required',
-            'meetingseries_id' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'name.required' => 'A name must be entered before continuing!',
+            'date.required' => 'Date is required!',
+            'start_time.required' => 'The start time for this meeting is required!',
+            'end_time.required' => 'An end time for this meeting is required!',
+            'facilitator.required' => 'A facilitator for this meeting is required!',
+            'time_keeper.required' => 'Please assign a time keeper before continuing',
         ];
     }
 }
