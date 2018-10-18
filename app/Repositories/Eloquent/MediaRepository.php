@@ -26,7 +26,6 @@ class MediaRepository implements MediaRepositoryInterface
     public function createMedia(MediaRequest $request)
     {
         $media = Media::create($request->all());
-        $media->save();
         return new MediaResource($media);
     }
     public function updateMedia(MediaRequest $request, Media $media)

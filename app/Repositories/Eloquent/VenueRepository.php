@@ -28,7 +28,6 @@ class VenueRepository implements VenueRepositoryInterface
     public function createVenue(VenueRequest $request)
     {
         $venue = Venue::create($request->all());
-        $venue->save();
         return new VenueResource($venue);
     }
 

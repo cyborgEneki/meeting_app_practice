@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Agenda;
+use App\Http\Requests\AgendaRequest;
 use App\Http\Resources\AgendaResource;
 use App\Repositories\AgendaRepositoryInterface;
 use Illuminate\Http\Request;
@@ -28,6 +29,12 @@ class AgendaController extends Controller
 //        return response()->json($agenda, 200);
 //    }
 
+    public function store(AgendaRequest $request)
+    {
+        $agenda = $this->agendaRepository->createAgenda($request);
+
+        return response()->json($agenda, 201);
+    }
     public function show($id)
     {
         $agenda = Agenda::find($id);

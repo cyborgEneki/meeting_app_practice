@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 interface AgendaRepositoryInterface
 {
     public function updateAgenda(AgendaRequest $request, Agenda $agenda);
+    public function createAgenda(AgendaRequest $request);
 
     public function deleteAgenda(Agenda $agenda);
 }

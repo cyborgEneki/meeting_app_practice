@@ -9,6 +9,7 @@ namespace App\Repositories;
  * Time: 10:57 PM
  */
 
+use App\Http\Requests\AgendaRequest;
 use App\Http\Requests\MeetingRequest;
 use App\Http\Resources\MeetingResource;
 use App\User;
@@ -50,11 +51,10 @@ class MeetingRepository implements MeetingRepositoryInterface
         foreach ($request->agendas as $agendadata)
         {
             $agendadata['meeting_id'] =$meeting->id;
-            $agendarequest = new Request($agendadata);
+            $agendarequest = new AgendaRequest($agendadata);
             $this->agendaRepository->createAgenda($agendarequest);
         }
 
-        $meeting->save();
         return new MeetingResource($meeting);
     }
 
