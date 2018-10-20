@@ -10,13 +10,14 @@ namespace App\Repositories;
 
 use App\Agenda;
 use App\Http\Requests\AgendaRequest;
+use App\Http\Requests\MeetingRequest;
 use App\Meeting;
 use App\Http\Resources\AgendaResource;
 use Illuminate\Http\Request;
 
 class AgendaRepository implements AgendaRepositoryInterface
 {
-    public function createAgenda(AgendaRequest $request)
+    public function createAgenda(MeetingRequest $request)
     {
         $agenda = Agenda::create($request->all());
         return new AgendaResource($agenda);

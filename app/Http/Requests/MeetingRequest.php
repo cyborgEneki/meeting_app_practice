@@ -31,6 +31,9 @@ class MeetingRequest extends FormRequest
             'creator' => 'required',
             'facilitator' => 'required',
             'time_keeper' => 'required',
+            'agendas.*.topic' => 'required',
+            'agendas.*.description' => 'required',
+            'agendas.*.time_allocated' => 'required',
         ];
     }
     public function messages()
@@ -42,6 +45,10 @@ class MeetingRequest extends FormRequest
             'end_time.required' => 'An end time for this meeting is required!',
             'facilitator.required' => 'A facilitator for this meeting is required!',
             'time_keeper.required' => 'Please assign a time keeper before continuing',
+            'agendas.*.topic.required' => 'Each agenda must have a topic',
+            'agendas.*.description.required' => 'Each agenda must have a description',
+            'agendas.*.time_allocated.required' => 'Each agenda must have a time allocated',
+
         ];
     }
 }

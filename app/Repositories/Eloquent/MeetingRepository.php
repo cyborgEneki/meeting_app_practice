@@ -11,6 +11,7 @@ namespace App\Repositories;
 
 use App\Http\Requests\AgendaRequest;
 use App\Http\Requests\MeetingRequest;
+use App\Http\Requests\MeetingseriesRequest;
 use App\Http\Resources\MeetingResource;
 use App\User;
 use App\Http\Resources\MeetingWithoutRelatedDataResource;
@@ -51,7 +52,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         foreach ($request->agendas as $agendadata)
         {
             $agendadata['meeting_id'] =$meeting->id;
-            $agendarequest = new AgendaRequest($agendadata);
+            $agendarequest = new MeetingseriesRequest($agendadata);
             $this->agendaRepository->createAgenda($agendarequest);
         }
 

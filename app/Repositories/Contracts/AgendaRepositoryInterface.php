@@ -10,12 +10,13 @@ namespace App\Repositories;
 
 use App\Agenda;
 use App\Http\Requests\AgendaRequest;
+use App\Http\Requests\MeetingRequest;
 use Illuminate\Http\Request;
 
 interface AgendaRepositoryInterface
 {
     public function updateAgenda(AgendaRequest $request, Agenda $agenda);
-    public function createAgenda(AgendaRequest $request);
+    public function createAgenda(MeetingRequest $request);
 
     public function deleteAgenda(Agenda $agenda);
 }
