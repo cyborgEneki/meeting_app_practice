@@ -31,7 +31,29 @@ Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens')
 );
+import Vue from 'vue'
+import VueAxios from 'vue-axios'
+import VueRouter from 'vue-router'
+
+Vue.use(VueAxios)
+Vue.use(VueRouter)
+
+import App from './components/App'
+import ListMeetings from './components/Meetings/ListMeetings'
+
+const router = new VueRouter({
+    mode: history,
+    routes: [
+        {
+            path: '/meetings',
+            name: 'ListMeetings',
+            component: ListMeetings
+        }
+    ],
+});
 
 const app = new Vue({
-    el: '#app'
-});
+    el: '#app',
+    components: { App },
+    router,
+}).$mount(#app);
