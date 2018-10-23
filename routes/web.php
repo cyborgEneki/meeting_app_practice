@@ -15,12 +15,12 @@
 //    return view('welcome');
 //});
 
-Route::get('/home', function (){
+Route::get('/welcome', function (){
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home_page', 'HomeController@index')->name('home_page');
+Route::get('/home', 'HomeController@home')->name('home');
 
-//Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+Route::get('/{any}', 'HomeController@welcome')->name('stray');
