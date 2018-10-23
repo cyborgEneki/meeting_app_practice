@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\MeetingseriesRequest;
 use App\Http\Resources\MeetingseriesResource;
 use App\Meetingseries;
 use Illuminate\Http\Request;
@@ -21,12 +22,12 @@ class MeetingseriesRepository implements MeetingseriesRepositoryInterface
         return MeetingseriesResource::collection(Meetingseries::all());
     }
 
-    public function createMeetingseries(Request $request)
+    public function createMeetingseries(MeetingseriesRequest $request)
     {
         return Meetingseries::create($request->all());
     }
 
-    public function updateMeetingseries(Request $request, Meetingseries $meetingseries)
+    public function updateMeetingseries(MeetingseriesRequest $request, Meetingseries $meetingseries)
     {
         return $meetingseries->update($request->all());
     }

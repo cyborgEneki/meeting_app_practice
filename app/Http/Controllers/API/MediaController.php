@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MediaRequest;
 use App\Media;
 use App\Repositories\MediaRepositoryInterface;
 use Illuminate\Http\Request;
@@ -32,13 +33,13 @@ class MediaController extends Controller
         return $media;
     }
 
-    public function store(Request $request)
+    public function store(MediaRequest $request)
     {
         $media = $this->mediaRepository->createMedia($request);
         return $media;
     }
 
-    public function update(Request $request, Media $media)
+    public function update(MediaRequest $request, Media $media)
     {
         $this->mediaRepository->updateMedia($request, $media);
         return response()->json(['You have successfully updated this media.'], 200);

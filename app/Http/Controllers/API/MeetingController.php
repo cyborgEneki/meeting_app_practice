@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MeetingRequest;
 use App\Meeting;
 use App\User;
 use App\Repositories\AgendaRepository;
@@ -37,7 +38,7 @@ class MeetingController extends Controller
      * @param $meeting
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(MeetingRequest $request)
     {
         $meeting = $this->meetingRepository->createMeeting($request);
         event(new MeetingAlert($meeting));
@@ -55,7 +56,7 @@ class MeetingController extends Controller
      * @param Meeting $meeting
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, Meeting $meeting)
+    public function update(MeetingRequest $request, Meeting $meeting)
     {
         $this->meetingRepository->updateMeeting($request, $meeting);
         return response()->json(['You have successfully updated your meeting.'], 200);

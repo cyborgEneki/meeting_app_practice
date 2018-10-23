@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Discussion;
+use App\Http\Requests\DiscussionRequest;
 use App\Repositories\DiscussionRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class DiscussionController extends Controller
         return $discussion;
     }
 
-    public function store(Request $request)
+    public function store(DiscussionRequest $request)
     {
         $discussion = $this->discussionRepository->createDiscussion($request);
         return $discussion;

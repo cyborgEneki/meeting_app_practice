@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\MeetingseriesRequest;
 use App\Meetingseries;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ interface MeetingseriesRepositoryInterface
 {
     public function allMeetingseries();
 
-    public function createMeetingseries(Request $request);
+    public function createMeetingseries(MeetingseriesRequest $request);
 
-    public function updateMeetingseries(Request $request, Meetingseries $meetingseries);
+    public function updateMeetingseries(MeetingseriesRequest $request, Meetingseries $meetingseries);
 
     public function deleteMeetingseries(Meetingseries $meetingseries);
 }

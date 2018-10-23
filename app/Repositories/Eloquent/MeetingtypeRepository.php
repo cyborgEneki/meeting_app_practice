@@ -8,6 +8,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\MeetingtypeRequest;
 use App\Http\Resources\MeetingtypeResource;
 use App\Meetingtype;
 use Illuminate\Http\Request;
@@ -26,13 +27,13 @@ class MeetingtypeRepository implements MeetingtypeRepositoryInterface
         return MeetingtypeResource::collection(Meetingtype::all());
     }
 
-    public function createMeetingtype(Request $request)
+    public function createMeetingtype(MeetingtypeRequest $request)
     {
         $meetingtype = Meetingtype::create($request->all());
         return new MeetingtypeResource($meetingtype);
     }
 
-    public function updateMeetingtype(Request $request, Meetingtype $meetingtype)
+    public function updateMeetingtype(MeetingtypeRequest $request, Meetingtype $meetingtype)
     {
         return $meetingtype->update($request->all());
     }

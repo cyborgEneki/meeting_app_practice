@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Agenda;
 use App\Followup;
+use App\Http\Requests\FollowupRequest;
 use App\Http\Resources\FollowupResource;
 use Illuminate\Http\Request;
 
@@ -21,12 +22,12 @@ class FollowupRepository implements FollowupRepositoryInterface
         return FollowupResource::collection(Followup::all());
     }
 
-    public function createFollowup(Request $request)
+    public function createFollowup(FollowupRequest $request)
     {
         return Followup::create($request->all());
     }
 
-    public function updateFollowup(Request $request, Followup $followup)
+    public function updateFollowup(FollowupRequest $request, Followup $followup)
     {
         return $followup->update($request->all());
     }

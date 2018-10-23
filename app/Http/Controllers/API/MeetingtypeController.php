@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MeetingtypeRequest;
 use App\Meetingtype;
 use App\Repositories\MeetingtypeRepositoryInterface;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ class MeetingtypeController extends Controller
 
     public function __construct(MeetingtypeRepositoryInterface $meetingtypeRepository)
     {
+        $this->middleware(['role:admin']);
         $this->meetingtypeRepository = $meetingtypeRepository;
     }
 
@@ -34,7 +36,7 @@ class MeetingtypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MeetingtypeRequest $request)
     {
         $meetingtypes = $this->meetingtypeRepository->createMeetingtype($request);
 
@@ -53,7 +55,7 @@ class MeetingtypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Meetingtype $meetingtype)
+    public function update(MeetingtypeRequest $request, Meetingtype $meetingtype)
     {
         $this->meetingtypeRepository->updateMeetingtype($request, $meetingtype);
         return response()->json(['You have successfully updated this meeting type.'], 200);

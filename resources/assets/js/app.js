@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('list-meetings', require('./components/Meetings/ListMeetings.vue'));
 
 Vue.component(
     'passport-clients',

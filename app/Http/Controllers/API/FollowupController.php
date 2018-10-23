@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Followup;
+use App\Http\Requests\FollowupRequest;
 use App\Repositories\FollowupRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,7 +35,7 @@ class FollowupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FollowupRequest $request)
     {
         $followups = $this->followupRepository->createFollowup($request);
 

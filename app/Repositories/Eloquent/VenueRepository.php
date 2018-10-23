@@ -7,6 +7,7 @@
  */
 namespace App\Repositories;
 
+use App\Http\Requests\VenueRequest;
 use App\Http\Resources\VenueResource;
 use App\Venue;
 use Illuminate\Http\Request;
@@ -24,14 +25,13 @@ class VenueRepository implements VenueRepositoryInterface
         return new VenueResource($venue);
     }
 
-    public function createVenue(Request $request)
+    public function createVenue(VenueRequest $request)
     {
         $venue = Venue::create($request->all());
-        $venue->save();
         return new VenueResource($venue);
     }
 
-    public function updateVenue(Request $request, Venue $venue)
+    public function updateVenue(VenueRequest $request, Venue $venue)
     {
         $venue = $venue->update($request->all());
         return new VenueResource($venue);

@@ -7,6 +7,7 @@
  */
 namespace App\Repositories;
 
+use App\Http\Requests\MediaRequest;
 use App\Http\Resources\MediaResource;
 use App\Media;
 use Illuminate\Http\Request;
@@ -22,13 +23,12 @@ class MediaRepository implements MediaRepositoryInterface
         $media = Media::findOrFail($id);
         return new MediaResource($media);
     }
-    public function createMedia(Request $request)
+    public function createMedia(MediaRequest $request)
     {
         $media = Media::create($request->all());
-        $media->save();
         return new MediaResource($media);
     }
-    public function updateMedia(Request $request, Media $media)
+    public function updateMedia(MediaRequest $request, Media $media)
     {
         $media = $media->update($request->all());
         return new MediaResource($media);
