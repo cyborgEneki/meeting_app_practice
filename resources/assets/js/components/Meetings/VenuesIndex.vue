@@ -1,10 +1,10 @@
 <template>
-    <h2>Agendas Index</h2>
+    <h2>Venues Index</h2>
 </template>
 
 <script>
     export default {
-        name: "AgendasIndex"
+        name: "VenuesIndex"
     }
 </script>
 

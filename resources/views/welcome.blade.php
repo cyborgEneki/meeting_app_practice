@@ -79,7 +79,7 @@
 
     <div class="content">
         <div class="title m-b-md">
-            Promeet
+            Welcome to Promeet!
         </div>
     </div>
 </div>

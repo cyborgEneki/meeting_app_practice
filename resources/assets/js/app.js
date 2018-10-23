@@ -33,12 +33,15 @@ Vue.component(
 );
 
 import VueRouter from 'vue-router'
+// import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(VueRouter)
+Vue.use(VueAxios)
 
 import App from './components/App'
 import MeetingsIndex from './components/Meetings/MeetingsIndex'
-import AgendasIndex from './components/Meetings/AgendasIndex'
+import VenuesIndex from './components/Meetings/VenuesIndex'
 
 const router = new VueRouter({
     mode: 'history',
@@ -50,9 +53,9 @@ const router = new VueRouter({
         },
 
         {
-            path: '/agendas',
-            name: 'agendas',
-            component: AgendasIndex,
+            path: '/venues',
+            name: 'venues',
+            component: VenuesIndex,
         },
     ],
 });
