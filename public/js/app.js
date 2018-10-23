@@ -50164,7 +50164,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50189,6 +50189,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50196,11 +50199,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             meetings: [],
-            meeting: {
-                id: ' ',
-                name: ' ',
-                date: ' '
-            },
+            meeting: {},
             /*This is necessary because when the make a PUT and CREATE request to the API
             the field will have to be sent with it for it to know which id to output. They both go
             to the store method and we don't pass the id with the url*/
@@ -50209,18 +50208,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             edit: false
         };
     },
-    created: function created() {
+    mounted: function mounted() {
         this.getMeetings();
     },
 
 
     methods: {
         getMeetings: function getMeetings() {
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('api/meetings').then(function (response) {
-                this.meetings = response.data;
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/simplemeetings').then(function (response) {
+                _this.meetings = response.data;
             });
         }
     }
+
 });
 
 /***/ }),
@@ -50235,13 +50237,17 @@ var render = function() {
     _c("h2", [_vm._v("All Meetings")]),
     _vm._v(" "),
     _c(
-      "ul",
+      "table",
+      { staticClass: "table striped table-bordered" },
       _vm._l(_vm.meetings, function(meeting) {
-        return _c("li", [
-          _c("strong", [_vm._v("Name: ")]),
-          _vm._v(" " + _vm._s(meeting.name) + "\n            "),
-          _c("strong", [_vm._v("Date: ")]),
-          _vm._v(" " + _vm._s(meeting.date) + "\n        ")
+        return _c("tr", [
+          _c("td", [_vm._v(_vm._s(meeting.name))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(meeting.date))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(meeting.start_time))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(meeting.end_time))])
         ])
       })
     )

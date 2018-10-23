@@ -35,7 +35,8 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function allSimpleMeetings()
     {
-        return MeetingWithoutRelatedDataResource::collection(Meeting::all());
+//        return MeetingWithoutRelatedDataResource::collection(Meeting::all());
+        return MeetingWithoutRelatedDataResource::collection(Meeting::take(10)->get());
     }
 
     /**
