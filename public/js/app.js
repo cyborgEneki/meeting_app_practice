@@ -52993,7 +52993,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53008,9 +53008,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "VenuesIndex"
+    name: "VenuesIndex",
+    data: function data() {
+        return {
+            venue: {},
+            venues: []
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        axios.get('api/venues').then(function (response) {
+            _this.venues = response.data;
+        });
+    }
 });
 
 /***/ }),
@@ -53021,9 +53047,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h2", [_vm._v("Venues Index")])
+  return _c("div", [
+    _c("h2", [_vm._v("All Venues")]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table striped table-bordered" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.venues, function(venue) {
+          return _c("tr", [_c("td", [_vm._v(_vm._s(venue.name))])])
+        })
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [_c("th", [_c("strong", [_vm._v("Name")])])])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
