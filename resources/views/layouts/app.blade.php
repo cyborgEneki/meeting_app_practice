@@ -22,6 +22,7 @@
 </head>
 <body>
 <div id="app">
+
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -81,5 +82,6 @@
 </div>
 
 <script src="{{ asset('/js/app.js') }}"></script>
+
 </body>
 </html>
