@@ -2,7 +2,7 @@
     <div>
         <h2>All Meetings</h2>
         <ul>
-            <li v-for="meeting of meetings">
+            <li v-for="meeting in meetings">
                 <strong>Name: </strong> {{ meeting.name }}
                 <strong>Date: </strong> {{ meeting.date }}
             </li>
