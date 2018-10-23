@@ -1,10 +1,10 @@
 <template>
-    <h2>All Meetings</h2>
+    <h2>Agendas Index</h2>
 </template>
 
 <script>
     export default {
-        name: "ListMeetings"
+        name: "AgendasIndex"
     }
 </script>
 

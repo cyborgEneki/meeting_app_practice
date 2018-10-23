@@ -16,7 +16,6 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('list-meetings', require('./components/Meetings/ListMeetings.vue'));
 
 Vue.component(
     'passport-clients',
@@ -33,6 +32,33 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens')
 );
 
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+import App from './components/App'
+import MeetingsIndex from './components/Meetings/MeetingsIndex'
+import AgendasIndex from './components/Meetings/AgendasIndex'
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/meetings',
+            name: 'meetings',
+            component: MeetingsIndex,
+        },
+
+        {
+            path: '/agendas',
+            name: 'agendas',
+            component: AgendasIndex,
+        },
+    ],
+});
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: { App },
+    router,
 });

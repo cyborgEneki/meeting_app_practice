@@ -23,4 +23,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
 
-Route::get('/{any}', 'HomeController@welcome')->name('stray');
+Route::get('/{any}', 'HomeController@home')->name('home');
