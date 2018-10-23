@@ -22,7 +22,6 @@
 </head>
 <body>
 <div id="app">
-<app></app>
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -84,21 +83,3 @@
 <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>
-<script>
-    import App from "../../assets/js/components/App";
-    export default {
-        components: {App}
-    }
-</script>
-<script>
-    import ListMeetings from "../../assets/js/components/Meetings/ListMeetings";
-    export default {
-        components: {ListMeetings}
-    }
-</script>
-<script>
-    import App from "../../assets/js/components/App";
-    export default {
-        components: {App}
-    }
-</script>

@@ -4,12 +4,7 @@
 
 <script>
     export default {
-        name: "ListMeetings",
-        data() {
-            return {
-                meetings
-            }
-        }
+        name: "ListMeetings"
     }
 </script>
 
