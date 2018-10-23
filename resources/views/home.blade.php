@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <list-meetings></list-meetings>
+            <app></app>
         </div>
     </div>
 </div>
