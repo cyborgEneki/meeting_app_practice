@@ -16,7 +16,8 @@ class VenueRepository implements VenueRepositoryInterface
 {
     public function allVenues()
     {
-        return VenueResource::collection(Venue::all());
+//        return VenueResource::collection(Venue::all());
+        return VenueResource::collection(Venue::take(10)->get());
     }
 
     public function showVenue($id)
