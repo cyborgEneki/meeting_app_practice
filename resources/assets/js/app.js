@@ -55,7 +55,7 @@ const router = new VueRouter({
             component: VenuesIndex,
         },
         {
-            path: '/meeting',
+            path: '/meetings/:meetingId',
             name: 'showMeeting',
             component: ShowMeeting,
         },

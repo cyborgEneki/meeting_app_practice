@@ -1,10 +1,10 @@
 <template>
     <div>
-        
+
         <h2>All Meetings</h2>
         <table class="table striped table-bordered">
             <tr v-for="meeting in meetings">
-                <td>{{ meeting.name }}</td>
+                <td @click="goToDetail(meeting.id)">{{ meeting.name }}</td>
                 <td>{{ meeting.date }}</td>
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
@@ -19,6 +19,7 @@
         name: "MeetingsIndex",
         data() {
             return {
+                msg: 'Hi',
                 meetings: [],
                 meeting: {},
                 /*This is necessary because when the make a PUT and CREATE request to the API
@@ -41,6 +42,9 @@
                             this.meetings = response.data;
                         }
                     )
+            },
+            goToDetail(id) {
+                this.$router.push({name: 'showMeeting', params: { meetingId: id }})
             }
         }
 

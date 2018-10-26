@@ -1,12 +1,38 @@
 <template>
     <div>
         <h2>Meeting Details</h2>
+        <div v-for="(meeting, index) in meetings" :key="index">
+            <div v-if="meetingId === meeting.id">
+                <p>The name of this meeting is {{ meeting.name }}</p>
+            </div>
+        </div>
 
     </div>
 </template>
 
 <script>
-
+    export default {
+        name: 'showMeeting',
+        data() {
+            return {
+                meetingId: this.$route.params.meetingId,
+                meetings: [],
+            }
+        },
+        mounted() {
+            this.showMeetingDetails();
+        },
+        methods: {
+            showMeetingDetails() {
+                let uri = '/api/meetings/'+this.$route.params.meetingId;
+                axios.get(uri)
+                    .then(response => {
+                            this.meetings = response.data;
+                        }
+                    )
+            }
+        }
+    }
 </script>
 
 <style scoped>

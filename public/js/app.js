@@ -14362,7 +14362,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: 'venues',
         component: __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex___default.a
     }, {
-        path: '/meeting',
+        path: '/meetings/:meetingId',
         name: 'showMeeting',
         component: __WEBPACK_IMPORTED_MODULE_5__components_Meetings_ShowMeeting___default.a
     }]
@@ -52797,7 +52797,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52829,6 +52829,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "MeetingsIndex",
     data: function data() {
         return {
+            msg: 'Hi',
             meetings: [],
             meeting: {},
             /*This is necessary because when the make a PUT and CREATE request to the API
@@ -52851,6 +52852,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/simplemeetings').then(function (response) {
                 _this.meetings = response.data;
             });
+        },
+        goToDetail: function goToDetail(id) {
+            this.$router.push({ name: 'showMeeting', params: { meetingId: id } });
         }
     }
 
@@ -52872,7 +52876,17 @@ var render = function() {
       { staticClass: "table striped table-bordered" },
       _vm._l(_vm.meetings, function(meeting) {
         return _c("tr", [
-          _c("td", [_vm._v(_vm._s(meeting.name))]),
+          _c(
+            "td",
+            {
+              on: {
+                click: function($event) {
+                  _vm.goToDetail(meeting.id)
+                }
+              }
+            },
+            [_vm._v(_vm._s(meeting.name))]
+          ),
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(meeting.date))]),
           _vm._v(" "),
@@ -53166,15 +53180,17 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 89 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -53182,6 +53198,35 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 //
 //
 //
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'showMeeting',
+    data: function data() {
+        return {
+            meetingId: this.$route.params.meetingId,
+            meetings: []
+        };
+    },
+    mounted: function mounted() {
+        this.showMeetingDetails();
+    },
+
+    methods: {
+        showMeetingDetails: function showMeetingDetails() {
+            var _this = this;
+
+            var uri = '/api/meetings/' + this.$route.params.meetingId;
+            axios.get(uri).then(function (response) {
+                _this.meetings = response.data;
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 90 */
@@ -53191,16 +53236,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v("Meeting Details")]),
+      _vm._v(" "),
+      _vm._l(_vm.meetings, function(meeting, index) {
+        return _c("div", { key: index }, [
+          _vm.meetingId === meeting.id
+            ? _c("div", [
+                _c("p", [
+                  _vm._v("The name of this meeting is " + _vm._s(meeting.name))
+                ])
+              ])
+            : _vm._e()
+        ])
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Meeting Details")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
