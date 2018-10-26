@@ -7,8 +7,6 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -32,16 +30,15 @@ Vue.component(
     require('./components/passport/PersonalAccessTokens')
 );
 
+import Vue from 'vue';
 import VueRouter from 'vue-router'
-// import axios from 'axios'
-import VueAxios from 'vue-axios'
 
 Vue.use(VueRouter)
-Vue.use(VueAxios)
 
 import App from './components/App'
 import MeetingsIndex from './components/Meetings/MeetingsIndex'
 import VenuesIndex from './components/Meetings/VenuesIndex'
+import ShowMeeting from './components/Meetings/ShowMeeting'
 
 const router = new VueRouter({
     mode: 'history',
@@ -56,6 +53,11 @@ const router = new VueRouter({
             path: '/venues',
             name: 'venues',
             component: VenuesIndex,
+        },
+        {
+            path: '/meeting',
+            name: 'showMeeting',
+            component: ShowMeeting,
         },
     ],
 });

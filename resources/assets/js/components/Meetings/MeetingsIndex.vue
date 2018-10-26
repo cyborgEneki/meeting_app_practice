@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <h2>All Meetings</h2>
         <table class="table striped table-bordered">
             <tr v-for="meeting in meetings">
@@ -13,7 +14,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
 
     export default {
         name: "MeetingsIndex",

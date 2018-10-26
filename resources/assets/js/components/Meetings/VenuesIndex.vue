@@ -7,7 +7,7 @@
     </thead>
     <tbody>
     <tr v-for="venue in venues">
-        <td>{{ venue.name}}</td>
+        <td>{{ venue.name }}</td>
     </tr>
     </tbody>
 </table>
