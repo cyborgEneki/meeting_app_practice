@@ -10,3 +10,9 @@
     </div>
 </div>
 @endsection
+<script>
+    import ShowMeeting from "../assets/js/components/Meetings/ShowMeeting";
+    export default {
+        components: {ShowMeeting}
+    }
+</script>
