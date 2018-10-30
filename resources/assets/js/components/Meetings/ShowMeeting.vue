@@ -6,8 +6,10 @@
             <div v-if="meetingId === meeting.id">
                 <p>The name of this meeting is {{ meeting.name }}</p>
             </div>
-        </div>
 
+        </div>
+        <p v-if="seen">Message Can Be Seen!</p>
+        <p><button class="btn btn-lg btn-primary" v-on:click="seen = !seen">Toggle</button></p>
     </div>
 </template>
 
@@ -21,6 +23,7 @@
             return {
                 meetingId: this.$route.params.meetingId,
                 meetings: [],
+                seen: true
             }
         },
         mounted() {
