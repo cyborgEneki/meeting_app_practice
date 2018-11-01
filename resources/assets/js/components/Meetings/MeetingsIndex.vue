@@ -1,24 +1,31 @@
 <template>
     <div>
-        <h2>All Meetings</h2>
+        <h2>Meetings</h2>
         <table class="table striped table-bordered">
-            <tr v-for="meeting in meetings">
-                <td>{{ meeting.name }}</td>
-                <td>{{ meeting.date }}</td>
+            <tr v-for="meeting in meetings" :key="meeting.id">
+                <td>
+                    <router-link :to="'/meetings/'+meeting.id+'/details'" >
+                        {{ meeting.name }}
+                    </router-link>
+                </td>
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
+                <td>{{ meeting.id }}</td>
             </tr>
         </table>
+
+        <router-view/>
+
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
 
     export default {
         name: "MeetingsIndex",
         data() {
             return {
+                msg: 'Hi',
                 meetings: [],
                 meeting: {},
                 /*This is necessary because when the make a PUT and CREATE request to the API
@@ -43,7 +50,6 @@
                     )
             }
         }
-
     }
 </script>
 

@@ -2,8 +2,8 @@
     <div>
         <h1>Promeet</h1>
         <p>
-            <router-link :to="{ name: 'meetings'}">All Meetings</router-link>
-            <router-link :to="{ name: 'venues'}">All Venues</router-link>
+            <router-link :to="{ name: 'meetings'}">Meetings</router-link>
+            <router-link :to="{ name: 'venues'}">Venues</router-link>
         </p>
         <div>
             <router-view/>
@@ -13,7 +13,7 @@
 
 <script>
     export default {
-        name: "App"
+        name: "App",
     }
 </script>
 

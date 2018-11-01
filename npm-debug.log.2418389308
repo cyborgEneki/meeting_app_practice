@@ -1,0 +1,33 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'watch' ]
+2 info using npm@3.10.10
+3 info using node@v8.11.3
+4 verbose run-script [ 'prewatch', 'watch', 'postwatch' ]
+5 info lifecycle @~prewatch: @
+6 silly lifecycle @~prewatch: no script for prewatch, continuing
+7 info lifecycle @~watch: @
+8 verbose lifecycle @~watch: unsafe-perm in lifecycle true
+9 verbose lifecycle @~watch: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/jeneki/sites/meetings_manager/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+10 verbose lifecycle @~watch: CWD: /Users/jeneki/sites/meetings_manager
+11 silly lifecycle @~watch: Args: [ '-c', 'npm run development -- --watch' ]
+12 verbose stack Error: getWindowSize ENOTTY
+12 verbose stack     at _errnoException (util.js:992:11)
+12 verbose stack     at WriteStream._refreshSize (tty.js:102:24)
+12 verbose stack     at process.on (internal/process/stdio.js:22:43)
+12 verbose stack     at emitNone (events.js:111:20)
+12 verbose stack     at process.emit (events.js:208:7)
+12 verbose stack     at processEmit (/usr/local/lib/node_modules/npm/node_modules/npmlog/node_modules/gauge/node_modules/signal-exit/index.js:146:32)
+12 verbose stack     at processEmit [as emit] (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/node_modules/npmlog/node_modules/gauge/node_modules/signal-exit/index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:208:44)
+13 verbose cwd /Users/jeneki/sites/meetings_manager
+14 error Darwin 18.0.0
+15 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "watch"
+16 error node v8.11.3
+17 error npm  v3.10.10
+18 error code ENOTTY
+19 error errno ENOTTY
+20 error syscall getWindowSize
+21 error getWindowSize ENOTTY
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]
