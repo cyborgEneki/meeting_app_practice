@@ -1,6 +1,5 @@
 <template>
     <div>
-        <MeetingsIndex></MeetingsIndex>
         <h2>Meeting Details</h2>
         <div v-for="meeting in meetings">
             <div v-if="meetingId === meeting.id">
@@ -12,11 +11,9 @@
 </template>
 
 <script>
-    import MeetingsIndex from "./MeetingsIndex";
 
     export default {
         name: 'showMeeting',
-        components: {MeetingsIndex},
         data() {
             return {
                 meetingId: this.$route.params.meetingId,

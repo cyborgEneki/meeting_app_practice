@@ -4,23 +4,19 @@
         <h2>All Meetings</h2>
         <table class="table striped table-bordered">
             <tr v-for="meeting in meetings">
-                <td @click="goToDetail(meeting.id)"  v-on:click="seen = !seen">{{ meeting.name }}</td>
-                <td>{{ meeting.date }}</td>
+                <td @click="goToDetail(meeting.id)">{{ meeting.name }}</td>
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
+                <td>{{ meeting.id }}</td>
             </tr>
         </table>
-
-        <ShowMeeting v-if="seen"></ShowMeeting>
     </div>
 </template>
 
 <script>
 
-    import ShowMeeting from "./ShowMeeting";
     export default {
         name: "MeetingsIndex",
-        components: {ShowMeeting},
         data() {
             return {
                 msg: 'Hi',
@@ -31,9 +27,7 @@
                 to the store method and we don't pass the id with the url*/
                 meeting_id: '',
                 /*This is necessary because I will use the same form to add and edit.*/
-                edit: false,
-                seen: true
-
+                edit: false
             }
         },
 

@@ -14467,6 +14467,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/meetings/:meetingId',
         name: 'showMeeting',
         component: __WEBPACK_IMPORTED_MODULE_5__components_Meetings_ShowMeeting___default.a
+    }, {
+        path: '/meetings/:meetingId',
+        name: 'showMeeting',
+        component: Details
     }]
 });
 
@@ -52746,7 +52750,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52757,6 +52761,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -52795,9 +52800,20 @@ var render = function() {
         _vm._v(" "),
         _c("router-link", { attrs: { to: { name: "venues" } } }, [
           _vm._v("All Venues")
-        ])
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.meetings, function(meeting) {
+          return _c(
+            "router-link",
+            {
+              key: meeting.id,
+              attrs: { to: "/meetings/" + meeting.id + "/details" }
+            },
+            [_vm._v(_vm._s(meeting.name))]
+          )
+        })
       ],
-      1
+      2
     ),
     _vm._v(" "),
     _c("div", [_c("router-view")], 1)
@@ -52848,7 +52864,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52859,8 +52875,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ShowMeeting__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ShowMeeting___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ShowMeeting__);
 //
 //
 //
@@ -52876,14 +52890,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MeetingsIndex",
-    components: { ShowMeeting: __WEBPACK_IMPORTED_MODULE_0__ShowMeeting___default.a },
     data: function data() {
         return {
             msg: 'Hi',
@@ -52894,9 +52904,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             to the store method and we don't pass the id with the url*/
             meeting_id: '',
             /*This is necessary because I will use the same form to add and edit.*/
-            edit: false,
-            seen: true
-
+            edit: false
         };
     },
     mounted: function mounted() {
@@ -52954,7 +52962,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52965,8 +52973,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MeetingsIndex__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__MeetingsIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__MeetingsIndex__);
 //
 //
 //
@@ -52979,13 +52985,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'showMeeting',
-    components: { MeetingsIndex: __WEBPACK_IMPORTED_MODULE_0__MeetingsIndex___default.a },
     data: function data() {
         return {
             meetingId: this.$route.params.meetingId,
@@ -53019,8 +53022,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("MeetingsIndex"),
-      _vm._v(" "),
       _c("h2", [_vm._v("Meeting Details")]),
       _vm._v(" "),
       _vm._l(_vm.meetings, function(meeting) {
@@ -53056,46 +53057,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h2", [_vm._v("All Meetings")]),
-      _vm._v(" "),
-      _c(
-        "table",
-        { staticClass: "table striped table-bordered" },
-        _vm._l(_vm.meetings, function(meeting) {
-          return _c("tr", [
-            _c(
-              "td",
-              {
-                on: {
-                  click: [
-                    function($event) {
-                      _vm.goToDetail(meeting.id)
-                    },
-                    function($event) {
-                      _vm.seen = !_vm.seen
-                    }
-                  ]
+  return _c("div", [
+    _c("h2", [_vm._v("All Meetings")]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table striped table-bordered" },
+      _vm._l(_vm.meetings, function(meeting) {
+        return _c("tr", [
+          _c(
+            "td",
+            {
+              on: {
+                click: function($event) {
+                  _vm.goToDetail(meeting.id)
                 }
-              },
-              [_vm._v(_vm._s(meeting.name))]
-            ),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.date))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.start_time))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.end_time))])
-          ])
-        })
-      ),
-      _vm._v(" "),
-      _vm.seen ? _c("ShowMeeting") : _vm._e()
-    ],
-    1
-  )
+              }
+            },
+            [_vm._v(_vm._s(meeting.name))]
+          ),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(meeting.start_time))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(meeting.end_time))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(meeting.id))])
+        ])
+      })
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
