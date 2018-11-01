@@ -38,7 +38,7 @@ Vue.use(VueRouter)
 import App from './components/App'
 import MeetingsIndex from './components/Meetings/MeetingsIndex'
 import VenuesIndex from './components/Meetings/VenuesIndex'
-import ShowMeeting from './components/Meetings/ShowMeeting'
+import MeetingDetails from './components/Meetings/MeetingDetails'
 
 const router = new VueRouter({
     mode: 'history',
@@ -55,14 +55,9 @@ const router = new VueRouter({
             component: VenuesIndex,
         },
         {
-            path: '/meetings/:meetingId',
-            name: 'showMeeting',
-            component: ShowMeeting,
-        },
-        {
-            path: '/meetings/:meetingId',
-            name: 'showMeeting',
-            component: Details,
+            path: '/meetings/:id/details',
+            name: 'meeting-details',
+            component: MeetingDetails,
         },
     ],
 });
