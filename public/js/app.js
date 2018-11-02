@@ -14316,8 +14316,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Meetings_MeetingsIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Meetings_MeetingsIndex__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14351,12 +14353,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 
+
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
         path: '/meetings',
         name: 'meetings',
         component: __WEBPACK_IMPORTED_MODULE_3__components_Meetings_MeetingsIndex___default.a
+    }, {
+        path: '/meetingstest',
+        name: 'meetingstest',
+        component: __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest___default.a
     }, {
         path: '/venues',
         name: 'venues',
@@ -52644,7 +52651,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52655,6 +52662,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -52693,6 +52701,10 @@ var render = function() {
         _vm._v(" "),
         _c("router-link", { attrs: { to: { name: "venues" } } }, [
           _vm._v("Venues")
+        ]),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: { name: "meetingstest" } } }, [
+          _vm._v("MeetingsTest")
         ])
       ],
       1
@@ -53095,32 +53107,15 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(90)
+var __vue_script__ = __webpack_require__(78)
 /* template */
-var __vue_template__ = __webpack_require__(91)
+var __vue_template__ = __webpack_require__(79)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53159,7 +53154,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 90 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53196,7 +53191,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 91 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53212,6 +53207,188 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-68261017", module.exports)
+  }
+}
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(83)
+/* template */
+var __vue_template__ = __webpack_require__(89)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Meetings/MeetingsTest.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b968714c", Component.options)
+  } else {
+    hotAPI.reload("data-v-b968714c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 81 */,
+/* 82 */,
+/* 83 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            meetings: [],
+            meeting: {},
+            showView: false
+        };
+    },
+    mounted: function mounted() {
+        this.getMeetings();
+    },
+
+    methods: {
+        getMeetings: function getMeetings() {
+            var _this = this;
+
+            axios.get('/api/simplemeetings').then(function (response) {
+                _this.meetings = response.data;
+            });
+        },
+
+        loadView: function loadView(id) {
+            var _this2 = this;
+
+            this.showView = true;
+            axios.get('/api/meetings' + id).then(function (response) {
+                _this2.meeting = response.data;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 84 */,
+/* 85 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", [
+      _c("h2", [_vm._v("Meetings")]),
+      _vm._v(" "),
+      _c(
+        "table",
+        { staticClass: "table striped table-bordered" },
+        _vm._l(_vm.meetings, function(meeting) {
+          return _c("tr", { key: meeting.id }, [
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-info",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.loadView(meeting.id)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(meeting.name) + "\n                    ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.start_time))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.end_time))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.id))])
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
+    _vm.showView
+      ? _c("div", [_c("div", [_c("p", [_vm._v(_vm._s(_vm.meeting.name))])])])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b968714c", module.exports)
   }
 }
 
