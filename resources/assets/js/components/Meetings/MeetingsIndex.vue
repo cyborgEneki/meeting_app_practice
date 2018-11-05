@@ -1,58 +1,54 @@
 <template>
     <div>
-        <h2>Meetings</h2>
-        <table class="table striped table-bordered">
-            <tr v-for="meeting in meetings" :key="meeting.id">
-                <td>
-                    <router-link :to="'/meetings/'+meeting.id+'/details'" >
-                        {{ meeting.name }}
-                    </router-link>
-                </td>
-                <td>{{ meeting.start_time }}</td>
-                <td>{{ meeting.end_time }}</td>
-                <td>{{ meeting.id }}</td>
-            </tr>
-        </table>
+        <div>
+            <h2>Meetings</h2>
+            <table class="table striped table-bordered">
+                <tr v-for="meeting in meetings" :key="meeting.id">
+                    <td>{{meeting.name}}</td>
+                    <td>{{ meeting.start_time }}</td>
+                    <td>{{ meeting.end_time }}</td>
+                    <td>{{ meeting.id }}</td>
+                    <td>
+                        <button class="btn btn-info" type="button" @click="loadView(meeting)">View</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-        <router-view/>
-
+        <div v-if="showView">
+            <h4>Meeting</h4>
+            <show_view :meeting="meeting"></show_view>
+        </div>
     </div>
 </template>
 
 <script>
+    import show_view from './partials/MeetingShow';
 
     export default {
-        name: "MeetingsIndex",
         data() {
             return {
-                msg: 'Hi',
                 meetings: [],
-                meeting: {},
-                /*This is necessary because when the make a PUT and CREATE request to the API
-                the field will have to be sent with it for it to know which id to output. They both go
-                to the store method and we don't pass the id with the url*/
-                meeting_id: '',
-                /*This is necessary because I will use the same form to add and edit.*/
-                edit: false
+                showView: false,
+                meeting:{}
             }
         },
-
-        mounted() {
-            this.getMeetings();
-        },
-
-        methods: {
+        methods:{
             getMeetings() {
                 axios.get('/api/simplemeetings')
                     .then(response => {
                             this.meetings = response.data;
                         }
                     )
+            },
+            loadView: function (meeting) {
+                this.showView = true;
+                this.meeting = meeting;
             }
-        }
+        },
+        components:{show_view},
+        mounted() {
+            this.getMeetings();
+        },
     }
 </script>
-
-<style scoped>
-
-</style>

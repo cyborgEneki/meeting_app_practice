@@ -14298,7 +14298,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(85);
+module.exports = __webpack_require__(83);
 
 
 /***/ }),
@@ -14316,10 +14316,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Meetings_MeetingsIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Meetings_MeetingsIndex__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14352,8 +14348,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 
-
-
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
@@ -14361,17 +14355,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: 'meetings',
         component: __WEBPACK_IMPORTED_MODULE_3__components_Meetings_MeetingsIndex___default.a
     }, {
-        path: '/meetingstest',
-        name: 'meetingstest',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingsTest___default.a
-    }, {
         path: '/venues',
         name: 'venues',
         component: __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex___default.a
-    }, {
-        path: '/meetings/:id/details',
-        name: 'meeting-details',
-        component: __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingDetails___default.a
     }]
 });
 
@@ -52651,7 +52637,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -52662,7 +52648,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -52701,10 +52686,6 @@ var render = function() {
         _vm._v(" "),
         _c("router-link", { attrs: { to: { name: "venues" } } }, [
           _vm._v("Venues")
-        ]),
-        _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "meetingstest" } } }, [
-          _vm._v("MeetingsTest")
         ])
       ],
       1
@@ -52728,21 +52709,17 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(68)
-}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(70)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(100)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-41fa418c"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -52775,51 +52752,15 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(69);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(3)("e46b6c08", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41fa418c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MeetingsIndex.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-41fa418c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MeetingsIndex.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 68 */,
+/* 69 */,
 /* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_MeetingShow__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__partials_MeetingShow___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__partials_MeetingShow__);
 //
 //
 //
@@ -52841,27 +52782,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "MeetingsIndex",
     data: function data() {
         return {
-            msg: 'Hi',
             meetings: [],
-            meeting: {},
-            /*This is necessary because when the make a PUT and CREATE request to the API
-            the field will have to be sent with it for it to know which id to output. They both go
-            to the store method and we don't pass the id with the url*/
-            meeting_id: '',
-            /*This is necessary because I will use the same form to add and edit.*/
-            edit: false
+            showView: false,
+            meeting: {}
         };
     },
-    mounted: function mounted() {
-        this.getMeetings();
-    },
-
 
     methods: {
         getMeetings: function getMeetings() {
@@ -52870,71 +52804,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/simplemeetings').then(function (response) {
                 _this.meetings = response.data;
             });
+        },
+
+        loadView: function loadView(meeting) {
+            this.showView = true;
+            this.meeting = meeting;
         }
+    },
+    components: { show_view: __WEBPACK_IMPORTED_MODULE_0__partials_MeetingShow___default.a },
+    mounted: function mounted() {
+        this.getMeetings();
     }
 });
 
 /***/ }),
-/* 71 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h2", [_vm._v("Meetings")]),
-      _vm._v(" "),
-      _c(
-        "table",
-        { staticClass: "table striped table-bordered" },
-        _vm._l(_vm.meetings, function(meeting) {
-          return _c("tr", { key: meeting.id }, [
-            _c(
-              "td",
-              [
-                _c(
-                  "router-link",
-                  { attrs: { to: "/meetings/" + meeting.id + "/details" } },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(meeting.name) +
-                        "\n                "
-                    )
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.start_time))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.end_time))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.id))])
-          ])
-        })
-      ),
-      _vm._v(" "),
-      _c("router-view")
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-41fa418c", module.exports)
-  }
-}
-
-/***/ }),
+/* 71 */,
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53107,15 +52991,36 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(78)
+var __vue_script__ = __webpack_require__(96)
 /* template */
-var __vue_template__ = __webpack_require__(79)
+var __vue_template__ = __webpack_require__(99)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53132,7 +53037,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Meetings/MeetingDetails.vue"
+Component.options.__file = "resources/assets/js/components/Meetings/partials/MeetingShow.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -53141,9 +53046,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-68261017", Component.options)
+    hotAPI.createRecord("data-v-caa0f6aa", Component.options)
   } else {
-    hotAPI.reload("data-v-68261017", Component.options)
+    hotAPI.reload("data-v-caa0f6aa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -53154,7 +53059,9 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 78 */
+/* 94 */,
+/* 95 */,
+/* 96 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -53165,40 +53072,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'MeetingDetails',
-    props: ['id'],
-    data: function data() {
-        return {
-            meeting: {}
-        };
-    },
-    mounted: function mounted() {
-        this.showMeetingDetails();
-    },
-
-    methods: {
-        showMeetingDetails: function showMeetingDetails() {
-            var _this = this;
-
-            var uri = '/api/meetings/' + this.$route.params.id;
-            axios.get(uri).then(function (response) {
-                _this.meeting = response.data;
-            });
-        }
-    }
+    props: ['meeting']
 });
 
 /***/ }),
-/* 79 */
+/* 97 */,
+/* 98 */,
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("p", [_vm._v(_vm._s(_vm.meeting.name))])])
+  return _c("div", [
+    _c("h4", [_vm._v(_vm._s(_vm.meeting.name))]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.meeting))])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53206,136 +53100,12 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-68261017", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-caa0f6aa", module.exports)
   }
 }
 
 /***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(83)
-/* template */
-var __vue_template__ = __webpack_require__(89)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Meetings/MeetingsTest.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b968714c", Component.options)
-  } else {
-    hotAPI.reload("data-v-b968714c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 81 */,
-/* 82 */,
-/* 83 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            meetings: [],
-            meeting: {},
-            showView: false
-        };
-    },
-    mounted: function mounted() {
-        this.getMeetings();
-    },
-
-    methods: {
-        getMeetings: function getMeetings() {
-            var _this = this;
-
-            axios.get('/api/simplemeetings').then(function (response) {
-                _this.meetings = response.data;
-            });
-        },
-
-        loadView: function loadView(id) {
-            var _this2 = this;
-
-            this.showView = true;
-            axios.get('/api/meetings' + id).then(function (response) {
-                _this2.meeting = response.data;
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 84 */,
-/* 85 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -53351,6 +53121,14 @@ var render = function() {
         { staticClass: "table striped table-bordered" },
         _vm._l(_vm.meetings, function(meeting) {
           return _c("tr", { key: meeting.id }, [
+            _c("td", [_vm._v(_vm._s(meeting.name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.start_time))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.end_time))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.id))]),
+            _vm._v(" "),
             _c("td", [
               _c(
                 "button",
@@ -53359,26 +53137,28 @@ var render = function() {
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
-                      _vm.loadView(meeting.id)
+                      _vm.loadView(meeting)
                     }
                   }
                 },
-                [_vm._v(_vm._s(meeting.name) + "\n                    ")]
+                [_vm._v("View")]
               )
-            ]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.start_time))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.end_time))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(meeting.id))])
+            ])
           ])
         })
       )
     ]),
     _vm._v(" "),
     _vm.showView
-      ? _c("div", [_c("div", [_c("p", [_vm._v(_vm._s(_vm.meeting.name))])])])
+      ? _c(
+          "div",
+          [
+            _c("h4", [_vm._v("Meeting")]),
+            _vm._v(" "),
+            _c("show_view", { attrs: { meeting: _vm.meeting } })
+          ],
+          1
+        )
       : _vm._e()
   ])
 }
@@ -53388,7 +53168,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b968714c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-41fa418c", module.exports)
   }
 }
 

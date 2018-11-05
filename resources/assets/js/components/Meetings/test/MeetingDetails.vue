@@ -28,3 +28,12 @@
         }
     }
 </script>
+
+<!--This is what the corresponding dynamic route should look like
+{
+path: '/meetings/:id/details',
+name: 'meeting-details',
+component: MeetingDetails,
+},
+-->
+
