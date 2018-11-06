@@ -53725,7 +53725,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -53806,6 +53805,45 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -53822,13 +53860,116 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h4", [_vm._v(_vm._s(_vm.meeting.name))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.meeting))])
-  ])
+  return _c(
+    "div",
+    [
+      _c("h4", [_vm._v("Meeting Name: ")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.name))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Creator:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.creator))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Facilitator:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Time Keeper:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v(" Attendees")]),
+      _vm._v(" "),
+      _vm._l(_vm.meeting.users, function(name) {
+        return _c("p", [_vm._v(_vm._s(name.first_name))])
+      }),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Agendas:")]),
+      _vm._v(" "),
+      _c(
+        "table",
+        { staticClass: "table striped table-bordered" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.meeting.agendas, function(agendas) {
+            return _c(
+              "tr",
+              [
+                _c("td", [_vm._v(_vm._s(agendas.topic))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(agendas.description))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(agendas.time_allocated))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(agendas.agenda_status))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(agendas.conclusion))]),
+                _vm._v(" "),
+                _vm._l(agendas.followups, function(description) {
+                  return _c("td", [_vm._v(" " + _vm._s(description.action))])
+                }),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  _vm._l(agendas.discussion, function(description) {
+                    return _c("h6", [
+                      _vm._v(" " + _vm._s(description.description))
+                    ])
+                  })
+                )
+              ],
+              2
+            )
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Venue:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.venue.name))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Media:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.media.name))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Meeting Type:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingtype.name))]),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Meeting Series:")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingseries.name))]),
+      _vm._v(" "),
+      _c("hr")
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Topic")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Description")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Time Allocated (minutes)")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Conclusion")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Follow Up Action")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Discussions")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53924,7 +54065,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -53935,6 +54076,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -53989,37 +54133,52 @@ var render = function() {
     _c(
       "table",
       { staticClass: "table striped table-bordered" },
-      _vm._l(_vm.meetings, function(meeting) {
-        return _c("tr", { key: meeting.id }, [
-          _c("td", [_vm._v(_vm._s(meeting.name))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(meeting.start_time))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(meeting.end_time))]),
-          _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(meeting.id))]),
-          _vm._v(" "),
-          _c("td", [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-info",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.loadView(meeting)
-                  }
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.meetings, function(meeting) {
+          return _c(
+            "tr",
+            {
+              key: meeting.id,
+              on: {
+                click: function($event) {
+                  _vm.loadView(meeting)
                 }
-              },
-              [_vm._v("View")]
-            )
-          ])
-        ])
-      })
+              }
+            },
+            [
+              _c("td", [_vm._v(_vm._s(meeting.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(meeting.date))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(meeting.start_time))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(meeting.end_time))])
+            ]
+          )
+        })
+      ],
+      2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Date")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Start Time")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("End Time")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54044,13 +54203,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm.showView
-      ? _c(
-          "div",
-          [_c("h4", [_vm._v("Meeting")]), _vm._v(" "), _c("show_view")],
-          1
-        )
-      : _vm._e()
+    _vm.showView ? _c("div", [_c("show_view")], 1) : _vm._e()
   ])
 }
 var staticRenderFns = []

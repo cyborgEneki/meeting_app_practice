@@ -6,7 +6,6 @@
         </div>
 
         <div v-if="showView">
-            <h4>Meeting</h4>
             <show_view></show_view>
         </div>
     </div>

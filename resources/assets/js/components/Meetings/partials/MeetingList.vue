@@ -1,14 +1,17 @@
 <template>
     <div>
         <table class="table striped table-bordered">
-            <tr v-for="meeting in meetings" :key="meeting.id">
+            <thead>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            </thead>
+            <tr v-for="meeting in meetings" :key="meeting.id" @click="loadView(meeting)">
                 <td>{{meeting.name}}</td>
+                <td>{{ meeting.date }}</td>
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
-                <td>{{ meeting.id }}</td>
-                <td>
-                    <button class="btn btn-info" type="button" @click="loadView(meeting)">View</button>
-                </td>
             </tr>
         </table>
     </div>

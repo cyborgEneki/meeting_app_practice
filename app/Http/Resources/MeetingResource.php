@@ -20,17 +20,16 @@ class MeetingResource extends JsonResource
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
+//            'creator' => UserResource::collection($this->creator),
             'creator' => $this->creator,
             'facilitator' => $this->facilitator,
             'time_keeper' => $this->time_keeper,
-            'venue_id' => $this->venue_id,
-            'media_id' => $this->media_id,
-            'meetingtype_id' => $this->meetingtype_id,
-            'meetingseries_id' => $this->meetingseries_id,
             'users' => UserResource::collection($this->users),
             'agendas' =>AgendaResource::collection($this->agendas),
             'venue' => $this->venue,
-            'media' => $this->media
+            'media' => $this->media,
+            'meetingseries' => $this->meetingseries,
+            'meetingtype' => $this->meetingtype,
         ];
     }
 }
