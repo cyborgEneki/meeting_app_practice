@@ -23,7 +23,7 @@
         },
         methods:{
             getMeetings() {
-                axios.get('/api/simplemeetings')
+                axios.get('/api/meetings')
                     .then(response => {
                             this.meetings = response.data;
                         }

@@ -53963,7 +53963,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getMeetings: function getMeetings() {
             var _this = this;
 
-            axios.get('/api/simplemeetings').then(function (response) {
+            axios.get('/api/meetings').then(function (response) {
                 _this.meetings = response.data;
             });
         },

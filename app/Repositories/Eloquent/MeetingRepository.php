@@ -30,7 +30,8 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function allMeetings()
     {
-        return MeetingResource::collection(Meeting::all());
+//        return MeetingResource::collection(Meeting::all());
+        return MeetingResource::collection(Meeting::take(10)->get());
     }
 
     public function allSimpleMeetings()
