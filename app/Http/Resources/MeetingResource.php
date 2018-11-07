@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MeetingResource extends JsonResource
@@ -20,10 +21,9 @@ class MeetingResource extends JsonResource
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
-//            'creator' => UserResource::collection($this->creator),
-            'creator' => $this->creator,
-            'facilitator' => $this->facilitator,
-            'time_keeper' => $this->time_keeper,
+            'creator' => new UserResource(User::find($this->creator)),
+            'facilitator' => new UserResource(User::find($this->facilitator)),
+            'time_keeper' => new UserResource(User::find($this->time_keeper)),
             'users' => UserResource::collection($this->users),
             'agendas' =>AgendaResource::collection($this->agendas),
             'venue' => $this->venue,

@@ -3,11 +3,11 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        <p>{{ meeting.creator }}</p>
+        <p>{{ meeting.creator.first_name }}</p>
         <h4>Facilitator:</h4>
-        <p>{{ meeting.facilitator }}</p>
+        <p>{{ meeting.facilitator.first_name }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ meeting.time_keeper }}</p>
+        <p>{{ meeting.time_keeper.first_name }}</p>
         <h4> Attendees</h4>
         <p v-for="name in meeting.users">{{ name.first_name }}</p>
         <h4>Agendas:</h4>
