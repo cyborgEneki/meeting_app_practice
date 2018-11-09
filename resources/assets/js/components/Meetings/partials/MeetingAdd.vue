@@ -98,7 +98,6 @@
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
                     });
-                this.meeting = '';
             },
             addAgenda() {
                 let items = this.meeting.agendas.length;
