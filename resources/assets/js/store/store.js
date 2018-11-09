@@ -12,6 +12,9 @@ const mutations ={
     GET_MEETING_DETAILS(state, meeting){
         state.showView = true;
         state.meeting = meeting;
+    },
+    ADD_NEW_MEETING(state){
+        state.showView = true;
     }
 };
 
