@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div v-if="showView">
+        <div v-if="showAddListView">
             <meeting_add></meeting_add>
         </div>
         <div>
@@ -9,7 +9,7 @@
             <meeting_list></meeting_list>
         </div>
 
-        <div v-if="showView">
+        <div v-if="showMeetingListView">
             <show_view></show_view>
         </div>
     </div>
@@ -28,10 +28,9 @@
         },
         computed:{
             ...mapGetters({
-                showView: 'showView',
+                showMeetingListView: 'showMeetingListView',
+                showAddListView: 'showAddListView',
             })
-        },
-        methods:{
         },
         components:{meeting_add, show_view, meeting_list},
     }

@@ -6,10 +6,13 @@
                 Meeting Name<input type="text" v-model="meeting.name"/>
             </div>
             <div>
-                Start Time<input name="date" v-model="meeting.date"/>
+                Date<input name="date" v-model="meeting.date" type="date"/>
             </div>
             <div>
-                End Time<input name="end_time" v-model="meeting.end_time"/>
+                Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
+            </div>
+            <div>
+                End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
             </div>
             <div>
                 Creator<input name="creator" v-model="meeting.creator"/>
@@ -94,8 +97,8 @@
             addNewMeeting() {
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
-                        console.log('response');
                     });
+                this.meeting = '';
             },
             addAgenda() {
                 let items = this.meeting.agendas.length;

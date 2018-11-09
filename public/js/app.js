@@ -53801,9 +53801,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])({
-        showView: 'showView'
+        showMeetingListView: 'showMeetingListView',
+        showAddListView: 'showAddListView'
     })),
-    methods: {},
     components: { meeting_add: __WEBPACK_IMPORTED_MODULE_3__partials_MeetingAdd___default.a, show_view: __WEBPACK_IMPORTED_MODULE_0__partials_MeetingShow___default.a, meeting_list: __WEBPACK_IMPORTED_MODULE_1__partials_MeetingList___default.a }
 });
 
@@ -54305,7 +54305,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54316,6 +54316,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -54409,9 +54412,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addNewMeeting: function addNewMeeting() {
-            axios.post('/api/meetings', this.meeting).then(function (response) {
-                console.log('response');
-            });
+            axios.post('/api/meetings', this.meeting).then(function (response) {});
+            this.meeting = '';
         },
         addAgenda: function addAgenda() {
             var items = this.meeting.agendas.length;
@@ -54477,7 +54479,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", [
-          _vm._v("\n            Start Time"),
+          _vm._v("\n            Date"),
           _c("input", {
             directives: [
               {
@@ -54487,7 +54489,7 @@ var render = function() {
                 expression: "meeting.date"
               }
             ],
-            attrs: { name: "date" },
+            attrs: { name: "date", type: "date" },
             domProps: { value: _vm.meeting.date },
             on: {
               input: function($event) {
@@ -54495,6 +54497,30 @@ var render = function() {
                   return
                 }
                 _vm.$set(_vm.meeting, "date", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _vm._v("\n            Start Time"),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.start_time,
+                expression: "meeting.start_time"
+              }
+            ],
+            attrs: { name: "start_time", type: "time" },
+            domProps: { value: _vm.meeting.start_time },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.meeting, "start_time", $event.target.value)
               }
             }
           })
@@ -54511,7 +54537,7 @@ var render = function() {
                 expression: "meeting.end_time"
               }
             ],
-            attrs: { name: "end_time" },
+            attrs: { name: "end_time", type: "time" },
             domProps: { value: _vm.meeting.end_time },
             on: {
               input: function($event) {
@@ -54893,7 +54919,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.showView ? _c("div", [_c("meeting_add")], 1) : _vm._e(),
+    _vm.showAddListView ? _c("div", [_c("meeting_add")], 1) : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
@@ -54901,7 +54927,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm.showView ? _c("div", [_c("show_view")], 1) : _vm._e()
+    _vm.showMeetingListView ? _c("div", [_c("show_view")], 1) : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -55100,23 +55126,27 @@ if (false) {
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
 var state = {
-    showView: false,
+    showMeetingListView: false,
+    showAddListView: false,
     meeting: {}
 };
 
 var mutations = {
     GET_MEETING_DETAILS: function GET_MEETING_DETAILS(state, meeting) {
-        state.showView = true;
+        state.showMeetingListView = true;
         state.meeting = meeting;
     },
     ADD_NEW_MEETING: function ADD_NEW_MEETING(state) {
-        state.showView = true;
+        state.showAddListView = true;
     }
 };
 
 var getters = {
-    showView: function showView(state) {
-        return state.showView;
+    showMeetingListView: function showMeetingListView(state) {
+        return state.showMeetingListView;
+    },
+    showAddListView: function showAddListView(state) {
+        return state.showAddListView;
     },
     meeting: function meeting(state) {
         return state.meeting;
