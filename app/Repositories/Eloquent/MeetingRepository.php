@@ -54,7 +54,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         foreach ($request->agendas as $agendadata)
         {
             $agendadata['meeting_id'] =$meeting->id;
-            $agendarequest = new MeetingseriesRequest($agendadata);
+            $agendarequest = new MeetingRequest($agendadata);
             $this->agendaRepository->createAgenda($agendarequest);
         }
 

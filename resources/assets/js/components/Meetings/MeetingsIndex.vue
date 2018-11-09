@@ -1,5 +1,9 @@
 <template>
     <div>
+
+        <div>
+            <meeting-add></meeting-add>
+        </div>
         <div>
             <h2>Meetings</h2>
             <meeting_list></meeting_list>
@@ -15,6 +19,7 @@
     import show_view from './partials/MeetingShow';
     import meeting_list from './partials/MeetingList'
     import {mapGetters} from 'vuex'
+    import MeetingAdd from "./partials/MeetingAdd";
 
     export default {
         data() {
@@ -28,6 +33,6 @@
         },
         methods:{
         },
-        components:{show_view, meeting_list},
+        components:{MeetingAdd, show_view, meeting_list},
     }
 </script>
