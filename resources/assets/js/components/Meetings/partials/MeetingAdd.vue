@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Add New Meeting</h3>
-        <form action="#" @submit.prevent="addNewMeeting()" method="POST">
+
             <div>
                 Meeting Name<input type="text" v-model="meeting.name"/>
             </div>
@@ -57,9 +57,8 @@
             </div>
 
             <button @click="addAgenda">Add Agenda</button>
-            <button class="button" type="submit">Add Meeting</button>
+            <button @click="addNewMeeting()">Add Meeting</button>
 
-        </form>
     </div>
 </template>
 
@@ -97,6 +96,7 @@
             addNewMeeting() {
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
+                        router.push('/')
                     });
             },
             addAgenda() {

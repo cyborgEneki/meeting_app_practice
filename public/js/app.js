@@ -26280,7 +26280,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Meetings_VenuesIndex__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_partials_MeetingAdd__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_partials_MeetingAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Meetings_partials_MeetingAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store_store__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_test_MeetingDetails__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_test_MeetingDetails___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Meetings_test_MeetingDetails__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__store_store__ = __webpack_require__(89);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -26315,6 +26317,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 
+
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
     routes: [{
@@ -26329,12 +26332,16 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/add-meeting',
         name: 'addMeeting',
         component: __WEBPACK_IMPORTED_MODULE_5__components_Meetings_partials_MeetingAdd___default.a
+    }, {
+        path: '/meetings/:id/details',
+        name: 'meeting-details',
+        component: __WEBPACK_IMPORTED_MODULE_6__components_Meetings_test_MeetingDetails___default.a
     }]
 });
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
-    store: __WEBPACK_IMPORTED_MODULE_6__store_store__["a" /* default */],
+    store: __WEBPACK_IMPORTED_MODULE_7__store_store__["a" /* default */],
     components: { App: __WEBPACK_IMPORTED_MODULE_2__components_App___default.a },
     router: router
 });
@@ -54380,7 +54387,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MeetingAdd",
@@ -54412,7 +54418,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addNewMeeting: function addNewMeeting() {
-            axios.post('/api/meetings', this.meeting).then(function (response) {});
+            axios.post('/api/meetings', this.meeting).then(function (response) {
+                router.push('/');
+            });
         },
         addAgenda: function addAgenda() {
             var items = this.meeting.agendas.length;
@@ -54438,466 +54446,463 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h3", [_vm._v("Add New Meeting")]),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        attrs: { action: "#", method: "POST" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            _vm.addNewMeeting()
+  return _c(
+    "div",
+    [
+      _c("h3", [_vm._v("Add New Meeting")]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Meeting Name"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.name,
+              expression: "meeting.name"
+            }
+          ],
+          attrs: { type: "text" },
+          domProps: { value: _vm.meeting.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "name", $event.target.value)
+            }
           }
-        }
-      },
-      [
-        _c("div", [
-          _vm._v("\n            Meeting Name"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.name,
-                expression: "meeting.name"
-              }
-            ],
-            attrs: { type: "text" },
-            domProps: { value: _vm.meeting.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "name", $event.target.value)
-              }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Date"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.date,
+              expression: "meeting.date"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Date"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.date,
-                expression: "meeting.date"
+          ],
+          attrs: { name: "date", type: "date" },
+          domProps: { value: _vm.meeting.date },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            attrs: { name: "date", type: "date" },
-            domProps: { value: _vm.meeting.date },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "date", $event.target.value)
-              }
+              _vm.$set(_vm.meeting, "date", $event.target.value)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Start Time"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.start_time,
-                expression: "meeting.start_time"
-              }
-            ],
-            attrs: { name: "start_time", type: "time" },
-            domProps: { value: _vm.meeting.start_time },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "start_time", $event.target.value)
-              }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Start Time"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.start_time,
+              expression: "meeting.start_time"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            End Time"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.end_time,
-                expression: "meeting.end_time"
+          ],
+          attrs: { name: "start_time", type: "time" },
+          domProps: { value: _vm.meeting.start_time },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            attrs: { name: "end_time", type: "time" },
-            domProps: { value: _vm.meeting.end_time },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "end_time", $event.target.value)
-              }
+              _vm.$set(_vm.meeting, "start_time", $event.target.value)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Creator"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.creator,
-                expression: "meeting.creator"
-              }
-            ],
-            attrs: { name: "creator" },
-            domProps: { value: _vm.meeting.creator },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "creator", $event.target.value)
-              }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            End Time"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.end_time,
+              expression: "meeting.end_time"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Facilitator"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.facilitator,
-                expression: "meeting.facilitator"
+          ],
+          attrs: { name: "end_time", type: "time" },
+          domProps: { value: _vm.meeting.end_time },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            attrs: { name: "facilitator" },
-            domProps: { value: _vm.meeting.facilitator },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "facilitator", $event.target.value)
-              }
+              _vm.$set(_vm.meeting, "end_time", $event.target.value)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Time Keeper"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.time_keeper,
-                expression: "meeting.time_keeper"
-              }
-            ],
-            attrs: { name: "time_keeper" },
-            domProps: { value: _vm.meeting.time_keeper },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "time_keeper", $event.target.value)
-              }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Creator"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.creator,
+              expression: "meeting.creator"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Venue"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.venue_id,
-                expression: "meeting.venue_id"
+          ],
+          attrs: { name: "creator" },
+          domProps: { value: _vm.meeting.creator },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            attrs: { name: "venue_id" },
-            domProps: { value: _vm.meeting.venue_id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "venue_id", $event.target.value)
-              }
+              _vm.$set(_vm.meeting, "creator", $event.target.value)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Media"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.media_id,
-                expression: "meeting.media_id"
-              }
-            ],
-            attrs: { name: "media_id" },
-            domProps: { value: _vm.meeting.media_id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "media_id", $event.target.value)
-              }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Facilitator"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.facilitator,
+              expression: "meeting.facilitator"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Meeting Type"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.meetingtype_id,
-                expression: "meeting.meetingtype_id"
+          ],
+          attrs: { name: "facilitator" },
+          domProps: { value: _vm.meeting.facilitator },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
               }
-            ],
-            attrs: { name: "meetingtype_id" },
-            domProps: { value: _vm.meeting.meetingtype_id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "meetingtype_id", $event.target.value)
-              }
+              _vm.$set(_vm.meeting, "facilitator", $event.target.value)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _vm._v("\n            Meeting Series"),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.meeting.meetingseries_id,
-                expression: "meeting.meetingseries_id"
-              }
-            ],
-            attrs: { name: "meetingseries_id" },
-            domProps: { value: _vm.meeting.meetingseries_id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.meeting, "meetingseries_id", $event.target.value)
-              }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Time Keeper"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.time_keeper,
+              expression: "meeting.time_keeper"
             }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.meeting.agendas, function(agenda, index) {
-          return _c("div", [
-            _c("div", [
-              _vm._v("\n                Agenda Topic"),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.meeting.agendas[index].topic,
-                    expression: "meeting.agendas[index].topic"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.meeting.agendas[index].topic },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.meeting.agendas[index],
-                      "topic",
-                      $event.target.value
-                    )
-                  }
+          ],
+          attrs: { name: "time_keeper" },
+          domProps: { value: _vm.meeting.time_keeper },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "time_keeper", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Venue"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.venue_id,
+              expression: "meeting.venue_id"
+            }
+          ],
+          attrs: { name: "venue_id" },
+          domProps: { value: _vm.meeting.venue_id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "venue_id", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Media"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.media_id,
+              expression: "meeting.media_id"
+            }
+          ],
+          attrs: { name: "media_id" },
+          domProps: { value: _vm.meeting.media_id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "media_id", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Meeting Type"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.meetingtype_id,
+              expression: "meeting.meetingtype_id"
+            }
+          ],
+          attrs: { name: "meetingtype_id" },
+          domProps: { value: _vm.meeting.meetingtype_id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "meetingtype_id", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _vm._v("\n            Meeting Series"),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.meetingseries_id,
+              expression: "meeting.meetingseries_id"
+            }
+          ],
+          attrs: { name: "meetingseries_id" },
+          domProps: { value: _vm.meeting.meetingseries_id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "meetingseries_id", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.meeting.agendas, function(agenda, index) {
+        return _c("div", [
+          _c("div", [
+            _vm._v("\n                Agenda Topic"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.meeting.agendas[index].topic,
+                  expression: "meeting.agendas[index].topic"
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                Agenda Description"),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.meeting.agendas[index].description,
-                    expression: "meeting.agendas[index].description"
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.meeting.agendas[index].topic },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.meeting.agendas[index].description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.meeting.agendas[index],
-                      "description",
-                      $event.target.value
-                    )
-                  }
+                  _vm.$set(
+                    _vm.meeting.agendas[index],
+                    "topic",
+                    $event.target.value
+                  )
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                Time Allocated"),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.meeting.agendas[index].time_allocated,
-                    expression: "meeting.agendas[index].time_allocated"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.meeting.agendas[index].time_allocated },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.meeting.agendas[index],
-                      "time_allocated",
-                      $event.target.value
-                    )
-                  }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                Agenda Description"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.meeting.agendas[index].description,
+                  expression: "meeting.agendas[index].description"
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                User Assigned to Agenda"),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.meeting.agendas[index].user_id,
-                    expression: "meeting.agendas[index].user_id"
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.meeting.agendas[index].description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.meeting.agendas[index].user_id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.meeting.agendas[index],
-                      "user_id",
-                      $event.target.value
-                    )
-                  }
+                  _vm.$set(
+                    _vm.meeting.agendas[index],
+                    "description",
+                    $event.target.value
+                  )
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                Agenda Status"),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.meeting.agendas[index].agenda_status,
-                    expression: "meeting.agendas[index].agenda_status"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.meeting.agendas[index].agenda_status },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.meeting.agendas[index],
-                      "agenda_status",
-                      $event.target.value
-                    )
-                  }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                Time Allocated"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.meeting.agendas[index].time_allocated,
+                  expression: "meeting.agendas[index].time_allocated"
                 }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                Agenda Conclusion"),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.meeting.agendas[index].conclusion,
-                    expression: "meeting.agendas[index].conclusion"
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.meeting.agendas[index].time_allocated },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.meeting.agendas[index].conclusion },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.meeting.agendas[index],
-                      "conclusion",
-                      $event.target.value
-                    )
-                  }
+                  _vm.$set(
+                    _vm.meeting.agendas[index],
+                    "time_allocated",
+                    $event.target.value
+                  )
                 }
-              })
-            ])
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                User Assigned to Agenda"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.meeting.agendas[index].user_id,
+                  expression: "meeting.agendas[index].user_id"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.meeting.agendas[index].user_id },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.meeting.agendas[index],
+                    "user_id",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                Agenda Status"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.meeting.agendas[index].agenda_status,
+                  expression: "meeting.agendas[index].agenda_status"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.meeting.agendas[index].agenda_status },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.meeting.agendas[index],
+                    "agenda_status",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v("\n                Agenda Conclusion"),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.meeting.agendas[index].conclusion,
+                  expression: "meeting.agendas[index].conclusion"
+                }
+              ],
+              attrs: { type: "text" },
+              domProps: { value: _vm.meeting.agendas[index].conclusion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.meeting.agendas[index],
+                    "conclusion",
+                    $event.target.value
+                  )
+                }
+              }
+            })
           ])
-        }),
-        _vm._v(" "),
-        _c("button", { on: { click: _vm.addAgenda } }, [_vm._v("Add Agenda")]),
-        _vm._v(" "),
-        _c("button", { staticClass: "button", attrs: { type: "submit" } }, [
-          _vm._v("Add Meeting")
         ])
-      ],
-      2
-    )
-  ])
+      }),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.addAgenda } }, [_vm._v("Add Agenda")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              _vm.addNewMeeting()
+            }
+          }
+        },
+        [_vm._v("Add Meeting")]
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -55165,6 +55170,116 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(98)
+/* template */
+var __vue_template__ = __webpack_require__(99)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Meetings/test/MeetingDetails.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4f084d04", Component.options)
+  } else {
+    hotAPI.reload("data-v-4f084d04", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 98 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'MeetingDetails',
+    props: ['id'],
+    data: function data() {
+        return {
+            meeting: {}
+        };
+    },
+    mounted: function mounted() {
+        this.showMeetingDetails();
+    },
+
+    methods: {
+        showMeetingDetails: function showMeetingDetails() {
+            var _this = this;
+
+            var uri = '/api/meetings/' + this.$route.params.id;
+            axios.get(uri).then(function (response) {
+                _this.meeting = response.data;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_c("p", [_vm._v(_vm._s(_vm.meeting.name))])])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4f084d04", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
