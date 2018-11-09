@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="loadAddMeetingView()">Add New Meeting</button>
+        <button @click="loadAddMeetingView()">Create New Meeting</button>
 
         <table class="table striped table-bordered">
             <thead>

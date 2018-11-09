@@ -54209,7 +54209,7 @@ var render = function() {
           }
         }
       },
-      [_vm._v("Add New Meeting")]
+      [_vm._v("Create New Meeting")]
     ),
     _vm._v(" "),
     _c(
@@ -54305,7 +54305,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54316,6 +54316,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -54411,6 +54412,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/meetings', this.meeting).then(function (response) {
                 console.log('response');
             });
+        },
+        addAgenda: function addAgenda() {
+            var items = this.meeting.agendas.length;
+            if (this.meeting.agendas[items - 1].topic !== '' && this.meeting.agendas[items - 1].description !== '' && this.meeting.agendas[items - 1].time_allocated !== '' && this.meeting.agendas[items - 1].user_id !== '' && this.meeting.agendas[items - 1].agenda_status !== '' && this.meeting.agendas[items - 1].conclusion !== '') {
+                this.meeting.agendas.push({
+                    topic: '',
+                    description: '',
+                    time_allocated: '',
+                    user_id: '',
+                    agenda_status: '',
+                    conclusion: ''
+                });
+            }
         }
     }
 });
@@ -54850,8 +54864,10 @@ var render = function() {
           ])
         }),
         _vm._v(" "),
+        _c("button", { on: { click: _vm.addAgenda } }, [_vm._v("Add Agenda")]),
+        _vm._v(" "),
         _c("button", { staticClass: "button", attrs: { type: "submit" } }, [
-          _vm._v("Add")
+          _vm._v("Add Meeting")
         ])
       ],
       2

@@ -53,7 +53,8 @@
                 </div>
             </div>
 
-            <button class="button" type="submit">Add</button>
+            <button @click="addAgenda">Add Agenda</button>
+            <button class="button" type="submit">Add Meeting</button>
 
         </form>
     </div>
@@ -95,6 +96,27 @@
                     .then((response) => {
                         console.log('response');
                     });
+            },
+            addAgenda() {
+                let items = this.meeting.agendas.length;
+                if (
+                    this.meeting.agendas[items - 1].topic !== '' &&
+                    this.meeting.agendas[items - 1].description !== '' &&
+                    this.meeting.agendas[items - 1].time_allocated !== '' &&
+                    this.meeting.agendas[items - 1].user_id !== '' &&
+                    this.meeting.agendas[items - 1].agenda_status !== '' &&
+                    this.meeting.agendas[items - 1].conclusion !== ''
+
+                ) {
+                    this.meeting.agendas.push({
+                        topic: '',
+                        description: '',
+                        time_allocated: '',
+                        user_id: '',
+                        agenda_status: '',
+                        conclusion: '',
+                    })
+                }
             }
         }
     }
