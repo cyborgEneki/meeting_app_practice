@@ -57,7 +57,7 @@
             </div>
 
             <button @click="addAgenda">Add Agenda</button>
-            <button @click="addNewMeeting()">Add Meeting</button>
+            <button @click="addNewMeeting">Add Meeting</button>
 
     </div>
 </template>

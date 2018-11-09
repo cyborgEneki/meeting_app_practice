@@ -54889,17 +54889,9 @@ var render = function() {
       _vm._v(" "),
       _c("button", { on: { click: _vm.addAgenda } }, [_vm._v("Add Agenda")]),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              _vm.addNewMeeting()
-            }
-          }
-        },
-        [_vm._v("Add Meeting")]
-      )
+      _c("button", { on: { click: _vm.addNewMeeting } }, [
+        _vm._v("Add Meeting")
+      ])
     ],
     2
   )
