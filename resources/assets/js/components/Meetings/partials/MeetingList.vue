@@ -1,5 +1,7 @@
 <template>
     <div>
+        <button @click="loadAddMeetingView()">Create New Meeting</button>
+
         <table class="table striped table-bordered">
             <thead>
             <th>Name</th>
@@ -24,7 +26,7 @@
                 meetings: [],
             }
         },
-        methods:{
+        methods: {
             getMeetings() {
                 axios.get('/api/meetings')
                     .then(response => {
@@ -33,7 +35,10 @@
                     )
             },
             loadView: function (meeting) {
-               this.$store.commit('GET_MEETING_DETAILS', meeting)
+                this.$store.commit('GET_MEETING_DETAILS', meeting)
+            },
+            loadAddMeetingView() {
+                this.$store.commit('ADD_NEW_MEETING')
             }
         },
         mounted() {

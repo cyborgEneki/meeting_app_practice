@@ -1,15 +1,15 @@
 <template>
     <div>
 
-        <div>
-            <meeting-add></meeting-add>
+        <div v-if="showAddListView">
+            <meeting_add></meeting_add>
         </div>
         <div>
             <h2>Meetings</h2>
             <meeting_list></meeting_list>
         </div>
 
-        <div v-if="showView">
+        <div v-if="showMeetingListView">
             <show_view></show_view>
         </div>
     </div>
@@ -19,7 +19,7 @@
     import show_view from './partials/MeetingShow';
     import meeting_list from './partials/MeetingList'
     import {mapGetters} from 'vuex'
-    import MeetingAdd from "./partials/MeetingAdd";
+    import meeting_add from "./partials/MeetingAdd";
 
     export default {
         data() {
@@ -28,11 +28,10 @@
         },
         computed:{
             ...mapGetters({
-                showView: 'showView',
+                showMeetingListView: 'showMeetingListView',
+                showAddListView: 'showAddListView',
             })
         },
-        methods:{
-        },
-        components:{MeetingAdd, show_view, meeting_list},
+        components:{meeting_add, show_view, meeting_list},
     }
 </script>
