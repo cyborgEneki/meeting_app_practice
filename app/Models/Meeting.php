@@ -31,6 +31,8 @@ class Meeting extends Model
             'created' => Events\MeetingAlert::class
         ];
 
+    public $appends = ['meetingseries', 'meetingtype'];
+
     public function venue()
     {
         return $this->belongsTo('App\Venue');
@@ -46,7 +48,7 @@ class Meeting extends Model
         return $this->belongsTo('App\Media');
     }
 
-    public function meetingtypes()
+    public function meetingtype()
     {
         return $this->belongsTo('App\Meetingtype');
     }
@@ -94,5 +96,14 @@ class Meeting extends Model
             'conclusion' => request('conclusion')
         ]);
         return $agenda;
+    }
+    public function getMeetingseriesAttribute()
+    {
+        return $this->meetingseries()->first();
+    }
+
+    public function getMeetingtypeAttribute()
+    {
+        return $this->meetingtype()->first();
     }
 }

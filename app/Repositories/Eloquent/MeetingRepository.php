@@ -30,7 +30,8 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function allMeetings()
     {
-        return MeetingResource::collection(Meeting::all());
+//        return MeetingResource::collection(Meeting::all());
+        return MeetingResource::collection(Meeting::take(10)->get());
     }
 
     public function allSimpleMeetings()
@@ -53,7 +54,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         foreach ($request->agendas as $agendadata)
         {
             $agendadata['meeting_id'] =$meeting->id;
-            $agendarequest = new MeetingseriesRequest($agendadata);
+            $agendarequest = new MeetingRequest($agendadata);
             $this->agendaRepository->createAgenda($agendarequest);
         }
 

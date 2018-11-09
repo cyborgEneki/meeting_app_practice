@@ -1,58 +1,38 @@
 <template>
     <div>
-        <h2>Meetings</h2>
-        <table class="table striped table-bordered">
-            <tr v-for="meeting in meetings" :key="meeting.id">
-                <td>
-                    <router-link :to="'/meetings/'+meeting.id+'/details'" >
-                        {{ meeting.name }}
-                    </router-link>
-                </td>
-                <td>{{ meeting.start_time }}</td>
-                <td>{{ meeting.end_time }}</td>
-                <td>{{ meeting.id }}</td>
-            </tr>
-        </table>
 
-        <router-view/>
+        <div>
+            <meeting-add></meeting-add>
+        </div>
+        <div>
+            <h2>Meetings</h2>
+            <meeting_list></meeting_list>
+        </div>
 
+        <div v-if="showView">
+            <show_view></show_view>
+        </div>
     </div>
 </template>
 
 <script>
+    import show_view from './partials/MeetingShow';
+    import meeting_list from './partials/MeetingList'
+    import {mapGetters} from 'vuex'
+    import MeetingAdd from "./partials/MeetingAdd";
 
     export default {
-        name: "MeetingsIndex",
         data() {
             return {
-                msg: 'Hi',
-                meetings: [],
-                meeting: {},
-                /*This is necessary because when the make a PUT and CREATE request to the API
-                the field will have to be sent with it for it to know which id to output. They both go
-                to the store method and we don't pass the id with the url*/
-                meeting_id: '',
-                /*This is necessary because I will use the same form to add and edit.*/
-                edit: false
             }
         },
-
-        mounted() {
-            this.getMeetings();
+        computed:{
+            ...mapGetters({
+                showView: 'showView',
+            })
         },
-
-        methods: {
-            getMeetings() {
-                axios.get('/api/simplemeetings')
-                    .then(response => {
-                            this.meetings = response.data;
-                        }
-                    )
-            }
-        }
+        methods:{
+        },
+        components:{MeetingAdd, show_view, meeting_list},
     }
 </script>
-
-<style scoped>
-
-</style>
