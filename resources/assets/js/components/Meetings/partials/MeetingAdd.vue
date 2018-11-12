@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Add New Meeting</h3>
+            <h3>Add New Meeting</h3>
 
             <div>
                 Meeting Name<input type="text" v-model="meeting.name"/>
@@ -58,8 +58,8 @@
 
             <button @click="addAgenda">Add Agenda</button>
             <button @click="addNewMeeting">Add Meeting</button>
+        </div>
 
-    </div>
 </template>
 
 <script>
