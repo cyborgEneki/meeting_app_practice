@@ -59,12 +59,7 @@ const router = new VueRouter({
             path: '/add-meeting',
             name: 'addMeeting',
             component: MeetingAdd,
-        },
-        {
-            path: '/meetings/:id/details',
-            name: 'meeting-details',
-            component: MeetingDetails,
-        },
+        }
     ],
 });
 

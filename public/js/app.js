@@ -26332,10 +26332,6 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         path: '/add-meeting',
         name: 'addMeeting',
         component: __WEBPACK_IMPORTED_MODULE_5__components_Meetings_partials_MeetingAdd___default.a
-    }, {
-        path: '/meetings/:id/details',
-        name: 'meeting-details',
-        component: __WEBPACK_IMPORTED_MODULE_6__components_Meetings_test_MeetingDetails___default.a
     }]
 });
 
@@ -54312,7 +54308,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54393,6 +54389,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             meeting: {
+                id: '',
                 name: '',
                 date: '',
                 start_time: '',
@@ -54418,8 +54415,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         addNewMeeting: function addNewMeeting() {
+            var _this = this;
+
             axios.post('/api/meetings', this.meeting).then(function (response) {
-                router.push('/');
+                _this.$router.push('/');
             });
         },
         addAgenda: function addAgenda() {
@@ -54452,7 +54451,7 @@ var render = function() {
       _c("h3", [_vm._v("Add New Meeting")]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Meeting Name"),
+        _vm._v("\n        Meeting Name"),
         _c("input", {
           directives: [
             {
@@ -54476,7 +54475,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Date"),
+        _vm._v("\n        Date"),
         _c("input", {
           directives: [
             {
@@ -54500,7 +54499,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Start Time"),
+        _vm._v("\n        Start Time"),
         _c("input", {
           directives: [
             {
@@ -54524,7 +54523,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            End Time"),
+        _vm._v("\n        End Time"),
         _c("input", {
           directives: [
             {
@@ -54548,7 +54547,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Creator"),
+        _vm._v("\n        Creator"),
         _c("input", {
           directives: [
             {
@@ -54572,7 +54571,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Facilitator"),
+        _vm._v("\n        Facilitator"),
         _c("input", {
           directives: [
             {
@@ -54596,7 +54595,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Time Keeper"),
+        _vm._v("\n        Time Keeper"),
         _c("input", {
           directives: [
             {
@@ -54620,7 +54619,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Venue"),
+        _vm._v("\n        Venue"),
         _c("input", {
           directives: [
             {
@@ -54644,7 +54643,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Media"),
+        _vm._v("\n        Media"),
         _c("input", {
           directives: [
             {
@@ -54668,7 +54667,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Meeting Type"),
+        _vm._v("\n        Meeting Type"),
         _c("input", {
           directives: [
             {
@@ -54692,7 +54691,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n            Meeting Series"),
+        _vm._v("\n        Meeting Series"),
         _c("input", {
           directives: [
             {
@@ -54718,7 +54717,7 @@ var render = function() {
       _vm._l(_vm.meeting.agendas, function(agenda, index) {
         return _c("div", [
           _c("div", [
-            _vm._v("\n                Agenda Topic"),
+            _vm._v("\n            Agenda Topic"),
             _c("input", {
               directives: [
                 {
@@ -54746,7 +54745,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n                Agenda Description"),
+            _vm._v("\n            Agenda Description"),
             _c("input", {
               directives: [
                 {
@@ -54774,7 +54773,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n                Time Allocated"),
+            _vm._v("\n            Time Allocated"),
             _c("input", {
               directives: [
                 {
@@ -54802,7 +54801,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n                User Assigned to Agenda"),
+            _vm._v("\n            User Assigned to Agenda"),
             _c("input", {
               directives: [
                 {
@@ -54830,7 +54829,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n                Agenda Status"),
+            _vm._v("\n            Agenda Status"),
             _c("input", {
               directives: [
                 {
@@ -54858,7 +54857,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n                Agenda Conclusion"),
+            _vm._v("\n            Agenda Conclusion"),
             _c("input", {
               directives: [
                 {

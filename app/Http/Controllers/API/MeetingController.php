@@ -42,7 +42,7 @@ class MeetingController extends Controller
     {
         $meeting = $this->meetingRepository->createMeeting($request);
         event(new MeetingAlert($meeting));
-        return response()->json(['message' => 'Meeting created successfully.'], 201);
+        return $meeting;
     }
 
     public function show($id)
