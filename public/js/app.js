@@ -54133,7 +54133,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54144,6 +54144,33 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54203,17 +54230,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
-            _vm.loadAddMeetingView()
-          }
-        }
-      },
-      [_vm._v("Create New Meeting")]
-    ),
+    _c("button", { on: { click: _vm.loadAddMeetingView } }, [
+      _vm._v("Create New Meeting")
+    ]),
     _vm._v(" "),
     _c(
       "table",
@@ -54222,26 +54241,59 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.meetings, function(meeting) {
-          return _c(
-            "tr",
-            {
-              key: meeting.id,
-              on: {
-                click: function($event) {
-                  _vm.loadView(meeting)
+          return _c("tr", { key: meeting.id }, [
+            _c(
+              "td",
+              {
+                on: {
+                  click: function($event) {
+                    _vm.loadView(meeting)
+                  }
                 }
-              }
-            },
-            [
-              _c("td", [_vm._v(_vm._s(meeting.name))]),
+              },
+              [_vm._v(_vm._s(meeting.name))]
+            ),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.start_time))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(meeting.end_time))]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    type: "button",
+                    "data-toggle": "modal",
+                    "data-target": "#exampleModal" + meeting.id
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    Launch demo modal\n                "
+                  )
+                ]
+              ),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(meeting.date))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(meeting.start_time))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(meeting.end_time))])
-            ]
-          )
+              _c(
+                "div",
+                {
+                  staticClass: "modal fade",
+                  attrs: {
+                    id: "exampleModal" + meeting.id,
+                    tabindex: "-1",
+                    role: "dialog",
+                    "aria-labelledby": "exampleModalLabel",
+                    "aria-hidden": "true"
+                  }
+                },
+                [_vm._m(1, true)]
+              )
+            ])
+          ])
         })
       ],
       2
@@ -54262,6 +54314,65 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("End Time")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-dialog", attrs: { role: "document" } },
+      [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-header" }, [
+            _c(
+              "h5",
+              {
+                staticClass: "modal-title",
+                attrs: { id: "exampleModalLabel" }
+              },
+              [_vm._v("Modal title")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: {
+                  type: "button",
+                  "data-dismiss": "modal",
+                  "aria-label": "Close"
+                }
+              },
+              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _vm._v(
+              "\n                                ...\n                            "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Close")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "button" } },
+              [_vm._v("Save changes")]
+            )
+          ])
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
