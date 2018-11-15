@@ -20,7 +20,13 @@ const mutations = {
     },
 
     EDIT_MEETING(state, meeting) {
-        axios.put('/api/meetings/' + meeting.id)
+        meeting.media = meeting.media.id;
+        meeting.facilitator = meeting.facilitator.id;
+        meeting.time_keeper = meeting.time_keeper.id;
+        meeting.venue = meeting.venue.id;
+        meeting.meetingseries = meeting.meetingseries.id;
+        meeting.meetingtype = meeting.meetingtype.id;
+        axios.put('/api/meetings/' + meeting.id, meeting)
             .then(response => {
                     this.meeting = response.data;
                 }

@@ -15,9 +15,6 @@
             End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
         </div>
         <div>
-            Creator<input name="creator" v-model="meeting.creator.id"/>
-        </div>
-        <div>
             Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>
         </div>
         <div>
@@ -35,29 +32,9 @@
         <div>
             Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries.id"/>
         </div>
-        <div v-for="(agenda,index) in meeting.agendas">
-            <div>
-                Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
-            </div>
-            <div>
-                Agenda Description<input type="text" v-model="meeting.agendas[index].description">
-            </div>
-            <div>
-                Time Allocated<input type="text" v-model="meeting.agendas[index].time_allocated">
-            </div>
-            <div>
-                User Assigned to Agenda<input type="text" v-model="meeting.agendas[index].user_id">
-            </div>
-            <div>
-                Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
-            </div>
-            <div>
-                Agenda Conclusion<input type="text" v-model="meeting.agendas[index].conclusion">
-            </div>
-        </div>
 
-        <button @click="editAgenda">Edit Agenda</button>
-        <button @click="editMeeting">Edit Meeting</button>
+    <button @click="editAgenda">Edit Agenda</button>
+    <button @click="editMeeting">Edit Meeting</button>
     </div>
 </template>
 
@@ -66,13 +43,10 @@
         props: ['meeting'],
 
         methods: {
-            editMeeting : function() {
+            editMeeting: function () {
                 this.$store.commit('EDIT_MEETING', this.meeting);
             }
         },
-        // mounted() {
-        //     this.meeting;
-        // }
     }
 </script>
 
