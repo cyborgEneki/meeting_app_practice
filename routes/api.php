@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::delete('meetings/{meetingId}/users/{userId}', 'MeetingController@detachUser');
     Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
     Route::apiResource('meetings', 'MeetingController');
+//    Route::post('meeting/edit/{meeting}', 'MeetingController@update');
 });
 
 

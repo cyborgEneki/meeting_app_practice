@@ -51,6 +51,11 @@ class MeetingController extends Controller
         return $meetings;
     }
 
+    public function edit($id)
+    {
+        dd($id, 'here');
+    }
+
     /**
      * @param Request $request
      * @param Meeting $meeting
