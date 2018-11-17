@@ -53847,10 +53847,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -53858,13 +53854,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {};
-    },
-
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapGetters */])({
-        showMeetingListView: 'showMeetingListView',
-        showAddListView: 'showAddListView'
+        showMeetingListView: 'showMeetingListView'
     })),
     components: { meeting_add: __WEBPACK_IMPORTED_MODULE_3__partials_MeetingAdd___default.a, show_view: __WEBPACK_IMPORTED_MODULE_0__partials_MeetingShow___default.a, meeting_list: __WEBPACK_IMPORTED_MODULE_1__partials_MeetingList___default.a }
 });
@@ -55014,8 +55005,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.showAddListView ? _c("div", [_c("meeting_add")], 1) : _vm._e(),
-    _vm._v(" "),
     _c(
       "div",
       [_c("h2", [_vm._v("Meetings")]), _vm._v(" "), _c("meeting_list")],

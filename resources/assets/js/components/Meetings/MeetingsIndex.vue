@@ -1,9 +1,5 @@
 <template>
     <div>
-
-        <div v-if="showAddListView">
-            <meeting_add></meeting_add>
-        </div>
         <div>
             <h2>Meetings</h2>
             <meeting_list></meeting_list>
@@ -22,14 +18,9 @@
     import meeting_add from "./partials/MeetingAdd";
 
     export default {
-        data() {
-            return {
-            }
-        },
         computed:{
             ...mapGetters({
                 showMeetingListView: 'showMeetingListView',
-                showAddListView: 'showAddListView',
             })
         },
         components:{meeting_add, show_view, meeting_list},
