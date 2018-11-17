@@ -18,7 +18,7 @@ interface MeetingRepositoryInterface
 
     public function updateMeeting(MeetingRequest $request, Meeting $meeting);
 
-    public function deleteMeeting(Meeting $meeting);
+    public function deleteMeeting($id);
 
     public function addUser($meetingId, $userId);
 

@@ -70,7 +70,7 @@ class MeetingRepository implements MeetingRepositoryInterface
     public function updateMeeting(MeetingRequest $request, Meeting $meeting)
     {
         $meeting = $meeting->update($request->all());
-        $meeting->users()->sync($request->users);
+//        $meeting->users()->sync($request->users);
 
         return new MeetingResource($meeting);
     }
@@ -80,9 +80,12 @@ class MeetingRepository implements MeetingRepositoryInterface
      * @return bool|null
      * @throws \Exception
      */
-    public function deleteMeeting(Meeting $meeting)
+    public function deleteMeeting($id)
     {
+        $meeting = Meeting::findOrFail($id);
+
         $meeting->users()->detach();
+
         return $meeting->delete($meeting);
     }
 

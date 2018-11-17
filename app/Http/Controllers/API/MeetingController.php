@@ -72,9 +72,9 @@ class MeetingController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy(Meeting $meeting)
+    public function destroy($id)
     {
-        $this->meetingRepository->deleteMeeting($meeting);
+        $this->meetingRepository->deleteMeeting($id);
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 

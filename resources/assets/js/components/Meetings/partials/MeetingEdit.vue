@@ -33,8 +33,8 @@
             Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries.id"/>
         </div>
 
-    <button @click="editAgenda">Edit Agenda</button>
-    <button @click="editMeeting">Edit Meeting</button>
+        <button @click="editAgenda">Edit Agenda</button>
+        <button @click="editMeeting">Edit Meeting</button>
     </div>
 </template>
 

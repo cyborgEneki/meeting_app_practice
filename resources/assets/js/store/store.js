@@ -6,7 +6,6 @@ vue.use(vuex);
 
 const state = {
     showMeetingListView: false,
-    showAddListView: false,
     meeting: {}
 };
 
@@ -15,18 +14,17 @@ const mutations = {
         state.showMeetingListView = true;
         state.meeting = meeting;
     },
-    ADD_NEW_MEETING(state) {
-        state.showAddListView = true;
-    },
 
     EDIT_MEETING(state, meeting) {
-        meeting.media = meeting.media.id;
-        meeting.facilitator = meeting.facilitator.id;
-        meeting.time_keeper = meeting.time_keeper.id;
-        meeting.venue = meeting.venue.id;
-        meeting.meetingseries = meeting.meetingseries.id;
-        meeting.meetingtype = meeting.meetingtype.id;
-        axios.put('/api/meetings/' + meeting.id, meeting)
+        let currentmeeting = Object.assign({}, meeting);
+
+        currentmeeting.media = meeting.media.id;
+        currentmeeting.facilitator = meeting.facilitator.id;
+        currentmeeting.time_keeper = meeting.time_keeper.id;
+        currentmeeting.venue = meeting.venue.id;
+        currentmeeting.meetingseries = meeting.meetingseries.id;
+        currentmeeting.meetingtype = meeting.meetingtype.id;
+        axios.put('/api/meetings/' + meeting.id, currentmeeting)
             .then(response => {
                     this.meeting = response.data;
                 }
@@ -36,7 +34,6 @@ const mutations = {
 
 const getters = {
     showMeetingListView: state => state.showMeetingListView,
-    showAddListView: state => state.showAddListView,
     meeting: state => state.meeting
 };
 
