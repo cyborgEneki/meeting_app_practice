@@ -42,13 +42,18 @@ class MeetingController extends Controller
     {
         $meeting = $this->meetingRepository->createMeeting($request);
         event(new MeetingAlert($meeting));
-        return response()->json(['message' => 'Meeting created successfully.'], 201);
+        return $meeting;
     }
 
     public function show($id)
     {
         $meetings = $this->meetingRepository->showMeeting($id);
         return $meetings;
+    }
+
+    public function edit($id)
+    {
+        dd($id, 'here');
     }
 
     /**
@@ -67,9 +72,9 @@ class MeetingController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy(Meeting $meeting)
+    public function destroy($id)
     {
-        $this->meetingRepository->deleteMeeting($meeting);
+        $this->meetingRepository->deleteMeeting($id);
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 

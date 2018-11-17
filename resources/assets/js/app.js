@@ -36,37 +36,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import App from './components/App'
-import MeetingsIndex from './components/Meetings/MeetingsIndex'
-import VenuesIndex from './components/Meetings/VenuesIndex'
-import MeetingAdd from './components/Meetings/partials/MeetingAdd'
-import MeetingDetails from './components/Meetings/test/MeetingDetails'
 import store from './store/store'
-
-const router = new VueRouter({
-    mode: 'history',
-    routes: [
-        {
-            path: '/meetings',
-            name: 'meetings',
-            component: MeetingsIndex,
-        },
-        {
-            path: '/venues',
-            name: 'venues',
-            component: VenuesIndex,
-        },
-        {
-            path: '/add-meeting',
-            name: 'addMeeting',
-            component: MeetingAdd,
-        },
-        {
-            path: '/meetings/:id/details',
-            name: 'meeting-details',
-            component: MeetingDetails,
-        },
-    ],
-});
+import router from './routes.js'
 
 const app = new Vue({
     el: '#app',
