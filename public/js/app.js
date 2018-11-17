@@ -53694,9 +53694,6 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-
 
 
 
@@ -53711,21 +53708,6 @@ var mutations = {
     GET_MEETING_DETAILS: function GET_MEETING_DETAILS(state, meeting) {
         state.showMeetingListView = true;
         state.meeting = meeting;
-    },
-    EDIT_MEETING: function EDIT_MEETING(state, meeting) {
-        var _this = this;
-
-        var currentmeeting = Object.assign({}, meeting);
-
-        currentmeeting.media = meeting.media.id;
-        currentmeeting.facilitator = meeting.facilitator.id;
-        currentmeeting.time_keeper = meeting.time_keeper.id;
-        currentmeeting.venue = meeting.venue.id;
-        currentmeeting.meetingseries = meeting.meetingseries.id;
-        currentmeeting.meetingtype = meeting.meetingtype.id;
-        __WEBPACK_IMPORTED_MODULE_2_axios___default.a.put('/api/meetings/' + meeting.id, currentmeeting).then(function (response) {
-            _this.meeting = response.data;
-        });
     }
 };
 
@@ -55311,7 +55293,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55361,14 +55343,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['meeting'],
 
     methods: {
-        editMeeting: function editMeeting() {
-            this.$store.commit('EDIT_MEETING', this.meeting);
+        editMeeting: function editMeeting(meeting) {
+            var _this = this;
+
+            var currentMeeting = Object.assign({}, meeting);
+
+            currentMeeting.media = meeting.media.id;
+            currentMeeting.facilitator = meeting.facilitator.id;
+            currentMeeting.time_keeper = meeting.time_keeper.id;
+            currentMeeting.venue = meeting.venue.id;
+            currentMeeting.meetingseries = meeting.meetingseries.id;
+            currentMeeting.meetingtype = meeting.meetingtype.id;
+            axios.put('/api/meetings/' + meeting.id, currentMeeting).then(function (response) {
+                _this.meeting = response.data;
+            });
         }
     }
 });
@@ -55624,9 +55617,17 @@ var render = function() {
       })
     ]),
     _vm._v(" "),
-    _c("button", { on: { click: _vm.editAgenda } }, [_vm._v("Edit Agenda")]),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.editMeeting } }, [_vm._v("Edit Meeting")])
+    _c(
+      "button",
+      {
+        on: {
+          click: function($event) {
+            _vm.editMeeting(_vm.meeting)
+          }
+        }
+      },
+      [_vm._v("Edit Meeting")]
+    )
   ])
 }
 var staticRenderFns = []

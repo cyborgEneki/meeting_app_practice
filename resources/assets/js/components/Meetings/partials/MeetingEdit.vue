@@ -33,8 +33,7 @@
             Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries.id"/>
         </div>
 
-        <button @click="editAgenda">Edit Agenda</button>
-        <button @click="editMeeting">Edit Meeting</button>
+        <button @click="editMeeting(meeting)">Edit Meeting</button>
     </div>
 </template>
 
@@ -43,8 +42,20 @@
         props: ['meeting'],
 
         methods: {
-            editMeeting: function () {
-                this.$store.commit('EDIT_MEETING', this.meeting);
+            editMeeting: function(meeting) {
+                let currentMeeting = Object.assign({}, meeting);
+
+                currentMeeting.media = meeting.media.id;
+                currentMeeting.facilitator = meeting.facilitator.id;
+                currentMeeting.time_keeper = meeting.time_keeper.id;
+                currentMeeting.venue = meeting.venue.id;
+                currentMeeting.meetingseries = meeting.meetingseries.id;
+                currentMeeting.meetingtype = meeting.meetingtype.id;
+                axios.put('/api/meetings/' + meeting.id, currentMeeting)
+                    .then(response => {
+                            this.meeting = response.data;
+                        }
+                    );
             }
         },
     }
