@@ -9,7 +9,10 @@
         <h4>Time Keeper:</h4>
         <p>{{ meeting.time_keeper.first_name }}</p>
         <h4> Attendees</h4>
-        <p v-for="name in meeting.users">{{ name.first_name }}</p>
+        <div v-for="user in meeting.users">
+            <p>{{ user.first_name }}</p>
+            <p @click="removeUsers(user.id)">Remove</p>
+        </div>
         <h4>Agendas:</h4>
         <table class="table striped table-bordered">
             <thead>
@@ -52,5 +55,16 @@
                 meeting: 'meeting',
             })
         },
+        methods: {
+            removeUsers(id) {
+                axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
+                    .then((response) => {
+                        let index = this.meeting.users.map(function (item) {
+                            return item.id
+                        }).indexOf(id);
+                        this.meeting.users.splice(index, 1);
+                    });
+            }
+        }
     }
 </script>

@@ -53791,13 +53791,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         meeting: 'meeting'
-    }))
+    })),
+    methods: {
+        removeUsers: function removeUsers(id) {
+            var _this = this;
+
+            axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
+                var index = _this.meeting.users.map(function (item) {
+                    return item.id;
+                }).indexOf(id);
+                _this.meeting.users.splice(index, 1);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -53829,8 +53844,22 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
-      _vm._l(_vm.meeting.users, function(name) {
-        return _c("p", [_vm._v(_vm._s(name.first_name))])
+      _vm._l(_vm.meeting.users, function(user) {
+        return _c("div", [
+          _c("p", [_vm._v(_vm._s(user.first_name))]),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              on: {
+                click: function($event) {
+                  _vm.removeUsers(user.id)
+                }
+              }
+            },
+            [_vm._v("Remove")]
+          )
+        ])
       }),
       _vm._v(" "),
       _c("h4", [_vm._v("Agendas:")]),
