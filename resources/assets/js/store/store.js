@@ -4,19 +4,19 @@ import vuex from 'vuex';
 vue.use(vuex);
 
 const state = {
-    showMeetingListView: false,
+    showMeetingDetails: false,
     meeting: {}
 };
 
 const mutations = {
     GET_MEETING_DETAILS(state, meeting) {
-        state.showMeetingListView = true;
+        state.showMeetingDetails = true;
         state.meeting = meeting;
     }
 };
 
 const getters = {
-    showMeetingListView: state => state.showMeetingListView,
+    showMeetingDetails: state => state.showMeetingDetails,
     meeting: state => state.meeting
 };
 

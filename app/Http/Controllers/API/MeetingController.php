@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MeetingRequest;
+use App\Http\Requests\EditMeetingRequest;
 use App\Meeting;
 use App\User;
 use App\Repositories\AgendaRepository;
@@ -51,17 +52,12 @@ class MeetingController extends Controller
         return $meetings;
     }
 
-    public function edit($id)
-    {
-        dd($id, 'here');
-    }
-
     /**
      * @param Request $request
      * @param Meeting $meeting
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(MeetingRequest $request, Meeting $meeting)
+    public function update(EditMeetingRequest $request, Meeting $meeting)
     {
         $this->meetingRepository->updateMeeting($request, $meeting);
         return response()->json(['You have successfully updated your meeting.'], 200);

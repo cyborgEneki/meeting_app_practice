@@ -13,29 +13,18 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.use(VueRouter);
 
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients')
-);
-
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients')
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens')
-);
+Vue.component('passport-clients', Clients);
+Vue.component('passport-authorized-clients', AuthorizedClients);
+Vue.component('passport-personal-access-tokens', PersonalAccessTokens);
 
 import Vue from 'vue';
 import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
 import App from './components/App'
+import Clients from './components/passport/Clients'
+import AuthorizedClients from './components/passport/AuthorizedClients'
+import PersonalAccessTokens from './components/passport/PersonalAccessTokens'
 import store from './store/store'
 import router from './routes.js'
 
