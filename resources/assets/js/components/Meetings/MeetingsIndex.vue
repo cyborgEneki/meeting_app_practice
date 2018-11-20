@@ -2,27 +2,29 @@
     <div>
         <div>
             <h2>Meetings</h2>
-            <meeting_list></meeting_list>
+            <meeting-list></meeting-list>
         </div>
 
-        <div v-if="showMeetingListView">
-            <show_view></show_view>
+        <div v-if="showMeetingDetails">
+            <meeting-details></meeting-details>
         </div>
     </div>
 </template>
 
 <script>
-    import show_view from './partials/MeetingShow';
-    import meeting_list from './partials/MeetingList'
+    import MeetingDetails from './partials/MeetingDetails';
+    import MeetingList from './partials/MeetingList'
     import {mapGetters} from 'vuex'
-    import meeting_add from "./partials/MeetingAdd";
 
     export default {
-        computed:{
+        computed: {
             ...mapGetters({
-                showMeetingListView: 'showMeetingListView',
+                showMeetingDetails: 'showMeetingDetails',
             })
         },
-        components:{meeting_add, show_view, meeting_list},
+        components: {
+            'meeting-details': MeetingDetails,
+            'meeting-list': MeetingList
+        },
     }
 </script>

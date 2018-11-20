@@ -9,7 +9,7 @@ namespace App\Repositories;
  * Time: 10:57 PM
  */
 
-use App\Http\Requests\AgendaRequest;
+use App\Http\Requests\EditMeetingRequest;
 use App\Http\Requests\MeetingRequest;
 use App\Http\Requests\MeetingseriesRequest;
 use App\Http\Resources\MeetingResource;
@@ -67,7 +67,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         return new MeetingResource($meeting);
     }
 
-    public function updateMeeting(MeetingRequest $request, Meeting $meeting)
+    public function updateMeeting(EditMeetingRequest $request, Meeting $meeting)
     {
         $meeting = $meeting->update($request->all());
 //        $meeting->users()->sync($request->users);

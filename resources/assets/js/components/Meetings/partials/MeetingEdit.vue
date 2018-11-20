@@ -14,23 +14,23 @@
         <div>
             End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
         </div>
+        <!--<div>-->
+            <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
+        <!--</div>-->
+        <!--<div>-->
+            <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
+        <!--</div>-->
         <div>
-            Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>
+            Venue<input name="venue_id" v-model="meeting.venue_id"/>
         </div>
         <div>
-            Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>
+            Media<input name="media_id" v-model="meeting.media_id"/>
         </div>
         <div>
-            Venue<input name="venue_id" v-model="meeting.venue.id"/>
+            Meeting Type<input name="meetingtype_id" v-model="meeting.meetingtype_id"/>
         </div>
         <div>
-            Media<input name="media_id" v-model="meeting.media.id"/>
-        </div>
-        <div>
-            Meeting Type<input name="meetingtype_id" v-model="meeting.meetingtype.id"/>
-        </div>
-        <div>
-            Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries.id"/>
+            Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries_id"/>
         </div>
 
         <button @click="editMeeting(meeting)">Edit Meeting</button>
@@ -43,19 +43,21 @@
 
         methods: {
             editMeeting: function(meeting) {
-                let currentMeeting = Object.assign({}, meeting);
+                let currentMeeting = {};
 
-                currentMeeting.media = meeting.media.id;
+                currentMeeting.name = meeting.name;
+                currentMeeting.start_time = meeting.start_time;
+                currentMeeting.end_time = meeting.end_time;
+                currentMeeting.date = meeting.date;
+                currentMeeting.media_id = meeting.media_id;
                 currentMeeting.facilitator = meeting.facilitator.id;
                 currentMeeting.time_keeper = meeting.time_keeper.id;
-                currentMeeting.venue = meeting.venue.id;
-                currentMeeting.meetingseries = meeting.meetingseries.id;
-                currentMeeting.meetingtype = meeting.meetingtype.id;
+                currentMeeting.venue_id = meeting.venue_id;
+                currentMeeting.meetingseries_id = meeting.meetingseries_id;
+                currentMeeting.meetingtype_id = meeting.meetingtype_id;
+
                 axios.put('/api/meetings/' + meeting.id, currentMeeting)
-                    .then(response => {
-                            this.meeting = response.data;
-                        }
-                    );
+                    .then(response => {});
             }
         },
     }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Http\Requests\MeetingRequest;
+use App\Http\Requests\EditMeetingRequest;
 use App\Meeting;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ interface MeetingRepositoryInterface
 
     public function showMeeting($id);
 
-    public function updateMeeting(MeetingRequest $request, Meeting $meeting);
+    public function updateMeeting(EditMeetingRequest $request, Meeting $meeting);
 
     public function deleteMeeting($id);
 
