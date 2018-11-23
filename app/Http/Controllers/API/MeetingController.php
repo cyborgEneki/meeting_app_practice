@@ -18,9 +18,9 @@ class MeetingController extends Controller
 {
     protected $meetingRepository;
 
-    public function __construct(MeetingRepositoryInterface $meetingRepository, MeetingRepository $repo)
+    public function __construct(MeetingRepositoryInterface $meetingRepositoryInterface, MeetingRepository $meetingRepository)
     {
-        $this->meetingRepository = $repo;
+        $this->meetingRepository = $meetingRepository;
     }
 
     public function index()

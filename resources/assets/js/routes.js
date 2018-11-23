@@ -1,6 +1,7 @@
 import VueRouter from "vue-router";
 import MeetingsIndex from './components/Meetings/MeetingsIndex'
 import VenuesIndex from './components/Meetings/VenuesIndex'
+import UsersIndex from './components/Meetings/UsersIndex'
 import MeetingAdd from './components/Meetings/partials/MeetingAdd'
 import MeetingEdit  from './components/Meetings/partials/MeetingEdit'
 
@@ -16,6 +17,11 @@ const router = new VueRouter({
             path: '/venues',
             name: 'venues',
             component: VenuesIndex,
+        },
+        {
+            path: '/users',
+            name: 'users',
+            component: UsersIndex,
         },
         {
             path: '/add-meeting',

@@ -6,13 +6,15 @@
  * Time: 11:48 PM
  */
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\Bridge\UserRepository;
+use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use Validator;
 
 class UserController extends Controller

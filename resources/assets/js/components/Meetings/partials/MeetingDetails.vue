@@ -36,7 +36,7 @@
         </table>
         <label>Add Attendee</label>
 
-            <button @click="addUser(users.id)">cf</button>
+        <button @click="addUser(users.id)">cf</button>
 
         <h4>Venue:</h4>
         <p>{{ meeting.venue.name }}</p>
@@ -64,6 +64,13 @@
                 users: []
             }
         },
+        created() {
+            axios.get('/api/users')
+                .then(response => {
+                        this.users = response.data;
+                    }
+                );
+        },
         methods: {
             removeUsers(id) {
                 axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
@@ -75,11 +82,6 @@
                     });
             },
             addUser: function (id) {
-                // axios.get('/api/users')
-                //     .then(response => {
-                //             this.users = response.data;
-                //         }
-                //     );
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
                 });

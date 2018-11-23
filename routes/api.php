@@ -31,14 +31,15 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('discussions', 'DiscussionController');
     Route::apiResource('agendas', 'AgendaController');
     Route::apiresource('roles','RoleController');
-    Route::apiresource('users','UserController');
     Route::get('simplemeetings', 'MeetingController@indexSimpleMeetings');
     Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingUserNote');
     Route::delete('meetings/{meetingId}/users/{userId}', 'MeetingController@detachUser');
     Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
+    Route::apiResource('meetings', 'MeetingController');
 });
 
-Route::apiResource('meetings', 'MeetingController');
+
+Route::apiresource('users','UserController');
 
 
 
