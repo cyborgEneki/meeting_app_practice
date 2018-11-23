@@ -3,11 +3,11 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        <p>{{ meeting.creator.first_name }}</p>
+        <p>{{ meeting.creator_id.first_name }}</p>
         <h4>Facilitator:</h4>
-        <p>{{ meeting.facilitator.first_name }}</p>
+        <p>{{ meeting.facilitator_id.first_name }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ meeting.time_keeper.first_name }}</p>
+        <p>{{ meeting.time_keeper_id.first_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in meeting.users">
             <p>{{ user.first_name }}</p>
@@ -34,6 +34,10 @@
                 <td><h6 v-for="description in agendas.discussion"> {{description.description}}</h6></td>
             </tr>
         </table>
+        <label>Add Attendee</label>
+
+            <button @click="addUser(users.id)">cf</button>
+
         <h4>Venue:</h4>
         <p>{{ meeting.venue.name }}</p>
         <h4>Media:</h4>
@@ -55,6 +59,11 @@
                 meeting: 'meeting',
             })
         },
+        data() {
+            return {
+                users: []
+            }
+        },
         methods: {
             removeUsers(id) {
                 axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
@@ -64,7 +73,26 @@
                         }).indexOf(id);
                         this.meeting.users.splice(index, 1);
                     });
+            },
+            addUser: function (id) {
+                // axios.get('/api/users')
+                //     .then(response => {
+                //             this.users = response.data;
+                //         }
+                //     );
+                let checkMtg = this.meeting.users.filter(function (user) {
+                    return user.id === id;
+                });
+                //only add user if that user isn't already in the meeting
+                if (!checkMtg.length) {
+                    axios.get('/api/meetings/' + this.meeting.id + '/users/' + id)
+                        .then((response) => {
+                            this.meeting.users.push(response.data.user);
+                        });
+                } else {
+                    console.log('User already exists');
+                }
             }
-        }
+        },
     }
 </script>

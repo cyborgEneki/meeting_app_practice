@@ -81,13 +81,13 @@ $factory->define(App\Meeting::class, function ($faker) {
         'date' => $faker->date,
         'start_time' => $faker->time,
         'end_time' => $faker->time,
-        'creator' => function () {
+        'creator_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'facilitator' => function () {
+        'facilitator_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'time_keeper' => function () {
+        'time_keeper_id' => function () {
             return factory('App\User')->create()->id;
         },
     ];

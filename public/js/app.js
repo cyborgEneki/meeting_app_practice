@@ -53794,6 +53794,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -53801,6 +53805,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         meeting: 'meeting'
     })),
+    data: function data() {
+        return {
+            users: []
+        };
+    },
+
     methods: {
         removeUsers: function removeUsers(id) {
             var _this = this;
@@ -53811,6 +53821,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 }).indexOf(id);
                 _this.meeting.users.splice(index, 1);
             });
+        },
+
+        addUser: function addUser(id) {
+            var _this2 = this;
+
+            // axios.get('/api/users')
+            //     .then(response => {
+            //             this.users = response.data;
+            //         }
+            //     );
+            var checkMtg = this.meeting.users.filter(function (user) {
+                return user.id === id;
+            });
+            //only add user if that user isn't already in the meeting
+            if (!checkMtg.length) {
+                axios.get('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
+                    _this2.meeting.users.push(response.data.user);
+                });
+            } else {
+                console.log('User already exists');
+            }
         }
     }
 });
@@ -53832,15 +53863,15 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Creator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.creator.first_name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.creator_id.first_name))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator.first_name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator_id.first_name))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Time Keeper:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper.first_name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper_id.first_name))]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
@@ -53902,6 +53933,20 @@ var render = function() {
           })
         ],
         2
+      ),
+      _vm._v(" "),
+      _c("label", [_vm._v("Add Attendee")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              _vm.addUser(_vm.users.id)
+            }
+          }
+        },
+        [_vm._v("cf")]
       ),
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
@@ -54595,9 +54640,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 date: '',
                 start_time: '',
                 end_time: '',
-                creator: '',
-                facilitator: '',
-                time_keeper: '',
+                creator_id: '',
+                facilitator_id: '',
+                time_keeper_id: '',
                 venue_id: '',
                 media_id: '',
                 meetingtype_id: '',
@@ -54754,18 +54799,18 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.creator,
-              expression: "meeting.creator"
+              value: _vm.meeting.creator_id,
+              expression: "meeting.creator_id"
             }
           ],
           attrs: { name: "creator" },
-          domProps: { value: _vm.meeting.creator },
+          domProps: { value: _vm.meeting.creator_id },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.meeting, "creator", $event.target.value)
+              _vm.$set(_vm.meeting, "creator_id", $event.target.value)
             }
           }
         })
@@ -54778,18 +54823,18 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.facilitator,
-              expression: "meeting.facilitator"
+              value: _vm.meeting.facilitator_id,
+              expression: "meeting.facilitator_id"
             }
           ],
           attrs: { name: "facilitator" },
-          domProps: { value: _vm.meeting.facilitator },
+          domProps: { value: _vm.meeting.facilitator_id },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.meeting, "facilitator", $event.target.value)
+              _vm.$set(_vm.meeting, "facilitator_id", $event.target.value)
             }
           }
         })
@@ -54802,18 +54847,18 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.time_keeper,
-              expression: "meeting.time_keeper"
+              value: _vm.meeting.time_keeper_id,
+              expression: "meeting.time_keeper_id"
             }
           ],
           attrs: { name: "time_keeper" },
-          domProps: { value: _vm.meeting.time_keeper },
+          domProps: { value: _vm.meeting.time_keeper_id },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.meeting, "time_keeper", $event.target.value)
+              _vm.$set(_vm.meeting, "time_keeper_id", $event.target.value)
             }
           }
         })

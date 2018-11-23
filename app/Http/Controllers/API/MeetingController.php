@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MeetingRequest;
 use App\Http\Requests\EditMeetingRequest;
 use App\Meeting;
+use App\Repositories\MeetingRepository;
 use App\User;
 use App\Repositories\AgendaRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -17,14 +18,15 @@ class MeetingController extends Controller
 {
     protected $meetingRepository;
 
-    public function __construct(MeetingRepositoryInterface $meetingRepository)
+    public function __construct(MeetingRepositoryInterface $meetingRepository, MeetingRepository $repo)
     {
-        $this->meetingRepository = $meetingRepository;
+        $this->meetingRepository = $repo;
     }
 
     public function index()
     {
         $meetings = $this->meetingRepository->allMeetings();
+
         return $meetings;
     }
 
