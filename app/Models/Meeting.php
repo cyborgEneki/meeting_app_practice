@@ -31,7 +31,11 @@ class Meeting extends Model
             'created' => Events\MeetingAlert::class
         ];
 
-    public $appends = ['meetingseries', 'meetingtype'];
+    public $appends =
+        [
+            'meetingseries',
+            'meetingtype'
+        ];
 
     public function venue()
     {

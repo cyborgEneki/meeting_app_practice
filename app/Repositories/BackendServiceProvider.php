@@ -39,5 +39,8 @@ class BackendServiceProvider extends ServiceProvider
 
         $this->app->bind('App\Repositories\MediaRepositoryInterface',
             'App\Repositories\MediaRepository');
+
+        $this->app->bind('App\Repositories\CustomUserRepositoryInterface',
+            'App\Repositories\CustomUserRepository');
     }
 }

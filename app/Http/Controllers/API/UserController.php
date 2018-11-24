@@ -9,18 +9,55 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Repositories\CustomUserRepository;
+use App\Repositories\CustomUserRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Bridge\UserRepository;
-use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use Validator;
 
 class UserController extends Controller
 {
+    protected $customUserRepository;
+
     public $successStatus = 200;
 
+    public function __construct(CustomUserRepositoryInterface $customUserRepositoryInterface, CustomUserRepository $customUserRepository)
+    {
+        $this->customUserRepository = $customUserRepository;
+    }
+
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        $users = $this->customUserRepository->allUsers();
+
+        return $users;
+    }
+
+    public function update(UserRequest $request, User $user)
+    {
+        $this->customUserRepository->updateUser($request, $user);
+
+        return response()->json(['You have successfully updated this user'], 200);
+    }
+
+    public function store(UserRequest $request)
+    {
+        $this->customUserRepository->createUser($request);
+
+        return response()->json(['You have successfully created this user'], 201);
+    }
+
+    public function destroy($id)
+    {
+        $this->customUserRepository->deleteUser($id);
+
+        return response()->json(['You have successfully deleted this user.'], 200);
+    }
     /**
      * login api
      *

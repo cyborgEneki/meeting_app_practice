@@ -9,7 +9,6 @@ use App\Repositories\MeetingRepository;
 use App\User;
 use App\Repositories\AgendaRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
 use App\Events\MeetingAlert;

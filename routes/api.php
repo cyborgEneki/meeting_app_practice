@@ -15,12 +15,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
+Route::post('login', 'UserController@login');
+Route::post('register', 'UserController@register');
 
 Route::group(['middleware' => 'auth:api'], function ()
 {
-    Route::post('details', 'API\UserController@details');
+    Route::post('details', 'UserController@details');
     Route::apiResource('meetings.agendas', 'AgendaController');
     Route::apiResource('notes', 'NoteController');
     Route::apiResource('venues', 'VenueController');
@@ -30,16 +30,13 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('followups', 'FollowupController');
     Route::apiResource('discussions', 'DiscussionController');
     Route::apiResource('agendas', 'AgendaController');
-    Route::apiresource('roles','RoleController');
+    Route::apiresource('roles', 'RoleController');
+    Route::apiresource('users', 'UserController');
     Route::get('simplemeetings', 'MeetingController@indexSimpleMeetings');
     Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingUserNote');
     Route::delete('meetings/{meetingId}/users/{userId}', 'MeetingController@detachUser');
     Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
     Route::apiResource('meetings', 'MeetingController');
 });
-
-
-Route::apiresource('users','UserController');
-
 
 

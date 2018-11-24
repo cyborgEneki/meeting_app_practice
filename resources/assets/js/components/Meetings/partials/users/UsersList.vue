@@ -1,6 +1,8 @@
 <template>
     <div>
-        <table>
+        <router-link :to="{ name: 'addUser' }">Add a New User</router-link>
+
+        <table class="table striped table-bordered">
             <thead>
                 <th>First Name</th>
                 <th>Middle Name</th>
@@ -10,15 +12,15 @@
                 <th>Actions</th>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user_id">
-                    <td>{{ user_first_name}}</td>
-                    <td>{{ user_middle_name}}</td>
-                    <td>{{ user_last_name}}</td>
-                    <td>{{ user_phone_number}}</td>
-                    <td>{{ user_email}}</td>
+                <tr v-for="user in users" :key="user.id">
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.middle_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.phone_number }}</td>
+                    <td>{{ user.email }}</td>
                     <td>
-                        <router-link></router-link>
-                        <button>Delete</button>
+                        <router-link :to="{ name: 'editUser', params: { user } }">Edit</router-link>
+                        <button @click="deleteUser(user.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -39,10 +41,19 @@
         },
         methods: {
             getUsers() {
-                axios.get('/api/users/')
-                    .then((response) => {
+                axios.get('/api/users')
+                    .then(response => {
                         this.users = response.data;
                     })
+            },
+            deleteUser(id) {
+                axios.delete('/api/users/'+id)
+                    .then(() => {
+                        let index = this.users.map((item) => {
+                            return item.id;
+                        }).indexOf(id);
+                        this.users.splice(index, 1);
+                    });
             }
         }
     }
