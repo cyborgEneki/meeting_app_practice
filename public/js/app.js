@@ -53828,6 +53828,7 @@ var render = function() {
               _c(
                 "td",
                 {
+                  staticStyle: { cursor: "pointer" },
                   on: {
                     click: function($event) {
                       _vm.loadView(meeting)
