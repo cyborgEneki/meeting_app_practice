@@ -14,6 +14,13 @@
         <div>
             End Time<input v-model="meeting.end_time" type="time"/>
         </div>
+                <div>
+            Creator
+        <select v-model="meeting.creator_id" >
+            <option>Select user</option>
+            <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+        </select>
+        </div>
         <!--<div>-->
             <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
         <!--</div>-->
@@ -39,7 +46,7 @@
 
 <script>
     export default {
-        props: ['meeting'],
+        props: ['meeting','choices'],
 
         methods: {
             editMeeting: function(meeting) {

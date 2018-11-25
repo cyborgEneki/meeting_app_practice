@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MeetingRequest;
 use App\Http\Requests\EditMeetingRequest;
+use App\Media;
 use App\Meeting;
+use App\Meetingseries;
+use App\Meetingtype;
 use App\Repositories\MeetingRepository;
 use App\User;
 use App\Repositories\AgendaRepository;
+use App\Venue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
@@ -85,5 +89,34 @@ class MeetingController extends Controller
     {
         $this->meetingRepository->removeUser($meetingId, $userId);
         return response()->json(['success' => 'User deleted from meeting_user'], 200);
+    }
+
+    public function choices()
+    {
+        //users
+        $users = User::all('id','first_name','last_name','email')->take(10)->sortBy('first_name');
+        $users = $users->keyBy('id');
+        $users->sortBy('first_name');
+        $users = ['users'=>$users];
+
+        //venues
+        $venues = Venue::all('id','name')->take(10)->sortBy('name');
+        $venues = $venues->keyBy('id');
+        $venues = ['venues'=>$venues];
+        //media
+        $media = Media::all('id','name')->take(10)->sortBy('name');
+        $media = $media->keyBy('id');
+        $media = ['media'=>$media];
+        //meetingseries
+        $meetingseries = Meetingseries::all('id','name')->take(10)->sortBy('name');
+        $meetingseries = $meetingseries->keyBy('id');
+        $meetingseries = ['meetingseries'=>$meetingseries];
+        //meetingtype
+        $meetingtype = Meetingtype::all('id','name')->take(10)->sortBy('name');
+        $meetingtype = $meetingtype->keyBy('id');
+        $meetingtype = ['meetingtype'=>$meetingtype];
+        // merge
+        $choices = array_merge($users, $venues, $media, $meetingseries, $meetingtype);
+        return response()->json($choices, 200);
     }
 }

@@ -15,25 +15,53 @@
             End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
         </div>
         <div>
-            Creator<input name="creator" v-model="meeting.creator_id"/>
+            <label>Creator</label>
+            <select v-model="meeting.creator_id" >
+                <option>Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>
         </div>
         <div>
-            Facilitator<input name="facilitator" v-model="meeting.facilitator_id"/>
+            Facilitator
+            <select v-model="meeting.facilitator_id" >
+                <option>Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>
         </div>
         <div>
-            Time Keeper<input name="time_keeper" v-model="meeting.time_keeper_id"/>
+            Time Keeper
+            <select v-model="meeting.time_keeper_id" >
+                <option>Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>            
         </div>
         <div>
-            Venue<input name="venue_id" v-model="meeting.venue_id"/>
+            Venue
+            <select v-model="meeting.venue_id" >
+                <option>Select user</option>
+                <option v-for="venue in choices.venues" v-bind:value="venue.id">{{ venue.name }}</option>
+            </select>             
         </div>
         <div>
-            Media<input name="media_id" v-model="meeting.media_id"/>
+            Media
+            <select v-model="meeting.media_id" >
+                <option>Select user</option>
+                <option v-for="media in choices.media" v-bind:value="media.id">{{ media.name }}</option>
+            </select>    
         </div>
         <div>
-            Meeting Type<input name="meetingtype_id" v-model="meeting.meetingtype_id"/>
+            Meeting Type
+            <select v-model="meeting.meetingtype_id" >
+                <option value="">Select user</option>
+                <option v-for="meetingtype in choices.meetingtype" v-bind:value="meetingtype.id">{{ meetingtype.name }}</option>
+            </select> 
         </div>
         <div>
-            Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries_id"/>
+            Meeting Series
+            <select v-model="meeting.meetingseries_id" >
+                <option>Select user</option>
+                <option v-for="meetingseries in choices.meetingseries" v-bind:value="meetingseries.id">{{ meetingseries.name }}</option>
+            </select>  
         </div>
         <div v-for="(agenda,index) in meeting.agendas">
             <div>
@@ -46,7 +74,11 @@
                 Time Allocated<input type="text" v-model="meeting.agendas[index].time_allocated">
             </div>
             <div>
-                User Assigned to Agenda<input type="text" v-model="meeting.agendas[index].user_id">
+                User Assigned to Agenda
+                <select v-model="meeting.agendas[index].user_id" >
+                    <option>Select user</option>
+                    <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+                </select> 
             </div>
             <div>
                 Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
@@ -65,6 +97,7 @@
 <script>
     export default {
         name: "MeetingAdd",
+        props: ['choices'],
         data() {
             return {
                 meeting: {

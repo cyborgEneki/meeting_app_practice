@@ -3,11 +3,12 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        <p>{{ meeting.creator_id.first_name }}</p>
+        {{ choices.users[meeting.creator_id].first_name }} {{ choices.users[meeting.creator_id].last_name }}
+        
         <h4>Facilitator:</h4>
-        <p>{{ meeting.facilitator_id.first_name }}</p>
+        <p>{{ meeting.facilitator_id }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ meeting.time_keeper_id.first_name }}</p>
+        <p>{{ meeting.time_keeper_id }}</p>
         <h4> Attendees</h4>
         <div v-for="user in meeting.users">
             <p>{{ user.first_name }}</p>
@@ -59,6 +60,7 @@
                 meeting: 'meeting',
             })
         },
+        props: ['choices'],
         data() {
             return {
                 users: []

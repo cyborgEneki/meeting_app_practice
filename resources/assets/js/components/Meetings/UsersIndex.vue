@@ -1,16 +1,42 @@
 <template>
     <div>
         <h3>Users</h3>
-        <users-list></users-list>
+        <router-link :to="{ name: 'addUser' }">Add a New User</router-link>
+
+		<table class="table striped table-bordered">
+			<tr v-for="user in choices.users">
+				<td>{{ user.first_name}}</td>
+				<td>{{ user.last_name}}</td>
+				<td>{{ user.email}}</td>
+				<td><router-link :to="{ name: 'editUser', params: { user } }">Edit</router-link></td>
+				<td><button @click="deleteUser(user.id)">Delete</button></td>
+			</tr>
+		</table>
     </div>
 </template>
 
 <script>
-    import UsersList from './partials/users/UsersList'
 
     export default {
         name: "UsersIndex",
-        components: {'users-list': UsersList}
+        props: ['choices'],
+        methods: {
+            getUsers() {
+                axios.get('/api/users')
+                    .then(response => {
+                        this.users = response.data;
+                    })
+            },
+            deleteUser(id) {
+                axios.delete('/api/users/'+id)
+                    .then(() => {
+                        let index = this.users.map((item) => {
+                            return item.id;
+                        }).indexOf(id);
+                        this.users.splice(index, 1);
+                    });
+            }
+        }
     }
 </script>
 

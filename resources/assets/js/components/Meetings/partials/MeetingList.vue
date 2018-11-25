@@ -2,7 +2,6 @@
     <div>
 
         <router-link :to="{ name: 'addMeeting' }">Create New Meeting</router-link>
-
         <table class="table striped table-bordered">
             <thead>
             <th>Name</th>
@@ -32,6 +31,7 @@
                 meetings: [],
             }
         },
+        props: ['choices'],
         methods: {
             getMeetings() {
                 axios.get('/api/meetings')

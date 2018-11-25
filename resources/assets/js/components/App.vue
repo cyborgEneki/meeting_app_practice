@@ -7,7 +7,7 @@
             <router-link :to="{ name: 'users'}">User Management</router-link>
         </p>
         <div>
-            <router-view/>
+            <router-view :choices.sync="choices" />
         </div>
     </div>
 </template>
@@ -15,6 +15,18 @@
 <script>
     export default {
         name: "App",
+                data() {
+            return {
+                choices: [],
+            }
+        },
+        created() {
+            axios.get('/api/meetings/choices')
+                    .then(response => {
+                            this.choices = response.data;
+                        }
+                    )
+        }
     }
 </script>
 

@@ -21,7 +21,7 @@ class MeetingResource extends JsonResource
             'date' => $this->date,
             'start_time' => $this->start_time,
             'end_time' => $this->end_time,
-            'creator_id' => new UserResource(User::find($this->creator_id)),
+            'creator_id' => $this->creator_id,
             'facilitator_id' => new UserResource(User::find($this->facilitator_id)),
             'time_keeper_id' => new UserResource(User::find($this->time_keeper_id)),
             'users' => UserResource::collection($this->users),

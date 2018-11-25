@@ -2,11 +2,12 @@
     <div>
         <div>
             <h2>Meetings</h2>
+
             <meeting-list></meeting-list>
         </div>
 
         <div v-if="showMeetingDetails">
-            <meeting-details></meeting-details>
+            <meeting-details :choices.sync="choices"></meeting-details>
         </div>
     </div>
 </template>
@@ -22,6 +23,7 @@
                 showMeetingDetails: 'showMeetingDetails',
             })
         },
+        props: ['choices'],
         components: {
             'meeting-details': MeetingDetails,
             'meeting-list': MeetingList
