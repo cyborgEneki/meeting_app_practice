@@ -6,31 +6,31 @@
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
         <div>
-            Date<input name="date" v-model="meeting.date" type="date"/>
+            Date<input v-model="meeting.date" type="date"/>
         </div>
         <div>
-            Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
+            Start Time<input v-model="meeting.start_time" type="time"/>
         </div>
         <div>
-            End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
+            End Time<input v-model="meeting.end_time" type="time"/>
         </div>
         <!--<div>-->
-            <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
+        <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
         <!--</div>-->
         <!--<div>-->
-            <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
+        <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
         <!--</div>-->
         <div>
-            Venue<input name="venue_id" v-model="meeting.venue_id"/>
+            Venue<input type="text" v-model="meeting.venue_id"/>
         </div>
         <div>
-            Media<input name="media_id" v-model="meeting.media_id"/>
+            Media<input type="text" v-model="meeting.media_id"/>
         </div>
         <div>
-            Meeting Type<input name="meetingtype_id" v-model="meeting.meetingtype_id"/>
+            Meeting Type<input type="text" v-model="meeting.meetingtype_id"/>
         </div>
         <div>
-            Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries_id"/>
+            Meeting Series<input type="text" v-model="meeting.meetingseries_id"/>
         </div>
 
         <button @click="editMeeting(meeting)">Edit Meeting</button>
@@ -42,7 +42,7 @@
         props: ['meeting'],
 
         methods: {
-            editMeeting: function(meeting) {
+            editMeeting: function (meeting) {
                 let currentMeeting = {};
 
                 currentMeeting.name = meeting.name;
@@ -57,7 +57,10 @@
                 currentMeeting.meetingtype_id = meeting.meetingtype_id;
 
                 axios.put('/api/meetings/' + meeting.id, currentMeeting)
-                    .then(response => {});
+                    .then(response => {
+                    });
+                this.$router.push('/meetings');
+
             }
         },
     }

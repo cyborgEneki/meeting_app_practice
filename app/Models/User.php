@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
@@ -11,15 +12,23 @@ class  User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
     use HasRoles;
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    protected $dates = ['deleted_at'];
     protected $guard_name = 'api';
-    protected $fillable = [
-        'first_name', 'middle_name', 'last_name', 'phone_number', 'email', 'password',
-    ];
+    protected $fillable =
+        [
+            'first_name',
+            'middle_name',
+            'last_name',
+            'phone_number',
+            'email',
+            'password',
+        ];
 
     /**
      * The attributes that should be hidden for arrays.

@@ -45,7 +45,7 @@
             },
             deleteMeeting(id) {
                 axios.delete('/api/meetings/'+id)
-                    .then((response) => {
+                    .then(() => {
                         let index = this.meetings.map(function(item){
                             return item.id
                         }).indexOf(id);

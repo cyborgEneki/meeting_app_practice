@@ -15,6 +15,7 @@ class MeetingseriesResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'frequency' => $this->frequency
         ];

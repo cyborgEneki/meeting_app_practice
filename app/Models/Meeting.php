@@ -17,9 +17,9 @@ class Meeting extends Model
             'date',
             'start_time',
             'end_time',
-            'creator',
-            'facilitator',
-            'time_keeper',
+            'creator_id',
+            'facilitator_id',
+            'time_keeper_id',
             'media_id',
             'venue_id',
             'meetingtype_id',
@@ -31,7 +31,11 @@ class Meeting extends Model
             'created' => Events\MeetingAlert::class
         ];
 
-    public $appends = ['meetingseries', 'meetingtype'];
+    public $appends =
+        [
+            'meetingseries',
+            'meetingtype'
+        ];
 
     public function venue()
     {
@@ -60,17 +64,17 @@ class Meeting extends Model
 
     public function facilitator()
     {
-        return $this->belongsTo('App\User', 'facilitator');
+        return $this->belongsTo('App\User', 'facilitator_id');
     }
 
     public function creator()
     {
-        return $this->belongsTo('App\User', 'creator');
+        return $this->belongsTo('App\User', 'creator_id');
     }
 
     public function time_keeper()
     {
-        return $this->belongsTo('App\User', 'time_keeper');
+        return $this->belongsTo('App\User', 'time_keeper_id');
     }
 
     public function agendas()

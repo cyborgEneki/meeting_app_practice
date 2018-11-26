@@ -4,6 +4,9 @@
         <p>
             <router-link :to="{ name: 'meetings'}">Meetings</router-link>
             <router-link :to="{ name: 'venues'}">Venues</router-link>
+            <router-link :to="{ name: 'users'}">User Management</router-link>
+            <router-link :to="{ name: 'meetingSeries'}">Meeting Series</router-link>
+            <router-link :to="{ name: 'media'}">Media</router-link>
         </p>
         <div>
             <router-view/>

@@ -15,13 +15,13 @@
             End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
         </div>
         <div>
-            Creator<input name="creator" v-model="meeting.creator"/>
+            Creator<input name="creator" v-model="meeting.creator_id"/>
         </div>
         <div>
-            Facilitator<input name="facilitator" v-model="meeting.facilitator"/>
+            Facilitator<input name="facilitator" v-model="meeting.facilitator_id"/>
         </div>
         <div>
-            Time Keeper<input name="time_keeper" v-model="meeting.time_keeper"/>
+            Time Keeper<input name="time_keeper" v-model="meeting.time_keeper_id"/>
         </div>
         <div>
             Venue<input name="venue_id" v-model="meeting.venue_id"/>
@@ -73,9 +73,9 @@
                     date: '',
                     start_time: '',
                     end_time: '',
-                    creator: '',
-                    facilitator: '',
-                    time_keeper: '',
+                    creator_id: '',
+                    facilitator_id: '',
+                    time_keeper_id: '',
                     venue_id: '',
                     media_id: '',
                     meetingtype_id: '',
@@ -97,7 +97,7 @@
             addNewMeeting() {
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
-                        this.$router.push('/')
+                        this.$router.push('/meetings')
                     });
             },
             addAgenda() {
