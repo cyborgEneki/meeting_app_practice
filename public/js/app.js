@@ -51289,7 +51289,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51351,7 +51351,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "App"
+    name: "App",
+    data: function data() {
+        return {
+            choices: []
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('/api/meetings/choices').then(function (response) {
+            _this.choices = response.data;
+        });
+    }
 });
 
 /***/ }),

@@ -17,6 +17,17 @@
 <script>
     export default {
         name: "App",
+        data() {
+            return {
+                choices: []
+            }
+        },
+        created() {
+            axios.get('/api/meetings/choices')
+                .then(response => {
+                    this.choices = response.data;
+                })
+        }
     }
 </script>
 
