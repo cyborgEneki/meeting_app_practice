@@ -87,9 +87,6 @@
             <div>
                 Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
             </div>
-            <div>
-                Agenda Conclusion<input type="text" v-model="meeting.agendas[index].conclusion">
-            </div>
         </div>
 
         <button @click="addAgenda">Add Agenda</button>
