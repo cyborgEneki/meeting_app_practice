@@ -31,28 +31,28 @@
         <div>
             Venue
             <select v-model="meeting.venue_id" >
-                <option>Select user</option>
+                <option></option>
                 <option v-for="venue in choices.venues" v-bind:value="venue.id">{{ venue.name }}</option>
             </select>             
         </div>
         <div>
             Media
             <select v-model="meeting.media_id" >
-                <option>Select user</option>
+                <option></option>
                 <option v-for="media in choices.media" v-bind:value="media.id">{{ media.name }}</option>
             </select>    
         </div>
         <div>
             Meeting Type
             <select v-model="meeting.meetingtype_id" >
-                <option value="">Select user</option>
+                <option value=""></option>
                 <option v-for="meetingtype in choices.meetingtype" v-bind:value="meetingtype.id">{{ meetingtype.name }}</option>
             </select> 
         </div>
         <div>
             Meeting Series
             <select v-model="meeting.meetingseries_id" >
-                <option>Select user</option>
+                <option></option>
                 <option v-for="meetingseries in choices.meetingseries" v-bind:value="meetingseries.id">{{ meetingseries.name }}</option>
             </select>  
         </div>
@@ -61,7 +61,8 @@
                 Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
             </div>
             <div>
-                Agenda Description<input type="text" v-model="meeting.agendas[index].description">
+                <label>Agenda Description</label>
+                <textarea v-model="meeting.agendas[index].description"></textarea>
             </div>
             <div>
                 Time Allocated (Min) 
@@ -78,7 +79,11 @@
                 </select> 
             </div>
             <div>
-                Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
+                <label>Agenda Status</label>
+                <select v-model="meeting.agendas[index].agenda_status">
+                    <option value="0">Pending</option>
+                    <option value="1">Accepted</option>
+                </select>
             </div>
         </div>
 
@@ -113,7 +118,7 @@
                             description: '',
                             time_allocated: '',
                             user_id: '',
-                            agenda_status: '',
+                            agenda_status: 0,
                             conclusion: ''
                         }
                     ]
@@ -125,7 +130,7 @@
             addNewMeeting() {
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
-                        this.$router.push('/')
+                        this.$router.push('/meetings')
                     });
             },
             addAgenda() {
@@ -135,8 +140,7 @@
                     this.meeting.agendas[items - 1].description !== '' &&
                     this.meeting.agendas[items - 1].time_allocated !== '' &&
                     this.meeting.agendas[items - 1].user_id !== '' &&
-                    this.meeting.agendas[items - 1].agenda_status !== '' &&
-                    this.meeting.agendas[items - 1].conclusion !== ''
+                    this.meeting.agendas[items - 1].agenda_status !== ''
 
                 ) {
                     this.meeting.agendas.push({

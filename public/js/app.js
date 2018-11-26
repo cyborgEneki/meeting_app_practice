@@ -54269,7 +54269,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54280,6 +54280,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54394,7 +54399,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     description: '',
                     time_allocated: '',
                     user_id: '',
-                    agenda_status: '',
+                    agenda_status: 0,
                     conclusion: ''
                 }]
             },
@@ -54407,12 +54412,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/api/meetings', this.meeting).then(function (response) {
-                _this.$router.push('/');
+                _this.$router.push('/meetings');
             });
         },
         addAgenda: function addAgenda() {
             var items = this.meeting.agendas.length;
-            if (this.meeting.agendas[items - 1].topic !== '' && this.meeting.agendas[items - 1].description !== '' && this.meeting.agendas[items - 1].time_allocated !== '' && this.meeting.agendas[items - 1].user_id !== '' && this.meeting.agendas[items - 1].agenda_status !== '' && this.meeting.agendas[items - 1].conclusion !== '') {
+            if (this.meeting.agendas[items - 1].topic !== '' && this.meeting.agendas[items - 1].description !== '' && this.meeting.agendas[items - 1].time_allocated !== '' && this.meeting.agendas[items - 1].user_id !== '' && this.meeting.agendas[items - 1].agenda_status !== '') {
                 this.meeting.agendas.push({
                     topic: '',
                     description: '',
@@ -54655,7 +54660,7 @@ var render = function() {
             }
           },
           [
-            _c("option", [_vm._v("Select user")]),
+            _c("option"),
             _vm._v(" "),
             _vm._l(_vm.choices.venues, function(venue) {
               return _c("option", { domProps: { value: venue.id } }, [
@@ -54699,7 +54704,7 @@ var render = function() {
             }
           },
           [
-            _c("option", [_vm._v("Select user")]),
+            _c("option"),
             _vm._v(" "),
             _vm._l(_vm.choices.media, function(media) {
               return _c("option", { domProps: { value: media.id } }, [
@@ -54743,7 +54748,7 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+            _c("option", { attrs: { value: "" } }),
             _vm._v(" "),
             _vm._l(_vm.choices.meetingtype, function(meetingtype) {
               return _c("option", { domProps: { value: meetingtype.id } }, [
@@ -54787,7 +54792,7 @@ var render = function() {
             }
           },
           [
-            _c("option", [_vm._v("Select user")]),
+            _c("option"),
             _vm._v(" "),
             _vm._l(_vm.choices.meetingseries, function(meetingseries) {
               return _c("option", { domProps: { value: meetingseries.id } }, [
@@ -54830,8 +54835,9 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Agenda Description"),
-            _c("input", {
+            _c("label", [_vm._v("Agenda Description")]),
+            _vm._v(" "),
+            _c("textarea", {
               directives: [
                 {
                   name: "model",
@@ -54840,7 +54846,6 @@ var render = function() {
                   expression: "meeting.agendas[index].description"
                 }
               ],
-              attrs: { type: "text" },
               domProps: { value: _vm.meeting.agendas[index].description },
               on: {
                 input: function($event) {
@@ -54946,31 +54951,43 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Agenda Status"),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.meeting.agendas[index].agenda_status,
-                  expression: "meeting.agendas[index].agenda_status"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.meeting.agendas[index].agenda_status },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("label", [_vm._v("Agenda Status")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.meeting.agendas[index].agenda_status,
+                    expression: "meeting.agendas[index].agenda_status"
                   }
-                  _vm.$set(
-                    _vm.meeting.agendas[index],
-                    "agenda_status",
-                    $event.target.value
-                  )
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.meeting.agendas[index],
+                      "agenda_status",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [_vm._v("Pending")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Accepted")])
+              ]
+            )
           ])
         ])
       }),
