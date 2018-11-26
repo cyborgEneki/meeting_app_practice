@@ -15,13 +15,6 @@
             End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
         </div>
         <div>
-            <label>Creator</label>
-            <select v-model="meeting.creator_id" >
-                <option>Select user</option>
-                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
-            </select>
-        </div>
-        <div>
             Facilitator
             <select v-model="meeting.facilitator_id" >
                 <option>Select user</option>
