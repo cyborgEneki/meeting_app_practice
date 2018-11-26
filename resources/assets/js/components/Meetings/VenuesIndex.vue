@@ -1,23 +1,15 @@
 <template>
     <div>
-        <h2>Venues</h2>
-<table class="table striped table-bordered">
-    <thead>
-    <th><strong>Name</strong></th>
-    </thead>
-    <tbody>
-    <tr v-for="venue in venues">
-        <td>{{ venue.name }}</td>
-    </tr>
-    </tbody>
-</table>
+        <venue-list></venue-list>
     </div>
 
 </template>
 
 <script>
+    import VenueList from "./partials/venues/VenueList";
     export default {
         name: "VenuesIndex",
+        components: {VenueList},
         data() {
             return {
                 venue: {},

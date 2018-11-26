@@ -6,6 +6,8 @@ import MeetingAdd from './components/Meetings/partials/MeetingAdd'
 import MeetingEdit  from './components/Meetings/partials/MeetingEdit'
 import UserEdit  from './components/Meetings/partials/users/UserEdit'
 import UserAdd  from './components/Meetings/partials/users/UserAdd'
+import VenueAdd from './components/Meetings/partials/venues/VenueAdd'
+import VenueEdit from './components/Meetings/partials/venues/VenueEdit'
 
 const router = new VueRouter({
     mode: 'history',
@@ -36,6 +38,11 @@ const router = new VueRouter({
             component: UserAdd,
         },
         {
+            path: '/add-venue',
+            name: 'addVenue',
+            component: VenueAdd,
+        },
+        {
             path:'/edit_meeting',
             name: 'editMeeting',
             component: MeetingEdit,
@@ -46,7 +53,13 @@ const router = new VueRouter({
             name: 'editUser',
             component: UserEdit,
             props: true
-        }
+        },
+        {
+            path:'/edit_venue',
+            name: 'editVenue',
+            component: VenueEdit,
+            props: true
+        },
     ],
 });
 
