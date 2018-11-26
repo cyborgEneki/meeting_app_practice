@@ -55267,7 +55267,7 @@ var render = function() {
     _c("h3", [_vm._v("Edit Meeting")]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Meeting Name"),
+      _vm._v("\n        Meeting Name"),
       _c("input", {
         directives: [
           {
@@ -55291,7 +55291,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Date"),
+      _vm._v("\n        Date"),
       _c("input", {
         directives: [
           {
@@ -55315,7 +55315,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Start Time"),
+      _vm._v("\n        Start Time"),
       _c("input", {
         directives: [
           {
@@ -55339,7 +55339,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            End Time"),
+      _vm._v("\n        End Time"),
       _c("input", {
         directives: [
           {
@@ -55363,7 +55363,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Venue\n            "),
+      _vm._v("\n        Venue\n        "),
       _c(
         "select",
         {
@@ -55407,7 +55407,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Media\n            "),
+      _vm._v("\n        Media\n        "),
       _c(
         "select",
         {
@@ -55451,7 +55451,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Meeting Type\n            "),
+      _vm._v("\n        Meeting Type\n        "),
       _c(
         "select",
         {
@@ -55495,7 +55495,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n            Meeting Series\n            "),
+      _vm._v("\n        Meeting Series\n        "),
       _c(
         "select",
         {
@@ -55980,7 +55980,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56008,27 +56008,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "UsersIndex",
     props: ['choices'],
     methods: {
-        getUsers: function getUsers() {
+        deleteUser: function deleteUser(id) {
             var _this = this;
 
-            axios.get('/api/users').then(function (response) {
-                _this.users = response.data;
-            });
-        },
-        deleteUser: function deleteUser(id) {
-            var _this2 = this;
-
             axios.delete('/api/users/' + id).then(function () {
-                var index = _this2.users.map(function (item) {
+                var index = _this.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this2.users.splice(index, 1);
+                _this.users.splice(index, 1);
             });
         }
     }
@@ -56048,7 +56042,7 @@ var render = function() {
       _c("h3", [_vm._v("Users")]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: { name: "addUser" } } }, [
-        _vm._v("Add a New User")
+        _vm._v("Add New User")
       ]),
       _vm._v(" "),
       _c(
@@ -56197,7 +56191,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56238,6 +56232,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         editUser: function editUser(user) {
+            var _this = this;
+
             var currentUser = {};
 
             currentUser.first_name = user.first_name;
@@ -56246,7 +56242,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentUser.phone_number = user.phone_number;
             currentUser.email = user.email;
 
-            axios.put('/api/users/' + user.id, currentUser).then(function (response) {});
+            axios.put('/api/users/' + user.id, currentUser).then(function (response) {
+                _this.$router.push('/users');
+            });
         }
     }
 });

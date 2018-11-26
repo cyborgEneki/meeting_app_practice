@@ -14,7 +14,7 @@
         <div>
             End Time<input v-model="meeting.end_time" type="time"/>
         </div>
-<div>
+        <div>
             Venue
             <select v-model="meeting.venue_id" >
                 <option></option>

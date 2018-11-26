@@ -38,6 +38,7 @@
 
                 axios.put('/api/users/' + user.id, currentUser)
                     .then(response => {
+                        this.$router.push('/users');
                     });
             }
         },

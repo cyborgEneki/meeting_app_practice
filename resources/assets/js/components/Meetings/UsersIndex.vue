@@ -1,17 +1,18 @@
 <template>
     <div>
         <h3>Users</h3>
-        <router-link :to="{ name: 'addUser' }">Add a New User</router-link>
+        <router-link :to="{ name: 'addUser' }">Add New User</router-link>
 
-		<table class="table striped table-bordered">
+        <table class="table striped table-bordered">
 			<tr v-for="user in choices.users">
-				<td>{{ user.first_name}}</td>
-				<td>{{ user.last_name}}</td>
-				<td>{{ user.email}}</td>
+				<td>{{ user.first_name }}</td>
+				<td>{{ user.last_name }}</td>
+				<td>{{ user.email }}</td>
 				<td><router-link :to="{ name: 'editUser', params: { user } }">Edit</router-link></td>
 				<td><button @click="deleteUser(user.id)">Delete</button></td>
 			</tr>
 		</table>
+
     </div>
 </template>
 
@@ -21,12 +22,6 @@
         name: "UsersIndex",
         props: ['choices'],
         methods: {
-            getUsers() {
-                axios.get('/api/users')
-                    .then(response => {
-                        this.users = response.data;
-                    })
-            },
             deleteUser(id) {
                 axios.delete('/api/users/'+id)
                     .then(() => {
