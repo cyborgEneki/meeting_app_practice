@@ -24,7 +24,11 @@
             Time Keeper<input name="time_keeper" v-model="meeting.time_keeper_id"/>
         </div>
         <div>
-            Venue<input name="venue_id" v-model="meeting.venue_id"/>
+            <label>Venue</label>
+            <select v-model="meeting.venue_id" >
+                <option value="">Select venue</option>
+                <option v-for="venue in choices.venues" :value="venue.id">{{ venue.name }}</option>
+            </select>
         </div>
         <div>
             Media<input name="media_id" v-model="meeting.media_id"/>
@@ -65,6 +69,7 @@
 <script>
     export default {
         name: "MeetingAdd",
+        props: ['choices'],
         data() {
             return {
                 meeting: {

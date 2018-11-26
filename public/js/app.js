@@ -51403,7 +51403,20 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", [_c("router-view")], 1)
+    _c(
+      "div",
+      [
+        _c("router-view", {
+          attrs: { choices: _vm.choices },
+          on: {
+            "update:choices": function($event) {
+              _vm.choices = $event
+            }
+          }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = []
@@ -55032,7 +55045,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55107,9 +55120,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MeetingAdd",
+    props: ['choices'],
     data: function data() {
         return {
             meeting: {
@@ -55343,27 +55361,48 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Venue"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.venue_id,
-              expression: "meeting.venue_id"
-            }
-          ],
-          attrs: { name: "venue_id" },
-          domProps: { value: _vm.meeting.venue_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("label", [_vm._v("Venue")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.venue_id,
+                expression: "meeting.venue_id"
               }
-              _vm.$set(_vm.meeting, "venue_id", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.meeting,
+                  "venue_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        })
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("Select venue")]),
+            _vm._v(" "),
+            _vm._l(_vm.choices.venues, function(venue) {
+              return _c("option", { domProps: { value: venue.id } }, [
+                _vm._v(_vm._s(venue.name))
+              ])
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("div", [
