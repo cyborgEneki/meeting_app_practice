@@ -37,6 +37,7 @@
             addUser(){
                 axios.post('/api/users', this.user)
                     .then(response => {});
+                this.$router.push('/users');
             }
         }
     }

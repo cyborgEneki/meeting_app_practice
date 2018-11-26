@@ -19,7 +19,8 @@
         methods: {
             addVenue(){
                 axios.post('/api/venues', this.venue)
-                    .then(response => {})
+                    .then(response => {});
+                this.$router.push('/venues');
             }
         }
     }

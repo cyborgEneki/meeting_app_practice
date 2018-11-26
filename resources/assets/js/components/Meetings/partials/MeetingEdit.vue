@@ -15,10 +15,10 @@
             End Time<input v-model="meeting.end_time" type="time"/>
         </div>
         <!--<div>-->
-            <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
+        <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
         <!--</div>-->
         <!--<div>-->
-            <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
+        <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
         <!--</div>-->
         <div>
             Venue<input type="text" v-model="meeting.venue_id"/>
@@ -42,7 +42,7 @@
         props: ['meeting'],
 
         methods: {
-            editMeeting: function(meeting) {
+            editMeeting: function (meeting) {
                 let currentMeeting = {};
 
                 currentMeeting.name = meeting.name;
@@ -57,7 +57,10 @@
                 currentMeeting.meetingtype_id = meeting.meetingtype_id;
 
                 axios.put('/api/meetings/' + meeting.id, currentMeeting)
-                    .then(response => {});
+                    .then(response => {
+                    });
+                this.$router.push('/meetings');
+
             }
         },
     }

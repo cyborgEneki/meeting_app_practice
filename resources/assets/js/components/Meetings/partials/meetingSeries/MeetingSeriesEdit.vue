@@ -14,14 +14,16 @@
         props: ['eachmeetingseries'],
         methods: {
             editMeetingSeries(eachmeetingseries) {
-                console.log (eachmeetingseries);
                 let currentMeetingSeries = {};
 
                 currentMeetingSeries.name = eachmeetingseries.name;
                 currentMeetingSeries.frequency = eachmeetingseries.frequency;
 
                 axios.put('/api/meetingseries/' + eachmeetingseries.id, currentMeetingSeries)
-                    .then(response => {});
+                    .then(response => {
+                    });
+                this.$router.push('/meeting_series');
+
             }
         }
     }

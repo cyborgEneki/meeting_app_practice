@@ -97,7 +97,7 @@
             addNewMeeting() {
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
-                        this.$router.push('/')
+                        this.$router.push('/meetings')
                     });
             },
             addAgenda() {

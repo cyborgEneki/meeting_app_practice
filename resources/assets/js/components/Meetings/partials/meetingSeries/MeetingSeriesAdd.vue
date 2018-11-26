@@ -22,7 +22,9 @@
         methods: {
             addMeetingSeries() {
                 axios.post('api/meetingseries', this.meetingseries)
-                    .then(response => {})
+                    .then(response => {});
+                this.$router.push('/meeting_series');
+
             }
         }
     }

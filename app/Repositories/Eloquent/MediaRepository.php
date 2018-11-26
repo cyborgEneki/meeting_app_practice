@@ -16,7 +16,8 @@ class MediaRepository implements MediaRepositoryInterface
 {
     public function allMedia()
     {
-        return MediaResource::collection(Media::all());
+//        return MediaResource::collection(Media::all());
+        return MediaResource::collection(Media::take(10)->get());
     }
     public function showMedia($id)
     {

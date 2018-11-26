@@ -17,7 +17,10 @@
                 currentVenue.name = venue.name;
 
                 axios.put('/api/venues/' + venue.id, currentVenue)
-                    .then(response => {});
+                    .then(response => {
+                    });
+                this.$router.push('/venues');
+
             }
         }
     }
