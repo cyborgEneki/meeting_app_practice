@@ -26,10 +26,10 @@ class MeetingResource extends JsonResource
             'time_keeper_id' => $this->time_keeper_id,
             'users' => $this->users,
             'agendas' =>$this->agendas,
-            'venue' => $this->venue,
-            'media' => $this->media,
-            'meetingseries' => $this->meetingseries,
-            'meetingtype' => $this->meetingtype,
+            'venue_id' => $this->venue_id,
+            'media_id' => $this->media_id,
+            'meetingseries_id' => $this->meetingseries_id,
+            'meetingtype_id' => $this->meetingtype_id,
         ];
     }
 }

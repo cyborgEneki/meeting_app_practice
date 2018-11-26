@@ -14,30 +14,33 @@
         <div>
             End Time<input v-model="meeting.end_time" type="time"/>
         </div>
-                <div>
-            Creator
-        <select v-model="meeting.creator_id" >
-            <option>Select user</option>
-            <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
-        </select>
-        </div>
-        <!--<div>-->
-            <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
-        <!--</div>-->
-        <!--<div>-->
-            <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
-        <!--</div>-->
-        <div>
-            Venue<input type="text" v-model="meeting.venue_id"/>
+<div>
+            Venue
+            <select v-model="meeting.venue_id" >
+                <option></option>
+                <option v-for="venue in choices.venues" v-bind:value="venue.id">{{ venue.name }}</option>
+            </select>             
         </div>
         <div>
-            Media<input type="text" v-model="meeting.media_id"/>
+            Media
+            <select v-model="meeting.media_id" >
+                <option></option>
+                <option v-for="media in choices.media" v-bind:value="media.id">{{ media.name }}</option>
+            </select>    
         </div>
         <div>
-            Meeting Type<input type="text" v-model="meeting.meetingtype_id"/>
+            Meeting Type
+            <select v-model="meeting.meetingtype_id" >
+                <option value=""></option>
+                <option v-for="meetingtype in choices.meetingtype" v-bind:value="meetingtype.id">{{ meetingtype.name }}</option>
+            </select> 
         </div>
         <div>
-            Meeting Series<input type="text" v-model="meeting.meetingseries_id"/>
+            Meeting Series
+            <select v-model="meeting.meetingseries_id" >
+                <option></option>
+                <option v-for="meetingseries in choices.meetingseries" v-bind:value="meetingseries.id">{{ meetingseries.name }}</option>
+            </select>  
         </div>
 
         <button @click="editMeeting(meeting)">Edit Meeting</button>
@@ -50,6 +53,7 @@
 
         methods: {
             editMeeting: function(meeting) {
+                console.log(meeting);
                 let currentMeeting = {};
 
                 currentMeeting.name = meeting.name;
@@ -57,14 +61,16 @@
                 currentMeeting.end_time = meeting.end_time;
                 currentMeeting.date = meeting.date;
                 currentMeeting.media_id = meeting.media_id;
-                currentMeeting.facilitator = meeting.facilitator.id;
-                currentMeeting.time_keeper = meeting.time_keeper.id;
+                currentMeeting.facilitator = meeting.facilitator_id;
+                currentMeeting.time_keeper = meeting.time_keeper_id;
                 currentMeeting.venue_id = meeting.venue_id;
                 currentMeeting.meetingseries_id = meeting.meetingseries_id;
                 currentMeeting.meetingtype_id = meeting.meetingtype_id;
 
                 axios.put('/api/meetings/' + meeting.id, currentMeeting)
-                    .then(response => {});
+                    .then(response => {
+                        this.$router.push('/meetings')
+                    });
             }
         },
     }
