@@ -12,6 +12,7 @@
                <td> {{ venue.name }}</td>
                <td>
                    <router-link :to="{ name: 'editVenue', params: { venue } }">Edit</router-link>
+                   <button @click="deleteVenue(venue.id)">Delete</button>
                </td>
            </tr>
        </table>
@@ -34,8 +35,16 @@
                 axios.get('/api/venues')
                     .then(response => {
                         this.venues = response.data;
-                        console.log(this.venues)
                     });
+            },
+            deleteVenue(id) {
+                axios.delete('/api/venues/' + id)
+                    .then(() => {
+                        let index = this.venues.map((item) => {
+                            return item.id;
+                        }).indexOf(id);
+                        this.venues.splice(index, 1);
+                    })
             }
         }
     }

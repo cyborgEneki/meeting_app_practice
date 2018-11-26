@@ -19,7 +19,8 @@ class MeetingseriesRepository implements MeetingseriesRepositoryInterface
 
     public function allMeetingseries()
     {
-        return MeetingseriesResource::collection(Meetingseries::all());
+//        return MeetingseriesResource::collection(Meetingseries::all());
+        return MeetingseriesResource::collection(Meetingseries::take(10)->get());
     }
 
     public function createMeetingseries(MeetingseriesRequest $request)

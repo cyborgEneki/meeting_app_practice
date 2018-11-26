@@ -2,7 +2,7 @@
     <div>
         <label>Name</label>
         <input type="text" v-model="venue.name">
-        <button @click="editVenue(venue)"></button>
+        <button @click="editVenue(venue)">Edit Venue</button>
     </div>
 </template>
 

@@ -8,6 +8,9 @@ import UserEdit  from './components/Meetings/partials/users/UserEdit'
 import UserAdd  from './components/Meetings/partials/users/UserAdd'
 import VenueAdd from './components/Meetings/partials/venues/VenueAdd'
 import VenueEdit from './components/Meetings/partials/venues/VenueEdit'
+import MeetingSeriesIndex from './components/Meetings/MeetingSeriesIndex'
+import MeetingSeriesAdd from './components/Meetings/partials/meetingSeries/MeetingSeriesAdd'
+import MeetingSeriesEdit from './components/Meetings/partials/meetingSeries/MeetingSeriesEdit'
 
 const router = new VueRouter({
     mode: 'history',
@@ -28,6 +31,11 @@ const router = new VueRouter({
             component: UsersIndex,
         },
         {
+            path: '/meeting_series',
+            name: 'meetingSeries',
+            component: MeetingSeriesIndex,
+        },
+        {
             path: '/add-meeting',
             name: 'addMeeting',
             component: MeetingAdd,
@@ -41,6 +49,11 @@ const router = new VueRouter({
             path: '/add-venue',
             name: 'addVenue',
             component: VenueAdd,
+        },
+        {
+            path: '/add-meeting-series',
+            name: 'addMeetingSeries',
+            component: MeetingSeriesAdd,
         },
         {
             path:'/edit_meeting',
@@ -58,6 +71,12 @@ const router = new VueRouter({
             path:'/edit_venue',
             name: 'editVenue',
             component: VenueEdit,
+            props: true
+        },
+        {
+            path:'/edit_meeting_series',
+            name: 'editMeetingSeries',
+            component: MeetingSeriesEdit,
             props: true
         },
     ],
