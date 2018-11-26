@@ -53854,7 +53854,8 @@ var render = function() {
                         to: {
                           name: "editMeeting",
                           params: { meeting: meeting }
-                        }
+                        },
+                        tag: "button"
                       }
                     },
                     [_vm._v("Edit")]
@@ -54268,7 +54269,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54279,6 +54280,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -54402,7 +54407,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     agenda_status: '',
                     conclusion: ''
                 }]
-            }
+            },
+            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90]
         };
     },
 
@@ -54907,31 +54913,45 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Time Allocated"),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.meeting.agendas[index].time_allocated,
-                  expression: "meeting.agendas[index].time_allocated"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.meeting.agendas[index].time_allocated },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _vm._v("\n            Time Allocated (Min) \n            "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.meeting.agendas[index].time_allocated,
+                    expression: "meeting.agendas[index].time_allocated"
                   }
-                  _vm.$set(
-                    _vm.meeting.agendas[index],
-                    "time_allocated",
-                    $event.target.value
-                  )
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.meeting.agendas[index],
+                      "time_allocated",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", [_vm._v("Select time")]),
+                _vm._v(" "),
+                _vm._l(_vm.timing, function(time) {
+                  return _c("option", [_vm._v(_vm._s(time))])
+                })
+              ],
+              2
+            )
           ]),
           _vm._v(" "),
           _c("div", [
@@ -55686,27 +55706,25 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     },
     created: function created() {
-        var _this = this;
-
         axios.get('/api/users').then(function (response) {
-            _this.users = response.data;
+            //this.users = response.data;
         });
     },
 
     methods: {
         removeUsers: function removeUsers(id) {
-            var _this2 = this;
+            var _this = this;
 
             axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this2.meeting.users.map(function (item) {
+                var index = _this.meeting.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this2.meeting.users.splice(index, 1);
+                _this.meeting.users.splice(index, 1);
             });
         },
 
         addUser: function addUser(id) {
-            var _this3 = this;
+            var _this2 = this;
 
             var checkMtg = this.meeting.users.filter(function (user) {
                 return user.id === id;
@@ -55714,7 +55732,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             //only add user if that user isn't already in the meeting
             if (!checkMtg.length) {
                 axios.get('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                    _this3.meeting.users.push(response.data.user);
+                    _this2.meeting.users.push(response.data.user);
                 });
             } else {
                 console.log('User already exists');
@@ -55739,29 +55757,45 @@ var render = function() {
       _c("p", [_vm._v(_vm._s(_vm.meeting.name))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Creator:")]),
-      _vm._v(
-        "\n    " +
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
           _vm._s(_vm.choices.users[_vm.meeting.creator_id].first_name) +
-          " " +
-          _vm._s(_vm.choices.users[_vm.meeting.creator_id].last_name) +
-          "\n    \n    "
-      ),
+            " " +
+            _vm._s(_vm.choices.users[_vm.meeting.creator_id].last_name)
+        )
+      ]),
+      _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator_id))]),
+      _c("p", [
+        _vm._v(
+          _vm._s(_vm.choices.users[_vm.meeting.facilitator_id].first_name) +
+            " " +
+            _vm._s(_vm.choices.users[_vm.meeting.facilitator_id].last_name)
+        )
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Time Keeper:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper_id))]),
+      _c("p", [
+        _vm._v(
+          _vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].first_name) +
+            " " +
+            _vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].last_name)
+        )
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
       _vm._l(_vm.meeting.users, function(user) {
         return _c("div", [
-          _c("p", [_vm._v(_vm._s(user.first_name))]),
+          _c("p", [
+            _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+          ]),
           _vm._v(" "),
           _c(
-            "p",
+            "button",
             {
               on: {
                 click: function($event) {

@@ -16,7 +16,7 @@
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
                 <td>
-                    <router-link :to="{ name: 'editMeeting' , params: { meeting }}">Edit</router-link>
+                    <router-link :to="{ name: 'editMeeting' , params: { meeting }}" tag="button">Edit</router-link>
                     <button @click="deleteMeeting(meeting.id)">Delete</button>
                 </td>
             </tr>

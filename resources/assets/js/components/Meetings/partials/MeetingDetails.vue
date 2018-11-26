@@ -3,16 +3,16 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        {{ choices.users[meeting.creator_id].first_name }} {{ choices.users[meeting.creator_id].last_name }}
+        <p>{{ choices.users[meeting.creator_id].first_name }} {{ choices.users[meeting.creator_id].last_name }}</p>
         
         <h4>Facilitator:</h4>
-        <p>{{ meeting.facilitator_id }}</p>
+        <p>{{ choices.users[meeting.facilitator_id].first_name }} {{ choices.users[meeting.facilitator_id].last_name }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ meeting.time_keeper_id }}</p>
+        <p>{{ choices.users[meeting.time_keeper_id].first_name }} {{ choices.users[meeting.time_keeper_id].last_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in meeting.users">
-            <p>{{ user.first_name }}</p>
-            <p @click="removeUsers(user.id)">Remove</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <button @click="removeUsers(user.id)">Remove</button>
         </div>
         <h4>Agendas:</h4>
         <table class="table striped table-bordered">
@@ -69,7 +69,7 @@
         created() {
             axios.get('/api/users')
                 .then(response => {
-                        this.users = response.data;
+                        //this.users = response.data;
                     }
                 );
         },

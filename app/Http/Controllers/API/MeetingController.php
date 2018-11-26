@@ -94,25 +94,25 @@ class MeetingController extends Controller
     public function choices()
     {
         //users
-        $users = User::all('id','first_name','last_name','email')->take(10)->sortBy('first_name');
+        $users = User::all('id','first_name','last_name','email')->sortBy('first_name');
         $users = $users->keyBy('id');
         $users->sortBy('first_name');
         $users = ['users'=>$users];
 
         //venues
-        $venues = Venue::all('id','name')->take(10)->sortBy('name');
+        $venues = Venue::all('id','name')->sortBy('name');
         $venues = $venues->keyBy('id');
         $venues = ['venues'=>$venues];
         //media
-        $media = Media::all('id','name')->take(10)->sortBy('name');
+        $media = Media::all('id','name')->sortBy('name');
         $media = $media->keyBy('id');
         $media = ['media'=>$media];
         //meetingseries
-        $meetingseries = Meetingseries::all('id','name')->take(10)->sortBy('name');
+        $meetingseries = Meetingseries::all('id','name')->sortBy('name');
         $meetingseries = $meetingseries->keyBy('id');
         $meetingseries = ['meetingseries'=>$meetingseries];
         //meetingtype
-        $meetingtype = Meetingtype::all('id','name')->take(10)->sortBy('name');
+        $meetingtype = Meetingtype::all('id','name')->sortBy('name');
         $meetingtype = $meetingtype->keyBy('id');
         $meetingtype = ['meetingtype'=>$meetingtype];
         // merge

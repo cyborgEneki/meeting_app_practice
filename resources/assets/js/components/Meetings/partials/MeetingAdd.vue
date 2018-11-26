@@ -71,7 +71,11 @@
                 Agenda Description<input type="text" v-model="meeting.agendas[index].description">
             </div>
             <div>
-                Time Allocated<input type="text" v-model="meeting.agendas[index].time_allocated">
+                Time Allocated (Min) 
+                <select v-model="meeting.agendas[index].time_allocated">
+                    <option>Select time</option>
+                    <option v-for="time in timing">{{ time }}</option>    
+                </select>
             </div>
             <div>
                 User Assigned to Agenda
@@ -123,7 +127,8 @@
                             conclusion: ''
                         }
                     ]
-                }
+                },
+                timing: [5,10,15,20,25,30,45,60,75,90]
             }
         },
         methods: {
