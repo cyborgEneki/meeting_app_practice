@@ -53999,11 +53999,15 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator_id))]),
+      _c("p", [
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.facilitator_id].first_name))
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Time Keeper:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper_id))]),
+      _c("p", [
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].first_name))
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
@@ -54095,13 +54099,18 @@ var render = function() {
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          " " + _vm._s(_vm.choices.meetingtype[_vm.meeting.meetingtype_id].name)
+          " " +
+            _vm._s(_vm.choices.meetingtypes[_vm.meeting.meetingtype_id].name)
         )
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Series:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingseries_id))]),
+      _c("p", [
+        _vm._v(
+          _vm._s(_vm.choices.meetingseries[_vm.meeting.meetingseries_id].name)
+        )
+      ]),
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
@@ -54227,7 +54236,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54284,6 +54293,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         loadView: function loadView(meeting) {
             this.$store.commit('GET_MEETING_DETAILS', meeting);
+            console.log(this.meetings);
         },
         deleteMeeting: function deleteMeeting(id) {
             var _this2 = this;

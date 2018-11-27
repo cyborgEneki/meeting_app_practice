@@ -5,9 +5,9 @@
         <h4>Creator:</h4>
         <p>{{ choices.users[meeting.creator_id].first_name }}</p>
         <h4>Facilitator:</h4>
-        <p>{{ meeting.facilitator_id }}</p>
+        <p>{{ choices.users[meeting.facilitator_id].first_name }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ meeting.time_keeper_id }}</p>
+        <p>{{ choices.users[meeting.time_keeper_id].first_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in meeting.users">
             <p>{{ user.first_name }}</p>
@@ -43,9 +43,9 @@
         <h4>Media:</h4>
         <p> {{ choices.media[meeting.media_id].name }}</p>
         <h4>Meeting Type:</h4>
-        <p> {{ choices.meetingtype[meeting.meetingtype_id].name }}</p>
+        <p> {{ choices.meetingtypes[meeting.meetingtype_id].name }}</p>
         <h4>Meeting Series:</h4>
-        <p>{{ meeting.meetingseries_id }}</p>
+        <p>{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
         <hr/>
         <button @click="test">Test</button>
     </div>
