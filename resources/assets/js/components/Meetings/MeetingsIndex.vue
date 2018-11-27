@@ -18,6 +18,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
+        props: ['choices'],
         computed: {
             ...mapGetters({
                 showMeetingDetails: 'showMeetingDetails',
