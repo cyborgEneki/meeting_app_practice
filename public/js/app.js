@@ -53945,7 +53945,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
     methods: {
         test: function test() {
-            console.log(this.choices);
+            console.log(this.meeting);
         },
         removeUsers: function removeUsers(id) {
             var _this2 = this;
@@ -53993,7 +53993,9 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Creator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.creator_id))]),
+      _c("p", [
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.creator_id].first_name))
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
@@ -54081,15 +54083,21 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.venue_id))]),
+      _c("p", [_vm._v(_vm._s(_vm.choices.venues[_vm.meeting.venue_id].name))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Media:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.media_id))]),
+      _c("p", [
+        _vm._v(" " + _vm._s(_vm.choices.media[_vm.meeting.media_id].name))
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Type:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingtype_id))]),
+      _c("p", [
+        _vm._v(
+          " " + _vm._s(_vm.choices.meetingtype[_vm.meeting.meetingtype_id].name)
+        )
+      ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Series:")]),
       _vm._v(" "),
