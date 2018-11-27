@@ -23,7 +23,7 @@ class Meeting extends Model
             'media_id',
             'venue_id',
             'meetingtype_id',
-            'meetingseries_id'
+            'meetingseries_id',
         ];
 
     protected $events =

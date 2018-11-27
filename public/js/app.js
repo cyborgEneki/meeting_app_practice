@@ -53796,6 +53796,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -53919,10 +53920,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['choices'],
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         meeting: 'meeting'
     })),
@@ -53940,6 +53943,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
+        test: function test() {
+            console.log(this.choices);
+        },
         removeUsers: function removeUsers(id) {
             var _this2 = this;
 
@@ -53986,15 +53992,15 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Creator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.creator_id.first_name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.creator_id))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator_id.first_name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.facilitator_id))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Time Keeper:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper_id.first_name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.time_keeper_id))]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
@@ -54074,21 +54080,23 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.venue.name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.venue_id))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Media:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.media.name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.media_id))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Type:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingtype.name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingtype_id))]),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Series:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingseries.name))]),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.meetingseries_id))]),
       _vm._v(" "),
-      _c("hr")
+      _c("hr"),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.test } }, [_vm._v("Test")])
     ],
     2
   )
@@ -54406,7 +54414,22 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm.showMeetingDetails ? _c("div", [_c("meeting-details")], 1) : _vm._e()
+    _vm.showMeetingDetails
+      ? _c(
+          "div",
+          [
+            _c("meeting-details", {
+              attrs: { choices: _vm.choices },
+              on: {
+                "update:choices": function($event) {
+                  _vm.choices = $event
+                }
+              }
+            })
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -55045,7 +55068,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55056,6 +55079,23 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55289,75 +55329,93 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Creator"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.creator_id,
-              expression: "meeting.creator_id"
-            }
-          ],
-          attrs: { name: "creator" },
-          domProps: { value: _vm.meeting.creator_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("label", [_vm._v("Time Keeper")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.time_keeper_id,
+                expression: "meeting.time_keeper_id"
               }
-              _vm.$set(_vm.meeting, "creator_id", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.meeting,
+                  "time_keeper_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        })
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+            _vm._v(" "),
+            _vm._l(_vm.choices.users, function(user) {
+              return _c("option", { domProps: { value: user.id } }, [
+                _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+              ])
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Facilitator"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.facilitator_id,
-              expression: "meeting.facilitator_id"
-            }
-          ],
-          attrs: { name: "facilitator" },
-          domProps: { value: _vm.meeting.facilitator_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("label", [_vm._v("Facilitator")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.facilitator_id,
+                expression: "meeting.facilitator_id"
               }
-              _vm.$set(_vm.meeting, "facilitator_id", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _vm._v("\n        Time Keeper"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.time_keeper_id,
-              expression: "meeting.time_keeper_id"
-            }
-          ],
-          attrs: { name: "time_keeper" },
-          domProps: { value: _vm.meeting.time_keeper_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.meeting,
+                  "facilitator_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
               }
-              _vm.$set(_vm.meeting, "time_keeper_id", $event.target.value)
             }
-          }
-        })
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+            _vm._v(" "),
+            _vm._l(_vm.choices.users, function(user) {
+              return _c("option", { domProps: { value: user.id } }, [
+                _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+              ])
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("div", [
@@ -55406,75 +55464,144 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Media"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.media_id,
-              expression: "meeting.media_id"
-            }
-          ],
-          attrs: { name: "media_id" },
-          domProps: { value: _vm.meeting.media_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("label", [_vm._v("Media")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.media_id,
+                expression: "meeting.media_id"
               }
-              _vm.$set(_vm.meeting, "media_id", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.meeting,
+                  "media_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        })
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("Select media")]),
+            _vm._v(" "),
+            _vm._l(_vm.choices.media, function(eachmedia) {
+              return _c("option", { domProps: { value: eachmedia.id } }, [
+                _vm._v(_vm._s(eachmedia.name))
+              ])
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Meeting Type"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.meetingtype_id,
-              expression: "meeting.meetingtype_id"
-            }
-          ],
-          attrs: { name: "meetingtype_id" },
-          domProps: { value: _vm.meeting.meetingtype_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("label", [_vm._v("Meeting Type")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.meetingtype_id,
+                expression: "meeting.meetingtype_id"
               }
-              _vm.$set(_vm.meeting, "meetingtype_id", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.meeting,
+                  "meetingtype_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        })
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("Select meeting type")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.choices.meetingtypes, function(meetingtype) {
+              return _c("option", { domProps: { value: meetingtype.id } }, [
+                _vm._v(_vm._s(meetingtype.name))
+              ])
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Meeting Series"),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.meeting.meetingseries_id,
-              expression: "meeting.meetingseries_id"
-            }
-          ],
-          attrs: { name: "meetingseries_id" },
-          domProps: { value: _vm.meeting.meetingseries_id },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("label", [_vm._v("Meeting Series")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.meeting.meetingseries_id,
+                expression: "meeting.meetingseries_id"
               }
-              _vm.$set(_vm.meeting, "meetingseries_id", $event.target.value)
+            ],
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.meeting,
+                  "meetingseries_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
             }
-          }
-        })
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [
+              _vm._v("Select meeting series")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.choices.meetingseries, function(eachmeetingseries) {
+              return _c(
+                "option",
+                { domProps: { value: eachmeetingseries.id } },
+                [_vm._v(_vm._s(eachmeetingseries.name))]
+              )
+            })
+          ],
+          2
+        )
       ]),
       _vm._v(" "),
       _vm._l(_vm.meeting.agendas, function(agenda, index) {
@@ -55754,7 +55881,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55804,9 +55931,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['meeting'],
+    props: ['choices', 'meeting'],
 
     methods: {
         editMeeting: function editMeeting(meeting) {
@@ -55817,8 +55968,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentMeeting.end_time = meeting.end_time;
             currentMeeting.date = meeting.date;
             currentMeeting.media_id = meeting.media_id;
-            currentMeeting.facilitator = meeting.facilitator.id;
-            currentMeeting.time_keeper = meeting.time_keeper.id;
+            currentMeeting.facilitator_id = meeting.facilitator_id;
+            currentMeeting.time_keeper_id = meeting.time_keeper_id;
             currentMeeting.venue_id = meeting.venue_id;
             currentMeeting.meetingseries_id = meeting.meetingseries_id;
             currentMeeting.meetingtype_id = meeting.meetingtype_id;
@@ -55937,99 +56088,277 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Venue"),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.meeting.venue_id,
-            expression: "meeting.venue_id"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.meeting.venue_id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("label", [_vm._v("Time Keeper")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.time_keeper_id,
+              expression: "meeting.time_keeper_id"
             }
-            _vm.$set(_vm.meeting, "venue_id", $event.target.value)
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "time_keeper_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
           }
-        }
-      })
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+          _vm._v(" "),
+          _vm._l(_vm.choices.users, function(user) {
+            return _c("option", { domProps: { value: user.id } }, [
+              _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+            ])
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Media"),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.meeting.media_id,
-            expression: "meeting.media_id"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.meeting.media_id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("label", [_vm._v("Facilitator")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.facilitator_id,
+              expression: "meeting.facilitator_id"
             }
-            _vm.$set(_vm.meeting, "media_id", $event.target.value)
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "facilitator_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
           }
-        }
-      })
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+          _vm._v(" "),
+          _vm._l(_vm.choices.users, function(user) {
+            return _c("option", { domProps: { value: user.id } }, [
+              _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+            ])
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Meeting Type"),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.meeting.meetingtype_id,
-            expression: "meeting.meetingtype_id"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.meeting.meetingtype_id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("label", [_vm._v("Venue")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.venue_id,
+              expression: "meeting.venue_id"
             }
-            _vm.$set(_vm.meeting, "meetingtype_id", $event.target.value)
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "venue_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
           }
-        }
-      })
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Select venue")]),
+          _vm._v(" "),
+          _vm._l(_vm.choices.venues, function(venue) {
+            return _c("option", { domProps: { value: venue.id } }, [
+              _vm._v(_vm._s(venue.name))
+            ])
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Meeting Series"),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.meeting.meetingseries_id,
-            expression: "meeting.meetingseries_id"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.meeting.meetingseries_id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("label", [_vm._v("Media")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.media_id,
+              expression: "meeting.media_id"
             }
-            _vm.$set(_vm.meeting, "meetingseries_id", $event.target.value)
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "media_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
           }
-        }
-      })
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Select media")]),
+          _vm._v(" "),
+          _vm._l(_vm.choices.media, function(eachmedia) {
+            return _c("option", { domProps: { value: eachmedia.id } }, [
+              _vm._v(_vm._s(eachmedia.name))
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c("label", [_vm._v("Meeting Type")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.meetingtype_id,
+              expression: "meeting.meetingtype_id"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "meetingtype_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [
+            _vm._v("Select meeting type")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.choices.meetingtypes, function(meetingtype) {
+            return _c("option", { domProps: { value: meetingtype.id } }, [
+              _vm._v(_vm._s(meetingtype.name))
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c("label", [_vm._v("Meeting Series")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.meetingseries_id,
+              expression: "meeting.meetingseries_id"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "meetingseries_id",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [
+            _vm._v("Select meeting series")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.choices.meetingseries, function(eachmeetingseries) {
+            return _c("option", { domProps: { value: eachmeetingseries.id } }, [
+              _vm._v(_vm._s(eachmeetingseries.name))
+            ])
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c(

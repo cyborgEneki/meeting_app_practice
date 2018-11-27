@@ -3,11 +3,11 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        <p>{{ meeting.creator_id.first_name }}</p>
+        <p>{{ meeting.creator_id }}</p>
         <h4>Facilitator:</h4>
-        <p>{{ meeting.facilitator_id.first_name }}</p>
+        <p>{{ meeting.facilitator_id }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ meeting.time_keeper_id.first_name }}</p>
+        <p>{{ meeting.time_keeper_id }}</p>
         <h4> Attendees</h4>
         <div v-for="user in meeting.users">
             <p>{{ user.first_name }}</p>
@@ -39,14 +39,15 @@
         <button @click="addUser(users.id)">cf</button>
 
         <h4>Venue:</h4>
-        <p>{{ meeting.venue.name }}</p>
+        <p>{{ meeting.venue_id }}</p>
         <h4>Media:</h4>
-        <p>{{ meeting.media.name }}</p>
+        <p>{{ meeting.media_id }}</p>
         <h4>Meeting Type:</h4>
-        <p>{{ meeting.meetingtype.name }}</p>
+        <p>{{ meeting.meetingtype_id }}</p>
         <h4>Meeting Series:</h4>
-        <p>{{ meeting.meetingseries.name }}</p>
+        <p>{{ meeting.meetingseries_id }}</p>
         <hr/>
+        <button @click="test">Test</button>
     </div>
 </template>
 
@@ -54,6 +55,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
+        props: ['choices'],
         computed: {
             ...mapGetters({
                 meeting: 'meeting',
@@ -72,6 +74,9 @@
                 );
         },
         methods: {
+            test() {
+                console.log(this.choices)
+            },
             removeUsers(id) {
                 axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
                     .then((response) => {

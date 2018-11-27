@@ -15,13 +15,18 @@
             End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
         </div>
         <div>
-            Creator<input name="creator" v-model="meeting.creator_id"/>
+            <label>Time Keeper</label>
+            <select v-model="meeting.time_keeper_id" >
+                <option value="">Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>
         </div>
         <div>
-            Facilitator<input name="facilitator" v-model="meeting.facilitator_id"/>
-        </div>
-        <div>
-            Time Keeper<input name="time_keeper" v-model="meeting.time_keeper_id"/>
+            <label>Facilitator</label>
+            <select v-model="meeting.facilitator_id" >
+                <option value="">Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>
         </div>
         <div>
             <label>Venue</label>
@@ -31,13 +36,25 @@
             </select>
         </div>
         <div>
-            Media<input name="media_id" v-model="meeting.media_id"/>
+            <label>Media</label>
+            <select v-model="meeting.media_id" >
+                <option value="">Select media</option>
+                <option v-for="eachmedia in choices.media" :value="eachmedia.id">{{ eachmedia.name }}</option>
+            </select>
         </div>
         <div>
-            Meeting Type<input name="meetingtype_id" v-model="meeting.meetingtype_id"/>
+            <label>Meeting Type</label>
+            <select v-model="meeting.meetingtype_id">
+                <option value="">Select meeting type</option>
+                <option v-for="meetingtype in choices.meetingtypes" :value="meetingtype.id">{{ meetingtype.name }}</option>
+            </select>
         </div>
         <div>
-            Meeting Series<input name="meetingseries_id" v-model="meeting.meetingseries_id"/>
+            <label>Meeting Series</label>
+            <select v-model="meeting.meetingseries_id">
+                <option value="">Select meeting series</option>
+                <option v-for="eachmeetingseries in choices.meetingseries" :value="eachmeetingseries.id">{{ eachmeetingseries.name }}</option>
+            </select>
         </div>
         <div v-for="(agenda,index) in meeting.agendas">
             <div>

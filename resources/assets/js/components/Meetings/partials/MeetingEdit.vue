@@ -14,23 +14,47 @@
         <div>
             End Time<input v-model="meeting.end_time" type="time"/>
         </div>
-        <!--<div>-->
-        <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
-        <!--</div>-->
-        <!--<div>-->
-        <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
-        <!--</div>-->
         <div>
-            Venue<input type="text" v-model="meeting.venue_id"/>
+            <label>Time Keeper</label>
+            <select v-model="meeting.time_keeper_id" >
+                <option value="">Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>
         </div>
         <div>
-            Media<input type="text" v-model="meeting.media_id"/>
+            <label>Facilitator</label>
+            <select v-model="meeting.facilitator_id" >
+                <option value="">Select user</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+            </select>
         </div>
         <div>
-            Meeting Type<input type="text" v-model="meeting.meetingtype_id"/>
+            <label>Venue</label>
+            <select v-model="meeting.venue_id" >
+                <option value="">Select venue</option>
+                <option v-for="venue in choices.venues" :value="venue.id">{{ venue.name }}</option>
+            </select>
         </div>
         <div>
-            Meeting Series<input type="text" v-model="meeting.meetingseries_id"/>
+            <label>Media</label>
+            <select v-model="meeting.media_id" >
+                <option value="">Select media</option>
+                <option v-for="eachmedia in choices.media" :value="eachmedia.id">{{ eachmedia.name }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Meeting Type</label>
+            <select v-model="meeting.meetingtype_id">
+                <option value="">Select meeting type</option>
+                <option v-for="meetingtype in choices.meetingtypes" :value="meetingtype.id">{{ meetingtype.name }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Meeting Series</label>
+            <select v-model="meeting.meetingseries_id">
+                <option value="">Select meeting series</option>
+                <option v-for="eachmeetingseries in choices.meetingseries" :value="eachmeetingseries.id">{{ eachmeetingseries.name }}</option>
+            </select>
         </div>
 
         <button @click="editMeeting(meeting)">Edit Meeting</button>
@@ -39,7 +63,7 @@
 
 <script>
     export default {
-        props: ['meeting'],
+        props: ['choices', 'meeting'],
 
         methods: {
             editMeeting: function (meeting) {
@@ -50,8 +74,8 @@
                 currentMeeting.end_time = meeting.end_time;
                 currentMeeting.date = meeting.date;
                 currentMeeting.media_id = meeting.media_id;
-                currentMeeting.facilitator = meeting.facilitator.id;
-                currentMeeting.time_keeper = meeting.time_keeper.id;
+                currentMeeting.facilitator_id = meeting.facilitator_id;
+                currentMeeting.time_keeper_id = meeting.time_keeper_id;
                 currentMeeting.venue_id = meeting.venue_id;
                 currentMeeting.meetingseries_id = meeting.meetingseries_id;
                 currentMeeting.meetingtype_id = meeting.meetingtype_id;
