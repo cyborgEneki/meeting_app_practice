@@ -46,7 +46,7 @@
             <label>Meeting Type</label>
             <select v-model="meeting.meetingtype_id">
                 <option value="">Select meeting type</option>
-                <option v-for="meetingtype in orderedMeetingType" :value="meetingtype.id">{{ meetingtype.name }}</option>
+                <option v-for="meetingtype in orderedMeetingTypes" :value="meetingtype.id">{{ meetingtype.name }}</option>
             </select>
         </div>
         <div>
@@ -154,7 +154,7 @@
             orderedMedia () {
                 return _.orderBy(this.choices.media, 'media');
             },
-            orderedMeetingType() {
+            orderedMeetingTypes() {
                 return _.orderBy(this.choices.meetingtypes, 'name');
             },
             orderedMeetingSeries() {

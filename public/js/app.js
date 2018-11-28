@@ -56514,7 +56514,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         orderedMedia: function orderedMedia() {
             return _.orderBy(this.choices.media, 'media');
         },
-        orderedMeetingType: function orderedMeetingType() {
+        orderedMeetingTypes: function orderedMeetingTypes() {
             return _.orderBy(this.choices.meetingtypes, 'name');
         },
         orderedMeetingSeries: function orderedMeetingSeries() {
@@ -56849,7 +56849,7 @@ var render = function() {
               _vm._v("Select meeting type")
             ]),
             _vm._v(" "),
-            _vm._l(_vm.orderedMeetingType, function(meetingtype) {
+            _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
               return _c("option", { domProps: { value: meetingtype.id } }, [
                 _vm._v(_vm._s(meetingtype.name))
               ])
@@ -58023,7 +58023,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -58100,7 +58100,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['choices', 'meeting'],
-
+    computed: {
+        orderedUsers: function orderedUsers() {
+            return _.orderBy(this.choices.users, 'first_name');
+        },
+        orderedVenues: function orderedVenues() {
+            return _.orderBy(this.choices.venues, 'name');
+        },
+        orderedMedia: function orderedMedia() {
+            return _.orderBy(this.choices.media, 'media');
+        },
+        orderedMeetingTypes: function orderedMeetingTypes() {
+            return _.orderBy(this.choices.meetingtypes, 'name');
+        },
+        orderedMeetingSeries: function orderedMeetingSeries() {
+            return _.orderBy(this.choices.meetingseries, 'name');
+        }
+    },
     methods: {
         editMeeting: function editMeeting(meeting) {
             var currentMeeting = {};
@@ -58264,7 +58280,7 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
           _vm._v(" "),
-          _vm._l(_vm.choices.users, function(user) {
+          _vm._l(_vm.orderedUsers, function(user) {
             return _c("option", { domProps: { value: user.id } }, [
               _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
             ])
@@ -58309,7 +58325,7 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
           _vm._v(" "),
-          _vm._l(_vm.choices.users, function(user) {
+          _vm._l(_vm.orderedUsers, function(user) {
             return _c("option", { domProps: { value: user.id } }, [
               _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
             ])
@@ -58354,7 +58370,7 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select venue")]),
           _vm._v(" "),
-          _vm._l(_vm.choices.venues, function(venue) {
+          _vm._l(_vm.orderedVenues, function(venue) {
             return _c("option", { domProps: { value: venue.id } }, [
               _vm._v(_vm._s(venue.name))
             ])
@@ -58399,7 +58415,7 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select media")]),
           _vm._v(" "),
-          _vm._l(_vm.choices.media, function(eachmedia) {
+          _vm._l(_vm.orderedMedia, function(eachmedia) {
             return _c("option", { domProps: { value: eachmedia.id } }, [
               _vm._v(_vm._s(eachmedia.name))
             ])
@@ -58446,7 +58462,7 @@ var render = function() {
             _vm._v("Select meeting type")
           ]),
           _vm._v(" "),
-          _vm._l(_vm.choices.meetingtypes, function(meetingtype) {
+          _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
             return _c("option", { domProps: { value: meetingtype.id } }, [
               _vm._v(_vm._s(meetingtype.name))
             ])
@@ -58493,7 +58509,7 @@ var render = function() {
             _vm._v("Select meeting series")
           ]),
           _vm._v(" "),
-          _vm._l(_vm.choices.meetingseries, function(eachmeetingseries) {
+          _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
             return _c("option", { domProps: { value: eachmeetingseries.id } }, [
               _vm._v(_vm._s(eachmeetingseries.name))
             ])
