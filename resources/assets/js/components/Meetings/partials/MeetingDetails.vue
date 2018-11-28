@@ -3,14 +3,14 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        <p>{{ choices.users[meeting.creator_id].first_name }}</p>
+        <p>{{ choices.users[meeting.creator_id].first_name }} {{ choices.users[meeting.creator_id].last_name }}</p>
         <h4>Facilitator:</h4>
-        <p>{{ choices.users[meeting.facilitator_id].first_name }}</p>
+        <p>{{ choices.users[meeting.facilitator_id].first_name }} {{ choices.users[meeting.facilitator_id].last_name }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ choices.users[meeting.time_keeper_id].first_name }}</p>
+        <p>{{ choices.users[meeting.time_keeper_id].first_name }} {{ choices.users[meeting.time_keeper_id].last_name }}</p>
         <h4> Attendees</h4>
-        <div v-for="user in meeting.users">
-            <p>{{ user.first_name }}</p>
+        <div v-for="user in orderedUsers">
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
         <h4>Agendas:</h4>
@@ -59,7 +59,10 @@
         computed: {
             ...mapGetters({
                 meeting: 'meeting',
-            })
+            }),
+            orderedUsers() {
+                return _.orderBy(this.meeting.users, 'first_name');
+            }
         },
         data() {
             return {
