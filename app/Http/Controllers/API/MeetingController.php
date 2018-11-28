@@ -91,23 +91,24 @@ class MeetingController extends Controller
     }
     public function choices()
     {
-        $users = User::all('id', 'first_name', 'last_name')->take(5000)->sortBy('first_name');
+        $users = User::all()->take(10);
+//        $users = User::take(10)->get();
         $users = $users->keyBy('id');
         $users = ['users' => $users];
 
-        $venues = Venue::all('id', 'name')->take(500)->sortBy('name');
+        $venues = Venue::all()->take(10);
         $venues = $venues->keyBy('id');
         $venues = ['venues' => $venues];
 
-        $media = Media::all('id', 'name')->take(500)->sortBy('name');
+        $media = Media::all()->take(10);
         $media = $media->keyBy('id');
         $media = ['media'=>$media];
 
-        $meetingseries = Meetingseries::all('id', 'name')->take(500)->sortBy('name');
+        $meetingseries = Meetingseries::all()->take(10);
         $meetingseries = $meetingseries->keyBy('id');
         $meetingseries = ['meetingseries'=>$meetingseries];
 
-        $meetingtypes = Meetingtype::all('id', 'name')->take(500)->sortBy('name');
+        $meetingtypes = Meetingtype::all()->take(10);
         $meetingtypes = $meetingtypes->keyBy('id');
         $meetingtypes = ['meetingtypes'=>$meetingtypes];
 

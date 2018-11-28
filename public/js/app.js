@@ -54954,7 +54954,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54979,6 +54979,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "UsersIndex",
+    props: ['choices'],
     components: { 'users-list': __WEBPACK_IMPORTED_MODULE_0__partials_users_UsersList___default.a }
 });
 
@@ -55068,7 +55069,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55112,31 +55113,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "UsersList",
+    props: ['choices'],
     data: function data() {
         return {
             users: []
         };
     },
-    created: function created() {
-        this.getUsers();
-    },
 
+    computed: {
+        orderedUsers: function orderedUsers() {
+            return _.orderBy(this.choices.users, 'first_name');
+        }
+    },
     methods: {
-        getUsers: function getUsers() {
+        deleteUser: function deleteUser(id) {
             var _this = this;
 
-            axios.get('/api/users').then(function (response) {
-                _this.users = response.data;
-            });
-        },
-        deleteUser: function deleteUser(id) {
-            var _this2 = this;
-
             axios.delete('/api/users/' + id).then(function () {
-                var index = _this2.users.map(function (item) {
+                var index = _this.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this2.users.splice(index, 1);
+                _this.users.splice(index, 1);
             });
         }
     }
@@ -55162,7 +55159,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.users, function(user) {
+          _vm._l(_vm.orderedUsers, function(user) {
             return _c("tr", { key: user.id }, [
               _c("td", [_vm._v(_vm._s(user.first_name))]),
               _vm._v(" "),
@@ -55248,7 +55245,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [_c("h3", [_vm._v("Users")]), _vm._v(" "), _c("users-list")],
+    [
+      _c("h3", [_vm._v("Users")]),
+      _vm._v(" "),
+      _c("users-list", {
+        attrs: { choices: _vm.choices },
+        on: {
+          "update:choices": function($event) {
+            _vm.choices = $event
+          }
+        }
+      })
+    ],
     1
   )
 }

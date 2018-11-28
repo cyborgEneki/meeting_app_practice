@@ -4,25 +4,25 @@
 
         <table class="table striped table-bordered">
             <thead>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Email</th>
-                <th>Actions</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Actions</th>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id">
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.middle_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.phone_number }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        <router-link :to="{ name: 'editUser', params: { user } }">Edit</router-link>
-                        <button @click="deleteUser(user.id)">Delete</button>
-                    </td>
-                </tr>
+            <tr v-for="user in orderedUsers" :key="user.id">
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.middle_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.phone_number }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <router-link :to="{ name: 'editUser', params: { user } }">Edit</router-link>
+                    <button @click="deleteUser(user.id)">Delete</button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -31,23 +31,20 @@
 <script>
     export default {
         name: "UsersList",
+        props: ['choices'],
         data() {
             return {
                 users: []
             }
         },
-        created() {
-            this.getUsers();
+        computed: {
+            orderedUsers: function () {
+                return _.orderBy(this.choices.users, 'first_name')
+            }
         },
         methods: {
-            getUsers() {
-                axios.get('/api/users')
-                    .then(response => {
-                        this.users = response.data;
-                    })
-            },
             deleteUser(id) {
-                axios.delete('/api/users/'+id)
+                axios.delete('/api/users/' + id)
                     .then(() => {
                         let index = this.users.map((item) => {
                             return item.id;

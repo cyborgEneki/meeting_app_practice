@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Users</h3>
-        <users-list></users-list>
+        <users-list :choices.sync="choices"></users-list>
     </div>
 </template>
 
@@ -10,6 +10,7 @@
 
     export default {
         name: "UsersIndex",
+        props: ['choices'],
         components: {'users-list': UsersList}
     }
 </script>
