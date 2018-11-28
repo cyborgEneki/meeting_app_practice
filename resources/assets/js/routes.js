@@ -3,17 +3,20 @@ import MeetingsIndex from './components/Meetings/MeetingsIndex'
 import VenuesIndex from './components/Meetings/VenuesIndex'
 import UsersIndex from './components/Meetings/UsersIndex'
 import MediaIndex from './components/Meetings/MediaIndex'
+import MeetingTypeIndex from './components/Meetings/MeetingTypeIndex'
 import MeetingSeriesIndex from './components/Meetings/MeetingSeriesIndex'
 import MeetingAdd from './components/Meetings/partials/MeetingAdd'
 import UserAdd  from './components/Meetings/partials/users/UserAdd'
 import VenueAdd from './components/Meetings/partials/venues/VenueAdd'
 import MeetingSeriesAdd from './components/Meetings/partials/meetingSeries/MeetingSeriesAdd'
+import MeetingTypeAdd from './components/Meetings/partials/meetingTypes/MeetingTypeAdd'
 import MediaAdd from './components/Meetings/partials/media/MediaAdd'
 import MeetingEdit  from './components/Meetings/partials/MeetingEdit'
 import UserEdit  from './components/Meetings/partials/users/UserEdit'
 import VenueEdit from './components/Meetings/partials/venues/VenueEdit'
 import MeetingSeriesEdit from './components/Meetings/partials/meetingSeries/MeetingSeriesEdit'
 import MediaEdit from './components/Meetings/partials/media/MediaEdit'
+import MeetingTypeEdit from './components/Meetings/partials/meetingTypes/MeetingTypeEdit'
 
 const router = new VueRouter({
     mode: 'history',
@@ -44,6 +47,11 @@ const router = new VueRouter({
             component: MediaIndex,
         },
         {
+            path: '/meeting_type',
+            name: 'meetingTypes',
+            component: MeetingTypeIndex,
+        },
+        {
             path: '/add-meeting',
             name: 'addMeeting',
             component: MeetingAdd,
@@ -67,6 +75,11 @@ const router = new VueRouter({
             path: '/add-media',
             name: 'addMedia',
             component: MediaAdd,
+        },
+        {
+            path: '/add-meeting_type',
+            name: 'addMeetingType',
+            component: MeetingTypeAdd,
         },
         {
             path:'/edit_meeting',
@@ -96,6 +109,12 @@ const router = new VueRouter({
             path:'/edit_media',
             name: 'editMedia',
             component: MediaEdit,
+            props: true
+        },
+        {
+            path:'/edit_meeting_type',
+            name: 'editMeetingType',
+            component: MeetingTypeEdit,
             props: true
         }
     ],
