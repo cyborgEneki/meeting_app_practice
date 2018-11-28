@@ -5,7 +5,7 @@
         <table>
             <th>Name</th>
             <th>Actions</th>
-            <tr v-for="eachmedia in media">
+            <tr v-for="eachmedia in orderedMedia">
                 <td>{{eachmedia.name}}</td>
                 <td>
                     <router-link :to="{ name: 'editMedia', params: { eachmedia } }">Edit</router-link>
@@ -19,18 +19,18 @@
 <script>
     export default {
         name: "MediaList",
+        props: ['choices'],
         data() {
             return {
                 media: []
             }
         },
+        computed: {
+            orderedMedia() {
+                return _.orderBy(this.choices.media, 'name');
+            }
+        },
         methods: {
-            getMedia() {
-                axios.get('/api/media', this.media)
-                    .then(response => {
-                        this.media = response.data;
-                    })
-            },
             deleteMedia(id) {
                 axios.delete('/api/media/' + id, this.media)
                     .then(() => {
@@ -40,9 +40,6 @@
                         this.media.splice(index, 1);
                     });
             }
-        },
-        created() {
-            this.getMedia();
         }
     }
 </script>

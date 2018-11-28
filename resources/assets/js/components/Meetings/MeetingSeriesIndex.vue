@@ -1,6 +1,6 @@
 <template>
     <div>
-        <meeting-series-list></meeting-series-list>
+        <meeting-series-list :choices.sync="choices"></meeting-series-list>
     </div>
 </template>
 
@@ -8,6 +8,7 @@
     import MeetingSeriesList from "./partials/meetingSeries/MeetingSeriesList";
     export default {
         name: "MeetingSeriesIndex",
+        props: ['choices'],
         components: {MeetingSeriesList}
     }
 </script>

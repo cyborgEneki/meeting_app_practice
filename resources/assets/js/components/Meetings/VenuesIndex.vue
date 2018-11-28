@@ -1,6 +1,6 @@
 <template>
     <div>
-        <venue-list></venue-list>
+        <venue-list :choices.sync="choices"></venue-list>
     </div>
 
 </template>
@@ -9,6 +9,7 @@
     import VenueList from "./partials/venues/VenueList";
     export default {
         name: "VenuesIndex",
+        props: ['choices'],
         components: {VenueList},
         data() {
             return {

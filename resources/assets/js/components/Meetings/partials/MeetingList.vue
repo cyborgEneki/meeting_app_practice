@@ -42,7 +42,6 @@
             },
             loadView: function (meeting) {
                 this.$store.commit('GET_MEETING_DETAILS', meeting);
-                console.log(this.meetings);
             },
             deleteMeeting(id) {
                 axios.delete('/api/meetings/'+id)
