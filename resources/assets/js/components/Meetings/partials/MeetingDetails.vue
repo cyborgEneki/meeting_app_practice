@@ -16,6 +16,7 @@
         <h4>Agendas:</h4>
         <table class="table striped table-bordered">
             <thead>
+            <th>Assignee</th>
             <th>Topic</th>
             <th>Description</th>
             <th>Time Allocated (minutes)</th>
@@ -25,6 +26,7 @@
             <th>Discussions</th>
             </thead>
             <tr v-for="agendas in meeting.agendas">
+                <td>{{ agendas.user.first_name }} {{ agendas.user.last_name }}</td>
                 <td>{{ agendas.topic }}</td>
                 <td>{{ agendas.description }}</td>
                 <td>{{ agendas.time_allocated }}</td>

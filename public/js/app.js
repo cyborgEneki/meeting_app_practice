@@ -53949,6 +53949,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -54086,6 +54088,14 @@ var render = function() {
             return _c(
               "tr",
               [
+                _c("td", [
+                  _vm._v(
+                    _vm._s(agendas.user.first_name) +
+                      " " +
+                      _vm._s(agendas.user.last_name)
+                  )
+                ]),
+                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(agendas.topic))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(agendas.description))]),
@@ -54170,6 +54180,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
+      _c("th", [_vm._v("Assignee")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Topic")]),
       _vm._v(" "),
       _c("th", [_vm._v("Description")]),
