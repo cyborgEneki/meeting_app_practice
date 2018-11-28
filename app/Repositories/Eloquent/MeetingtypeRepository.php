@@ -24,7 +24,7 @@ class MeetingtypeRepository implements MeetingtypeRepositoryInterface
 
     public function allMeetingtypes()
     {
-        return MeetingtypeResource::collection(Meetingtype::all());
+        return MeetingtypeResource::collection(Meetingtype::take(10)->get());
     }
 
     public function createMeetingtype(MeetingtypeRequest $request)
@@ -33,9 +33,15 @@ class MeetingtypeRepository implements MeetingtypeRepositoryInterface
         return new MeetingtypeResource($meetingtype);
     }
 
+    /**
+     * @param MeetingtypeRequest $request
+     * @param Meetingtype $meetingtype
+     * @return MeetingtypeResource|bool
+     */
     public function updateMeetingtype(MeetingtypeRequest $request, Meetingtype $meetingtype)
     {
-        return $meetingtype->update($request->all());
+        $meetingtype->update($request->all());
+        return new MeetingtypeResource($meetingtype);
     }
 
     /**
