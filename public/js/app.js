@@ -55365,7 +55365,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55389,6 +55389,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MediaIndex",
+    props: ['choices'],
     components: { MediaList: __WEBPACK_IMPORTED_MODULE_0__partials_media_MediaList___default.a }
 });
 
@@ -55478,7 +55479,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55510,33 +55511,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MediaList",
+    props: ['choices'],
     data: function data() {
         return {
             media: []
         };
     },
 
-    methods: {
-        getMedia: function getMedia() {
-            var _this = this;
-
-            axios.get('/api/media', this.media).then(function (response) {
-                _this.media = response.data;
-            });
-        },
-        deleteMedia: function deleteMedia(id) {
-            var _this2 = this;
-
-            axios.delete('/api/media/' + id, this.media).then(function () {
-                var index = _this2.media.map(function (item) {
-                    return item.id;
-                }).indexOf(id);
-                _this2.media.splice(index, 1);
-            });
+    computed: {
+        orderedMedia: function orderedMedia() {
+            return _.orderBy(this.choices.media, 'name');
         }
     },
-    created: function created() {
-        this.getMedia();
+    methods: {
+        deleteMedia: function deleteMedia(id) {
+            var _this = this;
+
+            axios.delete('/api/media/' + id, this.media).then(function () {
+                var index = _this.media.map(function (item) {
+                    return item.id;
+                }).indexOf(id);
+                _this.media.splice(index, 1);
+            });
+        }
     }
 });
 
@@ -55564,7 +55561,7 @@ var render = function() {
           _vm._v(" "),
           _c("th", [_vm._v("Actions")]),
           _vm._v(" "),
-          _vm._l(_vm.media, function(eachmedia) {
+          _vm._l(_vm.orderedMedia, function(eachmedia) {
             return _c("tr", [
               _c("td", [_vm._v(_vm._s(eachmedia.name))]),
               _vm._v(" "),
@@ -55625,7 +55622,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("media-list")], 1)
+  return _c(
+    "div",
+    [
+      _c("media-list", {
+        attrs: { choices: _vm.choices },
+        on: {
+          "update:choices": function($event) {
+            _vm.choices = $event
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -55723,7 +55733,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55756,10 +55766,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MeetingType",
+    props: ['choices'],
     data: function data() {
         return {
             meetingtypes: []
         };
+    },
+
+    computed: {
+        orderedMeetingTypes: function orderedMeetingTypes() {
+            return _.orderBy(this.choices.meetingtypes, 'name');
+        }
     },
     created: function created() {
         var _this = this;
@@ -55804,7 +55821,7 @@ var render = function() {
         [
           _vm._m(0),
           _vm._v(" "),
-          _vm._l(_vm.meetingtypes, function(meetingtype) {
+          _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
             return _c("tr", { key: meetingtype.id }, [
               _c("td", [_vm._v(_vm._s(meetingtype.name))]),
               _vm._v(" "),

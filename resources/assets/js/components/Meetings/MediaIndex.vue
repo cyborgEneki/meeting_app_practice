@@ -1,6 +1,6 @@
 <template>
     <div>
-        <media-list></media-list>
+        <media-list :choices.sync="choices"></media-list>
     </div>
 </template>
 
@@ -9,6 +9,7 @@
 
     export default {
         name: "MediaIndex",
+        props: ['choices'],
         components: {MediaList}
     }
 </script>

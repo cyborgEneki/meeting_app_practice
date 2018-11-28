@@ -6,7 +6,7 @@
             <th>Name</th>
             <th>Actions</th>
             </thead>
-            <tr v-for="meetingtype in meetingtypes" :key="meetingtype.id">
+            <tr v-for="meetingtype in orderedMeetingTypes" :key="meetingtype.id">
                 <td>{{ meetingtype.name }}</td>
                 <td>
                     <router-link :to="{ name: 'editMeetingType', params: { meetingtype } }">Edit</router-link>
@@ -20,9 +20,15 @@
 <script>
     export default {
         name: "MeetingType",
+        props: ['choices'],
         data() {
             return {
                 meetingtypes: []
+            }
+        },
+        computed: {
+            orderedMeetingTypes() {
+                return _.orderBy(this.choices.meetingtypes, 'name');
             }
         },
         created() {
