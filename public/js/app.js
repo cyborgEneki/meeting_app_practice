@@ -54056,7 +54056,9 @@ var render = function() {
       _vm._v(" "),
       _vm._l(_vm.orderedUsers, function(user) {
         return _c("div", [
-          _c("p", [_vm._v(_vm._s(user.first_name))]),
+          _c("p", [
+            _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+          ]),
           _vm._v(" "),
           _c(
             "p",

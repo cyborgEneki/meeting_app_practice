@@ -10,7 +10,7 @@
         <p>{{ choices.users[meeting.time_keeper_id].first_name }} {{ choices.users[meeting.time_keeper_id].last_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in orderedUsers">
-            <p>{{ user.first_name }}</p>
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
         <h4>Agendas:</h4>
