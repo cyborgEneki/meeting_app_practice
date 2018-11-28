@@ -54021,19 +54021,31 @@ var render = function() {
       _c("h4", [_vm._v("Creator:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.creator_id].first_name))
+        _vm._v(
+          _vm._s(_vm.choices.users[_vm.meeting.creator_id].first_name) +
+            " " +
+            _vm._s(_vm.choices.users[_vm.meeting.creator_id].last_name)
+        )
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.facilitator_id].first_name))
+        _vm._v(
+          _vm._s(_vm.choices.users[_vm.meeting.facilitator_id].first_name) +
+            " " +
+            _vm._s(_vm.choices.users[_vm.meeting.facilitator_id].last_name)
+        )
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Time Keeper:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].first_name))
+        _vm._v(
+          _vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].first_name) +
+            " " +
+            _vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].last_name)
+        )
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
