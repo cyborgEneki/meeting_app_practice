@@ -8,7 +8,7 @@
             <th>Frequency</th>
             <th>Actions</th>
             </thead>
-            <tr v-for="eachmeetingseries in meetingseries">
+            <tr v-for="eachmeetingseries in orderedMeetingSeries">
                 <td>{{eachmeetingseries.name}}</td>
                 <td>{{eachmeetingseries.frequency}}</td>
                 <td>
@@ -23,18 +23,18 @@
 <script>
     export default {
         name: "MeetingSeriesList",
+        props: ['choices'],
         data() {
             return {
                 meetingseries: []
             }
         },
+        computed: {
+            orderedMeetingSeries: function () {
+                return _.orderBy(this.choices.meetingseries, 'name')
+            }
+        },
         methods: {
-            getMeetingSeries() {
-                axios.get('/api/meetingseries')
-                    .then(response => {
-                        this.meetingseries = response.data;
-                    })
-            },
             deleteMeetingSeries(id) {
                 axios.delete('/api/meetings/' + id)
                     .then(() => {
@@ -44,9 +44,6 @@
                         this.meetingseries.splice(index, 1);
                     })
             }
-        },
-        created() {
-            this.getMeetingSeries();
         }
     }
 </script>
