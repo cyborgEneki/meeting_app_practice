@@ -9,7 +9,7 @@
         <h4>Time Keeper:</h4>
         <p>{{ choices.users[meeting.time_keeper_id].first_name }} {{ choices.users[meeting.time_keeper_id].last_name }}</p>
         <h4> Attendees</h4>
-        <div v-for="user in meeting.users">
+        <div v-for="user in orderedUsers">
             <p>{{ user.first_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
@@ -59,7 +59,10 @@
         computed: {
             ...mapGetters({
                 meeting: 'meeting',
-            })
+            }),
+            orderedUsers() {
+                return _.orderBy(this.meeting.users, 'first_name');
+            }
         },
         data() {
             return {

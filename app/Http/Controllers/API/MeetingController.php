@@ -92,7 +92,6 @@ class MeetingController extends Controller
     public function choices()
     {
         $users = User::all();
-//        $users = User::take(10)->get();
         $users = $users->keyBy('id');
         $users = ['users' => $users];
 

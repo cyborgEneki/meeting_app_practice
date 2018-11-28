@@ -53956,7 +53956,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     props: ['choices'],
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
         meeting: 'meeting'
-    })),
+    }), {
+        orderedUsers: function orderedUsers() {
+            return _.orderBy(this.meeting.users, 'first_name');
+        }
+    }),
     data: function data() {
         return {
             users: []
@@ -54050,7 +54054,7 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
-      _vm._l(_vm.meeting.users, function(user) {
+      _vm._l(_vm.orderedUsers, function(user) {
         return _c("div", [
           _c("p", [_vm._v(_vm._s(user.first_name))]),
           _vm._v(" "),
