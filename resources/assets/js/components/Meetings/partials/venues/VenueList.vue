@@ -8,7 +8,7 @@
            <th>Name</th>
            <th>Actions</th>
            </thead>
-           <tr v-for="venue in venues">
+           <tr v-for="venue in orderedVenues">
                <td> {{ venue.name }}</td>
                <td>
                    <router-link :to="{ name: 'editVenue', params: { venue } }">Edit</router-link>
@@ -22,21 +22,18 @@
 <script>
     export default {
         name: "VenueList",
+        props: ['choices'],
         data() {
             return {
                 venues: []
             }
         },
-        created() {
-            this.getVenues();
+        computed: {
+            orderedVenues: function () {
+                return _.orderBy(this.choices.venues, 'name')
+            }
         },
         methods: {
-            getVenues(){
-                axios.get('/api/venues')
-                    .then(response => {
-                        this.venues = response.data;
-                    });
-            },
             deleteVenue(id) {
                 axios.delete('/api/venues/' + id)
                     .then(() => {

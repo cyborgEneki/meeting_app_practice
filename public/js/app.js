@@ -54263,7 +54263,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54320,7 +54320,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         loadView: function loadView(meeting) {
             this.$store.commit('GET_MEETING_DETAILS', meeting);
-            console.log(this.meetings);
         },
         deleteMeeting: function deleteMeeting(id) {
             var _this2 = this;
@@ -54574,7 +54573,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54598,6 +54597,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "VenuesIndex",
+    props: ['choices'],
     components: { VenueList: __WEBPACK_IMPORTED_MODULE_0__partials_venues_VenueList___default.a },
     data: function data() {
         return {
@@ -54700,7 +54700,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54735,31 +54735,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "VenueList",
+    props: ['choices'],
     data: function data() {
         return {
             venues: []
         };
     },
-    created: function created() {
-        this.getVenues();
-    },
 
+    computed: {
+        orderedVenues: function orderedVenues() {
+            return _.orderBy(this.choices.venues, 'name');
+        }
+    },
     methods: {
-        getVenues: function getVenues() {
+        deleteVenue: function deleteVenue(id) {
             var _this = this;
 
-            axios.get('/api/venues').then(function (response) {
-                _this.venues = response.data;
-            });
-        },
-        deleteVenue: function deleteVenue(id) {
-            var _this2 = this;
-
             axios.delete('/api/venues/' + id).then(function () {
-                var index = _this2.venues.map(function (item) {
+                var index = _this.venues.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this2.venues.splice(index, 1);
+                _this.venues.splice(index, 1);
             });
         }
     }
@@ -54787,7 +54783,7 @@ var render = function() {
         [
           _vm._m(0),
           _vm._v(" "),
-          _vm._l(_vm.venues, function(venue) {
+          _vm._l(_vm.orderedVenues, function(venue) {
             return _c("tr", [
               _c("td", [_vm._v(" " + _vm._s(venue.name))]),
               _vm._v(" "),
@@ -54856,7 +54852,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("venue-list")], 1)
+  return _c(
+    "div",
+    [
+      _c("venue-list", {
+        attrs: { choices: _vm.choices },
+        on: {
+          "update:choices": function($event) {
+            _vm.choices = $event
+          }
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
