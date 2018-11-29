@@ -13,6 +13,8 @@
             <input type="text" v-model="user.email">
             <label>Password</label>
             <input type="text" v-model="user.password">
+            <label>Confirm Password</label>
+            <input type="text" v-model="user.password_confirmation">
         </div>
         <button @click="addUser">Save User</button>
         <button @click="$router.go(-1)">Go Back to Previous Page</button>
