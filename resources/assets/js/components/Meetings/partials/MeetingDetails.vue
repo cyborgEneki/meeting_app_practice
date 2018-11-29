@@ -3,14 +3,14 @@
         <h4>Meeting Name: </h4>
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
-        <p>{{ choices.users[meeting.creator_id].first_name }} {{ choices.users[meeting.creator_id].last_name }}</p>
+        <p>{{ choices.users[meeting.creator_id].full_name }}</p>
         <h4>Facilitator:</h4>
-        <p>{{ choices.users[meeting.facilitator_id].first_name }} {{ choices.users[meeting.facilitator_id].last_name }}</p>
+        <p>{{ choices.users[meeting.facilitator_id].full_name }}</p>
         <h4>Time Keeper:</h4>
-        <p>{{ choices.users[meeting.time_keeper_id].first_name }} {{ choices.users[meeting.time_keeper_id].last_name }}</p>
+        <p>{{ choices.users[meeting.time_keeper_id].full_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in orderedUsers">
-            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <p>{{ user.full_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
         <h4>Agendas:</h4>
@@ -26,7 +26,7 @@
             <th>Discussions</th>
             </thead>
             <tr v-for="agendas in meeting.agendas">
-                <td>{{ agendas.user.first_name }} {{ agendas.user.last_name }}</td>
+                <td>{{ agendas.user.full_name }}</td>
                 <td>{{ agendas.topic }}</td>
                 <td>{{ agendas.description }}</td>
                 <td>{{ agendas.time_allocated }}</td>

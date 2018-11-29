@@ -18,6 +18,7 @@ class  User extends Authenticatable
      *
      * @var array
      */
+    protected $appends = ['full_name'];
     protected $dates = ['deleted_at'];
     protected $guard_name = 'api';
     protected $fillable =
@@ -65,5 +66,10 @@ class  User extends Authenticatable
     public function notes()
     {
         return $this->hasMany('App\Note');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 }
