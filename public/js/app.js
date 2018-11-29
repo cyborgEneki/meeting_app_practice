@@ -53949,6 +53949,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -54086,6 +54088,14 @@ var render = function() {
             return _c(
               "tr",
               [
+                _c("td", [
+                  _vm._v(
+                    _vm._s(agendas.user.first_name) +
+                      " " +
+                      _vm._s(agendas.user.last_name)
+                  )
+                ]),
+                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(agendas.topic))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(agendas.description))]),
@@ -54170,6 +54180,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
+      _c("th", [_vm._v("Assignee")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Topic")]),
       _vm._v(" "),
       _c("th", [_vm._v("Description")]),
@@ -55790,7 +55802,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55801,6 +55813,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -56430,31 +56446,50 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            User Assigned to Agenda"),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.meeting.agendas[index].user_id,
-                  expression: "meeting.agendas[index].user_id"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.meeting.agendas[index].user_id },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("label", [_vm._v("User Assigned to Agenda")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.meeting.agendas[index].user_id,
+                    expression: "meeting.agendas[index].user_id"
                   }
-                  _vm.$set(
-                    _vm.meeting.agendas[index],
-                    "user_id",
-                    $event.target.value
-                  )
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.meeting.agendas[index],
+                      "user_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+                _vm._v(" "),
+                _vm._l(_vm.orderedUsers, function(user) {
+                  return _c("option", { domProps: { value: user.id } }, [
+                    _vm._v(
+                      _vm._s(user.first_name) + " " + _vm._s(user.last_name)
+                    )
+                  ])
+                })
+              ],
+              2
+            )
           ]),
           _vm._v(" "),
           _c("div", [
