@@ -29,6 +29,7 @@ class UserRequest extends FormRequest
             'last_name' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
+            'password' => 'required|confirmed|min:6',
         ];
     }
     public function messages()

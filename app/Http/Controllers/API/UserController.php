@@ -87,14 +87,14 @@ class UserController extends Controller
             'last_name' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
+            'password' => 'required|confirmed|min:6',
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
         }
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
+        $input['password_confirmation'] = bcrypt($input['password_confirmation']);
         $user = User::create($input);
         $success['token'] = $user->createToken('MyApp')->accessToken;
         $success['first_name'] = $user->first_name;
