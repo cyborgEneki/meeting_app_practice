@@ -78,8 +78,8 @@
             </div>
         </div>
 
-        <button @click="addAgenda">Add Agenda</button>
-        <button @click="addNewMeeting">Add Meeting</button>
+        <button @click="addAgenda">Save Agenda</button>
+        <button @click="addNewMeeting">Save Meeting</button>
     </div>
 
 </template>

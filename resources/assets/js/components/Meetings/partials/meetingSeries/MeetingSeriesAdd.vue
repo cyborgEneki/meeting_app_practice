@@ -4,7 +4,7 @@
         <input type="text" v-model="meetingseries.name">
         <label>Frequency</label>
         <input type="text" v-model="meetingseries.frequency">
-        <button @click="addMeetingSeries">Add Type of Meeting Series</button>
+        <button @click="addMeetingSeries">Save Meeting Series</button>
     </div>
 </template>
 

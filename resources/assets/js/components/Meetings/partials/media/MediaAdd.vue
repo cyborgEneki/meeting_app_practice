@@ -2,7 +2,7 @@
     <div>
         <label>Name</label>
         <input type="text" v-model="media.name"/>
-        <button @click="addMedia">Add new Media</button>
+        <button @click="addMedia">Save Media</button>
     </div>
 </template>
 

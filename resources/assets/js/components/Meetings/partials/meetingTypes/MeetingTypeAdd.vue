@@ -2,7 +2,7 @@
     <div>
         <label>Name</label>
         <input type="text" v-model="meetingtype.name">
-        <button @click="addMeetingType">Add Meeting Type</button>
+        <button @click="addMeetingType">Save Meeting Type</button>
     </div>
 </template>
 rout
