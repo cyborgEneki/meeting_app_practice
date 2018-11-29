@@ -17,7 +17,7 @@ interface CustomUserRepositoryInterface {
 
     public function showUser($id);
 
-    public function createUser(UserRequest $request);
+//    public function createUser(UserRequest $request);
 
     public function updateUser(UserRequest $request, User $user);
 
