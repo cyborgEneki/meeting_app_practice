@@ -61,7 +61,7 @@
                 Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
             </div>
             <div>
-                Agenda Description<input type="text" v-model="meeting.agendas[index].description">
+                Agenda Description<textarea type="text" v-model="meeting.agendas[index].description"></textarea>
             </div>
             <div>
                 Time Allocated<input type="text" v-model="meeting.agendas[index].time_allocated">
@@ -76,13 +76,12 @@
             <div>
                 Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
             </div>
-            <div>
-                Agenda Conclusion<input type="text" v-model="meeting.agendas[index].conclusion">
-            </div>
         </div>
 
-        <button @click="addAgenda">Add Agenda</button>
-        <button @click="addNewMeeting">Add Meeting</button>
+        <button @click="addAgenda">Save Agenda</button>
+        <button @click="addNewMeeting">Save Meeting</button>
+
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 
 </template>

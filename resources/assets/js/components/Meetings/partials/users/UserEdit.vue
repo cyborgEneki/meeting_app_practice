@@ -19,6 +19,7 @@
         </div>
 
         <button @click="editUser(user)">Edit User</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

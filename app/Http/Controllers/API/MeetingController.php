@@ -95,19 +95,19 @@ class MeetingController extends Controller
         $users = $users->keyBy('id');
         $users = ['users' => $users];
 
-        $venues = Venue::all();
+        $venues = Venue::take(10)->get();
         $venues = $venues->keyBy('id');
         $venues = ['venues' => $venues];
 
-        $media = Media::all();
+        $media = Media::take(10)->get();
         $media = $media->keyBy('id');
         $media = ['media'=>$media];
 
-        $meetingseries = Meetingseries::all();
+        $meetingseries = Meetingseries::take(10)->get();
         $meetingseries = $meetingseries->keyBy('id');
         $meetingseries = ['meetingseries'=>$meetingseries];
 
-        $meetingtypes = Meetingtype::all();
+        $meetingtypes = Meetingtype::take(10)->get();
         $meetingtypes = $meetingtypes->keyBy('id');
         $meetingtypes = ['meetingtypes'=>$meetingtypes];
 

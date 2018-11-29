@@ -3,6 +3,7 @@
         <label>Name</label>
         <input type="text" v-model="meetingtype.name">
         <button @click="editMeetingType(meetingtype)">Edit this meeting type</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

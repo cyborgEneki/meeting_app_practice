@@ -5,6 +5,7 @@
         <label>Frequency</label>
         <input type="text" v-model="eachmeetingseries.frequency">
         <button @click="editMeetingSeries(eachmeetingseries)">Edit this Meeting Type</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

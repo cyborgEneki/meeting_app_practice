@@ -2,7 +2,8 @@
     <div>
         <label>Name</label>
         <input type="text" v-model="media.name"/>
-        <button @click="addMedia">Add new Media</button>
+        <button @click="addMedia">Save Media</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

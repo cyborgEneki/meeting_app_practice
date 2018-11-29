@@ -58,6 +58,8 @@
         </div>
 
         <button @click="editMeeting(meeting)">Edit Meeting</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
+
     </div>
 </template>
 
