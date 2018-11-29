@@ -18,14 +18,14 @@
             <label>Time Keeper</label>
             <select v-model="meeting.time_keeper_id" >
                 <option value="">Select user</option>
-                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
             <label>Facilitator</label>
             <select v-model="meeting.facilitator_id" >
                 <option value="">Select user</option>
-                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>

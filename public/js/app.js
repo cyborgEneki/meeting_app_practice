@@ -54027,40 +54027,26 @@ var render = function() {
       _c("h4", [_vm._v("Creator:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(
-          _vm._s(_vm.choices.users[_vm.meeting.creator_id].first_name) +
-            " " +
-            _vm._s(_vm.choices.users[_vm.meeting.creator_id].last_name)
-        )
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.creator_id].full_name))
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Facilitator:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(
-          _vm._s(_vm.choices.users[_vm.meeting.facilitator_id].first_name) +
-            " " +
-            _vm._s(_vm.choices.users[_vm.meeting.facilitator_id].last_name)
-        )
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.facilitator_id].full_name))
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v("Time Keeper:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(
-          _vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].first_name) +
-            " " +
-            _vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].last_name)
-        )
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].full_name))
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
       _vm._l(_vm.orderedUsers, function(user) {
         return _c("div", [
-          _c("p", [
-            _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
-          ]),
+          _c("p", [_vm._v(_vm._s(user.full_name))]),
           _vm._v(" "),
           _c(
             "p",
@@ -54088,13 +54074,7 @@ var render = function() {
             return _c(
               "tr",
               [
-                _c("td", [
-                  _vm._v(
-                    _vm._s(agendas.user.first_name) +
-                      " " +
-                      _vm._s(agendas.user.last_name)
-                  )
-                ]),
+                _c("td", [_vm._v(_vm._s(agendas.user.full_name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(agendas.topic))]),
                 _vm._v(" "),
@@ -56120,7 +56100,7 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.orderedUsers, function(user) {
               return _c("option", { domProps: { value: user.id } }, [
-                _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+                _vm._v(_vm._s(user.full_name))
               ])
             })
           ],
@@ -56165,7 +56145,7 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.orderedUsers, function(user) {
               return _c("option", { domProps: { value: user.id } }, [
-                _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+                _vm._v(_vm._s(user.full_name))
               ])
             })
           ],
@@ -56482,9 +56462,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm._l(_vm.orderedUsers, function(user) {
                   return _c("option", { domProps: { value: user.id } }, [
-                    _vm._v(
-                      _vm._s(user.first_name) + " " + _vm._s(user.last_name)
-                    )
+                    _vm._v(_vm._s(user.full_name))
                   ])
                 })
               ],
@@ -57752,7 +57730,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.orderedUsers, function(user) {
             return _c("option", { domProps: { value: user.id } }, [
-              _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+              _vm._v(_vm._s(user.full_name))
             ])
           })
         ],
@@ -57797,7 +57775,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.orderedUsers, function(user) {
             return _c("option", { domProps: { value: user.id } }, [
-              _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
+              _vm._v(_vm._s(user.full_name))
             ])
           })
         ],
