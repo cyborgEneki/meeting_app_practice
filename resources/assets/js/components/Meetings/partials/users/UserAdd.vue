@@ -15,6 +15,7 @@
             <input type="text" v-model="user.password">
         </div>
         <button @click="addUser">Save User</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

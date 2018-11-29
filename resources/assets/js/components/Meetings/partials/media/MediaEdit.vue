@@ -3,6 +3,7 @@
         <label>Name</label>
         <input type="text" v-model="eachmedia.name">
         <button @click="editMedia(eachmedia)">Edit Media</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

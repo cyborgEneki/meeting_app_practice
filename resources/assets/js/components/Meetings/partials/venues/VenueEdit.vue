@@ -3,6 +3,7 @@
         <label>Name</label>
         <input type="text" v-model="venue.name">
         <button @click="editVenue(venue)">Edit Venue</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 </template>
 

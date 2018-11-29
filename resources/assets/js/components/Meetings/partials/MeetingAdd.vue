@@ -80,6 +80,8 @@
 
         <button @click="addAgenda">Save Agenda</button>
         <button @click="addNewMeeting">Save Meeting</button>
+
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
 
 </template>
