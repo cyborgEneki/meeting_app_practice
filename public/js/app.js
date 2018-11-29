@@ -56385,7 +56385,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56396,6 +56396,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -57025,31 +57029,50 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            User Assigned to Agenda"),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.meeting.agendas[index].user_id,
-                  expression: "meeting.agendas[index].user_id"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.meeting.agendas[index].user_id },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _c("label", [_vm._v("User Assigned to Agenda")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.meeting.agendas[index].user_id,
+                    expression: "meeting.agendas[index].user_id"
                   }
-                  _vm.$set(
-                    _vm.meeting.agendas[index],
-                    "user_id",
-                    $event.target.value
-                  )
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.meeting.agendas[index],
+                      "user_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
+                _vm._v(" "),
+                _vm._l(_vm.orderedUsers, function(user) {
+                  return _c("option", { domProps: { value: user.id } }, [
+                    _vm._v(
+                      _vm._s(user.first_name) + " " + _vm._s(user.last_name)
+                    )
+                  ])
+                })
+              ],
+              2
+            )
           ]),
           _vm._v(" "),
           _c("div", [

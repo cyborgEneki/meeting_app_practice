@@ -67,7 +67,11 @@
                 Time Allocated<input type="text" v-model="meeting.agendas[index].time_allocated">
             </div>
             <div>
-                User Assigned to Agenda<input type="text" v-model="meeting.agendas[index].user_id">
+                <label>User Assigned to Agenda</label>
+                <select v-model="meeting.agendas[index].user_id" >
+                    <option value="">Select user</option>
+                    <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.first_name }} {{ user.last_name }}</option>
+                </select>
             </div>
             <div>
                 Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
