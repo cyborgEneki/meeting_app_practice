@@ -14,12 +14,14 @@ require('./bootstrap');
  */
 
 Vue.use(VueRouter);
+Vue.use(VuejsDialog);
 
 Vue.component('passport-clients', Clients);
 Vue.component('passport-authorized-clients', AuthorizedClients);
 Vue.component('passport-personal-access-tokens', PersonalAccessTokens);
 
 import Vue from 'vue';
+import VuejsDialog from "vuejs-dialog"
 import VueRouter from 'vue-router'
 import App from './components/App'
 import Clients from './components/passport/Clients'
