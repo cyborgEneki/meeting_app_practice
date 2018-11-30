@@ -44,6 +44,14 @@
         },
         methods: {
             deleteUser(id) {
+                this.$dialog.confirm('Please confirm to continue')
+                    .then(function (dialog) {
+                        console.log('Clicked on proceed')
+                    })
+                    .catch(function () {
+                        console.log('Clicked on cancel')
+                    });
+
                 axios.delete('/api/users/' + id)
                     .then(() => {
                         let index = this.users.map((item) => {
