@@ -54824,7 +54824,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54883,8 +54883,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['choices'],
     data: function data() {
         return {
-            customMessages: ['Delete', 'Are you sure?', 'Ok!'],
-            users: []
+            customMessages: ['Delete', 'Are you sure?', 'Ok!']
         };
     },
 
@@ -54898,10 +54897,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.delete('/api/users/' + id).then(function () {
-                var index = _this.users.map(function (item) {
+                var index = _this.choices.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this.users.splice(index, 1);
+                _this.choices.users.splice(index, 1);
             });
         }
     }

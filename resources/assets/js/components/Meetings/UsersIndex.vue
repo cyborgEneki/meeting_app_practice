@@ -49,8 +49,7 @@
                         'Delete',
                         'Are you sure?',
                         'Ok!'
-                    ],
-                users: []
+                    ]
             }
         },
         computed: {
@@ -62,10 +61,10 @@
             deleteUser(id) {
                 axios.delete('/api/users/' + id)
                     .then(() => {
-                        let index = this.users.map((item) => {
+                        let index = this.choices.users.map((item) => {
                             return item.id;
                         }).indexOf(id);
-                        this.users.splice(index, 1);
+                        this.choices.users.splice(index, 1);
                     });
             }
         }
