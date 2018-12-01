@@ -83,8 +83,8 @@
             <div>
                 Agenda Status
                 <select type="text" v-model="meeting.agendas[index].agenda_status">
-                    <option value="0">Pending</option>
-                    <option value="1">Accepted</option>
+                    <option value="">Select status</option>
+                    <option v-for="status in statuses">{{ status }}</option>
                 </select>
             </div>
         </div>
@@ -127,7 +127,8 @@
                         }
                     ]
                 },
-                timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90]
+                timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
+                statuses: ['Pending', 'Accepted', 'Rejected']
             }
         },
         methods: {

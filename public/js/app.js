@@ -55821,7 +55821,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55959,7 +55959,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     conclusion: ''
                 }]
             },
-            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90]
+            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
+            statuses: ['Pending', 'Accepted', 'Rejected']
         };
     },
 
@@ -56568,10 +56569,15 @@ var render = function() {
                 }
               },
               [
-                _c("option", { attrs: { value: "0" } }, [_vm._v("Pending")]),
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Select status")
+                ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Accepted")])
-              ]
+                _vm._l(_vm.statuses, function(status) {
+                  return _c("option", [_vm._v(_vm._s(status))])
+                })
+              ],
+              2
             )
           ])
         ])
