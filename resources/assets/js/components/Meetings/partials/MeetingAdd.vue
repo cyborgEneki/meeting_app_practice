@@ -5,8 +5,14 @@
         <div>
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
+        <!--<div>-->
+            <!--<input name="10/03/2018" value="10/03/2018" type="hidden">-->
+            <!--Date<input v-validate=" 'before:10/03/2018|date_format:DD/MM/YYYY' " name="date" v-model="meeting.date" type="date"/>-->
+            <!--<span v-show="errors.has('date')">{{ errors.first('date')}}</span>-->
+        <!--</div>-->
         <div>
-            Date<input name="date" v-model="meeting.date" type="date"/>
+            Date <input v-validate="'after:today |date_format:DD-MM-YYYY'" data-vv-as="meeting's date" name="date" placeholder="dd-mm-yyyy" type="text" v-model="meeting.date" >
+            <span>{{ errors.first('date') }}</span>
         </div>
         <div>
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
@@ -101,7 +107,7 @@
     export default {
         name: "MeetingAdd",
         props: ['choices'],
-        data() {
+        data: function () {
             return {
                 meeting: {
                     id: '',
@@ -128,8 +134,9 @@
                     ]
                 },
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-                statuses: ['Pending', 'Accepted', 'Rejected']
-            }
+                statuses: ['Pending', 'Accepted', 'Rejected'],
+                today: new Date()
+        }
         },
         methods: {
             addNewMeeting() {
@@ -158,7 +165,7 @@
                         conclusion: '',
                     })
                 }
-            }
+            },
         },
         computed: {
             orderedUsers() {
@@ -176,6 +183,9 @@
             orderedMeetingSeries() {
                 return _.orderBy(this.choices.meetingseries, 'name');
             }
+        },
+        created() {
+            console.log(this.today);
         }
     }
 

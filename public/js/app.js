@@ -55823,7 +55823,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55834,6 +55834,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55962,10 +55968,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }]
             },
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-            statuses: ['Pending', 'Accepted', 'Rejected']
+            statuses: ['Pending', 'Accepted', 'Rejected'],
+            today: new Date()
         };
     },
-
     methods: {
         addNewMeeting: function addNewMeeting() {
             var _this = this;
@@ -56004,6 +56010,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         orderedMeetingSeries: function orderedMeetingSeries() {
             return _.orderBy(this.choices.meetingseries, 'name');
         }
+    },
+    created: function created() {
+        console.log(this.today);
     }
 });
 
@@ -56045,9 +56054,15 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", [
-        _vm._v("\n        Date"),
+        _vm._v("\n        Date "),
         _c("input", {
           directives: [
+            {
+              name: "validate",
+              rawName: "v-validate",
+              value: "after:today |date_format:DD-MM-YYYY",
+              expression: "'after:today |date_format:DD-MM-YYYY'"
+            },
             {
               name: "model",
               rawName: "v-model",
@@ -56055,7 +56070,12 @@ var render = function() {
               expression: "meeting.date"
             }
           ],
-          attrs: { name: "date", type: "date" },
+          attrs: {
+            "data-vv-as": "meeting's date",
+            name: "date",
+            placeholder: "dd-mm-yyyy",
+            type: "text"
+          },
           domProps: { value: _vm.meeting.date },
           on: {
             input: function($event) {
@@ -56065,7 +56085,9 @@ var render = function() {
               _vm.$set(_vm.meeting, "date", $event.target.value)
             }
           }
-        })
+        }),
+        _vm._v(" "),
+        _c("span", [_vm._v(_vm._s(_vm.errors.first("date")))])
       ]),
       _vm._v(" "),
       _c("div", [
