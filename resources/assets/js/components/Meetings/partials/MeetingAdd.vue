@@ -5,14 +5,11 @@
         <div>
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
-        <!--<div>-->
-            <!--<input name="10/03/2018" value="10/03/2018" type="hidden">-->
-            <!--Date<input v-validate=" 'before:10/03/2018|date_format:DD/MM/YYYY' " name="date" v-model="meeting.date" type="date"/>-->
-            <!--<span v-show="errors.has('date')">{{ errors.first('date')}}</span>-->
-        <!--</div>-->
         <div>
-            Date <input v-validate="'after:today |date_format:DD-MM-YYYY'" data-vv-as="meeting's date" name="date" placeholder="dd-mm-yyyy" type="text" v-model="meeting.date" >
-            <span>{{ errors.first('date') }}</span>
+            Date
+            <input v-validate="'date_format:DD/MM/YYYY|after:refDateFld'" name="after_field" type="text">
+            <span>{{ errors.first('after_field') }}</span>
+            <input v-show='false'  ref="refDateFld" type="text" v-model="refDate">
         </div>
         <div>
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
@@ -182,6 +179,15 @@
             },
             orderedMeetingSeries() {
                 return _.orderBy(this.choices.meetingseries, 'name');
+            },
+            refDate() {
+                let today = new Date()
+                let dd = today.getDate();
+                let mm = today.getMonth()+1;
+                let yyyy = today.getFullYear();
+                if(dd<10) { dd='0'+dd; }
+                if(mm<10) { mm='0'+mm; }
+                return dd+'/'+mm+'/'+yyyy;
             }
         },
         created() {
