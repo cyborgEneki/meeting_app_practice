@@ -64950,14 +64950,18 @@ var render = function() {
             {
               name: "validate",
               rawName: "v-validate",
-              value: "date_format:DD/MM/YYYY|after:refDateFld",
-              expression: "'date_format:DD/MM/YYYY|after:refDateFld'"
+              value: "date_format:DD/MM/YYYY|after:the_date_today",
+              expression: "'date_format:DD/MM/YYYY|after:the_date_today'"
             }
           ],
-          attrs: { name: "after_field", type: "text" }
+          attrs: {
+            name: "meeting_date_entered",
+            type: "text",
+            placeholder: "dd/mm/yyyy"
+          }
         }),
         _vm._v(" "),
-        _c("span", [_vm._v(_vm._s(_vm.errors.first("after_field")))]),
+        _c("span", [_vm._v(_vm._s(_vm.errors.first("meeting_date_entered")))]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -64974,7 +64978,7 @@ var render = function() {
               expression: "refDate"
             }
           ],
-          ref: "refDateFld",
+          ref: "the_date_today",
           attrs: { type: "text" },
           domProps: { value: _vm.refDate },
           on: {
