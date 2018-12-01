@@ -54273,7 +54273,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54284,6 +54284,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -54312,10 +54319,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'vue-confirmation-button': __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button___default.a
+    },
     data: function data() {
         return {
-            meetings: []
+            meetings: [],
+            customMessages: ['Delete', 'Are you sure?', 'Ok!']
         };
     },
 
@@ -54411,15 +54424,19 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
-                    "button",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.deleteMeeting(meeting.id)
+                    "div",
+                    { staticClass: "confirmation__button" },
+                    [
+                      _c("vue-confirmation-button", {
+                        attrs: { messages: _vm.customMessages },
+                        on: {
+                          "confirmation-success": function($event) {
+                            _vm.deleteUser(meeting.id)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("Delete")]
+                      })
+                    ],
+                    1
                   )
                 ],
                 1
