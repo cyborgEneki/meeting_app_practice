@@ -16,28 +16,28 @@
         </div>
         <div>
             <label>Time Keeper</label>
-            <select v-model="meeting.time_keeper_id" >
+            <select v-model="meeting.time_keeper_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
             <label>Facilitator</label>
-            <select v-model="meeting.facilitator_id" >
+            <select v-model="meeting.facilitator_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
             <label>Venue</label>
-            <select v-model="meeting.venue_id" >
+            <select v-model="meeting.venue_id">
                 <option value="">Select venue</option>
                 <option v-for="venue in orderedVenues" :value="venue.id">{{ venue.name }}</option>
             </select>
         </div>
         <div>
             <label>Media</label>
-            <select v-model="meeting.media_id" >
+            <select v-model="meeting.media_id">
                 <option value="">Select media</option>
                 <option v-for="eachmedia in orderedMedia" :value="eachmedia.id">{{ eachmedia.name }}</option>
             </select>
@@ -46,14 +46,17 @@
             <label>Meeting Type</label>
             <select v-model="meeting.meetingtype_id">
                 <option value="">Select meeting type</option>
-                <option v-for="meetingtype in orderedMeetingTypes" :value="meetingtype.id">{{ meetingtype.name }}</option>
+                <option v-for="meetingtype in orderedMeetingTypes" :value="meetingtype.id">{{ meetingtype.name }}
+                </option>
             </select>
         </div>
         <div>
             <label>Meeting Series</label>
             <select v-model="meeting.meetingseries_id">
                 <option value="">Select meeting series</option>
-                <option v-for="eachmeetingseries in orderedMeetingSeries" :value="eachmeetingseries.id">{{ eachmeetingseries.name }}</option>
+                <option v-for="eachmeetingseries in orderedMeetingSeries" :value="eachmeetingseries.id">{{
+                    eachmeetingseries.name }}
+                </option>
             </select>
         </div>
         <div v-for="(agenda,index) in meeting.agendas">
@@ -64,17 +67,25 @@
                 Agenda Description<textarea type="text" v-model="meeting.agendas[index].description"></textarea>
             </div>
             <div>
-                Time Allocated<input type="text" v-model="meeting.agendas[index].time_allocated">
+                Time Allocated
+                <select type="text" v-model="meeting.agendas[index].time_allocated">
+                    <option value="">Select time</option>
+                    <option v-for="time in timing">{{ time }}</option>
+                </select>
             </div>
             <div>
                 <label>User Assigned to Agenda</label>
-                <select v-model="meeting.agendas[index].user_id" >
+                <select v-model="meeting.agendas[index].user_id">
                     <option value="">Select user</option>
                     <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
                 </select>
             </div>
             <div>
-                Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
+                Agenda Status
+                <select type="text" v-model="meeting.agendas[index].agenda_status">
+                    <option value="">Select status</option>
+                    <option v-for="status in statuses">{{ status }}</option>
+                </select>
             </div>
         </div>
 
@@ -112,10 +123,12 @@
                             time_allocated: '',
                             user_id: '',
                             agenda_status: '',
-                            conclusion: ''
+                            conclusion: '',
                         }
                     ]
-                }
+                },
+                timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
+                statuses: ['Pending', 'Accepted', 'Rejected']
             }
         },
         methods: {
@@ -154,7 +167,7 @@
             orderedVenues() {
                 return _.orderBy(this.choices.venues, 'name');
             },
-            orderedMedia () {
+            orderedMedia() {
                 return _.orderBy(this.choices.media, 'media');
             },
             orderedMeetingTypes() {
