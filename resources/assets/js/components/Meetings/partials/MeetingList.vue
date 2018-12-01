@@ -18,7 +18,12 @@
                 <td>{{ meeting.end_time }}</td>
                 <td>
                     <router-link :to="{ name: 'editMeeting' , params: { meeting }}">Edit</router-link>
-                    <button @click="deleteMeeting(meeting.id)">Delete</button>
+                    <div class="confirmation__button">
+                        <vue-confirmation-button
+                                :messages="customMessages"
+                                v-on:confirmation-success="deleteUser(meeting.id)">
+                        </vue-confirmation-button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -26,10 +31,21 @@
 </template>
 
 <script>
+    import vueConfirmationButton from 'vue-confirmation-button';
+
     export default {
+        components: {
+            'vue-confirmation-button': vueConfirmationButton,
+        },
         data() {
             return {
                 meetings: [],
+                customMessages:
+                    [
+                        'Delete',
+                        'Are you sure?',
+                        'Ok!'
+                    ]
             }
         },
         methods: {

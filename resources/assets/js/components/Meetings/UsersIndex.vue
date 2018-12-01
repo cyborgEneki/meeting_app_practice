@@ -20,7 +20,12 @@
                 <td>{{ user.email }}</td>
                 <td>
                     <router-link :to="{ name: 'editUser', params: { user } }">Edit</router-link>
-                    <button @click="deleteUser(user.id)">Delete</button>
+                    <div class="confirmation__button">
+                        <vue-confirmation-button
+                                :messages="customMessages"
+                                v-on:confirmation-success="deleteUser(user.id)">
+                        </vue-confirmation-button>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -29,12 +34,22 @@
 </template>
 
 <script>
+    import vueConfirmationButton from 'vue-confirmation-button';
+
     export default {
         name: "UsersList",
+        components: {
+            'vue-confirmation-button': vueConfirmationButton,
+        },
         props: ['choices'],
         data() {
             return {
-                users: []
+                customMessages:
+                    [
+                        'Delete',
+                        'Are you sure?',
+                        'Ok!'
+                    ]
             }
         },
         computed: {
@@ -44,20 +59,12 @@
         },
         methods: {
             deleteUser(id) {
-                this.$dialog.confirm('Please confirm to continue')
-                    .then(function (dialog) {
-                        console.log('Clicked on proceed')
-                    })
-                    .catch(function () {
-                        console.log('Clicked on cancel')
-                    });
-
                 axios.delete('/api/users/' + id)
                     .then(() => {
-                        let index = this.users.map((item) => {
+                        let index = this.choices.users.map((item) => {
                             return item.id;
                         }).indexOf(id);
-                        this.users.splice(index, 1);
+                        this.choices.users.splice(index, 1);
                     });
             }
         }
