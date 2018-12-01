@@ -81,7 +81,11 @@
                 </select>
             </div>
             <div>
-                Agenda Status<input type="text" v-model="meeting.agendas[index].agenda_status">
+                Agenda Status
+                <select type="text" v-model="meeting.agendas[index].agenda_status">
+                    <option value="0">Pending</option>
+                    <option value="1">Accepted</option>
+                </select>
             </div>
         </div>
 
