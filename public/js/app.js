@@ -55821,7 +55821,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55832,6 +55832,13 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -55947,7 +55954,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     agenda_status: '',
                     conclusion: ''
                 }]
-            }
+            },
+            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90]
         };
     },
 
@@ -56320,7 +56328,7 @@ var render = function() {
             _vm._v(" "),
             _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
               return _c("option", { domProps: { value: meetingtype.id } }, [
-                _vm._v(_vm._s(meetingtype.name))
+                _vm._v(_vm._s(meetingtype.name) + "\n            ")
               ])
             })
           ],
@@ -56369,7 +56377,7 @@ var render = function() {
               return _c(
                 "option",
                 { domProps: { value: eachmeetingseries.id } },
-                [_vm._v(_vm._s(eachmeetingseries.name))]
+                [_vm._v(_vm._s(eachmeetingseries.name) + "\n            ")]
               )
             })
           ],
@@ -56436,31 +56444,46 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Time Allocated"),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.meeting.agendas[index].time_allocated,
-                  expression: "meeting.agendas[index].time_allocated"
-                }
-              ],
-              attrs: { type: "text" },
-              domProps: { value: _vm.meeting.agendas[index].time_allocated },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+            _vm._v("\n            Time Allocated\n            "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.meeting.agendas[index].time_allocated,
+                    expression: "meeting.agendas[index].time_allocated"
                   }
-                  _vm.$set(
-                    _vm.meeting.agendas[index],
-                    "time_allocated",
-                    $event.target.value
-                  )
+                ],
+                attrs: { type: "text" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.meeting.agendas[index],
+                      "time_allocated",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("Select time")]),
+                _vm._v(" "),
+                _vm._l(_vm.timing, function(time) {
+                  return _c("option", [_vm._v(_vm._s(time))])
+                })
+              ],
+              2
+            )
           ]),
           _vm._v(" "),
           _c("div", [
