@@ -22,7 +22,8 @@
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
         </div>
         <div>
-            End Time<input name="end_time" v-model="meeting.end_time" type="time"/>
+            End Time<input v-validate="'after:'+meeting.start_time+'|required'" name="end_time" v-model="meeting.end_time" type="time"/>
+            <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
             <label>Time Keeper</label>
