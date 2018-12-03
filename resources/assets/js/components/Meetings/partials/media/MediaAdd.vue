@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "MediaAdd",
         data() {
@@ -22,6 +24,7 @@
                 axios.post('/api/media/', this.media)
                     .then(response => {});
                 this.$router.push('/media');
+                this.$noty.success("Your venue has been saved!");
             }
     }
     }

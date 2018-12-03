@@ -65660,7 +65660,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65671,6 +65671,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__);
 //
 //
 //
@@ -65695,6 +65697,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "UserAdd",
@@ -65715,6 +65719,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addUser: function addUser() {
             axios.post('/api/users', this.user).then(function (response) {});
             this.$router.push('/users');
+            this.$noty.success("Your user has been saved!");
         }
     }
 });
@@ -66010,7 +66015,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66021,6 +66026,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__);
 //
 //
 //
@@ -66030,6 +66037,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "VenueAdd",
@@ -66045,6 +66054,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addVenue: function addVenue() {
             axios.post('/api/venues', this.venue).then(function (response) {});
             this.$router.push('/venues');
+            this.$noty.success("Your venue has been saved!");
         }
     }
 });
@@ -66192,7 +66202,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66203,6 +66213,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__);
 //
 //
 //
@@ -66214,6 +66226,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MeetingSeriesAdd",
@@ -66230,6 +66244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addMeetingSeries: function addMeetingSeries() {
             axios.post('api/meetingseries', this.meetingseries).then(function (response) {});
             this.$router.push('/meeting_series');
+            this.$noty.success("Your meeting series has been saved!");
         }
     }
 });
@@ -66402,7 +66417,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66413,6 +66428,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__);
 //
 //
 //
@@ -66423,6 +66440,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MeetingTypeAdd",
@@ -66438,6 +66457,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addMeetingType: function addMeetingType() {
             axios.post('/api/meetingtypes', this.meetingtype).then(function (response) {});
             this.$router.push('/meeting_type');
+            this.$noty.success("Your meeting type has been saved!");
         }
     }
 });
@@ -66587,7 +66607,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66598,6 +66618,8 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__);
 //
 //
 //
@@ -66607,6 +66629,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "MediaAdd",
@@ -66622,6 +66646,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addMedia: function addMedia() {
             axios.post('/api/media/', this.media).then(function (response) {});
             this.$router.push('/media');
+            this.$noty.success("Your venue has been saved!");
         }
     }
 });

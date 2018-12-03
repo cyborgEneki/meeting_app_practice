@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "VenueAdd",
         data() {
@@ -22,6 +24,7 @@
                 axios.post('/api/venues', this.venue)
                     .then(response => {});
                 this.$router.push('/venues');
+                this.$noty.success("Your venue has been saved!");
             }
         }
     }
