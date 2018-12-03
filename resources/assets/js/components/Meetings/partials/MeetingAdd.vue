@@ -6,16 +6,17 @@
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
         <!--<div>-->
-            <!--Date-->
-            <!--<input v-validate="'date_format:DD/MM/YYYY|after:the_date_today'" name="meeting_date_entered" type="text" placeholder="dd/mm/yyyy">-->
-            <!--<span>{{ errors.first('meeting_date_entered') }}</span>-->
-            <!--<input v-show='false'  ref="the_date_today" type="text" v-model="refDate">-->
+        <!--Date-->
+        <!--<input v-validate="'date_format:DD/MM/YYYY|after:the_date_today'" name="meeting_date_entered" type="text" placeholder="dd/mm/yyyy">-->
+        <!--<span>{{ errors.first('meeting_date_entered') }}</span>-->
+        <!--<input v-show='false'  ref="the_date_today" type="text" v-model="refDate">-->
         <!--</div>-->
         <div>
             Date
-            <input v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" name="after_field" type="text" placeholder="yyyy-mm-dd" >
+            <input v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" name="after_field" type="text"
+                   placeholder="yyyy-mm-dd" v-model="meeting.date">
             <span>{{ errors.first('after_field') }}</span>
-            <input v-show='false'  ref="refDate" type="text" v-model="refDate">
+            <input v-show='false' ref="refDate" type="text" v-model="refDate">
         </div>
         <div>
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
@@ -93,7 +94,7 @@
                 Agenda Status
                 <select type="text" v-model="meeting.agendas[index].agenda_status">
                     <option value="">Select status</option>
-                    <option v-for="status in statuses">{{ status }}</option>
+                    <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
                 </select>
             </div>
         </div>
@@ -137,15 +138,23 @@
                     ]
                 },
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-                statuses: ['Pending', 'Accepted', 'Rejected'],
+                statuses:
+                    [
+                        {id: 0, name: 'Pending'},
+                        {id: 1, name: 'Accepted'},
+                        {id: 2, name: 'Rejected'}
+                    ],
                 today: new Date()
-        }
+            }
         },
         methods: {
             addNewMeeting() {
+                console.log(this.meeting);
+
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
-                        this.$router.push('/meetings')
+                        this.$router.push('/meetings');
+                        console.log(this.meeting);
                     });
             },
             addAgenda() {
@@ -189,11 +198,15 @@
             refDate() {
                 let today = new Date()
                 let dd = today.getDate();
-                let mm = today.getMonth()+1;
+                let mm = today.getMonth() + 1;
                 let yyyy = today.getFullYear();
-                if(dd<10) { dd='0'+dd; }
-                if(mm<10) { mm='0'+mm; }
-                return yyyy+'-'+mm+'-'+dd;
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                return yyyy + '-' + mm + '-' + dd;
             }
         },
         created() {

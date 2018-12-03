@@ -64703,7 +64703,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64714,6 +64714,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -64851,7 +64852,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }]
             },
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-            statuses: ['Pending', 'Accepted', 'Rejected'],
+            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
             today: new Date()
         };
     },
@@ -64859,8 +64860,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addNewMeeting: function addNewMeeting() {
             var _this = this;
 
+            console.log(this.meeting);
+
             axios.post('/api/meetings', this.meeting).then(function (response) {
                 _this.$router.push('/meetings');
+                console.log(_this.meeting);
             });
         },
         addAgenda: function addAgenda() {
@@ -64958,12 +64962,27 @@ var render = function() {
               rawName: "v-validate",
               value: "after:" + _vm.refDate + "|date_format:YYYY-MM-DD",
               expression: "'after:'+refDate+'|date_format:YYYY-MM-DD'"
+            },
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.date,
+              expression: "meeting.date"
             }
           ],
           attrs: {
             name: "after_field",
             type: "text",
             placeholder: "yyyy-mm-dd"
+          },
+          domProps: { value: _vm.meeting.date },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.meeting, "date", $event.target.value)
+            }
           }
         }),
         _vm._v(" "),
@@ -65506,7 +65525,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _vm._l(_vm.statuses, function(status) {
-                  return _c("option", [_vm._v(_vm._s(status))])
+                  return _c("option", { domProps: { value: status.id } }, [
+                    _vm._v(_vm._s(status.name))
+                  ])
                 })
               ],
               2

@@ -28,7 +28,6 @@ class MeetingRequest extends FormRequest
             'date' => 'required',
             'start_time' => 'required',
             'end_time' => 'required',
-//            'creator' => 'required',
             'facilitator_id' => 'required',
             'time_keeper_id' => 'required',
             'agendas.*.topic' => 'required',
