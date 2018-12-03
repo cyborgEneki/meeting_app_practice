@@ -24,7 +24,6 @@
                     });
                 this.$router.push('/venues');
                 this.$noty.success("Your venue has been edited!");
-
             }
         }
     }
