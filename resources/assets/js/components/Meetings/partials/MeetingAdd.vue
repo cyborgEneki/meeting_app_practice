@@ -5,11 +5,17 @@
         <div>
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
+        <!--<div>-->
+            <!--Date-->
+            <!--<input v-validate="'date_format:DD/MM/YYYY|after:the_date_today'" name="meeting_date_entered" type="text" placeholder="dd/mm/yyyy">-->
+            <!--<span>{{ errors.first('meeting_date_entered') }}</span>-->
+            <!--<input v-show='false'  ref="the_date_today" type="text" v-model="refDate">-->
+        <!--</div>-->
         <div>
             Date
-            <input v-validate="'date_format:DD/MM/YYYY|after:the_date_today'" name="meeting_date_entered" type="text" placeholder="dd/mm/yyyy">
-            <span>{{ errors.first('meeting_date_entered') }}</span>
-            <input v-show='false'  ref="the_date_today" type="text" v-model="refDate">
+            <input v-validate="'after:'+refDate+'|date_format:DD/MM/YYYY'" name="after_field" type="text" placeholder="dd/mm/yyyy">
+            <span>{{ errors.first('after_field') }}</span>
+            <input v-show='false'  ref="refDate" type="text" v-model="refDate">
         </div>
         <div>
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>

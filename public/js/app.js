@@ -64703,7 +64703,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64714,6 +64714,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -64950,18 +64956,18 @@ var render = function() {
             {
               name: "validate",
               rawName: "v-validate",
-              value: "date_format:DD/MM/YYYY|after:the_date_today",
-              expression: "'date_format:DD/MM/YYYY|after:the_date_today'"
+              value: "after:" + _vm.refDate + "|date_format:DD/MM/YYYY",
+              expression: "'after:'+refDate+'|date_format:DD/MM/YYYY'"
             }
           ],
           attrs: {
-            name: "meeting_date_entered",
+            name: "after_field",
             type: "text",
             placeholder: "dd/mm/yyyy"
           }
         }),
         _vm._v(" "),
-        _c("span", [_vm._v(_vm._s(_vm.errors.first("meeting_date_entered")))]),
+        _c("span", [_vm._v(_vm._s(_vm.errors.first("after_field")))]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -64978,7 +64984,7 @@ var render = function() {
               expression: "refDate"
             }
           ],
-          ref: "the_date_today",
+          ref: "refDate",
           attrs: { type: "text" },
           domProps: { value: _vm.refDate },
           on: {
