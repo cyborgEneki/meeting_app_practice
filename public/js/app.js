@@ -64904,7 +64904,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (mm < 10) {
                 mm = '0' + mm;
             }
-            return dd + '/' + mm + '/' + yyyy;
+            return yyyy + '-' + mm + '-' + dd;
         }
     },
     created: function created() {
@@ -64956,14 +64956,14 @@ var render = function() {
             {
               name: "validate",
               rawName: "v-validate",
-              value: "after:" + _vm.refDate + "|date_format:DD/MM/YYYY",
-              expression: "'after:'+refDate+'|date_format:DD/MM/YYYY'"
+              value: "after:" + _vm.refDate + "|date_format:YYYY-MM-DD",
+              expression: "'after:'+refDate+'|date_format:YYYY-MM-DD'"
             }
           ],
           attrs: {
             name: "after_field",
             type: "text",
-            placeholder: "dd/mm/yyyy"
+            placeholder: "yyyy-mm-dd"
           }
         }),
         _vm._v(" "),

@@ -13,7 +13,7 @@
         <!--</div>-->
         <div>
             Date
-            <input v-validate="'after:'+refDate+'|date_format:DD/MM/YYYY'" name="after_field" type="text" placeholder="dd/mm/yyyy">
+            <input v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" name="after_field" type="text" placeholder="yyyy-mm-dd" >
             <span>{{ errors.first('after_field') }}</span>
             <input v-show='false'  ref="refDate" type="text" v-model="refDate">
         </div>
@@ -193,7 +193,7 @@
                 let yyyy = today.getFullYear();
                 if(dd<10) { dd='0'+dd; }
                 if(mm<10) { mm='0'+mm; }
-                return dd+'/'+mm+'/'+yyyy;
+                return yyyy+'-'+mm+'-'+dd;
             }
         },
         created() {
