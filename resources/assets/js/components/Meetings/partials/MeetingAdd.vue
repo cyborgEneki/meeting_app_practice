@@ -5,12 +5,6 @@
         <div>
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
-        <!--<div>-->
-        <!--Date-->
-        <!--<input v-validate="'date_format:DD/MM/YYYY|after:the_date_today'" name="meeting_date_entered" type="text" placeholder="dd/mm/yyyy">-->
-        <!--<span>{{ errors.first('meeting_date_entered') }}</span>-->
-        <!--<input v-show='false'  ref="the_date_today" type="text" v-model="refDate">-->
-        <!--</div>-->
         <div>
             Date
             <input v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" name="after_field" type="text"
@@ -150,12 +144,9 @@
         },
         methods: {
             addNewMeeting() {
-                console.log(this.meeting);
-
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
                         this.$router.push('/meetings');
-                        console.log(this.meeting);
                     });
             },
             addAgenda() {
@@ -167,7 +158,6 @@
                     this.meeting.agendas[items - 1].user_id !== '' &&
                     this.meeting.agendas[items - 1].agenda_status !== '' &&
                     this.meeting.agendas[items - 1].conclusion !== ''
-
                 ) {
                     this.meeting.agendas.push({
                         topic: '',
@@ -209,9 +199,6 @@
                 }
                 return yyyy + '-' + mm + '-' + dd;
             }
-        },
-        created() {
-            console.log(this.today);
         }
     }
 

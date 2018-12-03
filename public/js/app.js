@@ -64703,7 +64703,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64714,12 +64714,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -64861,11 +64855,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addNewMeeting: function addNewMeeting() {
             var _this = this;
 
-            console.log(this.meeting);
-
             axios.post('/api/meetings', this.meeting).then(function (response) {
                 _this.$router.push('/meetings');
-                console.log(_this.meeting);
             });
         },
         addAgenda: function addAgenda() {
@@ -64911,9 +64902,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             return yyyy + '-' + mm + '-' + dd;
         }
-    },
-    created: function created() {
-        console.log(this.today);
     }
 });
 
@@ -66771,7 +66759,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66845,28 +66833,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['choices', 'meeting'],
-    computed: {
-        orderedUsers: function orderedUsers() {
-            return _.orderBy(this.choices.users, 'first_name');
-        },
-        orderedVenues: function orderedVenues() {
-            return _.orderBy(this.choices.venues, 'name');
-        },
-        orderedMedia: function orderedMedia() {
-            return _.orderBy(this.choices.media, 'media');
-        },
-        orderedMeetingTypes: function orderedMeetingTypes() {
-            return _.orderBy(this.choices.meetingtypes, 'name');
-        },
-        orderedMeetingSeries: function orderedMeetingSeries() {
-            return _.orderBy(this.choices.meetingseries, 'name');
-        }
-    },
+
     methods: {
         editMeeting: function editMeeting(meeting) {
             var currentMeeting = {};
@@ -67030,9 +67000,9 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
           _vm._v(" "),
-          _vm._l(_vm.orderedUsers, function(user) {
+          _vm._l(_vm.choices.users, function(user) {
             return _c("option", { domProps: { value: user.id } }, [
-              _vm._v(_vm._s(user.full_name))
+              _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
             ])
           })
         ],
@@ -67075,9 +67045,9 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
           _vm._v(" "),
-          _vm._l(_vm.orderedUsers, function(user) {
+          _vm._l(_vm.choices.users, function(user) {
             return _c("option", { domProps: { value: user.id } }, [
-              _vm._v(_vm._s(user.full_name))
+              _vm._v(_vm._s(user.first_name) + " " + _vm._s(user.last_name))
             ])
           })
         ],
@@ -67120,7 +67090,7 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select venue")]),
           _vm._v(" "),
-          _vm._l(_vm.orderedVenues, function(venue) {
+          _vm._l(_vm.choices.venues, function(venue) {
             return _c("option", { domProps: { value: venue.id } }, [
               _vm._v(_vm._s(venue.name))
             ])
@@ -67165,7 +67135,7 @@ var render = function() {
         [
           _c("option", { attrs: { value: "" } }, [_vm._v("Select media")]),
           _vm._v(" "),
-          _vm._l(_vm.orderedMedia, function(eachmedia) {
+          _vm._l(_vm.choices.media, function(eachmedia) {
             return _c("option", { domProps: { value: eachmedia.id } }, [
               _vm._v(_vm._s(eachmedia.name))
             ])
@@ -67212,7 +67182,7 @@ var render = function() {
             _vm._v("Select meeting type")
           ]),
           _vm._v(" "),
-          _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
+          _vm._l(_vm.choices.meetingtypes, function(meetingtype) {
             return _c("option", { domProps: { value: meetingtype.id } }, [
               _vm._v(_vm._s(meetingtype.name))
             ])
@@ -67259,7 +67229,7 @@ var render = function() {
             _vm._v("Select meeting series")
           ]),
           _vm._v(" "),
-          _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
+          _vm._l(_vm.choices.meetingseries, function(eachmeetingseries) {
             return _c("option", { domProps: { value: eachmeetingseries.id } }, [
               _vm._v(_vm._s(eachmeetingseries.name))
             ])
@@ -67279,18 +67249,6 @@ var render = function() {
         }
       },
       [_vm._v("Edit Meeting")]
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
-            _vm.$router.go(-1)
-          }
-        }
-      },
-      [_vm._v("Go Back to Previous Page")]
     )
   ])
 }
