@@ -10,6 +10,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "MeetingSeriesEdit",
         props: ['eachmeetingseries'],
@@ -24,7 +26,7 @@
                     .then(response => {
                     });
                 this.$router.push('/meeting_series');
-
+                this.$noty.success("This meeting series has been edited!");
             }
         }
     }

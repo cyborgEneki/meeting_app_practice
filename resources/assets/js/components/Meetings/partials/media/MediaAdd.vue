@@ -19,14 +19,15 @@
                 }
             }
         },
-    methods: {
+        methods: {
             addMedia() {
                 axios.post('/api/media/', this.media)
-                    .then(response => {});
+                    .then(response => {
+                    });
                 this.$router.push('/media');
                 this.$noty.success("Your venue has been saved!");
             }
-    }
+        }
     }
 </script>
 

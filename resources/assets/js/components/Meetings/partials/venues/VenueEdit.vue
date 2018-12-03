@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "VenueEdit",
         props: ['venue'],
@@ -21,6 +23,7 @@
                     .then(response => {
                     });
                 this.$router.push('/venues');
+                this.$noty.success("Your venue has been edited!");
 
             }
         }

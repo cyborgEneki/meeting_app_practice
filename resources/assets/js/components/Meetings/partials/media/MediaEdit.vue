@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "MediaEdit",
         props: ['eachmedia'],
@@ -20,6 +22,7 @@
                 axios.put('/api/media/' + eachmedia.id, currentMedia)
                     .then(response => {});
                 this.$router.push('/media');
+                this.$noty.success("This media  has been edited!");
             }
         }
     }

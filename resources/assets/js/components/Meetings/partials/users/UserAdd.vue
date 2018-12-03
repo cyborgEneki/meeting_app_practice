@@ -44,7 +44,7 @@
                 axios.post('/api/users', this.user)
                     .then(response => {});
                 this.$router.push('/users');
-                this.$noty.success("Your user has been saved!");
+                this.$noty.success("This user has been saved!");
             }
         }
     }
