@@ -103,6 +103,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "MeetingAdd",
         props: ['choices'],
@@ -147,6 +149,7 @@
                 axios.post('/api/meetings', this.meeting)
                     .then((response) => {
                         this.$router.push('/meetings');
+                        this.$noty.success("Your meeting has been saved!");
                     });
             },
             addAgenda() {
