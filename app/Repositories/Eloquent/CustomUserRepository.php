@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 use App\User;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\EditUserRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 
@@ -34,7 +34,7 @@ class CustomUserRepository implements CustomUserRepositoryInterface
         return new UserResource($user);
     }
 
-    public function updateUser(UserRequest $request, User $user)
+    public function updateUser(EditUserRequest $request, User $user)
     {
         $user = $user->update($request->all());
 
