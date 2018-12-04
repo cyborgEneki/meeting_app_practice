@@ -24,7 +24,7 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('meetings.agendas', 'AgendaController');
     Route::apiResource('notes', 'NoteController');
     Route::apiResource('venues', 'VenueController');
-    Route::apiResource('media', 'MediaController');
+    Route::apiResource('medias', 'MediaController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
     Route::apiResource('meetingseries', 'MeetingseriesController');
     Route::apiResource('followups', 'FollowupController');

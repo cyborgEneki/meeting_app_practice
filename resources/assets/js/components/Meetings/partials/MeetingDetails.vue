@@ -32,7 +32,7 @@
                 <td>{{ agendas.time_allocated }}</td>
                 <td>{{ agendas.agenda_status }}</td>
                 <td>{{ agendas.conclusion }}</td>
-                <td v-for="description in agendas.followups"> {{description.action}}</td>
+                <td v-for="description in meeting.agendas.followups"> {{description.action}}</td>
                 <td><h6 v-for="description in agendas.discussion"> {{description.description}}</h6></td>
             </tr>
         </table>
@@ -77,6 +77,7 @@
                         this.users = response.data;
                     }
                 );
+
         },
         methods: {
             test() {

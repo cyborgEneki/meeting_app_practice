@@ -32,7 +32,7 @@
         },
         methods: {
             deleteMedia(id) {
-                axios.delete('/api/media/' + id, this.media)
+                axios.delete('/api/medias/' + id, this.media)
                     .then(() => {
                         let index = this.media.map(item => {
                             return item.id;

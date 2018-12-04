@@ -15,11 +15,7 @@
         props: ['venue'],
         methods: {
             editVenue(venue) {
-                let currentVenue = {};
-
-                currentVenue.name = venue.name;
-
-                axios.put('/api/venues/' + venue.id, currentVenue)
+                axios.put('/api/venues/' + venue.id, venue)
                     .then(response => {
                     });
                 this.$router.push('/venues');

@@ -31,16 +31,9 @@
 
         methods: {
             editUser: function (user) {
-                let currentUser = {};
-
-                currentUser.first_name = user.first_name;
-                currentUser.middle_name = user.middle_name;
-                currentUser.last_name = user.last_name;
-                currentUser.phone_number = user.phone_number;
-                currentUser.email = user.email;
-
-                axios.put('/api/users/' + user.id, currentUser)
-                    .then(response => {});
+                axios.put('/api/users/' + user.id, user)
+                    .then(response => {
+                    });
                 this.$router.push('/users');
                 this.$noty.success("This user has been edited!");
             }

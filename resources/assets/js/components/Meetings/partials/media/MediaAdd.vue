@@ -21,7 +21,7 @@
         },
         methods: {
             addMedia() {
-                axios.post('/api/media/', this.media)
+                axios.post('/api/medias/', this.media)
                     .then(response => {
                     });
                 this.$router.push('/media');
