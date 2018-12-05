@@ -62757,12 +62757,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -62877,45 +62871,56 @@ var render = function() {
       _c("h4", [_vm._v("Agendas:")]),
       _vm._v(" "),
       _c(
-        "table",
-        { staticClass: "table striped table-bordered" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.meeting.agendas, function(agendas) {
-            return _c(
-              "tr",
+        "div",
+        _vm._l(_vm.meeting.agendas, function(agendas) {
+          return _c("ul", [
+            _c("li", [_vm._v("Agenda")]),
+            _vm._v(" "),
+            _c(
+              "ul",
               [
-                _c("td", [_vm._v(_vm._s(agendas.user.full_name))]),
+                _c("li", [
+                  _vm._v(
+                    "Assignee " +
+                      _vm._s(_vm.choices.users[agendas.user_id].full_name)
+                  )
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(agendas.topic))]),
+                _c("li", [_vm._v("Topic " + _vm._s(agendas.topic))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(agendas.description))]),
+                _c("li", [
+                  _vm._v("Description " + _vm._s(agendas.description))
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(agendas.time_allocated))]),
+                _c("li", [
+                  _vm._v(
+                    "Time Allocated (minutes)" + _vm._s(agendas.time_allocated)
+                  )
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(agendas.agenda_status))]),
+                _c("li", [_vm._v("Status " + _vm._s(agendas.agenda_status))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(agendas.conclusion))]),
+                _c("li", [_vm._v("Conclusion " + _vm._s(agendas.conclusion))]),
                 _vm._v(" "),
                 _vm._l(_vm.meeting.agendas.followups, function(description) {
-                  return _c("td", [_vm._v(" " + _vm._s(description.action))])
+                  return _c("li", [
+                    _vm._v("Follow Up Action " + _vm._s(description.action))
+                  ])
                 }),
                 _vm._v(" "),
                 _c(
-                  "td",
+                  "li",
                   _vm._l(agendas.discussion, function(description) {
                     return _c("h6", [
-                      _vm._v(" " + _vm._s(description.description))
+                      _vm._v("Discussions " + _vm._s(description.description))
                     ])
                   })
                 )
               ],
               2
             )
-          })
-        ],
-        2
+          ])
+        })
       ),
       _vm._v(" "),
       _c("label", [_vm._v("Add Attendee")]),
@@ -62966,30 +62971,7 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Assignee")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Topic")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Description")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Time Allocated (minutes)")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Status")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Conclusion")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Follow Up Action")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Discussions")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
