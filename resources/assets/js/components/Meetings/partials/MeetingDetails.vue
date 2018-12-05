@@ -15,18 +15,62 @@
         </div>
         <h4>Agendas:</h4>
         <div>
-            <ul v-for="agendas in meeting.agendas">
+            <ul v-for="(agendas, index) in meeting.agendas">
                 <li>Agenda</li>
                 <ul>
                     <li>Assignee {{ choices.users[agendas.user_id].full_name }}</li>
-                    <li>Topic {{ agendas.topic }}</li>
+                    <li>Agenda {{index+1}}: {{ agendas.topic }}</li>
                     <li>Description {{ agendas.description }}</li>
-                    <li>Time Allocated (minutes){{ agendas.time_allocated }}</li>
+                    <li>Time Allocated (minutes) {{ agendas.time_allocated }}</li>
                     <li>Status {{ agendas.agenda_status }}</li>
                     <li>Conclusion {{ agendas.conclusion }}</li>
-                    <li v-for="description in meeting.agendas.followups">Follow Up Action {{description.action}}</li>
+                    <li>Follow ups</li>
+                    <ul v-for="followup in agendas.followups">
+                        <li>Action {{followup.action}}</li>
+                        <li>Timeline {{followup.timeline}}</li>
+                        <li>Status {{followup.status}}</li>
+                        <li></li>
+                    </ul>
                     <li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>
                 </ul>
+                <li @click="success = !success">Add Agenda</li>
+                <div v-if="success">
+                    <div v-for="(agenda,index) in meeting.agendas">
+                        <div>
+                            Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
+                        </div>
+                        <div>
+                            Agenda Description<textarea type="text"
+                                                        v-model="meeting.agendas[index].description"></textarea>
+                        </div>
+                        <div>
+                            Time Allocated
+                            <select type="text" v-model="meeting.agendas[index].time_allocated">
+                                <option value="">Select time</option>
+                                <option v-for="time in timing">{{ time }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>User Assigned to Agenda</label>
+                            <select v-model="meeting.agendas[index].user_id">
+                                <option value="">Select user</option>
+                                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            Agenda Status
+                            <select type="text" v-model="meeting.agendas[index].agenda_status">
+                                <option value="">Select status</option>
+                                <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button @click="addAgenda">Save Agenda</button>
+                    <li @click="success = !success">Hide Agenda Form</li>
+
+                </div>
             </ul>
         </div>
 
@@ -62,7 +106,8 @@
         },
         data() {
             return {
-                users: []
+                users: [],
+                success: false
             }
         },
         created() {
@@ -74,6 +119,13 @@
 
         },
         methods: {
+            addAgenda() {
+                axios.post('/api/meetings', this.meeting)
+                    .then((response) => {
+                        this.$router.push('/meetings');
+                        this.$noty.success("Your meeting has been saved!");
+                    });
+            },
             test() {
                 console.log(this.meeting)
             },
