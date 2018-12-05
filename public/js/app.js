@@ -62816,7 +62816,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             users: [],
-            success: false
+            success: false,
+            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }]
         };
     },
     created: function created() {
@@ -62828,30 +62829,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
-        addAgenda: function addAgenda() {
-            var _this2 = this;
-
-            axios.post('/api/meetings', this.meeting).then(function (response) {
-                _this2.$router.push('/meetings');
-                _this2.$noty.success("Your meeting has been saved!");
-            });
-        },
         test: function test() {
             console.log(this.meeting);
         },
         removeUsers: function removeUsers(id) {
-            var _this3 = this;
+            var _this2 = this;
 
             axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this3.meeting.users.map(function (item) {
+                var index = _this2.meeting.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this3.meeting.users.splice(index, 1);
+                _this2.meeting.users.splice(index, 1);
             });
         },
 
         addUser: function addUser(id) {
-            var _this4 = this;
+            var _this3 = this;
 
             var checkMtg = this.meeting.users.filter(function (user) {
                 return user.id === id;
@@ -62859,7 +62852,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             //only add user if that user isn't already in the meeting
             if (!checkMtg.length) {
                 axios.get('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                    _this4.meeting.users.push(response.data.user);
+                    _this3.meeting.users.push(response.data.user);
                 });
             } else {
                 console.log('User already exists');

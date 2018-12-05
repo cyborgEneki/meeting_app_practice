@@ -107,7 +107,13 @@
         data() {
             return {
                 users: [],
-                success: false
+                success: false,
+                statuses:
+                    [
+                        {id: 0, name: 'Pending'},
+                        {id: 1, name: 'Accepted'},
+                        {id: 2, name: 'Rejected'}
+                    ],
             }
         },
         created() {
@@ -119,13 +125,6 @@
 
         },
         methods: {
-            addAgenda() {
-                axios.post('/api/meetings', this.meeting)
-                    .then((response) => {
-                        this.$router.push('/meetings');
-                        this.$noty.success("Your meeting has been saved!");
-                    });
-            },
             test() {
                 console.log(this.meeting)
             },
