@@ -40,8 +40,7 @@
                             Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
                         </div>
                         <div>
-                            Agenda Description<textarea type="text"
-                                                        v-model="meeting.agendas[index].description"></textarea>
+                            Agenda Description<textarea type="text" v-model="meeting.agendas[index].description"></textarea>
                         </div>
                         <div>
                             Time Allocated
