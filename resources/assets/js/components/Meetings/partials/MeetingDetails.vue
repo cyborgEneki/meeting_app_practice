@@ -9,7 +9,7 @@
         <h4>Time Keeper:</h4>
         <p>{{ choices.users[meeting.time_keeper_id].full_name }}</p>
         <h4> Attendees</h4>
-        <div v-for="user in orderedUsers">
+        <div v-for="user in orderedAttendees">
             <p>{{ user.full_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
@@ -25,8 +25,8 @@
                             <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
                             <div>Status {{ agendas.agenda_status }}</div>
                             <div>Conclusion {{ agendas.conclusion }}</div>
-                            <!--<div>Follow Up Action-->
-                            <!--<li v-for="followup in agendas.followups">{{followup.action}}</li>-->
+                            <!--<div v-for="followup in agendas.followups">Follow Up Action-->
+                            <!--<li>{{followup.action}}</li>-->
                             <!--<li>Timeline {{followup.timeline}}</li>-->
                             <!--<li>Status {{followup.status}}</li>-->
                             <!--</div>-->
@@ -102,6 +102,9 @@
                 meeting: 'meeting',
             }),
             orderedUsers() {
+                return _.orderBy(this.choices.users, 'first_name');
+            },
+            orderedAttendees() {
                 return _.orderBy(this.meeting.users, 'first_name');
             }
         },
@@ -166,6 +169,9 @@
                     return item.id
                 }).indexOf(id);
                 this.editagenda = this.meeting.agendas[index];
+
+                console.log(this.orderedUsers);
+                console.log(this.user);
             },
             saveAgendaEdit() {
                 axios.put('/api/agendas/' + this.editagenda.id, this.editagenda)

@@ -62811,6 +62811,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         meeting: 'meeting'
     }), {
         orderedUsers: function orderedUsers() {
+            return _.orderBy(this.choices.users, 'first_name');
+        },
+        orderedAttendees: function orderedAttendees() {
             return _.orderBy(this.meeting.users, 'first_name');
         }
     }),
@@ -62873,6 +62876,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return item.id;
             }).indexOf(id);
             this.editagenda = this.meeting.agendas[index];
+
+            console.log(this.orderedUsers);
+            console.log(this.user);
         },
         saveAgendaEdit: function saveAgendaEdit() {
             var _this4 = this;
@@ -62919,7 +62925,7 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
       _vm._v(" "),
-      _vm._l(_vm.orderedUsers, function(user) {
+      _vm._l(_vm.orderedAttendees, function(user) {
         return _c("div", [
           _c("p", [_vm._v(_vm._s(user.full_name))]),
           _vm._v(" "),
