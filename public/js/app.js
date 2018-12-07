@@ -62801,6 +62801,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -63263,22 +63264,22 @@ var render = function() {
                           }
                         }
                       })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "button",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.saveAgendaEdit()
+                            }
+                          }
+                        },
+                        [_vm._v("Save Edit")]
+                      )
                     ])
                   ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "button",
-                  {
-                    on: {
-                      click: function($event) {
-                        _vm.saveAgendaEdit()
-                      }
-                    }
-                  },
-                  [_vm._v("Save Edit")]
                 )
               ]),
               _vm._v(" "),

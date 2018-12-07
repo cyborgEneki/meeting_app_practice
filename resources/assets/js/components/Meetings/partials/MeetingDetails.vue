@@ -62,10 +62,11 @@
                                 </select>
                             </div>
                             <div>Conclusion<input type="text" v-model="editagenda.conclusion"></div>
+                            <div>
+                                <button @click="saveAgendaEdit()">Save Edit</button>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <button @click="saveAgendaEdit()">Save Edit</button>
+
                     </div>
                     <div>
                         <button @click="editagenda = {}">Cancel</button>
