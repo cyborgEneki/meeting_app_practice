@@ -48,7 +48,7 @@ class AgendaController extends Controller
      * @param Agenda $agenda
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Agenda $agenda)
+    public function update(AgendaRequest $request, Agenda $agenda)
     {
         $this->agendaRepository->updateAgenda($request, $agenda);
         return response()->json(['You have successfully updated your agenda.'], 200);
