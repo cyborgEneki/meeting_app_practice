@@ -23,7 +23,7 @@ class CreateAgendasTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('agenda_status');
-            $table->text('conclusion');
+            $table->text('conclusion')->nullable($value = true);
             $table->timestamps();
         });
     }

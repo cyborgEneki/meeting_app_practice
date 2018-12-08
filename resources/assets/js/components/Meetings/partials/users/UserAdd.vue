@@ -10,7 +10,8 @@
             <label>Phone Number</label>
             <input type="text" v-model="user.phone_number">
             <label>Email</label>
-            <input type="text" v-model="user.email">
+            <input v-validate="'required|email'" name="email" type="text" v-model="user.email">
+            <span>{{ errors.first('email') }}</span>
             <label>Password</label>
             <input type="text" v-model="user.password">
             <label>Confirm Password</label>
