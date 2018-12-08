@@ -10,6 +10,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "MeetingSeriesAdd",
         data() {
@@ -25,7 +27,7 @@
                 axios.post('api/meetingseries', this.meetingseries)
                     .then(response => {});
                 this.$router.push('/meeting_series');
-
+                this.$noty.success("Your meeting series has been saved!");
             }
         }
     }

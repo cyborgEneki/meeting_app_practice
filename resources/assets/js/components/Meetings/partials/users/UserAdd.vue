@@ -23,6 +23,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "UserAdd",
         data(){
@@ -42,6 +44,7 @@
                 axios.post('/api/users', this.user)
                     .then(response => {});
                 this.$router.push('/users');
+                this.$noty.success("This user has been saved!");
             }
         }
     }

@@ -24,6 +24,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         props: ['user'],
 
@@ -40,6 +42,7 @@
                 axios.put('/api/users/' + user.id, currentUser)
                     .then(response => {});
                 this.$router.push('/users');
+                this.$noty.success("This user has been edited!");
             }
         },
     }

@@ -9,6 +9,8 @@
 </template>
 rout
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "MeetingTypeAdd",
         data() {
@@ -23,6 +25,7 @@ rout
                 axios.post('/api/meetingtypes', this.meetingtype)
                     .then(response => {});
                 this.$router.push('/meeting_type');
+                this.$noty.success("Your meeting type has been saved!");
             }
         }
     }

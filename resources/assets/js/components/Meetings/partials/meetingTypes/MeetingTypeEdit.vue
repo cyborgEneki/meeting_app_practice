@@ -8,6 +8,8 @@
 </template>
 
 <script>
+    import 'vuejs-noty/dist/vuejs-noty.css';
+
     export default {
         name: "editMeetingType",
         props: ['meetingtype'],
@@ -19,6 +21,8 @@
 
                 axios.put('/api/meetingtypes/' + meetingtype.id, this.currentMeetingType)
                     .then(response => {});
+                this.$router.push('/meeting_type');
+                this.$noty.success("This meeting type has been edited!");
             }
         }
     }

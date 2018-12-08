@@ -14,6 +14,7 @@ require('./bootstrap');
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
+Vue.use(VueNoty);
 
 Vue.component('passport-clients', Clients);
 Vue.component('passport-authorized-clients', AuthorizedClients);
@@ -21,9 +22,11 @@ Vue.component('passport-personal-access-tokens', PersonalAccessTokens);
 
 import Vue from 'vue';
 
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 
 import VeeValidate from 'vee-validate';
+
+import VueNoty from 'vuejs-noty';
 
 import App from './components/App'
 import Clients from './components/passport/Clients'
