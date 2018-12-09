@@ -83,11 +83,11 @@
                             <div>
                                 <button @click="saveAgendaEdit()">Save Edit</button>
                             </div>
+                            <div>
+                                <a  href="#" @click="editAgenda = {}" >Cancel</a>
+                            </div>
                         </div>
 
-                    </div>
-                    <div>
-                        <a  href="#" @click="editAgenda = {}" >Cancel</a>
                     </div>
                 </fieldset>
             </div>

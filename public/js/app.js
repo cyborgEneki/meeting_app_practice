@@ -63483,23 +63483,23 @@ var render = function() {
                         },
                         [_vm._v("Save Edit")]
                       )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              _vm.editAgenda = {}
+                            }
+                          }
+                        },
+                        [_vm._v("Cancel")]
+                      )
                     ])
                   ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        _vm.editAgenda = {}
-                      }
-                    }
-                  },
-                  [_vm._v("Cancel")]
                 )
               ])
             ])
