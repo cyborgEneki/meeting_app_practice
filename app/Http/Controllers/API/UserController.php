@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\EditUserRequest;
 use App\Repositories\CustomUserRepository;
 use App\Repositories\CustomUserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class UserController extends Controller
         return $users;
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(EditUserRequest $request, User $user)
     {
         $this->customUserRepository->updateUser($request, $user);
 

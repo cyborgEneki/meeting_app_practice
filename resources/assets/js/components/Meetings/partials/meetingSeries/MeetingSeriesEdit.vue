@@ -17,12 +17,7 @@
         props: ['eachmeetingseries'],
         methods: {
             editMeetingSeries(eachmeetingseries) {
-                let currentMeetingSeries = {};
-
-                currentMeetingSeries.name = eachmeetingseries.name;
-                currentMeetingSeries.frequency = eachmeetingseries.frequency;
-
-                axios.put('/api/meetingseries/' + eachmeetingseries.id, currentMeetingSeries)
+                axios.put('/api/meetingseries/' + eachmeetingseries.id, eachmeetingseries)
                     .then(response => {
                     });
                 this.$router.push('/meeting_series');

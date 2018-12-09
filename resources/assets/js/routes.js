@@ -42,8 +42,8 @@ const router = new VueRouter({
             component: MeetingSeriesIndex,
         },
         {
-            path: '/media',
-            name: 'media',
+            path: '/medias',
+            name: 'medias',
             component: MediaIndex,
         },
         {

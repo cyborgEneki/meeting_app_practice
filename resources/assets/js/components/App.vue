@@ -7,7 +7,7 @@
             <router-link :to="{ name: 'users'}">User Management</router-link>
             <router-link :to="{ name: 'meetingSeries'}">Meeting Series</router-link>
             <router-link :to="{ name: 'meetingTypes'}">Meeting Types</router-link>
-            <router-link :to="{ name: 'media'}">Media</router-link>
+            <router-link :to="{ name: 'medias'}">Media</router-link>
         </p>
         <div>
             <router-view :choices.sync="choices"/>
