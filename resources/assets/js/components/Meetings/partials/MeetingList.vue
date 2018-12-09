@@ -75,7 +75,7 @@
                         }).indexOf(id);
                         this.meetings.splice(index, 1);
                     });
-            }
+            },
         },
         created() {
             this.getMeetings();

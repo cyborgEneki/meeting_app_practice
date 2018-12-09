@@ -14,28 +14,65 @@
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
         <h4>Agendas:</h4>
-        <table class="table striped table-bordered">
-            <thead>
-            <th>Assignee</th>
-            <th>Topic</th>
-            <th>Description</th>
-            <th>Time Allocated (minutes)</th>
-            <th>Status</th>
-            <th>Conclusion</th>
-            <th>Follow Up Action</th>
-            <th>Discussions</th>
-            </thead>
-            <tr v-for="agendas in meeting.agendas">
-                <td>{{ agendas.user.full_name }}</td>
-                <td>{{ agendas.topic }}</td>
-                <td>{{ agendas.description }}</td>
-                <td>{{ agendas.time_allocated }}</td>
-                <td>{{ agendas.agenda_status }}</td>
-                <td>{{ agendas.conclusion }}</td>
-                <td v-for="description in meeting.agendas.followups"> {{description.action}}</td>
-                <td><h6 v-for="description in agendas.discussion"> {{description.description}}</h6></td>
-            </tr>
-        </table>
+        <div>
+            <ul v-for="(agendas, index) in meeting.agendas">
+                <li>Agenda</li>
+                <ul>
+                    <li>Assignee {{ choices.users[agendas.user_id].full_name }}</li>
+                    <li>Agenda {{index+1}}: {{ agendas.topic }}</li>
+                    <li>Description {{ agendas.description }}</li>
+                    <li>Time Allocated (minutes) {{ agendas.time_allocated }}</li>
+                    <li>Status {{ agendas.agenda_status }}</li>
+                    <li>Conclusion {{ agendas.conclusion }}</li>
+                    <li>Follow ups</li>
+                    <ul v-for="followup in agendas.followups">
+                        <li>Action {{followup.action}}</li>
+                        <li>Timeline {{followup.timeline}}</li>
+                        <li>Status {{followup.status}}</li>
+                        <li></li>
+                    </ul>
+                    <li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>
+                </ul>
+                <li @click="success = !success">Add Agenda</li>
+                <div v-if="success">
+                    <div v-for="(agenda,index) in meeting.agendas">
+                        <div>
+                            Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
+                        </div>
+                        <div>
+                            Agenda Description<textarea type="text" v-model="meeting.agendas[index].description"></textarea>
+                        </div>
+                        <div>
+                            Time Allocated
+                            <select type="text" v-model="meeting.agendas[index].time_allocated">
+                                <option value="">Select time</option>
+                                <option v-for="time in timing">{{ time }}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>User Assigned to Agenda</label>
+                            <select v-model="meeting.agendas[index].user_id">
+                                <option value="">Select user</option>
+                                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            Agenda Status
+                            <select type="text" v-model="meeting.agendas[index].agenda_status">
+                                <option value="">Select status</option>
+                                <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button @click="addAgenda">Save Agenda</button>
+                    <li @click="success = !success">Hide Agenda Form</li>
+
+                </div>
+            </ul>
+        </div>
+
         <label>Add Attendee</label>
 
         <button @click="addUser(users.id)">cf</button>
@@ -68,7 +105,14 @@
         },
         data() {
             return {
-                users: []
+                users: [],
+                success: false,
+                statuses:
+                    [
+                        {id: 0, name: 'Pending'},
+                        {id: 1, name: 'Accepted'},
+                        {id: 2, name: 'Rejected'}
+                    ],
             }
         },
         created() {

@@ -25,7 +25,7 @@ class MeetingResource extends JsonResource
             'facilitator_id' => $this->facilitator_id,
             'time_keeper_id' => $this->time_keeper_id,
             'users' => $this->users,
-            'agendas' =>$this->agendas,
+            'agendas' =>AgendaResource::collection($this->agendas),
             'venue_id' => $this->venue_id,
             'media_id' => $this->media_id,
             'meetingseries_id' => $this->meetingseries_id,
