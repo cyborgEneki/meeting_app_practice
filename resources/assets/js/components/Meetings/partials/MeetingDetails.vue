@@ -9,68 +9,70 @@
         <h4>Time Keeper:</h4>
         <p>{{ choices.users[meeting.time_keeper_id].full_name }}</p>
         <h4> Attendees</h4>
-        <div v-for="user in orderedUsers">
+        <div v-for="user in orderedAttendees">
             <p>{{ user.full_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
         <h4>Agendas:</h4>
         <div>
-            <ul v-for="(agendas, index) in meeting.agendas">
-                <li>Agenda</li>
-                <ul>
-                    <li>Assignee {{ choices.users[agendas.user_id].full_name }}</li>
-                    <li>Agenda {{index+1}}: {{ agendas.topic }}</li>
-                    <li>Description {{ agendas.description }}</li>
-                    <li>Time Allocated (minutes) {{ agendas.time_allocated }}</li>
-                    <li>Status {{ agendas.agenda_status }}</li>
-                    <li>Conclusion {{ agendas.conclusion }}</li>
-                    <li>Follow ups</li>
-                    <ul v-for="followup in agendas.followups">
-                        <li>Action {{followup.action}}</li>
-                        <li>Timeline {{followup.timeline}}</li>
-                        <li>Status {{followup.status}}</li>
-                        <li></li>
-                    </ul>
-                    <li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>
-                </ul>
-                <li @click="success = !success">Add Agenda</li>
-                <div v-if="success">
-                    <div v-for="(agenda,index) in meeting.agendas">
-                        <div>
-                            Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
+            <div v-for="(agendas, index) in meeting.agendas">
+                <fieldset>
+                    <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
+                    <div>
+                        <div v-show="editagenda.id != agendas.id">
+                            <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
+                            <div>Description {{ agendas.description }}</div>
+                            <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
+                            <div>Status {{ agendas.agenda_status }}</div>
+                            <div>Conclusion {{ agendas.conclusion }}</div>
+                            <!--<div v-for="followup in agendas.followups">Follow Up Action-->
+                            <!--<li>{{followup.action}}</li>-->
+                            <!--<li>Timeline {{followup.timeline}}</li>-->
+                            <!--<li>Status {{followup.status}}</li>-->
+                            <!--</div>-->
+                            <div>
+                                <button @click="toggleEdit(agendas.id)">Edit</button>
+                            </div>
+                            <!--<li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>-->
                         </div>
-                        <div>
-                            Agenda Description<textarea type="text" v-model="meeting.agendas[index].description"></textarea>
+                        <div v-show="editagenda.id==agendas.id">
+                            <div>Topic<input type="text" v-model="editagenda.topic"></div>
+                            <div>Description<input type="text" v-model="editagenda.description"></div>
+                            <div>
+                                Time Allocated (minutes)
+                                <select type="text" v-model="editagenda.time_allocated">
+                                    <option value="">Select time</option>
+                                    <option v-for="time in timing">{{ time }}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>User Assigned</label>
+                                <select v-model="editagenda.user_id">
+                                    <option value="">Select user</option>
+                                    <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>
+                                Status
+                                <select type="text" v-model="editagenda.agenda_status">
+                                    <option value="">Select status</option>
+                                    <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div>Conclusion<input type="text" v-model="editagenda.conclusion"></div>
+                            <div>
+                                <button @click="saveAgendaEdit()">Save Edit</button>
+                            </div>
                         </div>
-                        <div>
-                            Time Allocated
-                            <select type="text" v-model="meeting.agendas[index].time_allocated">
-                                <option value="">Select time</option>
-                                <option v-for="time in timing">{{ time }}</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label>User Assigned to Agenda</label>
-                            <select v-model="meeting.agendas[index].user_id">
-                                <option value="">Select user</option>
-                                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div>
-                            Agenda Status
-                            <select type="text" v-model="meeting.agendas[index].agenda_status">
-                                <option value="">Select status</option>
-                                <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
-                            </select>
-                        </div>
+
                     </div>
-
-                    <button @click="addAgenda">Save Agenda</button>
-                    <li @click="success = !success">Hide Agenda Form</li>
-
-                </div>
-            </ul>
+                    <div>
+                        <button @click="editagenda = {}">Cancel</button>
+                    </div>
+                </fieldset>
+            </div>
         </div>
 
         <label>Add Attendee</label>
@@ -100,12 +102,24 @@
                 meeting: 'meeting',
             }),
             orderedUsers() {
+                return _.orderBy(this.choices.users, 'first_name');
+            },
+            orderedAttendees() {
                 return _.orderBy(this.meeting.users, 'first_name');
             }
         },
         data() {
             return {
+                timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
+                editagenda: {
+                    id: '',
+                    topic: '',
+                    description: '',
+                    time_allocated: '',
+                    user_id: '',
+                    agenda_status: 0,
+                },
                 success: false,
                 statuses:
                     [
@@ -149,6 +163,21 @@
                 } else {
                     console.log('User already exists');
                 }
+            },
+            toggleEdit(id) {
+                let index = this.meeting.agendas.map(function (item) {
+                    return item.id
+                }).indexOf(id);
+                this.editagenda = this.meeting.agendas[index];
+
+                console.log(this.orderedUsers);
+                console.log(this.user);
+            },
+            saveAgendaEdit() {
+                axios.put('/api/agendas/' + this.editagenda.id, this.editagenda)
+                    .then((response) => {
+                        this.editagenda = {};
+                    });
             }
         },
     }
