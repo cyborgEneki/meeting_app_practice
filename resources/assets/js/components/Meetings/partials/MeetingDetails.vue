@@ -21,7 +21,7 @@
         <div>
             <div v-for="(agendas, index) in meeting.agendas">
                 <fieldset>
-                    <div v-on:dblclick="clicks += 1, toggleAgendaEdit(agendas.id)">
+                    <div @dblclick="toggleAgendaEdit(agendas.id)">
                         <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
                         <div>
                             <div v-show="editAgenda.id != agendas.id">
@@ -136,7 +136,6 @@
         },
         data() {
             return {
-                clicks: 0,
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {

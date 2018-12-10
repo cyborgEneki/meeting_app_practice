@@ -62845,7 +62845,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
-            clicks: 0,
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
             editAgenda: {
@@ -63000,7 +62999,7 @@ var render = function() {
                 {
                   on: {
                     dblclick: function($event) {
-                      ;(_vm.clicks += 1), _vm.toggleAgendaEdit(agendas.id)
+                      _vm.toggleAgendaEdit(agendas.id)
                     }
                   }
                 },
