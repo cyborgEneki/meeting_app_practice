@@ -16,7 +16,7 @@
 
         <label>Add Attendee</label>
         <button @click="addUser(users.id)">Add</button>
-        
+
         <h4>Agendas:</h4>
         <div>
             <div v-for="(agendas, index) in meeting.agendas">
@@ -58,8 +58,8 @@
                             <!--<li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>-->
                         </div>
                         <div v-show="editAgenda.id==agendas.id">
-                            <div>Topic<input type="text" v-model="editAgenda.topic"></div>
-                            <div>Description<input type="text" v-model="editAgenda.description"></div>
+                            <div>Topic<input @keyup.enter="nextAgenda1" type="text" v-model="editAgenda.topic"></div>
+                            <div>Description<input id="inputAgenda1" type="text" v-model="editAgenda.description"></div>
                             <div>
                                 Time Allocated (minutes)
                                 <select type="text" v-model="editAgenda.time_allocated">
@@ -83,9 +83,9 @@
                                     </option>
                                 </select>
                             </div>
-                            <div>Conclusion<input type="text" v-model="editAgenda.conclusion"></div>
+                            <div>Conclusion<input @keyup.enter="toggleAgendaEdit" type="text" v-model="editAgenda.conclusion"></div>
                             <div>
-                                <button @click="saveAgendaEdit()">Save Edit</button>
+                                <button  id="inputAgenda2" @click="saveAgendaEdit()">Save Edit</button>
                             </div>
                             <div>
                                 <a  href="#" @click="editAgenda = {}" >Cancel</a>
@@ -192,6 +192,12 @@
                     .then((response) => {
                         this.editAgenda = {};
                     });
+            },
+            nextAgenda1() {
+                document.getElementById('inputAgenda1').focus();
+            },
+            nextAgenda2() {
+                document.getElementById('inputAgenda2').focus();
             }
         },
     }

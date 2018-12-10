@@ -62901,6 +62901,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda).then(function (response) {
                 _this3.editAgenda = {};
             });
+        },
+        nextAgenda1: function nextAgenda1() {
+            document.getElementById('inputAgenda1').focus();
+        },
+        nextAgenda2: function nextAgenda2() {
+            document.getElementById('inputAgenda2').focus();
         }
     }
 });
@@ -63248,6 +63254,21 @@ var render = function() {
                         attrs: { type: "text" },
                         domProps: { value: _vm.editAgenda.topic },
                         on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.nextAgenda1($event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
@@ -63273,7 +63294,7 @@ var render = function() {
                             expression: "editAgenda.description"
                           }
                         ],
-                        attrs: { type: "text" },
+                        attrs: { id: "inputAgenda1", type: "text" },
                         domProps: { value: _vm.editAgenda.description },
                         on: {
                           input: function($event) {
@@ -63467,6 +63488,21 @@ var render = function() {
                         attrs: { type: "text" },
                         domProps: { value: _vm.editAgenda.conclusion },
                         on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.toggleAgendaEdit($event)
+                          },
                           input: function($event) {
                             if ($event.target.composing) {
                               return
@@ -63485,6 +63521,7 @@ var render = function() {
                       _c(
                         "button",
                         {
+                          attrs: { id: "inputAgenda2" },
                           on: {
                             click: function($event) {
                               _vm.saveAgendaEdit()
