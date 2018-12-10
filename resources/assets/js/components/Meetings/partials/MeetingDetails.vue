@@ -13,6 +13,10 @@
             <p>{{ user.full_name }}</p>
             <p @click="removeUsers(user.id)">Remove</p>
         </div>
+
+        <label>Add Attendee</label>
+        <button @click="addUser(users.id)">Add</button>
+        
         <h4>Agendas:</h4>
         <div>
             <div v-for="(agendas, index) in meeting.agendas">
@@ -93,10 +97,6 @@
             </div>
         </div>
 
-        <label>Add Attendee</label>
-
-        <button @click="addUser(users.id)">cf</button>
-
         <h4>Venue:</h4>
         <p>{{ choices.venues[meeting.venue_id].name }}</p>
         <h4>Media:</h4>
@@ -106,7 +106,6 @@
         <h4>Meeting Series:</h4>
         <p>{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
         <hr/>
-        <button @click="test">Test</button>
     </div>
 </template>
 
@@ -153,9 +152,6 @@
             }
         },
         methods: {
-            test() {
-                console.log(this.meeting)
-            },
             removeUsers(id) {
                 axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
                     .then((response) => {
@@ -186,7 +182,7 @@
                 this.editAgenda = this.meeting.agendas[index];
             },
             toggleFollowupEdit(id) {
-                let index = this.meeting.agendas.followups.map(function (item) {
+                let index = this.meeting.agendas[index].followups.map(function (item) {
                     return item.id
                 }).indexOf(id);
                 this.editFollowup= this.meeting.agendas.followups[index];

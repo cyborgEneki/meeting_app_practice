@@ -62819,7 +62819,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -62858,9 +62857,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
-        test: function test() {
-            console.log(this.meeting);
-        },
         removeUsers: function removeUsers(id) {
             var _this = this;
 
@@ -62894,7 +62890,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.editAgenda = this.meeting.agendas[index];
         },
         toggleFollowupEdit: function toggleFollowupEdit(id) {
-            var index = this.meeting.agendas.followups.map(function (item) {
+            var index = this.meeting.agendas[index].followups.map(function (item) {
                 return item.id;
             }).indexOf(id);
             this.editFollowup = this.meeting.agendas.followups[index];
@@ -62961,6 +62957,20 @@ var render = function() {
           )
         ])
       }),
+      _vm._v(" "),
+      _c("label", [_vm._v("Add Attendee")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              _vm.addUser(_vm.users.id)
+            }
+          }
+        },
+        [_vm._v("Add")]
+      ),
       _vm._v(" "),
       _c("h4", [_vm._v("Agendas:")]),
       _vm._v(" "),
@@ -63507,20 +63517,6 @@ var render = function() {
         })
       ),
       _vm._v(" "),
-      _c("label", [_vm._v("Add Attendee")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              _vm.addUser(_vm.users.id)
-            }
-          }
-        },
-        [_vm._v("cf")]
-      ),
-      _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
       _vm._v(" "),
       _c("p", [_vm._v(_vm._s(_vm.choices.venues[_vm.meeting.venue_id].name))]),
@@ -63548,9 +63544,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.test } }, [_vm._v("Test")])
+      _c("hr")
     ],
     2
   )
