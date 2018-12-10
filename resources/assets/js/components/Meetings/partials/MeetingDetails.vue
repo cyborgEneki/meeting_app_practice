@@ -21,45 +21,53 @@
         <div>
             <div v-for="(agendas, index) in meeting.agendas">
                 <fieldset>
-                    <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
-                    <div>
-                        <div v-show="editAgenda.id != agendas.id">
-                            <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
-                            <div>Description {{ agendas.description }}</div>
-                            <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
-                            <div>Status {{ agendas.agenda_status }}</div>
-                            <div>Conclusion {{ agendas.conclusion }}</div>
-                            <div v-for="followup in agendas.followups">Follow Up
-                                <div v-show="editFollowup.id != followup.id">
-                                    <div>
-                                        <li>Action {{followup.action}}</li>
-                                        <li>Timeline {{followup.timeline}}</li>
-                                        <li>Status {{followup.status}}</li>
+                    <div v-on:dblclick="clicks += 1, toggleAgendaEdit(agendas.id)">
+                        <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
+                        <div>
+                            <div v-show="editAgenda.id != agendas.id">
+                                <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
+                                <div>Description {{ agendas.description }}</div>
+                                <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
+                                <div>Status {{ agendas.agenda_status }}</div>
+                                <div>Conclusion {{ agendas.conclusion }}</div>
+                                <div v-for="followup in agendas.followups">Follow Up
+                                    <div v-show="editFollowup.id != followup.id">
                                         <div>
-                                            <button @click="toggleFollowupEdit(followup.id)">Edit Followup</button>
+                                            <li>Action {{followup.action}}</li>
+                                            <li>Timeline {{followup.timeline}}</li>
+                                            <li>Status {{followup.status}}</li>
+                                            <div>
+                                                <button @click="toggleFollowupEdit(followup.id)">Edit Followup</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-show="editFollowup.id == followup.id">
+                                        <div>Action<input type="text" v-model="editFollowup.action"></div>
+                                        <div>Timeline <input type="text" v-model="editFollowup.timeline"></div>
+                                        <div>Status
+                                            <select v-model="editFollowup.status">
+                                                <option value="">Select status</option>
+                                                <option v-for="status in statuses" v-bind:value="status.id">
+                                                    {{status.name}}
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-show="editFollowup.id == followup.id">
-                                    <div>Action<input type="text" v-model="editFollowup.action"></div>
-                                    <div>Timeline <input type="text" v-model="editFollowup.timeline"></div>
-                                    <div>Status
-                                        <select v-model="editFollowup.status">
-                                            <option value="">Select status</option>
-                                            <option v-for="status in statuses" v-bind:value="status.id">{{status.name}}
-                                            </option>
-                                        </select>
-                                    </div>
+                                <div>
+                                    <button @click="toggleAgendaEdit(agendas.id)">Edit Agenda</button>
                                 </div>
+                                <!--<li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>-->
                             </div>
-                            <div>
-                                <button @click="toggleAgendaEdit(agendas.id)">Edit Agenda</button>
-                            </div>
-                            <!--<li><h6 v-for="description in agendas.discussion">Discussions {{description.description}}</h6></li>-->
                         </div>
+
                         <div v-show="editAgenda.id==agendas.id">
-                            <div>Topic<input @keyup.enter="nextAgenda1" type="text" v-model="editAgenda.topic"></div>
-                            <div>Description<input id="inputAgenda1" type="text" v-model="editAgenda.description"></div>
+
+                            <div>Topic<input @keyup.enter="nextAgenda1" type="text" v-model="editAgenda.topic">
+                            </div>
+                            <div>Description<input id="inputAgenda1" @keyup.enter="nextAgenda2()" type="text"
+                                                   v-model="editAgenda.description">
+                            </div>
                             <div>
                                 Time Allocated (minutes)
                                 <select type="text" v-model="editAgenda.time_allocated">
@@ -83,12 +91,13 @@
                                     </option>
                                 </select>
                             </div>
-                            <div>Conclusion<input @keyup.enter="toggleAgendaEdit" type="text" v-model="editAgenda.conclusion"></div>
+                            <div>Conclusion<input id="inputAgenda2" @keyup.enter="saveAgendaEdit" type="text"
+                                                  v-model="editAgenda.conclusion"></div>
                             <div>
-                                <button  id="inputAgenda2" @click="saveAgendaEdit()">Save Edit</button>
+                                <button @click="saveAgendaEdit()">Save Edit</button>
                             </div>
                             <div>
-                                <a  href="#" @click="editAgenda = {}" >Cancel</a>
+                                <a href="#" @click="editAgenda = {}">Cancel</a>
                             </div>
                         </div>
 
@@ -127,6 +136,7 @@
         },
         data() {
             return {
+                clicks: 0,
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {
@@ -185,7 +195,7 @@
                 let index = this.meeting.agendas[index].followups.map(function (item) {
                     return item.id
                 }).indexOf(id);
-                this.editFollowup= this.meeting.agendas.followups[index];
+                this.editFollowup = this.meeting.agendas.followups[index];
             },
             saveAgendaEdit() {
                 axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda)
