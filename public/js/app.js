@@ -62916,6 +62916,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         cancelEdit: function cancelEdit() {
+            Object.assign(this.meeting.agendas, this.agendaBeforeEdit);
             this.editAgenda = {};
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
@@ -62932,6 +62933,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             //load the values of the followup from meeting into the editFollowup variable in data
             this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
         }
+    },
+    mounted: function mounted() {
+        this.agendaBeforeEdit = Object.assign({}, this.meeting.agendas);
     }
 });
 

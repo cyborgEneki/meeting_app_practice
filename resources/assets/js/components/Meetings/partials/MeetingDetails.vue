@@ -207,6 +207,7 @@
                     });
             },
             cancelEdit() {
+                Object.assign(this.meeting.agendas, this.agendaBeforeEdit);
                 this.editAgenda = {};
             },
             startFollowupEdit(followupId, agendaId) {
@@ -223,6 +224,9 @@
                 //load the values of the followup from meeting into the editFollowup variable in data
                 this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
             },
+        },
+        mounted() {
+            this.agendaBeforeEdit = Object.assign({}, this.meeting.agendas)
         }
     }
 </script>
