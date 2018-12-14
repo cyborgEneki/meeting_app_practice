@@ -32,6 +32,16 @@
                                     <div>Status {{ agendas.agenda_status }}</div>
                                     <div>Conclusion {{ agendas.conclusion }}</div>
                                 </div>
+
+                                <div>
+                                    <a href="#" @click="showFollowupForm()">Add Followup</a>
+                                    <div v-show='showFollowup'>
+                                        Action<input type="text" v-model="editFollowup.action">
+                                        Timeline<input type="text" v-model="editFollowup.timeline">
+                                        Status<input type="text" v-model="editFollowup.status">
+                                        <a href="#" @click="showFollowup = !showFollowup">Cancel</a>
+                                    </div>
+                                </div>
                                 <div v-for="followup in agendas.followups">Follow Up
                                     <div v-show="editFollowup.id != followup.id">
                                         <div>
@@ -41,7 +51,6 @@
                                                 <li>Status {{followup.status}}</li>
                                             </div>
                                             <div>
-                                                <a href="#" @click="addFollowup(followup.id, agendas.id)">Add Followup</a>
                                                 <button @click="startFollowupEdit(followup.id, agendas.id)">Edit
                                                     Followup
                                                 </button>
@@ -110,7 +119,7 @@
                                     <button @click="saveAgendaEdit">Save Edit</button>
                                 </div>
                                 <div>
-                                    <a href="#" @click="cancelAgendaEdit">Cancel</a>
+                                    <a href="#" @click="editAgenda = {}">Cancel</a>
                                 </div>
                             </div>
                         </form>
@@ -150,6 +159,7 @@
         },
         data() {
             return {
+                showFollowup: false,
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {
@@ -204,15 +214,16 @@
                 }).indexOf(id);
                 this.editAgenda = Object.assign({}, this.meeting.agendas[index]);
             },
-            cancelAgendaEdit() {
-                this.editAgenda = {};
-            },
             saveAgendaEdit() {
                 axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda)
                     .then((response) => {
                         this.editAgenda = {};
                     });
             },
+            showFollowupForm() {
+                this.showFollowup = !this.showFollowup;
+            },
+
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
                 let agendaindex = this.meeting.agendas.map(function (item) {
