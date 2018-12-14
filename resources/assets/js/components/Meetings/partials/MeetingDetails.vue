@@ -21,21 +21,25 @@
         <div>
             <div v-for="(agendas, index) in meeting.agendas">
                 <fieldset>
-                    <div @dblclick="startAgendaEdit(agendas.id)">
+                    <div>
                         <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
                         <div>
                             <div v-show="editAgenda.id != agendas.id">
-                                <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
-                                <div>Description {{ agendas.description }}</div>
-                                <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
-                                <div>Status {{ agendas.agenda_status }}</div>
-                                <div>Conclusion {{ agendas.conclusion }}</div>
+                                <div @dblclick="startAgendaEdit(agendas.id)">
+                                    <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
+                                    <div>Description {{ agendas.description }}</div>
+                                    <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
+                                    <div>Status {{ agendas.agenda_status }}</div>
+                                    <div>Conclusion {{ agendas.conclusion }}</div>
+                                </div>
                                 <div v-for="followup in agendas.followups">Follow Up
                                     <div v-show="editFollowup.id != followup.id">
                                         <div>
-                                            <li>Action {{followup.action}}</li>
-                                            <li>Timeline {{followup.timeline}}</li>
-                                            <li>Status {{followup.status}}</li>
+                                            <div @dblclick="startFollowupEdit(followup.id, agendas.id)">
+                                                <li>Action {{followup.action}}</li>
+                                                <li>Timeline {{followup.timeline}}</li>
+                                                <li>Status {{followup.status}}</li>
+                                            </div>
                                             <div>
                                                 <button @click="startFollowupEdit(followup.id, agendas.id)">Edit
                                                     Followup
