@@ -223,7 +223,7 @@
                 }).indexOf(followupId);
 
                 //load the values of the followup from meeting into the editFollowup variable in data
-                this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
+                this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
             },
             cancelFollowupEdit() {
                 this.editFollowup = {};
