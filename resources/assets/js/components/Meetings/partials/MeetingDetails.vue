@@ -249,8 +249,8 @@
 
                 this.editFollowup = {};
             },
-            deleteFollowup(agendaId, followupId) {
-                axios.delete('/api/followups/' + this.editFollowup.id)
+            deleteFollowup(followupId, agendaId) {
+                axios.delete('/api/followups/' + followupId)
                     .then((response) => {
                         let agendaindex = this.meeting.agendas.map(function (item) {
                             return item.id

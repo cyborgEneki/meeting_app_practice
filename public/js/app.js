@@ -62958,10 +62958,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             this.editFollowup = {};
         },
-        deleteFollowup: function deleteFollowup(agendaId, followupId) {
+        deleteFollowup: function deleteFollowup(followupId, agendaId) {
             var _this5 = this;
 
-            axios.delete('/api/followups/' + this.editFollowup.id).then(function (response) {
+            axios.delete('/api/followups/' + followupId).then(function (response) {
                 var agendaindex = _this5.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
