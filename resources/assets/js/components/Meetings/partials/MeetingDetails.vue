@@ -25,7 +25,7 @@
                         <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
                         <div>
                             <div v-show="editAgenda.id != agendas.id">
-                                <div @dblclick="startAgendaEdit(agendas.id)">
+                                <div @click="startAgendaEdit(agendas.id)">
                                     <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
                                     <div>Description {{ agendas.description }}</div>
                                     <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
@@ -35,12 +35,13 @@
                                 <div v-for="followup in agendas.followups">Follow Up
                                     <div v-show="editFollowup.id != followup.id">
                                         <div>
-                                            <div @dblclick="startFollowupEdit(followup.id, agendas.id)">
+                                            <div @click="startFollowupEdit(followup.id, agendas.id)">
                                                 <li>Action {{followup.action}}</li>
                                                 <li>Timeline {{followup.timeline}}</li>
                                                 <li>Status {{followup.status}}</li>
                                             </div>
                                             <div>
+                                                <a href="#" @click="addFollowup(followup.id, agendas.id)">Add Followup</a>
                                                 <button @click="startFollowupEdit(followup.id, agendas.id)">Edit
                                                     Followup
                                                 </button>
@@ -48,7 +49,7 @@
                                         </div>
                                     </div>
                                     <div v-show="editFollowup.id == followup.id">
-                                        <form>
+                                        <form @click.prevent>
                                             <div>Action<input type="text" v-model="editFollowup.action"></div>
                                             <div>Timeline <input type="text" v-model="editFollowup.timeline"></div>
                                             <div>Status
@@ -63,6 +64,7 @@
                                             <div>
                                                 <a href="#" @click="cancelFollowupEdit">Cancel</a>
                                             </div>
+                                            <a href="#" @click="deleteFollowup(followup.id, agendas.id)">Delete</a>
                                         </form>
                                     </div>
                                 </div>
@@ -73,7 +75,7 @@
                             </div>
                         </div>
 
-                        <form>
+                        <form @click.prevent>
                             <div v-show="editAgenda.id==agendas.id">
                                 <div>Topic<input type="text" v-model="editAgenda.topic">
                                 </div>
@@ -173,15 +175,6 @@
             }
         },
         methods: {
-            removeUsers(id) {
-                axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
-                    .then((response) => {
-                        let index = this.meeting.users.map(function (item) {
-                            return item.id
-                        }).indexOf(id);
-                        this.meeting.users.splice(index, 1);
-                    });
-            },
             addUser: function (id) {
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
@@ -195,6 +188,15 @@
                 } else {
                     alert('User already exists');
                 }
+            },
+            removeUsers(id) {
+                axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
+                    .then((response) => {
+                        let index = this.meeting.users.map(function (item) {
+                            return item.id
+                        }).indexOf(id);
+                        this.meeting.users.splice(index, 1);
+                    });
             },
             startAgendaEdit(id) {
                 let index = this.meeting.agendas.map(function (item) {
@@ -225,15 +227,35 @@
                 //load the values of the followup from meeting into the editFollowup variable in data
                 this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
             },
-            cancelFollowupEdit() {
-                this.editFollowup = {};
-            },
             saveFollowupEdit() {
                 axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup)
                     .then((response) => {
                         this.editFollowup = {};
                     });
             },
+            cancelFollowupEdit() {
+                console.log(this.meeting.agendas[agendaindex]);
+
+                this.editFollowup = {};
+            },
+            deleteFollowup(agendaId, followupId) {
+                axios.delete('/api/followups/' + this.editFollowup.id)
+                    .then((response) => {
+                        let agendaindex = this.meeting.agendas.map(function (item) {
+                            return item.id
+                        }).indexOf(agendaId);
+                        let followupindex = this.meeting.agendas[agendaindex].followups.map(function (item) {
+                            return item.id
+                        }).indexOf(followupId);
+                        this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+                    });
+            },
+            addFollowup(agendaId, followupId) {
+                axios.add('/api/followups' + this.editFollowup)
+                    .then(() => {
+                        this.$router.push('/meetings');
+                    })
+            }
         }
     }
 </script>

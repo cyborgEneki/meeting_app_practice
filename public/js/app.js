@@ -62840,6 +62840,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -62878,19 +62880,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
-        removeUsers: function removeUsers(id) {
-            var _this = this;
-
-            axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this.meeting.users.map(function (item) {
-                    return item.id;
-                }).indexOf(id);
-                _this.meeting.users.splice(index, 1);
-            });
-        },
-
         addUser: function addUser(id) {
-            var _this2 = this;
+            var _this = this;
 
             var checkMtg = this.meeting.users.filter(function (user) {
                 return user.id === id;
@@ -62898,11 +62889,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             //only add user if that user isn't already in the meeting
             if (!checkMtg.length) {
                 axios.get('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                    _this2.meeting.users.push(response.data.user);
+                    _this.meeting.users.push(response.data.user);
                 });
             } else {
                 alert('User already exists');
             }
+        },
+        removeUsers: function removeUsers(id) {
+            var _this2 = this;
+
+            axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
+                var index = _this2.meeting.users.map(function (item) {
+                    return item.id;
+                }).indexOf(id);
+                _this2.meeting.users.splice(index, 1);
+            });
         },
         startAgendaEdit: function startAgendaEdit(id) {
             var index = this.meeting.agendas.map(function (item) {
@@ -62934,14 +62935,36 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             //load the values of the followup from meeting into the editFollowup variable in data
             this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
         },
-        cancelFollowupEdit: function cancelFollowupEdit() {
-            this.editFollowup = {};
-        },
         saveFollowupEdit: function saveFollowupEdit() {
             var _this4 = this;
 
             axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup).then(function (response) {
                 _this4.editFollowup = {};
+            });
+        },
+        cancelFollowupEdit: function cancelFollowupEdit() {
+            console.log(this.meeting.agendas[agendaindex]);
+
+            this.editFollowup = {};
+        },
+        deleteFollowup: function deleteFollowup(agendaId, followupId) {
+            var _this5 = this;
+
+            axios.delete('/api/followups/' + this.editFollowup.id).then(function (response) {
+                var agendaindex = _this5.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                var followupindex = _this5.meeting.agendas[agendaindex].followups.map(function (item) {
+                    return item.id;
+                }).indexOf(followupId);
+                _this5.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+            });
+        },
+        addFollowup: function addFollowup(agendaId, followupId) {
+            var _this6 = this;
+
+            axios.add('/api/followups' + this.editFollowup).then(function () {
+                _this6.$router.push('/meetings');
             });
         }
     }
@@ -63046,7 +63069,7 @@ var render = function() {
                         "div",
                         {
                           on: {
-                            dblclick: function($event) {
+                            click: function($event) {
                               _vm.startAgendaEdit(agendas.id)
                             }
                           }
@@ -63103,7 +63126,7 @@ var render = function() {
                                   "div",
                                   {
                                     on: {
-                                      dblclick: function($event) {
+                                      click: function($event) {
                                         _vm.startFollowupEdit(
                                           followup.id,
                                           agendas.id
@@ -63133,6 +63156,22 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c("div", [
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addFollowup(
+                                            followup.id,
+                                            agendas.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Add Followup")]
+                                  ),
+                                  _vm._v(" "),
                                   _c(
                                     "button",
                                     {
@@ -63169,148 +63208,174 @@ var render = function() {
                               ]
                             },
                             [
-                              _c("form", [
-                                _c("div", [
-                                  _vm._v("Action"),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.editFollowup.action,
-                                        expression: "editFollowup.action"
-                                      }
-                                    ],
-                                    attrs: { type: "text" },
-                                    domProps: {
-                                      value: _vm.editFollowup.action
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.editFollowup,
-                                          "action",
-                                          $event.target.value
-                                        )
-                                      }
+                              _c(
+                                "form",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
                                     }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", [
-                                  _vm._v("Timeline "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.editFollowup.timeline,
-                                        expression: "editFollowup.timeline"
-                                      }
-                                    ],
-                                    attrs: { type: "text" },
-                                    domProps: {
-                                      value: _vm.editFollowup.timeline
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.editFollowup,
-                                          "timeline",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", [
-                                  _vm._v(
-                                    "Status\n                                            "
-                                  ),
-                                  _c(
-                                    "select",
-                                    {
+                                  }
+                                },
+                                [
+                                  _c("div", [
+                                    _vm._v("Action"),
+                                    _c("input", {
                                       directives: [
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.editFollowup.status,
-                                          expression: "editFollowup.status"
+                                          value: _vm.editFollowup.action,
+                                          expression: "editFollowup.action"
                                         }
                                       ],
+                                      attrs: { type: "text" },
+                                      domProps: {
+                                        value: _vm.editFollowup.action
+                                      },
                                       on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
                                           _vm.$set(
                                             _vm.editFollowup,
-                                            "status",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
+                                            "action",
+                                            $event.target.value
                                           )
                                         }
                                       }
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "" } }, [
-                                        _vm._v("Select status")
-                                      ]),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.statuses, function(status) {
-                                        return _c(
-                                          "option",
-                                          { domProps: { value: status.id } },
-                                          [
-                                            _vm._v(
-                                              "\n                                                    " +
-                                                _vm._s(status.name) +
-                                                "\n                                                "
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _vm._v("Timeline "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.editFollowup.timeline,
+                                          expression: "editFollowup.timeline"
+                                        }
+                                      ],
+                                      attrs: { type: "text" },
+                                      domProps: {
+                                        value: _vm.editFollowup.timeline
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.editFollowup,
+                                            "timeline",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _vm._v(
+                                      "Status\n                                            "
+                                    ),
+                                    _c(
+                                      "select",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.editFollowup.status,
+                                            expression: "editFollowup.status"
+                                          }
+                                        ],
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.editFollowup,
+                                              "status",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
                                             )
-                                          ]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  { on: { click: _vm.saveFollowupEdit } },
-                                  [_vm._v("Edit")]
-                                ),
-                                _vm._v(" "),
-                                _c("div", [
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("option", { attrs: { value: "" } }, [
+                                          _vm._v("Select status")
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm._l(_vm.statuses, function(status) {
+                                          return _c(
+                                            "option",
+                                            { domProps: { value: status.id } },
+                                            [
+                                              _vm._v(
+                                                "\n                                                    " +
+                                                  _vm._s(status.name) +
+                                                  "\n                                                "
+                                              )
+                                            ]
+                                          )
+                                        })
+                                      ],
+                                      2
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    { on: { click: _vm.saveFollowupEdit } },
+                                    [_vm._v("Edit")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: { click: _vm.cancelFollowupEdit }
+                                      },
+                                      [_vm._v("Cancel")]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
                                     "a",
                                     {
                                       attrs: { href: "#" },
-                                      on: { click: _vm.cancelFollowupEdit }
+                                      on: {
+                                        click: function($event) {
+                                          _vm.deleteFollowup(
+                                            followup.id,
+                                            agendas.id
+                                          )
+                                        }
+                                      }
                                     },
-                                    [_vm._v("Cancel")]
+                                    [_vm._v("Delete")]
                                   )
-                                ])
-                              ])
+                                ]
+                              )
                             ]
                           )
                         ])
@@ -63334,286 +63399,299 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("form", [
-                  _c(
-                    "div",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.editAgenda.id == agendas.id,
-                          expression: "editAgenda.id==agendas.id"
-                        }
-                      ]
-                    },
-                    [
-                      _c("div", [
-                        _vm._v("Topic"),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.editAgenda.topic,
-                              expression: "editAgenda.topic"
-                            }
-                          ],
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.editAgenda.topic },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.editAgenda,
-                                "topic",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v("Description"),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.editAgenda.description,
-                              expression: "editAgenda.description"
-                            }
-                          ],
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.editAgenda.description },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.editAgenda,
-                                "description",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "\n                                Time Allocated (minutes)\n                                "
-                        ),
-                        _c(
-                          "select",
+                _c(
+                  "form",
+                  {
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        directives: [
                           {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editAgenda.id == agendas.id,
+                            expression: "editAgenda.id==agendas.id"
+                          }
+                        ]
+                      },
+                      [
+                        _c("div", [
+                          _vm._v("Topic"),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.editAgenda.time_allocated,
-                                expression: "editAgenda.time_allocated"
+                                value: _vm.editAgenda.topic,
+                                expression: "editAgenda.topic"
                               }
                             ],
                             attrs: { type: "text" },
+                            domProps: { value: _vm.editAgenda.topic },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
                                 _vm.$set(
                                   _vm.editAgenda,
-                                  "time_allocated",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                  "topic",
+                                  $event.target.value
                                 )
                               }
                             }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Select time")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.timing, function(time) {
-                              return _c("option", [_vm._v(_vm._s(time))])
-                            })
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c("label", [_vm._v("User Assigned")]),
+                          })
+                        ]),
                         _vm._v(" "),
-                        _c(
-                          "select",
-                          {
+                        _c("div", [
+                          _vm._v("Description"),
+                          _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.editAgenda.user_id,
-                                expression: "editAgenda.user_id"
-                              }
-                            ],
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.editAgenda,
-                                  "user_id",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Select user")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.orderedUsers, function(user) {
-                              return _c(
-                                "option",
-                                { domProps: { value: user.id } },
-                                [
-                                  _vm._v(
-                                    _vm._s(user.full_name) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v(
-                          "\n                                Status\n                                "
-                        ),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.editAgenda.agenda_status,
-                                expression: "editAgenda.agenda_status"
+                                value: _vm.editAgenda.description,
+                                expression: "editAgenda.description"
                               }
                             ],
                             attrs: { type: "text" },
+                            domProps: { value: _vm.editAgenda.description },
                             on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
                                 _vm.$set(
                                   _vm.editAgenda,
-                                  "agenda_status",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
+                                  "description",
+                                  $event.target.value
                                 )
                               }
                             }
-                          },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("Select status")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.statuses, function(status) {
-                              return _c(
-                                "option",
-                                { domProps: { value: status.id } },
-                                [
-                                  _vm._v(
-                                    _vm._s(status.name) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _vm._v("Conclusion"),
-                        _c("input", {
-                          directives: [
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v(
+                            "\n                                Time Allocated (minutes)\n                                "
+                          ),
+                          _c(
+                            "select",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.editAgenda.conclusion,
-                              expression: "editAgenda.conclusion"
-                            }
-                          ],
-                          attrs: { type: "text" },
-                          domProps: { value: _vm.editAgenda.conclusion },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editAgenda.time_allocated,
+                                  expression: "editAgenda.time_allocated"
+                                }
+                              ],
+                              attrs: { type: "text" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.editAgenda,
+                                    "time_allocated",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
                               }
-                              _vm.$set(
-                                _vm.editAgenda,
-                                "conclusion",
-                                $event.target.value
-                              )
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select time")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.timing, function(time) {
+                                return _c("option", [_vm._v(_vm._s(time))])
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c("label", [_vm._v("User Assigned")]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editAgenda.user_id,
+                                  expression: "editAgenda.user_id"
+                                }
+                              ],
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.editAgenda,
+                                    "user_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select user")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.orderedUsers, function(user) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: user.id } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(user.full_name) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v(
+                            "\n                                Status\n                                "
+                          ),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editAgenda.agenda_status,
+                                  expression: "editAgenda.agenda_status"
+                                }
+                              ],
+                              attrs: { type: "text" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.editAgenda,
+                                    "agenda_status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "" } }, [
+                                _vm._v("Select status")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.statuses, function(status) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: status.id } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(status.name) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _vm._v("Conclusion"),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.editAgenda.conclusion,
+                                expression: "editAgenda.conclusion"
+                              }
+                            ],
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.editAgenda.conclusion },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.editAgenda,
+                                  "conclusion",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c("button", { on: { click: _vm.saveAgendaEdit } }, [
-                          _vm._v("Save Edit")
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c("button", { on: { click: _vm.saveAgendaEdit } }, [
+                            _vm._v("Save Edit")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#" },
+                              on: { click: _vm.cancelAgendaEdit }
+                            },
+                            [_vm._v("Cancel")]
+                          )
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: { click: _vm.cancelAgendaEdit }
-                          },
-                          [_vm._v("Cancel")]
-                        )
-                      ])
-                    ]
-                  )
-                ])
+                      ]
+                    )
+                  ]
+                )
               ])
             ])
           ])
