@@ -55,6 +55,10 @@
                                                     </option>
                                                 </select>
                                             </div>
+                                            <button @click="saveFollowupEdit">Edit</button>
+                                            <div>
+                                                <a href="#" @click="cancelFollowupEdit">Cancel</a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -100,7 +104,7 @@
                                     <button @click="saveAgendaEdit">Save Edit</button>
                                 </div>
                                 <div>
-                                    <a href="#" @click="cancelEdit">Cancel</a>
+                                    <a href="#" @click="cancelAgendaEdit">Cancel</a>
                                 </div>
                             </div>
                         </form>
@@ -194,20 +198,14 @@
                 }).indexOf(id);
                 this.editAgenda = Object.assign({}, this.meeting.agendas[index]);
             },
-            // toggleFollowupEdit(id) {
-            //     let index = this.meeting.agendas[index].followups.map(function (item) {
-            //         return item.id
-            //     }).indexOf(id);
-            //     this.editFollowup = this.meeting.agendas.followups[index];
-            // },
+            cancelAgendaEdit() {
+                this.editAgenda = {};
+            },
             saveAgendaEdit() {
                 axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda)
                     .then((response) => {
                         this.editAgenda = {};
                     });
-            },
-            cancelEdit() {
-                this.editAgenda = {};
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
@@ -222,6 +220,9 @@
 
                 //load the values of the followup from meeting into the editFollowup variable in data
                 this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
+            },
+            cancelFollowupEdit() {
+                this.editFollowup = {};
             },
             saveFollowupEdit() {
                 axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup)

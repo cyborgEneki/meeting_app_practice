@@ -62832,6 +62832,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -62902,22 +62906,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(id);
             this.editAgenda = Object.assign({}, this.meeting.agendas[index]);
         },
-
-        // toggleFollowupEdit(id) {
-        //     let index = this.meeting.agendas[index].followups.map(function (item) {
-        //         return item.id
-        //     }).indexOf(id);
-        //     this.editFollowup = this.meeting.agendas.followups[index];
-        // },
+        cancelAgendaEdit: function cancelAgendaEdit() {
+            this.editAgenda = {};
+        },
         saveAgendaEdit: function saveAgendaEdit() {
             var _this3 = this;
 
             axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda).then(function (response) {
                 _this3.editAgenda = {};
             });
-        },
-        cancelEdit: function cancelEdit() {
-            this.editAgenda = {};
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
             //get the index of the agenda you are editing in
@@ -62932,6 +62929,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             //load the values of the followup from meeting into the editFollowup variable in data
             this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
+        },
+        cancelFollowupEdit: function cancelFollowupEdit() {
+            this.editFollowup = {};
         },
         saveFollowupEdit: function saveFollowupEdit() {
             var _this4 = this;
@@ -63271,6 +63271,23 @@ var render = function() {
                                       ],
                                       2
                                     )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    { on: { click: _vm.saveFollowupEdit } },
+                                    [_vm._v("Edit")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: { click: _vm.cancelFollowupEdit }
+                                      },
+                                      [_vm._v("Cancel")]
+                                    )
                                   ])
                                 ])
                               ]
@@ -63571,7 +63588,7 @@ var render = function() {
                             "a",
                             {
                               attrs: { href: "#" },
-                              on: { click: _vm.cancelEdit }
+                              on: { click: _vm.cancelAgendaEdit }
                             },
                             [_vm._v("Cancel")]
                           )
