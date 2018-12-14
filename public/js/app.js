@@ -62851,6 +62851,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -62970,10 +62971,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this5.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
             });
         },
-        addFollowup: function addFollowup(agendaId, followupId) {
+        addFollowup: function addFollowup() {
             var _this6 = this;
 
-            axios.add('/api/followups' + this.editFollowup).then(function () {
+            axios.post('/api/followups', this.editFollowup).then(function () {
                 _this6.$router.push('/meetings');
             });
         }
@@ -63224,6 +63225,10 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
+                            _c("button", { on: { click: _vm.addFollowup } }, [
+                              _vm._v("Save")
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "a",
                               {
@@ -63308,6 +63313,22 @@ var render = function() {
                                         "Edit\n                                                Followup\n                                            "
                                       )
                                     ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.deleteFollowup(
+                                            followup.id,
+                                            agendas.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
                                   )
                                 ])
                               ])
@@ -63476,23 +63497,7 @@ var render = function() {
                                       },
                                       [_vm._v("Cancel")]
                                     )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.deleteFollowup(
-                                            followup.id,
-                                            agendas.id
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Delete")]
-                                  )
+                                  ])
                                 ]
                               )
                             ]

@@ -39,6 +39,7 @@
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
                                         Status<input type="text" v-model="editFollowup.status">
+                                        <button @click='addFollowup'>Save</button>
                                         <a href="#" @click="showFollowup = !showFollowup">Cancel</a>
                                     </div>
                                 </div>
@@ -54,6 +55,7 @@
                                                 <button @click="startFollowupEdit(followup.id, agendas.id)">Edit
                                                     Followup
                                                 </button>
+                                                <a href="#" @click="deleteFollowup(followup.id, agendas.id)">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +75,6 @@
                                             <div>
                                                 <a href="#" @click="cancelFollowupEdit">Cancel</a>
                                             </div>
-                                            <a href="#" @click="deleteFollowup(followup.id, agendas.id)">Delete</a>
                                         </form>
                                     </div>
                                 </div>
@@ -223,7 +224,6 @@
             showFollowupForm() {
                 this.showFollowup = !this.showFollowup;
             },
-
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
                 let agendaindex = this.meeting.agendas.map(function (item) {
@@ -261,8 +261,8 @@
                         this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
                     });
             },
-            addFollowup(agendaId, followupId) {
-                axios.add('/api/followups' + this.editFollowup)
+            addFollowup() {
+                axios.post('/api/followups', this.editFollowup)
                     .then(() => {
                         this.$router.push('/meetings');
                     })
