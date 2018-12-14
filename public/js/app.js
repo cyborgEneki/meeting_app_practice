@@ -62900,14 +62900,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var index = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(id);
-            this.editAgenda = this.meeting.agendas[index];
+            this.editAgenda = Object.assign({}, this.meeting.agendas[index]);
         },
-        toggleFollowupEdit: function toggleFollowupEdit(id) {
-            var index = this.meeting.agendas[index].followups.map(function (item) {
-                return item.id;
-            }).indexOf(id);
-            this.editFollowup = this.meeting.agendas.followups[index];
-        },
+
+        // toggleFollowupEdit(id) {
+        //     let index = this.meeting.agendas[index].followups.map(function (item) {
+        //         return item.id
+        //     }).indexOf(id);
+        //     this.editFollowup = this.meeting.agendas.followups[index];
+        // },
         saveAgendaEdit: function saveAgendaEdit() {
             var _this3 = this;
 
@@ -62916,7 +62917,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         cancelEdit: function cancelEdit() {
-            Object.assign(this.meeting.agendas, this.agendaBeforeEdit);
             this.editAgenda = {};
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
@@ -62932,10 +62932,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             //load the values of the followup from meeting into the editFollowup variable in data
             this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
+        },
+        saveFollowupEdit: function saveFollowupEdit() {
+            var _this4 = this;
+
+            axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup).then(function (response) {
+                _this4.editFollowup = {};
+            });
         }
-    },
-    mounted: function mounted() {
-        this.agendaBeforeEdit = Object.assign({}, this.meeting.agendas);
     }
 });
 
@@ -63018,7 +63022,7 @@ var render = function() {
                 {
                   on: {
                     dblclick: function($event) {
-                      _vm.toggleAgendaEdit(agendas.id)
+                      _vm.startAgendaEdit(agendas.id)
                     }
                   }
                 },

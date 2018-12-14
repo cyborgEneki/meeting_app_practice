@@ -21,7 +21,7 @@
         <div>
             <div v-for="(agendas, index) in meeting.agendas">
                 <fieldset>
-                    <div @dblclick="toggleAgendaEdit(agendas.id)">
+                    <div @dblclick="startAgendaEdit(agendas.id)">
                         <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
                         <div>
                             <div v-show="editAgenda.id != agendas.id">
@@ -192,14 +192,14 @@
                 let index = this.meeting.agendas.map(function (item) {
                     return item.id
                 }).indexOf(id);
-                this.editAgenda = this.meeting.agendas[index];
+                this.editAgenda = Object.assign({}, this.meeting.agendas[index]);
             },
-            toggleFollowupEdit(id) {
-                let index = this.meeting.agendas[index].followups.map(function (item) {
-                    return item.id
-                }).indexOf(id);
-                this.editFollowup = this.meeting.agendas.followups[index];
-            },
+            // toggleFollowupEdit(id) {
+            //     let index = this.meeting.agendas[index].followups.map(function (item) {
+            //         return item.id
+            //     }).indexOf(id);
+            //     this.editFollowup = this.meeting.agendas.followups[index];
+            // },
             saveAgendaEdit() {
                 axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda)
                     .then((response) => {
@@ -207,7 +207,6 @@
                     });
             },
             cancelEdit() {
-                Object.assign(this.meeting.agendas, this.agendaBeforeEdit);
                 this.editAgenda = {};
             },
             startFollowupEdit(followupId, agendaId) {
@@ -224,9 +223,12 @@
                 //load the values of the followup from meeting into the editFollowup variable in data
                 this.editFollowup = this.meeting.agendas[agendaindex].followups[followupindex];
             },
-        },
-        mounted() {
-            this.agendaBeforeEdit = Object.assign({}, this.meeting.agendas)
+            saveFollowupEdit() {
+                axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup)
+                    .then((response) => {
+                        this.editFollowup = {};
+                    });
+            },
         }
     }
 </script>
