@@ -34,6 +34,7 @@
                                 </div>
 
                                 <div>
+                                    <div v-show="editFollowup == 'followup'+agenda.id">
                                     <a href="#" @click="showFollowupForm()">Add Followup</a>
                                     <div v-show='showFollowup'>
                                         Action<input type="text" v-model="editFollowup.action">
@@ -42,9 +43,10 @@
                                         <button @click='addFollowup'>Save</button>
                                         <a href="#" @click="showFollowup = !showFollowup">Cancel</a>
                                     </div>
+                                        </div>
                                 </div>
                                 <div v-for="followup in agendas.followups">Follow Up
-                                    <div v-show="editFollowup.id != followup.id">
+                                    <!--<div v-show="editFollowup.id != followup.id">-->
                                         <div>
                                             <div @click="startFollowupEdit(followup.id, agendas.id)">
                                                 <li>Action {{followup.action}}</li>
@@ -58,7 +60,7 @@
                                                 <a href="#" @click="deleteFollowup(followup.id, agendas.id)">Delete</a>
                                             </div>
                                         </div>
-                                    </div>
+                                    <!--</div>-->
                                     <div v-show="editFollowup.id == followup.id">
                                         <form @click.prevent>
                                             <div>Action<input type="text" v-model="editFollowup.action"></div>
@@ -125,6 +127,17 @@
                             </div>
                         </form>
 
+                        <!--<div v-show="additem == 'agenda'">-->
+                            <!--<label>New Agenda Topic</label>-->
+                            <!--<input class="wideinput" v-model="editHolder.topic">-->
+                            <!--<label>Agenda Description</label>-->
+                            <!--<textarea class="bigtextarea" v-model="editHolder.description"></textarea>-->
+                            <!--<input v-show="false" v-model="editHolder.meeting_id">-->
+                            <!--<button @click="saveAgendaNew()">Save Agenda</button>-->
+                            <!--<button @click="additem=''">Cancel</button>-->
+                        <!--</div>-->
+                        <!--<button v-show="additem != 'agenda'" @click="additem='agenda'; editHolder.meeting_id=meetingdetails.id">Add Agenda</button>-->
+
                     </div>
                 </fieldset>
             </div>
@@ -172,6 +185,7 @@
                     agenda_status: 0,
                 },
                 editFollowup: {
+                    id: '',
                     action: '',
                     timeline: '',
                     status: ''
@@ -186,6 +200,17 @@
             }
         },
         methods: {
+            saveAgendaNew() {
+                axios.post('/agendas/', this.editHolder, { headers: {"Authorization" : `Bearer ${tokenStr}`} })
+                    .then((response) => {
+
+                        this.editHolder.id = response.data.id;
+                        this.meetingdetails.agendas.push(this.editHolder);
+                        this.editHolder = {};
+                        this.newitem = '';
+                        this.additem = '';
+                    });
+            },
             addUser: function (id) {
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
@@ -245,9 +270,8 @@
                     });
             },
             cancelFollowupEdit() {
-                console.log(this.meeting.agendas[agendaindex]);
-
                 this.editFollowup = {};
+                console.log(this.editFollowup);
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -261,12 +285,17 @@
                         this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
                     });
             },
-            addFollowup() {
-                axios.post('/api/followups', this.editFollowup)
-                    .then(() => {
-                        this.$router.push('/meetings');
-                    })
-            }
+            // addFollowup(followupId, agendaId) {
+            //     axios.post('/api/followups', this.editFollowup)
+            //         .then(() => {
+            //             let agendaindex = this.meeting.agendas.map(function (item) {
+            //                 return item.id
+            //             }).indexOf(agendaId);
+            //             this.meeting.agendas[agendaindex].followups.push(Object.assign({}, this.meeting));
+            //             this.meeting = {};
+            //             this.editFollowup = '';
+            //         });
+            // }
         }
     }
 </script>
