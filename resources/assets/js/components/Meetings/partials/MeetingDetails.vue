@@ -44,8 +44,14 @@
                                     <div v-show="editItem == 'followup'+agenda.id">
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
-                                        Status<input type="text" v-model="editFollowup.status">
-                                        <a href="#" @click="cancelFollowupEdit">Cancel</a>
+                                        Followup Status
+                                        <select type="text" v-model="editFollowup.status">
+                                            <option value="">Select status</option>
+                                            <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
+                                        </select>
+                                        <a href="#" @click="cancelFollowup">Cancel</a>
+                                        <a href="#" @click="addFollowup">Save</a>
+
                                     </div>
                                 </div>
 
@@ -84,7 +90,7 @@
                                             </div>
                                             <button @click="saveFollowupEdit">Edit</button>
                                             <div>
-                                                <a href="#" @click="cancelFollowupEdit">Cancel</a>
+                                                <a href="#" @click="cancelFollowup">Cancel</a>
                                             </div>
                                         </form>
                                     </div>
@@ -243,6 +249,7 @@
 
             showFollowupCreate(agendaId) {
                 this.editItem = 'followup'+agendaId;
+                this.editFollowup.agenda_id=agendaId;
             },
 
             startFollowupEdit(followupId, agendaId) {
@@ -266,7 +273,7 @@
                         this.editFollowup = {};
                     });
             },
-            cancelFollowupEdit() {
+            cancelFollowup() {
                 this.editFollowup = {};
             },
             deleteFollowup(followupId, agendaId) {
@@ -284,7 +291,7 @@
             addFollowup() {
                 axios.post('/api/followups', this.editFollowup)
                     .then(() => {
-                        this.$router.push('/meetings');
+                        this.editFollowup = {};
                     })
             }
         }

@@ -62870,6 +62870,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62949,6 +62955,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.editItem = 'followup' + agendaId;
+            this.editFollowup.agenda_id = agendaId;
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
             //get the index of the agenda you are editing in
@@ -62971,7 +62978,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this4.editFollowup = {};
             });
         },
-        cancelFollowupEdit: function cancelFollowupEdit() {
+        cancelFollowup: function cancelFollowup() {
             this.editFollowup = {};
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
@@ -62991,7 +62998,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var _this6 = this;
 
             axios.post('/api/followups', this.editFollowup).then(function () {
-                _this6.$router.push('/meetings');
+                _this6.editFollowup = {};
             });
         }
     }
@@ -63214,40 +63221,73 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                    Status"
+                              "\n                                    Followup Status\n                                    "
                             ),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.editFollowup.status,
-                                  expression: "editFollowup.status"
-                                }
-                              ],
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.editFollowup.status },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.editFollowup.status,
+                                    expression: "editFollowup.status"
                                   }
-                                  _vm.$set(
-                                    _vm.editFollowup,
-                                    "status",
-                                    $event.target.value
-                                  )
+                                ],
+                                attrs: { type: "text" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      _vm.editFollowup,
+                                      "status",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
                                 }
-                              }
-                            }),
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("Select status")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.statuses, function(status) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: status.id } },
+                                    [_vm._v(_vm._s(status.name))]
+                                  )
+                                })
+                              ],
+                              2
+                            ),
                             _vm._v(" "),
                             _c(
                               "a",
                               {
                                 attrs: { href: "#" },
-                                on: { click: _vm.cancelFollowupEdit }
+                                on: { click: _vm.cancelFollowup }
                               },
                               [_vm._v("Cancel")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: { click: _vm.addFollowup }
+                              },
+                              [_vm._v("Save")]
                             )
                           ]
                         )
@@ -63501,7 +63541,7 @@ var render = function() {
                                       "a",
                                       {
                                         attrs: { href: "#" },
-                                        on: { click: _vm.cancelFollowupEdit }
+                                        on: { click: _vm.cancelFollowup }
                                       },
                                       [_vm._v("Cancel")]
                                     )
