@@ -45,7 +45,7 @@
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
                                         Status<input type="text" v-model="editFollowup.status">
-                                        <a href="#" @click="showFollowup = !showFollowup">Cancel</a>
+                                        <a href="#" @click="cancelFollowupEdit">Cancel</a>
                                     </div>
                                 </div>
 
@@ -267,8 +267,6 @@
                     });
             },
             cancelFollowupEdit() {
-                console.log(this.meeting.agendas[agendaindex]);
-
                 this.editFollowup = {};
             },
             deleteFollowup(followupId, agendaId) {

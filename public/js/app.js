@@ -62972,8 +62972,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         cancelFollowupEdit: function cancelFollowupEdit() {
-            console.log(this.meeting.agendas[agendaindex]);
-
             this.editFollowup = {};
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
@@ -63247,11 +63245,7 @@ var render = function() {
                               "a",
                               {
                                 attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.showFollowup = !_vm.showFollowup
-                                  }
-                                }
+                                on: { click: _vm.cancelFollowupEdit }
                               },
                               [_vm._v("Cancel")]
                             )
