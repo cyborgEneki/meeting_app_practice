@@ -23,52 +23,47 @@
 
         <h4>Agendas:</h4>
         <div>
-            <div v-for="(agendas, index) in meeting.agendas">
+            <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
                     <div>
-                        <h2>Agenda {{ index + 1 }}: {{ agendas.topic }}</h2>
+                        <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
                         <div>
-                            <div v-show="editAgenda.id != agendas.id">
-                                <div @click="startAgendaEdit(agendas.id)">
-                                    <div>Assignee {{ choices.users[agendas.user_id].full_name }}</div>
-                                    <div>Description {{ agendas.description }}</div>
-                                    <div>Time Allocated (minutes) {{ agendas.time_allocated }}</div>
-                                    <div>Status {{ agendas.agenda_status }}</div>
-                                    <div>Conclusion {{ agendas.conclusion }}</div>
+                            <div v-show="editAgenda.id != agenda.id">
+                                <div @click="startAgendaEdit(agenda.id)">
+                                    <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
+                                    <div>Description {{ agenda.description }}</div>
+                                    <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
+                                    <div>Status {{ agenda.agenda_status }}</div>
+                                    <div>Conclusion {{ agenda.conclusion }}</div>
                                 </div>
 
                                 <!--Create followup form-->
 
                                 <div>
-                                    <form @click.prevent>
-                                        <a href="#" @click="showFollowupCreate()">Add Followup</a>
-                                        <div v-for="followup in agendas.followup">
-                                        <div v-show='editFollowup.id == followup.id'>
-                                            Action<input type="text" v-model="editFollowup.action">
-                                            Timeline<input type="text" v-model="editFollowup.timeline">
-                                            Status<input type="text" v-model="editFollowup.status">
-                                            <button @click='addFollowup'>Save</button>
-                                            <a href="#" @click="showFollowup = !showFollowup">Cancel</a>
-                                        </div>
-                                        </div>
-                                    </form>
+                                    <a href="#" @click="showFollowupCreate(agenda.id)">Add Followup</a>
+                                    <div v-show="editItem == 'followup'+agenda.id">
+                                        Action<input type="text" v-model="editFollowup.action">
+                                        Timeline<input type="text" v-model="editFollowup.timeline">
+                                        Status<input type="text" v-model="editFollowup.status">
+                                        <a href="#" @click="showFollowup = !showFollowup">Cancel</a>
+                                    </div>
                                 </div>
 
                                 <!--Read followup-->
 
-                                <div v-for="followup in agendas.followups">Follow Up
+                                <div v-for="followup in agenda.followups">Follow Up
                                     <div v-show="editFollowup.id != followup.id">
                                         <div>
-                                            <div @click="startFollowupEdit(followup.id, agendas.id)">
+                                            <div @click="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
                                                 <li>Timeline {{followup.timeline}}</li>
                                                 <li>Status {{followup.status}}</li>
                                             </div>
                                             <div>
-                                                <button @click="startFollowupEdit(followup.id, agendas.id)">Edit
+                                                <button @click="startFollowupEdit(followup.id, agenda.id)">Edit
                                                     Followup
                                                 </button>
-                                                <a href="#" @click="deleteFollowup(followup.id, agendas.id)">Delete</a>
+                                                <a href="#" @click="deleteFollowup(followup.id, agenda.id)">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -95,10 +90,12 @@
                                     </div>
                                 </div>
 
+                                <button @click='addFollowup'>Save</button>
+
                                 <!--Edit Agenda Button-->
 
                                 <div>
-                                    <button @click="startAgendaEdit(agendas.id)">Edit Agenda</button>
+                                    <button @click="startAgendaEdit(agenda.id)">Edit Agenda</button>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +103,7 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="editAgenda.id==agendas.id">
+                            <div v-show="editAgenda.id==agenda.id">
                                 <div>Topic<input type="text" v-model="editAgenda.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="editAgenda.description">
@@ -181,7 +178,7 @@
         },
         data() {
             return {
-                showFollowup: false,
+                editItem: {},
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {
@@ -244,8 +241,8 @@
                     });
             },
 
-            showFollowupCreate() {
-
+            showFollowupCreate(agendaId) {
+                this.editItem = 'followup'+agendaId;
             },
 
             startFollowupEdit(followupId, agendaId) {

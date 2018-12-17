@@ -62870,9 +62870,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
 
 
 
@@ -62890,7 +62887,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
-            showFollowup: false,
+            editItem: {},
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
             editAgenda: {
@@ -62950,7 +62947,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this3.editAgenda = {};
             });
         },
-        showFollowupCreate: function showFollowupCreate() {},
+        showFollowupCreate: function showFollowupCreate(agendaId) {
+            this.editItem = 'followup' + agendaId;
+        },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
             //get the index of the agenda you are editing in
             var agendaindex = this.meeting.agendas.map(function (item) {
@@ -63071,13 +63070,13 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        _vm._l(_vm.meeting.agendas, function(agendas, index) {
+        _vm._l(_vm.meeting.agendas, function(agenda, index) {
           return _c("div", [
             _c("fieldset", [
               _c("div", [
                 _c("h2", [
                   _vm._v(
-                    "Agenda " + _vm._s(index + 1) + ": " + _vm._s(agendas.topic)
+                    "Agenda " + _vm._s(index + 1) + ": " + _vm._s(agenda.topic)
                   )
                 ]),
                 _vm._v(" "),
@@ -63089,8 +63088,8 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.editAgenda.id != agendas.id,
-                          expression: "editAgenda.id != agendas.id"
+                          value: _vm.editAgenda.id != agenda.id,
+                          expression: "editAgenda.id != agenda.id"
                         }
                       ]
                     },
@@ -63100,7 +63099,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
-                              _vm.startAgendaEdit(agendas.id)
+                              _vm.startAgendaEdit(agenda.id)
                             }
                           }
                         },
@@ -63109,189 +63108,158 @@ var render = function() {
                             _vm._v(
                               "Assignee " +
                                 _vm._s(
-                                  _vm.choices.users[agendas.user_id].full_name
+                                  _vm.choices.users[agenda.user_id].full_name
                                 )
                             )
                           ]),
                           _vm._v(" "),
                           _c("div", [
-                            _vm._v("Description " + _vm._s(agendas.description))
+                            _vm._v("Description " + _vm._s(agenda.description))
                           ]),
                           _vm._v(" "),
                           _c("div", [
                             _vm._v(
                               "Time Allocated (minutes) " +
-                                _vm._s(agendas.time_allocated)
+                                _vm._s(agenda.time_allocated)
                             )
                           ]),
                           _vm._v(" "),
                           _c("div", [
-                            _vm._v("Status " + _vm._s(agendas.agenda_status))
+                            _vm._v("Status " + _vm._s(agenda.agenda_status))
                           ]),
                           _vm._v(" "),
                           _c("div", [
-                            _vm._v("Conclusion " + _vm._s(agendas.conclusion))
+                            _vm._v("Conclusion " + _vm._s(agenda.conclusion))
                           ])
                         ]
                       ),
                       _vm._v(" "),
                       _c("div", [
                         _c(
-                          "form",
+                          "a",
                           {
+                            attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                $event.preventDefault()
+                                _vm.showFollowupCreate(agenda.id)
                               }
                             }
                           },
+                          [_vm._v("Add Followup")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editItem == "followup" + agenda.id,
+                                expression: "editItem == 'followup'+agenda.id"
+                              }
+                            ]
+                          },
                           [
+                            _vm._v(
+                              "\n                                    Action"
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editFollowup.action,
+                                  expression: "editFollowup.action"
+                                }
+                              ],
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.editFollowup.action },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.editFollowup,
+                                    "action",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                    Timeline"
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editFollowup.timeline,
+                                  expression: "editFollowup.timeline"
+                                }
+                              ],
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.editFollowup.timeline },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.editFollowup,
+                                    "timeline",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(
+                              "\n                                    Status"
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editFollowup.status,
+                                  expression: "editFollowup.status"
+                                }
+                              ],
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.editFollowup.status },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.editFollowup,
+                                    "status",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             _c(
                               "a",
                               {
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
-                                    _vm.showFollowupCreate()
+                                    _vm.showFollowup = !_vm.showFollowup
                                   }
                                 }
                               },
-                              [_vm._v("Add Followup")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(agendas.followup, function(followup) {
-                              return _c("div", [
-                                _c(
-                                  "div",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value:
-                                          _vm.editFollowup.id == followup.id,
-                                        expression:
-                                          "editFollowup.id == followup.id"
-                                      }
-                                    ]
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        Action"
-                                    ),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.editFollowup.action,
-                                          expression: "editFollowup.action"
-                                        }
-                                      ],
-                                      attrs: { type: "text" },
-                                      domProps: {
-                                        value: _vm.editFollowup.action
-                                      },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.editFollowup,
-                                            "action",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(
-                                      "\n                                        Timeline"
-                                    ),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.editFollowup.timeline,
-                                          expression: "editFollowup.timeline"
-                                        }
-                                      ],
-                                      attrs: { type: "text" },
-                                      domProps: {
-                                        value: _vm.editFollowup.timeline
-                                      },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.editFollowup,
-                                            "timeline",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(
-                                      "\n                                        Status"
-                                    ),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.editFollowup.status,
-                                          expression: "editFollowup.status"
-                                        }
-                                      ],
-                                      attrs: { type: "text" },
-                                      domProps: {
-                                        value: _vm.editFollowup.status
-                                      },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.editFollowup,
-                                            "status",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      { on: { click: _vm.addFollowup } },
-                                      [_vm._v("Save")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.showFollowup = !_vm.showFollowup
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Cancel")]
-                                    )
-                                  ]
-                                )
-                              ])
-                            })
-                          ],
-                          2
+                              [_vm._v("Cancel")]
+                            )
+                          ]
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._l(agendas.followups, function(followup) {
+                      _vm._l(agenda.followups, function(followup) {
                         return _c("div", [
                           _vm._v("Follow Up\n                                "),
                           _c(
@@ -63315,7 +63283,7 @@ var render = function() {
                                       click: function($event) {
                                         _vm.startFollowupEdit(
                                           followup.id,
-                                          agendas.id
+                                          agenda.id
                                         )
                                       }
                                     }
@@ -63349,7 +63317,7 @@ var render = function() {
                                         click: function($event) {
                                           _vm.startFollowupEdit(
                                             followup.id,
-                                            agendas.id
+                                            agenda.id
                                           )
                                         }
                                       }
@@ -63369,7 +63337,7 @@ var render = function() {
                                         click: function($event) {
                                           _vm.deleteFollowup(
                                             followup.id,
-                                            agendas.id
+                                            agenda.id
                                           )
                                         }
                                       }
@@ -63551,13 +63519,17 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
+                      _c("button", { on: { click: _vm.addFollowup } }, [
+                        _vm._v("Save")
+                      ]),
+                      _vm._v(" "),
                       _c("div", [
                         _c(
                           "button",
                           {
                             on: {
                               click: function($event) {
-                                _vm.startAgendaEdit(agendas.id)
+                                _vm.startAgendaEdit(agenda.id)
                               }
                             }
                           },
@@ -63586,8 +63558,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.editAgenda.id == agendas.id,
-                            expression: "editAgenda.id==agendas.id"
+                            value: _vm.editAgenda.id == agenda.id,
+                            expression: "editAgenda.id==agenda.id"
                           }
                         ]
                       },
