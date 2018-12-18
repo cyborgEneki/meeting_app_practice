@@ -62876,6 +62876,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -63265,7 +63267,12 @@ var render = function() {
                                   return _c(
                                     "option",
                                     { domProps: { value: status.id } },
-                                    [_vm._v(_vm._s(status.name))]
+                                    [
+                                      _vm._v(
+                                        _vm._s(status.name) +
+                                          "\n                                        "
+                                      )
+                                    ]
                                   )
                                 })
                               ],

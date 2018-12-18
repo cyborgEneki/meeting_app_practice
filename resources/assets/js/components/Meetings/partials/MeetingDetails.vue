@@ -47,7 +47,9 @@
                                         Followup Status
                                         <select type="text" v-model="editFollowup.status">
                                             <option value="">Select status</option>
-                                            <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
+                                            <option v-for="status in statuses" v-bind:value="status.id">{{ status.name
+                                                }}
+                                            </option>
                                         </select>
                                         <a href="#" @click="cancelFollowup">Cancel</a>
                                         <a href="#" @click="addFollowup">Save</a>
@@ -248,8 +250,8 @@
             },
 
             showFollowupCreate(agendaId) {
-                this.editItem = 'followup'+agendaId;
-                this.editFollowup.agenda_id=agendaId;
+                this.editItem = 'followup' + agendaId;
+                this.editFollowup.agenda_id = agendaId;
             },
 
             startFollowupEdit(followupId, agendaId) {
