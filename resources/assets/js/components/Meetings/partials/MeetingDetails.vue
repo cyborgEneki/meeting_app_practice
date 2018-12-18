@@ -19,6 +19,34 @@
         <label>Add Attendee</label>
         <button @click="addUser(users.id)">Add</button>
 
+        <!--Create agenda-->
+<br>
+        <a href="#" @click.prevent="editAgenda='agenda'">Add Agenda</a>
+        <div v-show="editAgenda == 'agenda'">
+            <div>
+                Topic<input type="text" v-model="editAgenda.topic">
+            </div>
+            <div>
+                Description<input type="text" v-model="editAgenda.description">
+            </div>
+            <div>
+                Time Allocated (minutes)
+                <select type="text" v-model="editAgenda.time_allocated">
+                    <option value="">Select time</option>
+                    <option v-for="time in timing">{{ time }}</option>
+                </select>
+            </div>
+            <div>
+                <label>User Assigned</label>
+                <select v-model="editAgenda.user_id">
+                    <option value="">Select user</option>
+                    <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
+                    </option>
+                </select>
+            </div>
+            <button @click="saveAgendaCreate(meeting.id)">Save Agenda</button>
+        </div>
+
         <!--Read agendas-->
 
         <h4>Agendas:</h4>
@@ -29,33 +57,7 @@
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
 
-                        <!--Create agenda-->
 
-                        <a href="#" @click.prevent="editAgenda=true">Add Agenda</a>
-                        <div v-show="editAgenda">
-                            <div>
-                                Topic<input type="text" v-model="editAgenda.topic">
-                            </div>
-                            <div>
-                                Description<input type="text" v-model="editAgenda.description">
-                            </div>
-                            <div>
-                                Time Allocated (minutes)
-                                <select type="text" v-model="editAgenda.time_allocated">
-                                    <option value="">Select time</option>
-                                    <option v-for="time in timing">{{ time }}</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>User Assigned</label>
-                                <select v-model="editAgenda.user_id">
-                                    <option value="">Select user</option>
-                                    <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
-                                    </option>
-                                </select>
-                            </div>
-                            <button @click="saveAgendaCreate(meeting.id)">Save Agenda</button>
-                        </div>
 
                         <!--Start edit agenda-->
 
