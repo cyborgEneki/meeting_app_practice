@@ -19,14 +19,46 @@
         <label>Add Attendee</label>
         <button @click="addUser(users.id)">Add</button>
 
-        <!--Agendas-->
+        <!--Read agendas-->
 
         <h4>Agendas:</h4>
         <div>
             <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
+
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
+
+                        <!--Create agenda-->
+
+                        <a href="#" @click.prevent="editAgenda=true">Add Agenda</a>
+                        <div v-show="editAgenda">
+                            <div>
+                                Topic<input type="text" v-model="editAgenda.topic">
+                            </div>
+                            <div>
+                                Description<input type="text" v-model="editAgenda.description">
+                            </div>
+                            <div>
+                                Time Allocated (minutes)
+                                <select type="text" v-model="editAgenda.time_allocated">
+                                    <option value="">Select time</option>
+                                    <option v-for="time in timing">{{ time }}</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>User Assigned</label>
+                                <select v-model="editAgenda.user_id">
+                                    <option value="">Select user</option>
+                                    <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
+                                    </option>
+                                </select>
+                            </div>
+                            <button @click="saveAgendaCreate(meeting.id)">Save Agenda</button>
+                        </div>
+
+                        <!--Start edit agenda-->
+
                         <div>
                             <div v-show="editAgenda.id != agenda.id">
                                 <div @click="startAgendaEdit(agenda.id)">
@@ -40,7 +72,7 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <a href="#" @click="showFollowupCreate(agenda.id)">Add Followup</a>
+                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
                                     <div v-show="editItem == 'followup'+agenda.id">
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
@@ -186,6 +218,7 @@
         },
         data() {
             return {
+                addItem: {},
                 editItem: {},
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -196,6 +229,7 @@
                     time_allocated: '',
                     user_id: '',
                     agenda_status: 0,
+                    meeting_id: ''
                 },
                 editFollowup: {
                     action: '',
@@ -210,6 +244,9 @@
                         {id: 2, name: 'Rejected'}
                     ],
             }
+        },
+        mounted() {
+            console.log(this.meeting.agendas);
         },
         methods: {
             addUser: function (id) {
@@ -248,12 +285,19 @@
                         this.editAgenda = {};
                     });
             },
+            saveAgendaCreate(meetingId) {
+                this.editAgenda.meeting_id = meetingId;
+                axios.post('/api/agendas', this.editAgenda)
+                    .then(() => {
+                        this.editAgenda = {};
+
+                    })
+            },
 
             showFollowupCreate(agendaId) {
                 this.editItem = 'followup' + agendaId;
                 this.editFollowup.agenda_id = agendaId;
             },
-
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
                 let agendaindex = this.meeting.agendas.map(function (item) {
