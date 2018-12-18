@@ -63001,6 +63001,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             axios.post('/api/agendas', this.editAgenda).then(function () {
                 _this4.editAgenda = {};
             });
+            this.meeting.agendas.push(response.data);
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.editItem = 'followup' + agendaId;

@@ -292,8 +292,8 @@
                 axios.post('/api/agendas', this.editAgenda)
                     .then(() => {
                         this.editAgenda = {};
-
-                    })
+                    });
+                this.meeting.agendas.push(response.data);
             },
 
             showFollowupCreate(agendaId) {
