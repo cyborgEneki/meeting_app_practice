@@ -62910,6 +62910,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -62997,10 +63000,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var _this4 = this;
 
             this.editAgenda.meeting_id = meetingId;
-            axios.post('/api/agendas', this.editAgenda).then(function () {
+            axios.post('/api/agendas', this.editAgenda).then(function (response) {
                 _this4.editAgenda = {};
+                _this4.meeting.agendas.push(response.data);
             });
-            this.meeting.agendas.push(response.data);
+        },
+        cancelAgenda: function cancelAgenda() {
+            this.editAgenda = {};
+            this.editAgendaFlag = {};
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.editItem = 'followup' + agendaId;
@@ -63297,7 +63304,13 @@ var render = function() {
               }
             },
             [_vm._v("Save Agenda")]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", [
+            _c("a", { attrs: { href: "#" }, on: { click: _vm.cancelAgenda } }, [
+              _vm._v("Cancel")
+            ])
+          ])
         ]
       ),
       _vm._v(" "),

@@ -45,6 +45,9 @@
                 </select>
             </div>
             <button @click="saveAgendaCreate(meeting.id)">Save Agenda</button>
+            <div>
+                <a href="#" @click="cancelAgenda">Cancel</a>
+            </div>
         </div>
 
         <!--Read agendas-->
@@ -273,7 +276,6 @@
                         this.meeting.users.splice(index, 1);
                     });
             },
-
             startAgendaEdit(id) {
                 let index = this.meeting.agendas.map(function (item) {
                     return item.id
@@ -289,12 +291,15 @@
             saveAgendaCreate(meetingId) {
                 this.editAgenda.meeting_id = meetingId;
                 axios.post('/api/agendas', this.editAgenda)
-                    .then(() => {
+                    .then((response) => {
                         this.editAgenda = {};
+                        this.meeting.agendas.push(response.data);
                     });
-                this.meeting.agendas.push(response.data);
             },
-
+            cancelAgenda() {
+                this.editAgenda = {};
+                this.editAgendaFlag = {};
+            },
             showFollowupCreate(agendaId) {
                 this.editItem = 'followup' + agendaId;
                 this.editFollowup.agenda_id = agendaId;
