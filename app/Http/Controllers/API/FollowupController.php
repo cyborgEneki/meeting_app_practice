@@ -60,7 +60,7 @@ class FollowupController extends Controller
      * @param  \App\Followup  $followup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Followup $followup)
+    public function update(FollowupRequest $request, Followup $followup)
     {
         $this->followupRepository->updateFollowup($request, $followup);
         return response()->json(['You have successfully updated your followup.'], 200);
