@@ -62910,8 +62910,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
 
 
 
@@ -62930,6 +62928,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             addItem: {},
+            editAgendaFlag: {},
             editItem: {},
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -63130,7 +63129,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.editAgenda = "agenda"
+              _vm.editAgendaFlag = "agenda"
             }
           }
         },
@@ -63144,8 +63143,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.editAgenda == "agenda",
-              expression: "editAgenda == 'agenda'"
+              value: _vm.editAgendaFlag == "agenda",
+              expression: "editAgendaFlag == 'agenda'"
             }
           ]
         },

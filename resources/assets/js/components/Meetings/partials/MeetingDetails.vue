@@ -21,8 +21,8 @@
 
         <!--Create agenda-->
 <br>
-        <a href="#" @click.prevent="editAgenda='agenda'">Add Agenda</a>
-        <div v-show="editAgenda == 'agenda'">
+        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+        <div v-show="editAgendaFlag == 'agenda'">
             <div>
                 Topic<input type="text" v-model="editAgenda.topic">
             </div>
@@ -56,8 +56,6 @@
 
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
-
-
 
                         <!--Start edit agenda-->
 
@@ -221,6 +219,7 @@
         data() {
             return {
                 addItem: {},
+                editAgendaFlag: {},
                 editItem: {},
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
