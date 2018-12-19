@@ -50,14 +50,14 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
-
         <!--Read agendas-->
 
         <h4>Agendas:</h4>
         <div>
             <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
+
+                    <a href="#" @click="deleteAgenda(agenda.id)">Delete</a>
 
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
@@ -73,8 +73,6 @@
                                     <div>Status {{ agenda.agenda_status }}</div>
                                     <div>Conclusion {{ agenda.conclusion }}</div>
                                 </div>
-
-
 
                                 <!--Create followup form-->
 
@@ -193,6 +191,8 @@
             </div>
         </div>
 
+        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+
         <!--Second part of the form-->
 
         <h4>Venue:</h4>
@@ -304,6 +304,15 @@
             cancelAgenda() {
                 this.editAgenda = {};
                 this.editAgendaFlag = '';
+            },
+            deleteAgenda(agendaId) {
+                axios.delete('/api/agendas/' + agendaId)
+                        .then(() => {
+                            let agendaindex = this.meeting.agendas.map(function (item) {
+                                return item.id
+                            }).indexOf(agendaId);
+                            this.meeting.agendas.splice(agendaindex, 1);
+                    });
             },
             showFollowupCreate(agendaId) {
                 this.editItem = 'followup' + agendaId;

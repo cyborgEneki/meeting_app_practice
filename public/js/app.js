@@ -63014,6 +63014,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.editAgenda = {};
             this.editAgendaFlag = '';
         },
+        deleteAgenda: function deleteAgenda(agendaId) {
+            var _this5 = this;
+
+            axios.delete('/api/agendas/' + agendaId).then(function () {
+                var agendaindex = _this5.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                _this5.meeting.agendas.splice(agendaindex, 1);
+            });
+        },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.editItem = 'followup' + agendaId;
             this.editFollowup.agenda_id = agendaId;
@@ -63033,33 +63043,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
         },
         saveFollowupEdit: function saveFollowupEdit() {
-            var _this5 = this;
+            var _this6 = this;
 
             axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup).then(function (response) {
-                _this5.editFollowup = {};
+                _this6.editFollowup = {};
             });
         },
         cancelFollowup: function cancelFollowup() {
             this.editFollowup = {};
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this6 = this;
+            var _this7 = this;
 
             axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this6.meeting.agendas.map(function (item) {
+                var agendaindex = _this7.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                var followupindex = _this6.meeting.agendas[agendaindex].followups.map(function (item) {
+                var followupindex = _this7.meeting.agendas[agendaindex].followups.map(function (item) {
                     return item.id;
                 }).indexOf(followupId);
-                _this6.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+                _this7.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
             });
         },
         addFollowup: function addFollowup() {
-            var _this7 = this;
+            var _this8 = this;
 
             axios.post('/api/followups', this.editFollowup).then(function () {
-                _this7.editFollowup = {};
+                _this8.editFollowup = {};
             });
         }
     }
@@ -63303,20 +63313,6 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: { href: "#" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.editAgendaFlag = "agenda"
-            }
-          }
-        },
-        [_vm._v("Add Agenda")]
-      ),
-      _vm._v(" "),
       _c("h4", [_vm._v("Agendas:")]),
       _vm._v(" "),
       _c(
@@ -63324,6 +63320,19 @@ var render = function() {
         _vm._l(_vm.meeting.agendas, function(agenda, index) {
           return _c("div", [
             _c("fieldset", [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteAgenda(agenda.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              ),
+              _vm._v(" "),
               _c("div", [
                 _c("h2", [
                   _vm._v(
@@ -64128,6 +64137,20 @@ var render = function() {
             ])
           ])
         })
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.editAgendaFlag = "agenda"
+            }
+          }
+        },
+        [_vm._v("Add Agenda")]
       ),
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
