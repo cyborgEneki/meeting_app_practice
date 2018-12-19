@@ -6,43 +6,108 @@
             Meeting Name<input type="text" v-model="meeting.name"/>
         </div>
         <div>
-            Date<input v-model="meeting.date" type="date"/>
+            Date<input name='after_field' v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" v-model="meeting.date"
+                       type="text"/>
+            <span>{{ errors.first('after_field') }}</span>
+            <input v-show='false' ref="refDate" type="text" v-model="refDate">
         </div>
         <div>
             Start Time<input v-model="meeting.start_time" type="time"/>
         </div>
         <div>
-            End Time<input v-model="meeting.end_time" type="time"/>
-        </div>
-        <!--<div>-->
-        <!--Facilitator<input name="facilitator" v-model="meeting.facilitator.id"/>-->
-        <!--</div>-->
-        <!--<div>-->
-        <!--Time Keeper<input name="time_keeper" v-model="meeting.time_keeper.id"/>-->
-        <!--</div>-->
-        <div>
-            Venue<input type="text" v-model="meeting.venue_id"/>
+            End Time<input name='end_time' v-validate="'after:'+meeting.start_time+'|required'"
+                           v-model="meeting.end_time" type="time"/>
+            <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
-            Media<input type="text" v-model="meeting.media_id"/>
+            <label>Time Keeper</label>
+            <select v-model="meeting.time_keeper_id">
+                <option value="">Select user</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
+            </select>
         </div>
         <div>
-            Meeting Type<input type="text" v-model="meeting.meetingtype_id"/>
+            <label>Facilitator</label>
+            <select v-model="meeting.facilitator_id">
+                <option value="">Select user</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
+            </select>
         </div>
         <div>
-            Meeting Series<input type="text" v-model="meeting.meetingseries_id"/>
+            <label>Venue</label>
+            <select v-model="meeting.venue_id">
+                <option value="">Select venue</option>
+                <option v-for="venue in orderedVenues" :value="venue.id">{{ venue.name }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Media</label>
+            <select v-model="meeting.media_id">
+                <option value="">Select media</option>
+                <option v-for="eachmedia in orderedMedia" :value="eachmedia.id">{{ eachmedia.name }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Meeting Type</label>
+            <select v-model="meeting.meetingtype_id">
+                <option value="">Select meeting type</option>
+                <option v-for="meetingtype in orderedMeetingTypes" :value="meetingtype.id">{{ meetingtype.name }}
+                </option>
+            </select>
+        </div>
+        <div>
+            <label>Meeting Series</label>
+            <select v-model="meeting.meetingseries_id">
+                <option value="">Select meeting series</option>
+                <option v-for="eachmeetingseries in orderedMeetingSeries" :value="eachmeetingseries.id">{{
+                    eachmeetingseries.name }}
+                </option>
+            </select>
         </div>
 
         <button @click="editMeeting(meeting)">Edit Meeting</button>
+        <button @click="$router.go(-1)">Go Back to Previous Page</button>
+
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['meeting'],
+    import 'vuejs-noty/dist/vuejs-noty.css';
 
+    export default {
+        props: ['choices', 'meeting'],
+        computed: {
+            orderedUsers() {
+                return _.orderBy(this.choices.users, 'first_name');
+            },
+            orderedVenues() {
+                return _.orderBy(this.choices.venues, 'name');
+            },
+            orderedMedia() {
+                return _.orderBy(this.choices.media, 'media');
+            },
+            orderedMeetingTypes() {
+                return _.orderBy(this.choices.meetingtypes, 'name');
+            },
+            orderedMeetingSeries() {
+                return _.orderBy(this.choices.meetingseries, 'name');
+            },
+            refDate() {
+                let today = new Date();
+                let dd = today.getDate();
+                let mm = today.getMonth() + 1;
+                let yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                return yyyy + '-' + mm + '-' + dd;
+            }
+        },
         methods: {
-            editMeeting: function (meeting) {
+            editMeeting(meeting) {
                 let currentMeeting = {};
 
                 currentMeeting.name = meeting.name;
@@ -50,8 +115,8 @@
                 currentMeeting.end_time = meeting.end_time;
                 currentMeeting.date = meeting.date;
                 currentMeeting.media_id = meeting.media_id;
-                currentMeeting.facilitator = meeting.facilitator.id;
-                currentMeeting.time_keeper = meeting.time_keeper.id;
+                currentMeeting.facilitator_id = meeting.facilitator_id;
+                currentMeeting.time_keeper_id = meeting.time_keeper_id;
                 currentMeeting.venue_id = meeting.venue_id;
                 currentMeeting.meetingseries_id = meeting.meetingseries_id;
                 currentMeeting.meetingtype_id = meeting.meetingtype_id;
@@ -60,9 +125,9 @@
                     .then(response => {
                     });
                 this.$router.push('/meetings');
-
+                this.$noty.success("This meeting has been edited!");
             }
-        },
+        }
     }
 </script>
 

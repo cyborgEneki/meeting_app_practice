@@ -6,8 +6,9 @@
         </div>
 
         <div v-if="showMeetingDetails">
-            <meeting-details></meeting-details>
+            <meeting-details :choices.sync="choices"></meeting-details>
         </div>
+
     </div>
 </template>
 
@@ -17,6 +18,7 @@
     import {mapGetters} from 'vuex'
 
     export default {
+        props: ['choices'],
         computed: {
             ...mapGetters({
                 showMeetingDetails: 'showMeetingDetails',

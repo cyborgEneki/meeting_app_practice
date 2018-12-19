@@ -18,7 +18,12 @@
                 <td>{{ meeting.end_time }}</td>
                 <td>
                     <router-link :to="{ name: 'editMeeting' , params: { meeting }}">Edit</router-link>
-                    <button @click="deleteMeeting(meeting.id)">Delete</button>
+                    <div class="confirmation__button">
+                        <vue-confirmation-button
+                                :messages="customMessages"
+                                v-on:confirmation-success="deleteUser(meeting.id)">
+                        </vue-confirmation-button>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -26,10 +31,21 @@
 </template>
 
 <script>
+    import vueConfirmationButton from 'vue-confirmation-button';
+
     export default {
+        components: {
+            'vue-confirmation-button': vueConfirmationButton,
+        },
         data() {
             return {
                 meetings: [],
+                customMessages:
+                    [
+                        'Delete',
+                        'Are you sure?',
+                        'Ok!'
+                    ]
             }
         },
         methods: {
@@ -41,9 +57,17 @@
                     )
             },
             loadView: function (meeting) {
-                this.$store.commit('GET_MEETING_DETAILS', meeting)
+                this.$store.commit('GET_MEETING_DETAILS', meeting);
             },
             deleteMeeting(id) {
+                this.$dialog.confirm('Please confirm to continue')
+                    .then(function (dialog) {
+                        console.log('Clicked on proceed')
+                    })
+                    .catch(function () {
+                        console.log('Clicked on cancel')
+                    });
+                
                 axios.delete('/api/meetings/'+id)
                     .then(() => {
                         let index = this.meetings.map(function(item){
@@ -51,7 +75,7 @@
                         }).indexOf(id);
                         this.meetings.splice(index, 1);
                     });
-            }
+            },
         },
         created() {
             this.getMeetings();

@@ -9,7 +9,7 @@
 namespace App\Repositories;
 
 use App\User;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\EditUserRequest;
 use Illuminate\Http\Request;
 
 interface CustomUserRepositoryInterface {
@@ -17,9 +17,9 @@ interface CustomUserRepositoryInterface {
 
     public function showUser($id);
 
-    public function createUser(UserRequest $request);
+//    public function createUser(UserRequest $request);
 
-    public function updateUser(UserRequest $request, User $user);
+    public function updateUser(EditUserRequest $request, User $user);
 
     public function deleteUser($id);
 }

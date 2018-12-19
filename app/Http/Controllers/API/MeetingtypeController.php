@@ -14,7 +14,7 @@ class MeetingtypeController extends Controller
 
     public function __construct(MeetingtypeRepositoryInterface $meetingtypeRepository)
     {
-        $this->middleware(['role:admin']);
+//        $this->middleware(['role:admin']);
         $this->meetingtypeRepository = $meetingtypeRepository;
     }
 

@@ -32,7 +32,6 @@ class FollowupRepository implements FollowupRepositoryInterface
         return $followup->update($request->all());
     }
 
-
     /**
      * @param Followup $followup
      * @return bool|null
