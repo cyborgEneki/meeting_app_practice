@@ -62913,6 +62913,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -62931,7 +62935,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     data: function data() {
         return {
             addItem: {},
-            editAgendaFlag: {},
+            editAgendaFlag: '',
             editItem: {},
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -63004,10 +63008,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this4.editAgenda = {};
                 _this4.meeting.agendas.push(response.data);
             });
+            this.editAgendaFlag = '';
         },
         cancelAgenda: function cancelAgenda() {
             this.editAgenda = {};
-            this.editAgendaFlag = {};
+            this.editAgendaFlag = '';
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.editItem = 'followup' + agendaId;
@@ -63130,20 +63135,6 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _c(
-        "a",
-        {
-          attrs: { href: "#" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.editAgendaFlag = "agenda"
-            }
-          }
-        },
-        [_vm._v("Add Agenda")]
-      ),
-      _vm._v(" "),
-      _c(
         "div",
         {
           directives: [
@@ -63157,7 +63148,7 @@ var render = function() {
         },
         [
           _c("div", [
-            _vm._v("\n                Topic"),
+            _vm._v("\n            Topic"),
             _c("input", {
               directives: [
                 {
@@ -63181,7 +63172,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n                Description"),
+            _vm._v("\n            Description"),
             _c("input", {
               directives: [
                 {
@@ -63205,9 +63196,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v(
-              "\n                Time Allocated (minutes)\n                "
-            ),
+            _vm._v("\n            Time Allocated (minutes)\n            "),
             _c(
               "select",
               {
@@ -63286,7 +63275,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm._l(_vm.orderedUsers, function(user) {
                   return _c("option", { domProps: { value: user.id } }, [
-                    _vm._v(_vm._s(user.full_name) + "\n                    ")
+                    _vm._v(_vm._s(user.full_name) + "\n                ")
                   ])
                 })
               ],
@@ -63312,6 +63301,20 @@ var render = function() {
             ])
           ])
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.editAgendaFlag = "agenda"
+            }
+          }
+        },
+        [_vm._v("Add Agenda")]
       ),
       _vm._v(" "),
       _c("h4", [_vm._v("Agendas:")]),
@@ -63411,7 +63414,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                        Action"
+                              "\n                                    Action"
                             ),
                             _c("input", {
                               directives: [
@@ -63438,7 +63441,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                        Timeline"
+                              "\n                                    Timeline"
                             ),
                             _c("input", {
                               directives: [
@@ -63465,7 +63468,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                        Followup Status\n                                        "
+                              "\n                                    Followup Status\n                                    "
                             ),
                             _c(
                               "select",
@@ -63512,7 +63515,7 @@ var render = function() {
                                     [
                                       _vm._v(
                                         _vm._s(status.name) +
-                                          "\n                                            "
+                                          "\n                                        "
                                       )
                                     ]
                                   )
@@ -63544,9 +63547,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm._l(agenda.followups, function(followup) {
                         return _c("div", [
-                          _vm._v(
-                            "Follow Up\n                                    "
-                          ),
+                          _vm._v("Follow Up\n                                "),
                           _c(
                             "div",
                             {
@@ -63609,7 +63610,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "Edit\n                                                    Followup\n                                                "
+                                        "Edit\n                                                Followup\n                                            "
                                       )
                                     ]
                                   ),
@@ -63719,7 +63720,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("div", [
                                     _vm._v(
-                                      "Status\n                                                "
+                                      "Status\n                                            "
                                     ),
                                     _c(
                                       "select",
@@ -63769,9 +63770,9 @@ var render = function() {
                                             { domProps: { value: status.id } },
                                             [
                                               _vm._v(
-                                                "\n                                                        " +
+                                                "\n                                                    " +
                                                   _vm._s(status.name) +
-                                                  "\n                                                    "
+                                                  "\n                                                "
                                               )
                                             ]
                                           )
@@ -63907,7 +63908,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", [
                           _vm._v(
-                            "\n                                    Time Allocated (minutes)\n                                    "
+                            "\n                                Time Allocated (minutes)\n                                "
                           ),
                           _c(
                             "select",
@@ -64002,7 +64003,7 @@ var render = function() {
                                   [
                                     _vm._v(
                                       _vm._s(user.full_name) +
-                                        "\n                                        "
+                                        "\n                                    "
                                     )
                                   ]
                                 )
@@ -64014,7 +64015,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", [
                           _vm._v(
-                            "\n                                    Status\n                                    "
+                            "\n                                Status\n                                "
                           ),
                           _c(
                             "select",
@@ -64061,7 +64062,7 @@ var render = function() {
                                   [
                                     _vm._v(
                                       _vm._s(status.name) +
-                                        "\n                                        "
+                                        "\n                                    "
                                     )
                                   ]
                                 )

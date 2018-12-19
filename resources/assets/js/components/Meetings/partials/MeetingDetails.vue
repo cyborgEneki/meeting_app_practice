@@ -20,8 +20,8 @@
         <button @click="addUser(users.id)">Add</button>
 
         <!--Create agenda-->
-<br>
-        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+        <br>
+
         <div v-show="editAgendaFlag == 'agenda'">
             <div>
                 Topic<input type="text" v-model="editAgenda.topic">
@@ -50,6 +50,8 @@
             </div>
         </div>
 
+        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+
         <!--Read agendas-->
 
         <h4>Agendas:</h4>
@@ -71,6 +73,8 @@
                                     <div>Status {{ agenda.agenda_status }}</div>
                                     <div>Conclusion {{ agenda.conclusion }}</div>
                                 </div>
+
+
 
                                 <!--Create followup form-->
 
@@ -222,7 +226,7 @@
         data() {
             return {
                 addItem: {},
-                editAgendaFlag: {},
+                editAgendaFlag: '',
                 editItem: {},
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -295,10 +299,11 @@
                         this.editAgenda = {};
                         this.meeting.agendas.push(response.data);
                     });
+                this.editAgendaFlag = '';
             },
             cancelAgenda() {
                 this.editAgenda = {};
-                this.editAgendaFlag = {};
+                this.editAgendaFlag = '';
             },
             showFollowupCreate(agendaId) {
                 this.editItem = 'followup' + agendaId;
@@ -318,7 +323,6 @@
                 //load the values of the followup from meeting into the editFollowup variable in data
                 this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
             },
-
             saveFollowupEdit() {
                 axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup)
                     .then((response) => {
