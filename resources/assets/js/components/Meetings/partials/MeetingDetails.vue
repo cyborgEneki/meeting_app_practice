@@ -145,7 +145,7 @@
                                         Description<input type="text" v-model="editDiscussion.description">
                                     </div>
                                     <a href="#" @click="cancelDiscussion">Cancel</a>
-                                    <a href="#" @click="saveDiscussion">Save</a>
+                                    <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                 </div>
 
                                 <!--Read discussions-->
@@ -161,7 +161,7 @@
                                                     Discussion
                                                 </button>
                                                 <a href="#"
-                                                   @click="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
+                                                   @click.prevent="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
         data() {
             return {
                 editAgendaFlag: '',
-                editItem: {},
+                editItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {
@@ -410,10 +410,14 @@
             cancelDiscussion() {
                 this.editDiscussion = {}
             },
-            saveDiscussion() {
+            saveDiscussion(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
                 axios.post('/api/discussions', this.editDiscussion)
                     .then((response) => {
                         this.editDiscussion = {};
+                        this.meeting.agendas[agendaIndex].discussion.push(response.data);
                     });
             },
             startDiscussionEdit(discussionId, agendaId) {
