@@ -97,7 +97,7 @@
                                 <!--Read followup-->
 
                                 <div v-for="followup in agenda.followups">Follow Up
-                                    <div v-show="editFollowup.id != followup.id">
+                                    <div v-show="editFollowup.id !== followup.id">
                                         <div>
                                             <div @click="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
@@ -146,6 +146,22 @@
                                     </div>
                                     <a href="#" @click="cancelDiscussion">Cancel</a>
                                     <a href="#" @click="saveDiscussion">Save</a>
+                                </div>
+
+                                <!--Read discussions-->
+
+                                <div v-for="discussion in agenda.discussion"> Discussion
+                                    <div v-show="editDiscussion.id !== discussion.id">
+                                        <div>
+                                            <div @click="startDiscussionEdit(discussion.id, agenda.id)">
+                                                <li>Description {{discussion.description}}</li>
+                                            </div>
+                                            <div>
+                                                <button @click="startDiscussionEdit(discussion.id, agenda.id)">Edit Discussion</button>
+                                                <a href="#" @click="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!--Edit Agenda Button-->
@@ -236,9 +252,7 @@
         },
         data() {
             return {
-                addItem: {},
                 editAgendaFlag: '',
-                editDiscussionFlag: '',
                 editItem: {},
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -257,6 +271,7 @@
                     status: ''
                 },
                 editDiscussion: {
+                    id: '',
                     description: '',
                     agenda_id: ''
                 },

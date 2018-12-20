@@ -62928,6 +62928,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62945,9 +62961,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
-            addItem: {},
             editAgendaFlag: '',
-            editDiscussionFlag: '',
             editItem: {},
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -62966,6 +62980,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 status: ''
             },
             editDiscussion: {
+                id: '',
                 description: '',
                 agenda_id: ''
             },
@@ -63594,8 +63609,8 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.editFollowup.id != followup.id,
-                                  expression: "editFollowup.id != followup.id"
+                                  value: _vm.editFollowup.id !== followup.id,
+                                  expression: "editFollowup.id !== followup.id"
                                 }
                               ]
                             },
@@ -63928,6 +63943,87 @@ var render = function() {
                           [_vm._v("Save")]
                         )
                       ]),
+                      _vm._v(" "),
+                      _vm._l(agenda.discussion, function(discussion) {
+                        return _c("div", [
+                          _vm._v(
+                            " Discussion\n                                "
+                          ),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    _vm.editDiscussion.id !== discussion.id,
+                                  expression:
+                                    "editDiscussion.id !== discussion.id"
+                                }
+                              ]
+                            },
+                            [
+                              _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        _vm.startDiscussionEdit(
+                                          discussion.id,
+                                          agenda.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("li", [
+                                      _vm._v(
+                                        "Description " +
+                                          _vm._s(discussion.description)
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _c(
+                                    "button",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.startDiscussionEdit(
+                                            discussion.id,
+                                            agenda.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit Discussion")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.deleteDiscussion(
+                                            discussion.id,
+                                            agenda.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        ])
+                      }),
                       _vm._v(" "),
                       _c("div", [
                         _c(
