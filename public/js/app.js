@@ -64116,19 +64116,21 @@ var render = function() {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: discussion.description,
-                                        expression: "discussion.description"
+                                        value: _vm.editDiscussion.description,
+                                        expression: "editDiscussion.description"
                                       }
                                     ],
                                     attrs: { type: "text" },
-                                    domProps: { value: discussion.description },
+                                    domProps: {
+                                      value: _vm.editDiscussion.description
+                                    },
                                     on: {
                                       input: function($event) {
                                         if ($event.target.composing) {
                                           return
                                         }
                                         _vm.$set(
-                                          discussion,
+                                          _vm.editDiscussion,
                                           "description",
                                           $event.target.value
                                         )

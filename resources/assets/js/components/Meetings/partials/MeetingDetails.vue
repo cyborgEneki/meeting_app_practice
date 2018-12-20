@@ -170,7 +170,7 @@
 
                                     <div v-show="editDiscussion.id === discussion.id">
                                         <form @click.prevent>
-                                            Description <input type="text" v-model="discussion.description">
+                                            Description <input type="text" v-model="editDiscussion.description">
                                             <button @click="saveDiscussionEdit">Save Discussion</button>
                                             <a href="#" @click="cancelDiscussion">Cancel</a>
                                         </form>
