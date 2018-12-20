@@ -62944,6 +62944,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63116,6 +63127,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             axios.post('/api/discussions', this.editDiscussion).then(function (response) {
                 _this9.editDiscussion = {};
             });
+        },
+        startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
+
+            var discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                return item.id;
+            }).indexOf(discussionId);
+
+            this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
         }
     }
 });
@@ -63196,8 +63218,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.editAgendaFlag == "agenda",
-              expression: "editAgendaFlag == 'agenda'"
+              value: _vm.editAgendaFlag === "agenda",
+              expression: "editAgendaFlag === 'agenda'"
             }
           ]
         },
@@ -63696,8 +63718,8 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.editFollowup.id == followup.id,
-                                  expression: "editFollowup.id == followup.id"
+                                  value: _vm.editFollowup.id === followup.id,
+                                  expression: "editFollowup.id === followup.id"
                                 }
                               ]
                             },
@@ -64000,7 +64022,11 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [_vm._v("Edit Discussion")]
+                                    [
+                                      _vm._v(
+                                        "Edit\n                                                Discussion\n                                            "
+                                      )
+                                    ]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -64020,6 +64046,63 @@ var render = function() {
                                   )
                                 ])
                               ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    _vm.editDiscussion.id === discussion.id,
+                                  expression:
+                                    "editDiscussion.id === discussion.id"
+                                }
+                              ]
+                            },
+                            [
+                              _c(
+                                "form",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        Description "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: discussion.description,
+                                        expression: "discussion.description"
+                                      }
+                                    ],
+                                    attrs: { type: "text" },
+                                    domProps: { value: discussion.description },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          discussion,
+                                          "description",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
                             ]
                           )
                         ])
@@ -64060,8 +64143,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.editAgenda.id == agenda.id,
-                            expression: "editAgenda.id==agenda.id"
+                            value: _vm.editAgenda.id === agenda.id,
+                            expression: "editAgenda.id === agenda.id"
                           }
                         ]
                       },

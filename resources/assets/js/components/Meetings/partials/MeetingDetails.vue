@@ -22,7 +22,7 @@
         <!--Create agenda-->
         <br>
 
-        <div v-show="editAgendaFlag == 'agenda'">
+        <div v-show="editAgendaFlag === 'agenda'">
             <div>
                 Topic<input type="text" v-model="editAgenda.topic">
             </div>
@@ -115,7 +115,7 @@
 
                                     <!--Edit followup form-->
 
-                                    <div v-show="editFollowup.id == followup.id">
+                                    <div v-show="editFollowup.id === followup.id">
                                         <form @click.prevent>
                                             <div>Action<input type="text" v-model="editFollowup.action"></div>
                                             <div>Timeline <input type="text" v-model="editFollowup.timeline"></div>
@@ -157,10 +157,21 @@
                                                 <li>Description {{discussion.description}}</li>
                                             </div>
                                             <div>
-                                                <button @click="startDiscussionEdit(discussion.id, agenda.id)">Edit Discussion</button>
-                                                <a href="#" @click="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
+                                                <button @click="startDiscussionEdit(discussion.id, agenda.id)">Edit
+                                                    Discussion
+                                                </button>
+                                                <a href="#"
+                                                   @click="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <!--Edit Discussion-->
+
+                                    <div v-show="editDiscussion.id === discussion.id">
+                                        <form @click.prevent>
+                                            Description <input type="text" v-model="discussion.description">
+                                        </form>
                                     </div>
                                 </div>
 
@@ -175,7 +186,7 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="editAgenda.id==agenda.id">
+                            <div v-show="editAgenda.id === agenda.id">
                                 <div>Topic<input type="text" v-model="editAgenda.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="editAgenda.description">
@@ -402,6 +413,17 @@
                     .then((response) => {
                         this.editDiscussion = {};
                     });
+            },
+            startDiscussionEdit(discussionId, agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id
+                }).indexOf(agendaId);
+
+                let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                    return item.id
+                }).indexOf(discussionId);
+
+                this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
             }
         }
     }
