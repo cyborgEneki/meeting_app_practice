@@ -24,13 +24,13 @@ class DiscussionRequest extends FormRequest
     public function rules()
     {
         return [
-            'discussion' => 'required'
+            'description' => 'required'
         ];
     }
     public function messages()
     {
         return [
-            'discussion.required' => 'You must enter a discussion before submission!',
+            'description.required' => 'You must enter a discussion before submission!',
         ];
     }
 }

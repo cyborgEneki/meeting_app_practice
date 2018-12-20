@@ -78,7 +78,7 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
-                                    <div v-show="editItem == 'followup'+agenda.id">
+                                    <div v-show="editItem === 'followup'+agenda.id">
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
                                         Followup Status
@@ -89,7 +89,7 @@
                                             </option>
                                         </select>
                                         <a href="#" @click="cancelFollowup">Cancel</a>
-                                        <a href="#" @click="addFollowup">Save</a>
+                                        <a href="#" @click="saveFollowup">Save</a>
 
                                     </div>
                                 </div>
@@ -135,7 +135,18 @@
                                     </div>
                                 </div>
 
-                                <button @click='addFollowup'>Save</button>
+                                <button @click='saveFollowup'>Save</button>
+
+                                <!--Create discussion form-->
+
+                                <div>
+                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
+                                    <div v-show="editItem === 'discussion'+agenda.id">
+                                        Description<input type="text" v-model="editDiscussion.description">
+                                    </div>
+                                    <a href="#" @click="cancelDiscussion">Cancel</a>
+                                    <a href="#" @click="saveDiscussion">Save</a>
+                                </div>
 
                                 <!--Edit Agenda Button-->
 
@@ -227,6 +238,7 @@
             return {
                 addItem: {},
                 editAgendaFlag: '',
+                editDiscussionFlag: '',
                 editItem: {},
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -243,6 +255,10 @@
                     action: '',
                     timeline: '',
                     status: ''
+                },
+                editDiscussion: {
+                    description: '',
+                    agenda_id: ''
                 },
                 success: false,
                 statuses:
@@ -307,11 +323,11 @@
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)
-                        .then(() => {
-                            let agendaindex = this.meeting.agendas.map(function (item) {
-                                return item.id
-                            }).indexOf(agendaId);
-                            this.meeting.agendas.splice(agendaindex, 1);
+                    .then(() => {
+                        let agendaindex = this.meeting.agendas.map(function (item) {
+                            return item.id
+                        }).indexOf(agendaId);
+                        this.meeting.agendas.splice(agendaindex, 1);
                     });
             },
             showFollowupCreate(agendaId) {
@@ -353,11 +369,24 @@
                         this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
                     });
             },
-            addFollowup() {
+            saveFollowup() {
                 axios.post('/api/followups', this.editFollowup)
                     .then(() => {
                         this.editFollowup = {};
                     })
+            },
+            showDiscussionCreate(agendaId) {
+                this.editItem = 'discussion' + agendaId;
+                this.editDiscussion.agenda_id = agendaId;
+            },
+            cancelDiscussion() {
+                this.editDiscussion = {}
+            },
+            saveDiscussion() {
+                axios.post('/api/discussions', this.editDiscussion)
+                    .then((response) => {
+                        this.editDiscussion = {};
+                    });
             }
         }
     }
