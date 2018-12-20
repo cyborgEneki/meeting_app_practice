@@ -171,6 +171,8 @@
                                     <div v-show="editDiscussion.id === discussion.id">
                                         <form @click.prevent>
                                             Description <input type="text" v-model="discussion.description">
+                                            <button @click="saveDiscussionEdit">Save Discussion</button>
+                                            <a href="#" @click="cancelDiscussion">Cancel</a>
                                         </form>
                                     </div>
                                 </div>
@@ -424,6 +426,26 @@
                 }).indexOf(discussionId);
 
                 this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+            },
+            saveDiscussionEdit() {
+                axios.put('/api/discussions/' + this.editDiscussion.id, this.editDiscussion)
+                    .then((response) => {
+                        this.editDiscussion = {};
+                    })
+            },
+            deleteDiscussion(discussionId, agendaId) {
+                axios.delete('api/discussions/' + discussionId)
+                    .then((response) => {
+                        let agendaIndex = this.meeting.agendas.map(function(item) {
+                            return item.id
+                        }).indexOf(agendaId);
+
+                        let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                            return item.id;
+                        }).indexOf(discussionId);
+
+                        this.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
+                    });
             }
         }
     }

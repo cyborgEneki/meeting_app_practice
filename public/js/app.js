@@ -62955,6 +62955,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -63138,6 +63140,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(discussionId);
 
             this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+        },
+        saveDiscussionEdit: function saveDiscussionEdit() {
+            var _this10 = this;
+
+            axios.put('/api/discussions/' + this.editDiscussion.id, this.editDiscussion).then(function (response) {
+                _this10.editDiscussion = {};
+            });
+        },
+        deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
+            var _this11 = this;
+
+            axios.delete('api/discussions/' + discussionId).then(function (response) {
+                var agendaIndex = _this11.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
+                var discussionIndex = _this11.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                    return item.id;
+                }).indexOf(discussionId);
+
+                _this11.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
+            });
         }
     }
 });
@@ -64100,7 +64124,22 @@ var render = function() {
                                         )
                                       }
                                     }
-                                  })
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    { on: { click: _vm.saveDiscussionEdit } },
+                                    [_vm._v("Save Discussion")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: { click: _vm.cancelDiscussion }
+                                    },
+                                    [_vm._v("Cancel")]
+                                  )
                                 ]
                               )
                             ]
