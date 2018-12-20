@@ -62917,6 +62917,46 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62934,9 +62974,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
-            addItem: {},
             editAgendaFlag: '',
-            editItem: {},
+            editItem: '',
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
             editAgenda: {
@@ -62952,6 +62991,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 action: '',
                 timeline: '',
                 status: ''
+            },
+            editDiscussion: {
+                id: '',
+                description: '',
+                agenda_id: ''
             },
             success: false,
             statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }]
@@ -63014,6 +63058,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.editAgenda = {};
             this.editAgendaFlag = '';
         },
+        deleteAgenda: function deleteAgenda(agendaId) {
+            var _this5 = this;
+
+            axios.delete('/api/agendas/' + agendaId).then(function () {
+                var agendaindex = _this5.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                _this5.meeting.agendas.splice(agendaindex, 1);
+            });
+        },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.editItem = 'followup' + agendaId;
             this.editFollowup.agenda_id = agendaId;
@@ -63033,33 +63087,84 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
         },
         saveFollowupEdit: function saveFollowupEdit() {
-            var _this5 = this;
+            var _this6 = this;
 
             axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup).then(function (response) {
-                _this5.editFollowup = {};
+                _this6.editFollowup = {};
             });
         },
         cancelFollowup: function cancelFollowup() {
             this.editFollowup = {};
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this6 = this;
-
-            axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this6.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                var followupindex = _this6.meeting.agendas[agendaindex].followups.map(function (item) {
-                    return item.id;
-                }).indexOf(followupId);
-                _this6.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
-            });
-        },
-        addFollowup: function addFollowup() {
             var _this7 = this;
 
+            axios.delete('/api/followups/' + followupId).then(function (response) {
+                var agendaindex = _this7.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                var followupindex = _this7.meeting.agendas[agendaindex].followups.map(function (item) {
+                    return item.id;
+                }).indexOf(followupId);
+                _this7.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+            });
+        },
+        saveFollowup: function saveFollowup() {
+            var _this8 = this;
+
             axios.post('/api/followups', this.editFollowup).then(function () {
-                _this7.editFollowup = {};
+                _this8.editFollowup = {};
+            });
+        },
+        showDiscussionCreate: function showDiscussionCreate(agendaId) {
+            this.editItem = 'discussion' + agendaId;
+            this.editDiscussion.agenda_id = agendaId;
+        },
+        cancelDiscussion: function cancelDiscussion() {
+            this.editDiscussion = {};
+        },
+        saveDiscussion: function saveDiscussion(agendaId) {
+            var _this9 = this;
+
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
+            axios.post('/api/discussions', this.editDiscussion).then(function (response) {
+                _this9.editDiscussion = {};
+                _this9.meeting.agendas[agendaIndex].discussion.push(response.data);
+            });
+        },
+        startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
+
+            var discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                return item.id;
+            }).indexOf(discussionId);
+
+            this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+        },
+        saveDiscussionEdit: function saveDiscussionEdit() {
+            var _this10 = this;
+
+            axios.put('/api/discussions/' + this.editDiscussion.id, this.editDiscussion).then(function (response) {
+                _this10.editDiscussion = {};
+            });
+        },
+        deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
+            var _this11 = this;
+
+            axios.delete('api/discussions/' + discussionId).then(function (response) {
+                var agendaIndex = _this11.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
+                var discussionIndex = _this11.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                    return item.id;
+                }).indexOf(discussionId);
+
+                _this11.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
             });
         }
     }
@@ -63141,8 +63246,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.editAgendaFlag == "agenda",
-              expression: "editAgendaFlag == 'agenda'"
+              value: _vm.editAgendaFlag === "agenda",
+              expression: "editAgendaFlag === 'agenda'"
             }
           ]
         },
@@ -63303,20 +63408,6 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: { href: "#" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.editAgendaFlag = "agenda"
-            }
-          }
-        },
-        [_vm._v("Add Agenda")]
-      ),
-      _vm._v(" "),
       _c("h4", [_vm._v("Agendas:")]),
       _vm._v(" "),
       _c(
@@ -63324,6 +63415,19 @@ var render = function() {
         _vm._l(_vm.meeting.agendas, function(agenda, index) {
           return _c("div", [
             _c("fieldset", [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteAgenda(agenda.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              ),
+              _vm._v(" "),
               _c("div", [
                 _c("h2", [
                   _vm._v(
@@ -63407,8 +63511,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.editItem == "followup" + agenda.id,
-                                expression: "editItem == 'followup'+agenda.id"
+                                value: _vm.editItem === "followup" + agenda.id,
+                                expression: "editItem === 'followup'+agenda.id"
                               }
                             ]
                           },
@@ -63537,7 +63641,7 @@ var render = function() {
                               "a",
                               {
                                 attrs: { href: "#" },
-                                on: { click: _vm.addFollowup }
+                                on: { click: _vm.saveFollowup }
                               },
                               [_vm._v("Save")]
                             )
@@ -63555,8 +63659,8 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.editFollowup.id != followup.id,
-                                  expression: "editFollowup.id != followup.id"
+                                  value: _vm.editFollowup.id !== followup.id,
+                                  expression: "editFollowup.id !== followup.id"
                                 }
                               ]
                             },
@@ -63642,8 +63746,8 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.editFollowup.id == followup.id,
-                                  expression: "editFollowup.id == followup.id"
+                                  value: _vm.editFollowup.id === followup.id,
+                                  expression: "editFollowup.id === followup.id"
                                 }
                               ]
                             },
@@ -63805,9 +63909,255 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
-                      _c("button", { on: { click: _vm.addFollowup } }, [
+                      _c("button", { on: { click: _vm.saveFollowup } }, [
                         _vm._v("Save")
                       ]),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.showDiscussionCreate(agenda.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Add Discussion")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.editItem === "discussion" + agenda.id,
+                                expression:
+                                  "editItem === 'discussion'+agenda.id"
+                              }
+                            ]
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Description"
+                            ),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.editDiscussion.description,
+                                  expression: "editDiscussion.description"
+                                }
+                              ],
+                              attrs: { type: "text" },
+                              domProps: {
+                                value: _vm.editDiscussion.description
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.editDiscussion,
+                                    "description",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: { click: _vm.cancelDiscussion }
+                          },
+                          [_vm._v("Cancel")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                _vm.saveDiscussion(agenda.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Save")]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(agenda.discussion, function(discussion) {
+                        return _c("div", [
+                          _vm._v(
+                            " Discussion\n                                "
+                          ),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    _vm.editDiscussion.id !== discussion.id,
+                                  expression:
+                                    "editDiscussion.id !== discussion.id"
+                                }
+                              ]
+                            },
+                            [
+                              _c("div", [
+                                _c(
+                                  "div",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        _vm.startDiscussionEdit(
+                                          discussion.id,
+                                          agenda.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("li", [
+                                      _vm._v(
+                                        "Description " +
+                                          _vm._s(discussion.description)
+                                      )
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _c(
+                                    "button",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.startDiscussionEdit(
+                                            discussion.id,
+                                            agenda.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "Edit\n                                                Discussion\n                                            "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.deleteDiscussion(
+                                            discussion.id,
+                                            agenda.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    _vm.editDiscussion.id === discussion.id,
+                                  expression:
+                                    "editDiscussion.id === discussion.id"
+                                }
+                              ]
+                            },
+                            [
+                              _c(
+                                "form",
+                                {
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        Description "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.editDiscussion.description,
+                                        expression: "editDiscussion.description"
+                                      }
+                                    ],
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.editDiscussion.description
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.editDiscussion,
+                                          "description",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    { on: { click: _vm.saveDiscussionEdit } },
+                                    [_vm._v("Save Discussion")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: { click: _vm.cancelDiscussion }
+                                    },
+                                    [_vm._v("Cancel")]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
+                      }),
                       _vm._v(" "),
                       _c("div", [
                         _c(
@@ -63844,8 +64194,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.editAgenda.id == agenda.id,
-                            expression: "editAgenda.id==agenda.id"
+                            value: _vm.editAgenda.id === agenda.id,
+                            expression: "editAgenda.id === agenda.id"
                           }
                         ]
                       },
@@ -64128,6 +64478,20 @@ var render = function() {
             ])
           ])
         })
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.editAgendaFlag = "agenda"
+            }
+          }
+        },
+        [_vm._v("Add Agenda")]
       ),
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),

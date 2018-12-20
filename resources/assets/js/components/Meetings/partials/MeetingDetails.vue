@@ -22,7 +22,7 @@
         <!--Create agenda-->
         <br>
 
-        <div v-show="editAgendaFlag == 'agenda'">
+        <div v-show="editAgendaFlag === 'agenda'">
             <div>
                 Topic<input type="text" v-model="editAgenda.topic">
             </div>
@@ -50,14 +50,14 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
-
         <!--Read agendas-->
 
         <h4>Agendas:</h4>
         <div>
             <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
+
+                    <a href="#" @click="deleteAgenda(agenda.id)">Delete</a>
 
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
@@ -74,13 +74,11 @@
                                     <div>Conclusion {{ agenda.conclusion }}</div>
                                 </div>
 
-
-
                                 <!--Create followup form-->
 
                                 <div>
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
-                                    <div v-show="editItem == 'followup'+agenda.id">
+                                    <div v-show="editItem === 'followup'+agenda.id">
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
                                         Followup Status
@@ -91,7 +89,7 @@
                                             </option>
                                         </select>
                                         <a href="#" @click="cancelFollowup">Cancel</a>
-                                        <a href="#" @click="addFollowup">Save</a>
+                                        <a href="#" @click="saveFollowup">Save</a>
 
                                     </div>
                                 </div>
@@ -99,7 +97,7 @@
                                 <!--Read followup-->
 
                                 <div v-for="followup in agenda.followups">Follow Up
-                                    <div v-show="editFollowup.id != followup.id">
+                                    <div v-show="editFollowup.id !== followup.id">
                                         <div>
                                             <div @click="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
@@ -117,7 +115,7 @@
 
                                     <!--Edit followup form-->
 
-                                    <div v-show="editFollowup.id == followup.id">
+                                    <div v-show="editFollowup.id === followup.id">
                                         <form @click.prevent>
                                             <div>Action<input type="text" v-model="editFollowup.action"></div>
                                             <div>Timeline <input type="text" v-model="editFollowup.timeline"></div>
@@ -137,7 +135,47 @@
                                     </div>
                                 </div>
 
-                                <button @click='addFollowup'>Save</button>
+                                <button @click='saveFollowup'>Save</button>
+
+                                <!--Create discussion form-->
+
+                                <div>
+                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
+                                    <div v-show="editItem === 'discussion'+agenda.id">
+                                        Description<input type="text" v-model="editDiscussion.description">
+                                    </div>
+                                    <a href="#" @click="cancelDiscussion">Cancel</a>
+                                    <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
+                                </div>
+
+                                <!--Read discussions-->
+
+                                <div v-for="discussion in agenda.discussion"> Discussion
+                                    <div v-show="editDiscussion.id !== discussion.id">
+                                        <div>
+                                            <div @click="startDiscussionEdit(discussion.id, agenda.id)">
+                                                <li>Description {{discussion.description}}</li>
+                                            </div>
+                                            <div>
+                                                <button @click="startDiscussionEdit(discussion.id, agenda.id)">Edit
+                                                    Discussion
+                                                </button>
+                                                <a href="#"
+                                                   @click.prevent="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Edit Discussion-->
+
+                                    <div v-show="editDiscussion.id === discussion.id">
+                                        <form @click.prevent>
+                                            Description <input type="text" v-model="editDiscussion.description">
+                                            <button @click="saveDiscussionEdit">Save Discussion</button>
+                                            <a href="#" @click="cancelDiscussion">Cancel</a>
+                                        </form>
+                                    </div>
+                                </div>
 
                                 <!--Edit Agenda Button-->
 
@@ -150,7 +188,7 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="editAgenda.id==agenda.id">
+                            <div v-show="editAgenda.id === agenda.id">
                                 <div>Topic<input type="text" v-model="editAgenda.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="editAgenda.description">
@@ -193,6 +231,8 @@
             </div>
         </div>
 
+        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+
         <!--Second part of the form-->
 
         <h4>Venue:</h4>
@@ -225,9 +265,8 @@
         },
         data() {
             return {
-                addItem: {},
                 editAgendaFlag: '',
-                editItem: {},
+                editItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {
@@ -243,6 +282,11 @@
                     action: '',
                     timeline: '',
                     status: ''
+                },
+                editDiscussion: {
+                    id: '',
+                    description: '',
+                    agenda_id: ''
                 },
                 success: false,
                 statuses:
@@ -305,6 +349,15 @@
                 this.editAgenda = {};
                 this.editAgendaFlag = '';
             },
+            deleteAgenda(agendaId) {
+                axios.delete('/api/agendas/' + agendaId)
+                    .then(() => {
+                        let agendaindex = this.meeting.agendas.map(function (item) {
+                            return item.id
+                        }).indexOf(agendaId);
+                        this.meeting.agendas.splice(agendaindex, 1);
+                    });
+            },
             showFollowupCreate(agendaId) {
                 this.editItem = 'followup' + agendaId;
                 this.editFollowup.agenda_id = agendaId;
@@ -344,11 +397,59 @@
                         this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
                     });
             },
-            addFollowup() {
+            saveFollowup() {
                 axios.post('/api/followups', this.editFollowup)
                     .then(() => {
                         this.editFollowup = {};
                     })
+            },
+            showDiscussionCreate(agendaId) {
+                this.editItem = 'discussion' + agendaId;
+                this.editDiscussion.agenda_id = agendaId;
+            },
+            cancelDiscussion() {
+                this.editDiscussion = {}
+            },
+            saveDiscussion(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                axios.post('/api/discussions', this.editDiscussion)
+                    .then((response) => {
+                        this.editDiscussion = {};
+                        this.meeting.agendas[agendaIndex].discussion.push(response.data);
+                    });
+            },
+            startDiscussionEdit(discussionId, agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id
+                }).indexOf(agendaId);
+
+                let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                    return item.id
+                }).indexOf(discussionId);
+
+                this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+            },
+            saveDiscussionEdit() {
+                axios.put('/api/discussions/' + this.editDiscussion.id, this.editDiscussion)
+                    .then((response) => {
+                        this.editDiscussion = {};
+                    })
+            },
+            deleteDiscussion(discussionId, agendaId) {
+                axios.delete('api/discussions/' + discussionId)
+                    .then((response) => {
+                        let agendaIndex = this.meeting.agendas.map(function(item) {
+                            return item.id
+                        }).indexOf(agendaId);
+
+                        let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                            return item.id;
+                        }).indexOf(discussionId);
+
+                        this.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
+                    });
             }
         }
     }
