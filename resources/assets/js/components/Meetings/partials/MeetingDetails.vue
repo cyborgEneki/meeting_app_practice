@@ -143,9 +143,9 @@
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
                                     <div v-show="editItem === 'discussion'+agenda.id">
                                         Description<input type="text" v-model="editDiscussion.description">
+                                        <a href="#" @click="cancelDiscussion">Cancel</a>
+                                        <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                     </div>
-                                    <a href="#" @click="cancelDiscussion">Cancel</a>
-                                    <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                 </div>
 
                                 <!--Read discussions-->
@@ -419,6 +419,7 @@
                         this.editDiscussion = {};
                         this.meeting.agendas[agendaIndex].discussion.push(response.data);
                     });
+                this.editItem = '';
             },
             startDiscussionEdit(discussionId, agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {

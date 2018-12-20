@@ -63133,6 +63133,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this9.editDiscussion = {};
                 _this9.meeting.agendas[agendaIndex].discussion.push(response.data);
             });
+            this.editItem = '';
         },
         startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
             var agendaIndex = this.meeting.agendas.map(function (item) {
@@ -63971,31 +63972,31 @@ var render = function() {
                                   )
                                 }
                               }
-                            })
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: { click: _vm.cancelDiscussion }
+                              },
+                              [_vm._v("Cancel")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.saveDiscussion(agenda.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Save")]
+                            )
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: { click: _vm.cancelDiscussion }
-                          },
-                          [_vm._v("Cancel")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.saveDiscussion(agenda.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Save")]
                         )
                       ]),
                       _vm._v(" "),
