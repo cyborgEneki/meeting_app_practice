@@ -168,10 +168,11 @@
 
                                     <!--Edit Discussion-->
 
-                                    <div v-show="dataHolder.id === discussion.id">
+                                    <!--<div v-show="dataHolder.id === discussion.id">-->
+                                    <div v-show="dataItem === 'discussion'+agenda.id">
                                         <form @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
-                                            <button @click="saveDiscussionEdit">Save Discussion</button>
+                                            <button @click="saveDiscussionEdit(agenda.id)">Save Discussion</button>
                                             <a href="#" @click="cancelDiscussion">Cancel</a>
                                         </form>
                                     </div>
@@ -315,7 +316,9 @@
                 axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
+                        this.meeting.agendas.push(response.data);
                     });
+                this.dataItem = '';
             },
             saveAgendaCreate(meetingId) {
                 this.dataHolder.meeting_id = meetingId;
@@ -408,8 +411,8 @@
                     .then((response) => {
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].discussion.push(response.data);
+                        this.dataItem = '';
                     });
-                this.dataItem = '';
             },
             startDiscussionEdit(discussionId, agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -421,12 +424,19 @@
                 }).indexOf(discussionId);
 
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+                this.dataItem = 'discussion' + agendaId;
+
             },
-            saveDiscussionEdit() {
+            saveDiscussionEdit(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
                 axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.dataHolder = {};
-                    })
+                        // this.dataHolder = {};
+                        this.dataItem = '';
+                    });
             },
             deleteDiscussion(discussionId, agendaId) {
                 axios.delete('api/discussions/' + discussionId)

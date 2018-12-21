@@ -62957,6 +62957,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -63023,7 +63024,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
                 _this3.dataHolder = {};
+                _this3.meeting.agendas.push(response.data);
             });
+            this.dataItem = '';
         },
         saveAgendaCreate: function saveAgendaCreate(meetingId) {
             var _this4 = this;
@@ -63120,8 +63123,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             axios.post('/api/discussions', this.dataHolder).then(function (response) {
                 _this9.dataHolder = {};
                 _this9.meeting.agendas[agendaIndex].discussion.push(response.data);
+                _this9.dataItem = '';
             });
-            this.dataItem = '';
         },
         startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
             var agendaIndex = this.meeting.agendas.map(function (item) {
@@ -63133,12 +63136,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(discussionId);
 
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+            this.dataItem = 'discussion' + agendaId;
         },
-        saveDiscussionEdit: function saveDiscussionEdit() {
+        saveDiscussionEdit: function saveDiscussionEdit(agendaId) {
             var _this10 = this;
 
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
+
             axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this10.dataHolder = {};
+                // this.dataHolder = {};
+                _this10.dataItem = '';
             });
         },
         deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
@@ -64075,8 +64084,10 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.dataHolder.id === discussion.id,
-                                  expression: "dataHolder.id === discussion.id"
+                                  value:
+                                    _vm.dataItem === "discussion" + agenda.id,
+                                  expression:
+                                    "dataItem === 'discussion'+agenda.id"
                                 }
                               ]
                             },
@@ -64123,7 +64134,13 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "button",
-                                    { on: { click: _vm.saveDiscussionEdit } },
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          _vm.saveDiscussionEdit(agenda.id)
+                                        }
+                                      }
+                                    },
                                     [_vm._v("Save Discussion")]
                                   ),
                                   _vm._v(" "),
