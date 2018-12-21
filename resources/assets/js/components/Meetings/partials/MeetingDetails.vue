@@ -22,7 +22,7 @@
         <!--Create agenda-->
         <br>
 
-        <div v-show="editAgendaFlag === 'agenda'">
+        <div v-show="dataItem === 'agenda'">
             <div>
                 Topic<input type="text" v-model="dataHolder.topic">
             </div>
@@ -231,7 +231,7 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+        <a href="#" @click.prevent="dataItem='agenda'">Add Agenda</a>
 
         <!--Second part of the form-->
 
@@ -265,7 +265,6 @@
         },
         data() {
             return {
-                editAgendaFlag: '',
                 dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -325,11 +324,11 @@
                         this.dataHolder = {};
                         this.meeting.agendas.push(response.data);
                     });
-                this.editAgendaFlag = '';
+                this.dataItem = '';
             },
             cancelAgenda() {
                 this.dataHolder = {};
-                this.dataHolderdataHolder = '';
+                this.dataHolder = '';
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)

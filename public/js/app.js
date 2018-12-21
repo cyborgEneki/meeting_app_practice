@@ -62974,7 +62974,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
-            editAgendaFlag: '',
             dataItem: '',
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -63034,11 +63033,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this4.dataHolder = {};
                 _this4.meeting.agendas.push(response.data);
             });
-            this.editAgendaFlag = '';
+            this.dataItem = '';
         },
         cancelAgenda: function cancelAgenda() {
             this.dataHolder = {};
-            this.dataHolderdataHolder = '';
+            this.dataHolder = '';
         },
         deleteAgenda: function deleteAgenda(agendaId) {
             var _this5 = this;
@@ -63229,8 +63228,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.editAgendaFlag === "agenda",
-              expression: "editAgendaFlag === 'agenda'"
+              value: _vm.dataItem === "agenda",
+              expression: "dataItem === 'agenda'"
             }
           ]
         },
@@ -64464,7 +64463,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.editAgendaFlag = "agenda"
+              _vm.dataItem = "agenda"
             }
           }
         },
