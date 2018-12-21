@@ -22,23 +22,23 @@
         <!--Create agenda-->
         <br>
 
-        <div v-show="editAgendaFlag === 'agenda'">
+        <div v-show="dataItem === 'agenda'">
             <div>
-                Topic<input type="text" v-model="editAgenda.topic">
+                Topic<input type="text" v-model="dataHolder.topic">
             </div>
             <div>
-                Description<input type="text" v-model="editAgenda.description">
+                Description<input type="text" v-model="dataHolder.description">
             </div>
             <div>
                 Time Allocated (minutes)
-                <select type="text" v-model="editAgenda.time_allocated">
+                <select type="text" v-model="dataHolder.time_allocated">
                     <option value="">Select time</option>
                     <option v-for="time in timing">{{ time }}</option>
                 </select>
             </div>
             <div>
                 <label>User Assigned</label>
-                <select v-model="editAgenda.user_id">
+                <select v-model="dataHolder.user_id">
                     <option value="">Select user</option>
                     <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
                     </option>
@@ -65,7 +65,7 @@
                         <!--Start edit agenda-->
 
                         <div>
-                            <div v-show="editAgenda.id != agenda.id">
+                            <div v-show="dataHolder.id != agenda.id">
                                 <div @click="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
@@ -78,11 +78,11 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
-                                    <div v-show="editItem === 'followup'+agenda.id">
-                                        Action<input type="text" v-model="editFollowup.action">
-                                        Timeline<input type="text" v-model="editFollowup.timeline">
+                                    <div v-show="dataItem === 'followup'+agenda.id">
+                                        Action<input type="text" v-model="dataHolder.action">
+                                        Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
-                                        <select type="text" v-model="editFollowup.status">
+                                        <select type="text" v-model="dataHolder.status">
                                             <option value="">Select status</option>
                                             <option v-for="status in statuses" v-bind:value="status.id">{{ status.name
                                                 }}
@@ -97,7 +97,7 @@
                                 <!--Read followup-->
 
                                 <div v-for="followup in agenda.followups">Follow Up
-                                    <div v-show="editFollowup.id !== followup.id">
+                                    <div v-show="dataHolder.id !== followup.id">
                                         <div>
                                             <div @click="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
@@ -115,12 +115,12 @@
 
                                     <!--Edit followup form-->
 
-                                    <div v-show="editFollowup.id === followup.id">
+                                    <div v-show="dataHolder.id === followup.id">
                                         <form @click.prevent>
-                                            <div>Action<input type="text" v-model="editFollowup.action"></div>
-                                            <div>Timeline <input type="text" v-model="editFollowup.timeline"></div>
+                                            <div>Action<input type="text" v-model="dataHolder.action"></div>
+                                            <div>Timeline <input type="text" v-model="dataHolder.timeline"></div>
                                             <div>Status
-                                                <select v-model="editFollowup.status">
+                                                <select v-model="dataHolder.status">
                                                     <option value="">Select status</option>
                                                     <option v-for="status in statuses" v-bind:value="status.id">
                                                         {{status.name}}
@@ -141,8 +141,8 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
-                                    <div v-show="editItem === 'discussion'+agenda.id">
-                                        Description<input type="text" v-model="editDiscussion.description">
+                                    <div v-show="dataItem === 'discussion'+agenda.id">
+                                        Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click="cancelDiscussion">Cancel</a>
                                         <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                     </div>
@@ -151,7 +151,7 @@
                                 <!--Read discussions-->
 
                                 <div v-for="discussion in agenda.discussion"> Discussion
-                                    <div v-show="editDiscussion.id !== discussion.id">
+                                    <div v-show="dataHolder.id !== discussion.id">
                                         <div>
                                             <div @click="startDiscussionEdit(discussion.id, agenda.id)">
                                                 <li>Description {{discussion.description}}</li>
@@ -168,9 +168,9 @@
 
                                     <!--Edit Discussion-->
 
-                                    <div v-show="editDiscussion.id === discussion.id">
+                                    <div v-show="dataHolder.id === discussion.id">
                                         <form @click.prevent>
-                                            Description <input type="text" v-model="editDiscussion.description">
+                                            Description <input type="text" v-model="dataHolder.description">
                                             <button @click="saveDiscussionEdit">Save Discussion</button>
                                             <a href="#" @click="cancelDiscussion">Cancel</a>
                                         </form>
@@ -188,21 +188,21 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="editAgenda.id === agenda.id">
-                                <div>Topic<input type="text" v-model="editAgenda.topic">
+                            <div v-show="dataHolder.id === agenda.id">
+                                <div>Topic<input type="text" v-model="dataHolder.topic">
                                 </div>
-                                <div>Description<input type="text" v-model="editAgenda.description">
+                                <div>Description<input type="text" v-model="dataHolder.description">
                                 </div>
                                 <div>
                                     Time Allocated (minutes)
-                                    <select type="text" v-model="editAgenda.time_allocated">
+                                    <select type="text" v-model="dataHolder.time_allocated">
                                         <option value="">Select time</option>
                                         <option v-for="time in timing">{{ time }}</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label>User Assigned</label>
-                                    <select v-model="editAgenda.user_id">
+                                    <select v-model="dataHolder.user_id">
                                         <option value="">Select user</option>
                                         <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
                                         </option>
@@ -210,19 +210,19 @@
                                 </div>
                                 <div>
                                     Status
-                                    <select type="text" v-model="editAgenda.agenda_status">
+                                    <select type="text" v-model="dataHolder.agenda_status">
                                         <option value="">Select status</option>
                                         <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}
                                         </option>
                                     </select>
                                 </div>
                                 <div>Conclusion<input type="text"
-                                                      v-model="editAgenda.conclusion"></div>
+                                                      v-model="dataHolder.conclusion"></div>
                                 <div>
                                     <button @click="saveAgendaEdit">Save Edit</button>
                                 </div>
                                 <div>
-                                    <a href="#" @click="editAgenda = {}">Cancel</a>
+                                    <a href="#" @click="dataHolder = {}">Cancel</a>
                                 </div>
                             </div>
                         </form>
@@ -231,7 +231,7 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="editAgendaFlag='agenda'">Add Agenda</a>
+        <a href="#" @click.prevent="dataItem='agenda'">Add Agenda</a>
 
         <!--Second part of the form-->
 
@@ -265,29 +265,10 @@
         },
         data() {
             return {
-                editAgendaFlag: '',
-                editItem: '',
+                dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
-                editAgenda: {
-                    id: '',
-                    topic: '',
-                    description: '',
-                    time_allocated: '',
-                    user_id: '',
-                    agenda_status: 0,
-                    meeting_id: ''
-                },
-                editFollowup: {
-                    action: '',
-                    timeline: '',
-                    status: ''
-                },
-                editDiscussion: {
-                    id: '',
-                    description: '',
-                    agenda_id: ''
-                },
+                dataHolder: {},
                 success: false,
                 statuses:
                     [
@@ -328,26 +309,26 @@
                 let index = this.meeting.agendas.map(function (item) {
                     return item.id
                 }).indexOf(id);
-                this.editAgenda = Object.assign({}, this.meeting.agendas[index]);
+                this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
             },
             saveAgendaEdit() {
-                axios.put('/api/agendas/' + this.editAgenda.id, this.editAgenda)
+                axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.editAgenda = {};
+                        this.dataHolder = {};
                     });
             },
             saveAgendaCreate(meetingId) {
-                this.editAgenda.meeting_id = meetingId;
-                axios.post('/api/agendas', this.editAgenda)
+                this.dataHolder.meeting_id = meetingId;
+                axios.post('/api/agendas', this.dataHolder)
                     .then((response) => {
-                        this.editAgenda = {};
+                        this.dataHolder = {};
                         this.meeting.agendas.push(response.data);
                     });
-                this.editAgendaFlag = '';
+                this.dataItem = '';
             },
             cancelAgenda() {
-                this.editAgenda = {};
-                this.editAgendaFlag = '';
+                this.dataHolder = {};
+                this.dataHolder = '';
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)
@@ -359,8 +340,8 @@
                     });
             },
             showFollowupCreate(agendaId) {
-                this.editItem = 'followup' + agendaId;
-                this.editFollowup.agenda_id = agendaId;
+                this.dataItem = 'followup' + agendaId;
+                this.dataHolder.agenda_id = agendaId;
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
@@ -373,17 +354,17 @@
                     return item.id
                 }).indexOf(followupId);
 
-                //load the values of the followup from meeting into the editFollowup variable in data
-                this.editFollowup = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
+                //load the values of the followup from meeting into the dataHolder variable in data
+                this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
             },
             saveFollowupEdit() {
-                axios.put('/api/followups/' + this.editFollowup.id, this.editFollowup)
+                axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.editFollowup = {};
+                        this.dataHolder = {};
                     });
             },
             cancelFollowup() {
-                this.editFollowup = {};
+                this.dataHolder = {};
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -398,28 +379,28 @@
                     });
             },
             saveFollowup() {
-                axios.post('/api/followups', this.editFollowup)
+                axios.post('/api/followups', this.dataHolder)
                     .then(() => {
-                        this.editFollowup = {};
+                        this.dataHolder = {};
                     })
             },
             showDiscussionCreate(agendaId) {
-                this.editItem = 'discussion' + agendaId;
-                this.editDiscussion.agenda_id = agendaId;
+                this.dataItem = 'discussion' + agendaId;
+                this.dataHolder.agenda_id = agendaId;
             },
             cancelDiscussion() {
-                this.editDiscussion = {}
+                this.dataHolder = {}
             },
             saveDiscussion(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                axios.post('/api/discussions', this.editDiscussion)
+                axios.post('/api/discussions', this.dataHolder)
                     .then((response) => {
-                        this.editDiscussion = {};
+                        this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].discussion.push(response.data);
                     });
-                this.editItem = '';
+                this.dataItem = '';
             },
             startDiscussionEdit(discussionId, agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -430,12 +411,12 @@
                     return item.id
                 }).indexOf(discussionId);
 
-                this.editDiscussion = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+                this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
             },
             saveDiscussionEdit() {
-                axios.put('/api/discussions/' + this.editDiscussion.id, this.editDiscussion)
+                axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.editDiscussion = {};
+                        this.dataHolder = {};
                     })
             },
             deleteDiscussion(discussionId, agendaId) {
