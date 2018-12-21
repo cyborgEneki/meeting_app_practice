@@ -14,10 +14,10 @@
         <h4> Attendees</h4>
         <div v-for="user in orderedAttendees">
             <p>{{ user.full_name }}</p>
-            <p @click="removeUsers(user.id)">Remove</p>
+            <p @click.prevent="removeUsers(user.id)">Remove</p>
         </div>
         <label>Add Attendee</label>
-        <button @click="addUser(users.id)">Add</button>
+        <button @click.prevent="addUser(users.id)">Add</button>
 
         <!--Create agenda-->
         <br>
@@ -57,7 +57,7 @@
             <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
 
-                    <a href="#" @click="deleteAgenda(agenda.id)">Delete</a>
+                    <a href="#" @click.prevent="deleteAgenda(agenda.id)">Delete</a>
 
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
@@ -66,7 +66,7 @@
 
                         <div>
                             <div v-show="dataHolder.id != agenda.id">
-                                <div @click="startAgendaEdit(agenda.id)">
+                                <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
                                     <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
@@ -88,8 +88,8 @@
                                                 }}
                                             </option>
                                         </select>
-                                        <a href="#" @click="cancelFollowup">Cancel</a>
-                                        <a href="#" @click="saveFollowup">Save</a>
+                                        <a href="#" @click.prevent="cancelFollowup">Cancel</a>
+                                        <a href="#" @click.prevent="saveFollowup">Save</a>
 
                                     </div>
                                 </div>
@@ -99,16 +99,16 @@
                                 <div v-for="followup in agenda.followups">Follow Up
                                     <div v-show="dataHolder.id !== followup.id">
                                         <div>
-                                            <div @click="startFollowupEdit(followup.id, agenda.id)">
+                                            <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
                                                 <li>Timeline {{followup.timeline}}</li>
                                                 <li>Status {{followup.status}}</li>
                                             </div>
                                             <div>
-                                                <button @click="startFollowupEdit(followup.id, agenda.id)">Edit
+                                                <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
                                                     Followup
                                                 </button>
-                                                <a href="#" @click="deleteFollowup(followup.id, agenda.id)">Delete</a>
+                                                <a href="#" @click.prevent="deleteFollowup(followup.id, agenda.id)">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -127,15 +127,17 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <button @click="saveFollowupEdit">Edit</button>
+                                            <button @click.prevent="saveFollowupEdit">Edit</button>
                                             <div>
-                                                <a href="#" @click="cancelFollowup">Cancel</a>
+                                                <a href="#" @click.prevent="cancelFollowup">Cancel</a>
+                                                <button @click.prevent='saveFollowup'>Save</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
 
-                                <button @click='saveFollowup'>Save</button>
+
+                                <hr>
 
                                 <!--Create discussion form-->
 
@@ -143,7 +145,7 @@
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
                                     <div v-show="dataItem === 'discussion'+agenda.id">
                                         Description<input type="text" v-model="dataHolder.description">
-                                        <a href="#" @click="cancelDiscussion">Cancel</a>
+                                        <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                     </div>
                                 </div>
@@ -153,11 +155,11 @@
                                 <div v-for="discussion in agenda.discussion"> Discussion
                                     <div v-show="dataHolder.id !== discussion.id">
                                         <div>
-                                            <div @click="startDiscussionEdit(discussion.id, agenda.id)">
+                                            <div @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
                                                 <li>Description {{discussion.description}}</li>
                                             </div>
                                             <div>
-                                                <button @click="startDiscussionEdit(discussion.id, agenda.id)">Edit
+                                                <button @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">Edit
                                                     Discussion
                                                 </button>
                                                 <a href="#"
@@ -168,20 +170,22 @@
 
                                     <!--Edit Discussion-->
 
-                                    <!--<div v-show="dataHolder.id === discussion.id">-->
-                                    <div v-show="dataItem === 'discussion'+agenda.id">
+                                    <div v-show="dataHolder.id === discussion.id">
+                                    <!--<div v-show="dataItem === 'discussion'+agenda.id">-->
                                         <form @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
-                                            <button @click="saveDiscussionEdit(agenda.id)">Save Discussion</button>
-                                            <a href="#" @click="cancelDiscussion">Cancel</a>
+                                            <button @click.prevent="saveDiscussionEdit(agenda.id)">Save Discussion</button>
+                                            <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         </form>
                                     </div>
                                 </div>
 
+                                <hr>
+
                                 <!--Edit Agenda Button-->
 
                                 <div>
-                                    <button @click="startAgendaEdit(agenda.id)">Edit Agenda</button>
+                                    <button @click.prevent="startAgendaEdit(agenda.id)">Edit Agenda</button>
                                 </div>
                             </div>
                         </div>
@@ -220,10 +224,10 @@
                                 <div>Conclusion<input type="text"
                                                       v-model="dataHolder.conclusion"></div>
                                 <div>
-                                    <button @click="saveAgendaEdit">Save Edit</button>
+                                    <button @click.prevent="saveAgendaEdit">Save Edit</button>
                                 </div>
                                 <div>
-                                    <a href="#" @click="dataHolder = {}">Cancel</a>
+                                    <a href="#" @click.prevent="dataHolder = {}">Cancel</a>
                                 </div>
                             </div>
                         </form>
@@ -428,13 +432,14 @@
 
             },
             saveDiscussionEdit(agendaId) {
+
                 let agendaIndex = this.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
 
                 axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        // this.dataHolder = {};
+                        this.meeting.agendas[agendaindex].discussions[discussionindex] = Object.assign({}, this.dataHolder);
                         this.dataItem = '';
                     });
             },

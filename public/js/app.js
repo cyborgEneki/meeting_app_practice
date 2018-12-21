@@ -62958,6 +62958,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -63146,7 +63150,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(agendaId);
 
             axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                // this.dataHolder = {};
+                _this10.meeting.agendas[agendaindex].discussions[discussionindex] = Object.assign({}, _this10.dataHolder);
                 _this10.dataItem = '';
             });
         },
@@ -63212,6 +63216,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
+                  $event.preventDefault()
                   _vm.removeUsers(user.id)
                 }
               }
@@ -63228,6 +63233,7 @@ var render = function() {
         {
           on: {
             click: function($event) {
+              $event.preventDefault()
               _vm.addUser(_vm.users.id)
             }
           }
@@ -63419,6 +63425,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
+                      $event.preventDefault()
                       _vm.deleteAgenda(agenda.id)
                     }
                   }
@@ -63452,6 +63459,7 @@ var render = function() {
                         {
                           on: {
                             click: function($event) {
+                              $event.preventDefault()
                               _vm.startAgendaEdit(agenda.id)
                             }
                           }
@@ -63630,7 +63638,12 @@ var render = function() {
                               "a",
                               {
                                 attrs: { href: "#" },
-                                on: { click: _vm.cancelFollowup }
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.cancelFollowup($event)
+                                  }
+                                }
                               },
                               [_vm._v("Cancel")]
                             ),
@@ -63639,7 +63652,12 @@ var render = function() {
                               "a",
                               {
                                 attrs: { href: "#" },
-                                on: { click: _vm.saveFollowup }
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.saveFollowup($event)
+                                  }
+                                }
                               },
                               [_vm._v("Save")]
                             )
@@ -63669,6 +63687,7 @@ var render = function() {
                                   {
                                     on: {
                                       click: function($event) {
+                                        $event.preventDefault()
                                         _vm.startFollowupEdit(
                                           followup.id,
                                           agenda.id
@@ -63703,6 +63722,7 @@ var render = function() {
                                     {
                                       on: {
                                         click: function($event) {
+                                          $event.preventDefault()
                                           _vm.startFollowupEdit(
                                             followup.id,
                                             agenda.id
@@ -63723,6 +63743,7 @@ var render = function() {
                                       attrs: { href: "#" },
                                       on: {
                                         click: function($event) {
+                                          $event.preventDefault()
                                           _vm.deleteFollowup(
                                             followup.id,
                                             agenda.id
@@ -63886,7 +63907,14 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "button",
-                                    { on: { click: _vm.saveFollowupEdit } },
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.saveFollowupEdit($event)
+                                        }
+                                      }
+                                    },
                                     [_vm._v("Edit")]
                                   ),
                                   _vm._v(" "),
@@ -63895,9 +63923,27 @@ var render = function() {
                                       "a",
                                       {
                                         attrs: { href: "#" },
-                                        on: { click: _vm.cancelFollowup }
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.cancelFollowup($event)
+                                          }
+                                        }
                                       },
                                       [_vm._v("Cancel")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.saveFollowup($event)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Save")]
                                     )
                                   ])
                                 ]
@@ -63907,9 +63953,7 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
-                      _c("button", { on: { click: _vm.saveFollowup } }, [
-                        _vm._v("Save")
-                      ]),
+                      _c("hr"),
                       _vm._v(" "),
                       _c("div", [
                         _c(
@@ -63973,7 +64017,12 @@ var render = function() {
                               "a",
                               {
                                 attrs: { href: "#" },
-                                on: { click: _vm.cancelDiscussion }
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.cancelDiscussion($event)
+                                  }
+                                }
                               },
                               [_vm._v("Cancel")]
                             ),
@@ -64019,6 +64068,7 @@ var render = function() {
                                   {
                                     on: {
                                       click: function($event) {
+                                        $event.preventDefault()
                                         _vm.startDiscussionEdit(
                                           discussion.id,
                                           agenda.id
@@ -64042,6 +64092,7 @@ var render = function() {
                                     {
                                       on: {
                                         click: function($event) {
+                                          $event.preventDefault()
                                           _vm.startDiscussionEdit(
                                             discussion.id,
                                             agenda.id
@@ -64084,10 +64135,8 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value:
-                                    _vm.dataItem === "discussion" + agenda.id,
-                                  expression:
-                                    "dataItem === 'discussion'+agenda.id"
+                                  value: _vm.dataHolder.id === discussion.id,
+                                  expression: "dataHolder.id === discussion.id"
                                 }
                               ]
                             },
@@ -64137,6 +64186,7 @@ var render = function() {
                                     {
                                       on: {
                                         click: function($event) {
+                                          $event.preventDefault()
                                           _vm.saveDiscussionEdit(agenda.id)
                                         }
                                       }
@@ -64148,7 +64198,12 @@ var render = function() {
                                     "a",
                                     {
                                       attrs: { href: "#" },
-                                      on: { click: _vm.cancelDiscussion }
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.cancelDiscussion($event)
+                                        }
+                                      }
                                     },
                                     [_vm._v("Cancel")]
                                   )
@@ -64159,12 +64214,15 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
+                      _c("hr"),
+                      _vm._v(" "),
                       _c("div", [
                         _c(
                           "button",
                           {
                             on: {
                               click: function($event) {
+                                $event.preventDefault()
                                 _vm.startAgendaEdit(agenda.id)
                               }
                             }
@@ -64451,9 +64509,18 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", [
-                          _c("button", { on: { click: _vm.saveAgendaEdit } }, [
-                            _vm._v("Save Edit")
-                          ])
+                          _c(
+                            "button",
+                            {
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.saveAgendaEdit($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Save Edit")]
+                          )
                         ]),
                         _vm._v(" "),
                         _c("div", [
@@ -64463,6 +64530,7 @@ var render = function() {
                               attrs: { href: "#" },
                               on: {
                                 click: function($event) {
+                                  $event.preventDefault()
                                   _vm.dataHolder = {}
                                 }
                               }
