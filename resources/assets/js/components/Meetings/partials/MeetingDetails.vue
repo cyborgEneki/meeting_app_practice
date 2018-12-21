@@ -78,7 +78,7 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
-                                    <div v-show="editItem === 'followup'+agenda.id">
+                                    <div v-show="dataItem === 'followup'+agenda.id">
                                         Action<input type="text" v-model="editFollowup.action">
                                         Timeline<input type="text" v-model="editFollowup.timeline">
                                         Followup Status
@@ -141,7 +141,7 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
-                                    <div v-show="editItem === 'discussion'+agenda.id">
+                                    <div v-show="dataItem === 'discussion'+agenda.id">
                                         Description<input type="text" v-model="editDiscussion.description">
                                         <a href="#" @click="cancelDiscussion">Cancel</a>
                                         <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
@@ -266,7 +266,7 @@
         data() {
             return {
                 editAgendaFlag: '',
-                editItem: '',
+                dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
                 editAgenda: {
@@ -359,7 +359,7 @@
                     });
             },
             showFollowupCreate(agendaId) {
-                this.editItem = 'followup' + agendaId;
+                this.dataItem = 'followup' + agendaId;
                 this.editFollowup.agenda_id = agendaId;
             },
             startFollowupEdit(followupId, agendaId) {
@@ -404,7 +404,7 @@
                     })
             },
             showDiscussionCreate(agendaId) {
-                this.editItem = 'discussion' + agendaId;
+                this.dataItem = 'discussion' + agendaId;
                 this.editDiscussion.agenda_id = agendaId;
             },
             cancelDiscussion() {
@@ -419,7 +419,7 @@
                         this.editDiscussion = {};
                         this.meeting.agendas[agendaIndex].discussion.push(response.data);
                     });
-                this.editItem = '';
+                this.dataItem = '';
             },
             startDiscussionEdit(discussionId, agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
