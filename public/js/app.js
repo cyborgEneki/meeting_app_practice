@@ -63076,6 +63076,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         cancelFollowup: function cancelFollowup() {
             this.dataHolder = {};
+            this.dataItem = '';
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
             var _this7 = this;
@@ -63093,9 +63094,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         saveFollowup: function saveFollowup() {
             var _this8 = this;
 
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
             axios.post('/api/followups', this.dataHolder).then(function () {
                 _this8.dataHolder = {};
+                _this8.meeting.agendas[agendaIndex].followups.push(response.data);
             });
+            this.dataItem = '';
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
             this.dataItem = 'discussion' + agendaId;
@@ -63103,6 +63109,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         cancelDiscussion: function cancelDiscussion() {
             this.dataHolder = {};
+            this.dataItem = '';
         },
         saveDiscussion: function saveDiscussion(agendaId) {
             var _this9 = this;

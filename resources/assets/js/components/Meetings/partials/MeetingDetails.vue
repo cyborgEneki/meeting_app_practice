@@ -365,6 +365,8 @@
             },
             cancelFollowup() {
                 this.dataHolder = {};
+                this.dataItem = '';
+
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -379,17 +381,24 @@
                     });
             },
             saveFollowup() {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
                 axios.post('/api/followups', this.dataHolder)
                     .then(() => {
                         this.dataHolder = {};
-                    })
+                        this.meeting.agendas[agendaIndex].followups.push(response.data);
+                    });
+                this.dataItem = '';
             },
             showDiscussionCreate(agendaId) {
                 this.dataItem = 'discussion' + agendaId;
                 this.dataHolder.agenda_id = agendaId;
             },
             cancelDiscussion() {
-                this.dataHolder = {}
+                this.dataHolder = {};
+                this.dataItem = '';
+
             },
             saveDiscussion(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -422,7 +431,7 @@
             deleteDiscussion(discussionId, agendaId) {
                 axios.delete('api/discussions/' + discussionId)
                     .then((response) => {
-                        let agendaIndex = this.meeting.agendas.map(function(item) {
+                        let agendaIndex = this.meeting.agendas.map(function (item) {
                             return item.id
                         }).indexOf(agendaId);
 
