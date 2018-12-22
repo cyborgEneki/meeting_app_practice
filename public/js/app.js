@@ -62961,6 +62961,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -63110,7 +63111,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
-            this.dataItem = 'discussion' + agendaId;
+            this.dataItem = 'discussion';
             this.dataHolder.agenda_id = agendaId;
         },
         cancelDiscussion: function cancelDiscussion() {
@@ -63139,9 +63140,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(discussionId);
 
             this.dataItem = 'discussion' + discussionId;
-
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-            this.dataItem = 'discussion' + agendaId;
         },
         saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
             var _this10 = this;
@@ -63982,10 +63981,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value:
-                                  _vm.dataItem === "discussion" + agenda.id,
-                                expression:
-                                  "dataItem === 'discussion'+agenda.id"
+                                value: _vm.dataItem === "discussion",
+                                expression: "dataItem === 'discussion'"
                               }
                             ]
                           },
@@ -64061,8 +64058,11 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.dataHolder.id !== discussion.id,
-                                  expression: "dataHolder.id !== discussion.id"
+                                  value:
+                                    _vm.dataItem !==
+                                    "discussion" + discussion.id,
+                                  expression:
+                                    "dataItem !== 'discussion'+ discussion.id"
                                 }
                               ]
                             },

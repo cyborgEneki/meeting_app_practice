@@ -143,7 +143,7 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
-                                    <div v-show="dataItem === 'discussion'+agenda.id">
+                                    <div v-show="dataItem === 'discussion'">
                                         Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
@@ -153,8 +153,9 @@
                                 <!--Read discussions-->
 
                                 <div v-for="discussion in agenda.discussions"> Discussion
-                                    <div v-show="dataHolder.id !== discussion.id">
-                                        <div>
+                                    <div v-show="dataItem !== 'discussion'+ discussion.id">
+
+                                    <div>
                                             <div @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
                                                 <li>Description {{discussion.description}}</li>
                                             </div>
@@ -398,7 +399,7 @@
                 this.dataItem = '';
             },
             showDiscussionCreate(agendaId) {
-                this.dataItem = 'discussion' + agendaId;
+                this.dataItem = 'discussion';
                 this.dataHolder.agenda_id = agendaId;
             },
             cancelDiscussion() {
@@ -427,11 +428,9 @@
                 }).indexOf(discussionId);
 
                 this.dataItem = 'discussion' + discussionId;
-
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-                this.dataItem = 'discussion' + agendaId;
-
             },
+
             saveDiscussionEdit(agendaId, discussionId) {
 
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -448,6 +447,7 @@
                         this.dataItem = '';
                     });
             },
+
             deleteDiscussion(discussionId, agendaId) {
                 axios.delete('api/discussions/' + discussionId)
                     .then((response) => {
