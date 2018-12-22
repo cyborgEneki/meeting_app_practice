@@ -63126,7 +63126,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(agendaId);
             axios.post('/api/discussions', this.dataHolder).then(function (response) {
                 _this9.dataHolder = {};
-                _this9.meeting.agendas[agendaIndex].discussion.push(response.data);
+                _this9.meeting.agendas[agendaIndex].discussions.push(response.data);
                 _this9.dataItem = '';
             });
         },
@@ -63135,22 +63135,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return item.id;
             }).indexOf(agendaId);
 
-            var discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                 return item.id;
             }).indexOf(discussionId);
 
-            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
             this.dataItem = 'discussion' + agendaId;
         },
-        saveDiscussionEdit: function saveDiscussionEdit(agendaId) {
+        saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
             var _this10 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
 
+            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                return item.id;
+            }).indexOf(discussionId);
+
             axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this10.meeting.agendas[agendaindex].discussions[discussionindex] = Object.assign({}, _this10.dataHolder);
+                _this10.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this10.dataHolder);
                 _this10.dataItem = '';
             });
         },
@@ -63162,11 +63166,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     return item.id;
                 }).indexOf(agendaId);
 
-                var discussionIndex = _this11.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                var discussionIndex = _this11.meeting.agendas[agendaIndex].discussions.map(function (item) {
                     return item.id;
                 }).indexOf(discussionId);
 
-                _this11.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
+                _this11.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
         }
     }
@@ -64044,7 +64048,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _vm._l(agenda.discussion, function(discussion) {
+                      _vm._l(agenda.discussions, function(discussion) {
                         return _c("div", [
                           _vm._v(
                             " Discussion\n                                "
@@ -64187,7 +64191,10 @@ var render = function() {
                                       on: {
                                         click: function($event) {
                                           $event.preventDefault()
-                                          _vm.saveDiscussionEdit(agenda.id)
+                                          _vm.saveDiscussionEdit(
+                                            agenda.id,
+                                            discussion.id
+                                          )
                                         }
                                       }
                                     },

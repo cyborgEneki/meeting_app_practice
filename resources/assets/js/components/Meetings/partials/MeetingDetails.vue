@@ -152,7 +152,7 @@
 
                                 <!--Read discussions-->
 
-                                <div v-for="discussion in agenda.discussion"> Discussion
+                                <div v-for="discussion in agenda.discussions"> Discussion
                                     <div v-show="dataHolder.id !== discussion.id">
                                         <div>
                                             <div @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
@@ -174,7 +174,7 @@
                                     <!--<div v-show="dataItem === 'discussion'+agenda.id">-->
                                         <form @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
-                                            <button @click.prevent="saveDiscussionEdit(agenda.id)">Save Discussion</button>
+                                            <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save Discussion</button>
                                             <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         </form>
                                     </div>
@@ -414,7 +414,7 @@
                 axios.post('/api/discussions', this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                        this.meeting.agendas[agendaIndex].discussion.push(response.data);
+                        this.meeting.agendas[agendaIndex].discussions.push(response.data);
                         this.dataItem = '';
                     });
             },
@@ -423,23 +423,27 @@
                     return item.id
                 }).indexOf(agendaId);
 
-                let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                     return item.id
                 }).indexOf(discussionId);
 
-                this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+                this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
                 this.dataItem = 'discussion' + agendaId;
 
             },
-            saveDiscussionEdit(agendaId) {
+            saveDiscussionEdit(agendaId, discussionId) {
 
                 let agendaIndex = this.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
 
+                let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                    return item.id;
+                }).indexOf(discussionId);
+
                 axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.meeting.agendas[agendaindex].discussions[discussionindex] = Object.assign({}, this.dataHolder);
+                        this.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, this.dataHolder);
                         this.dataItem = '';
                     });
             },
@@ -450,11 +454,11 @@
                             return item.id
                         }).indexOf(agendaId);
 
-                        let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                        let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                             return item.id;
                         }).indexOf(discussionId);
 
-                        this.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
+                        this.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
                     });
             }
         }
