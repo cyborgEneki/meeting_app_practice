@@ -170,8 +170,7 @@
 
                                     <!--Edit Discussion-->
 
-                                    <div v-show="dataHolder.id === discussion.id">
-                                    <!--<div v-show="dataItem === 'discussion'+agenda.id">-->
+                                    <div v-show="dataItem === 'discussion'+discussion.id">
                                         <form @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
                                             <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save Discussion</button>
@@ -426,6 +425,8 @@
                 let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                     return item.id
                 }).indexOf(discussionId);
+
+                this.dataItem = 'discussion' + discussionId;
 
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
                 this.dataItem = 'discussion' + agendaId;

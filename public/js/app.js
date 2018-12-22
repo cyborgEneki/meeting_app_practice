@@ -62961,7 +62961,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -63138,6 +63137,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                 return item.id;
             }).indexOf(discussionId);
+
+            this.dataItem = 'discussion' + discussionId;
 
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
             this.dataItem = 'discussion' + agendaId;
@@ -64139,8 +64140,11 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.dataHolder.id === discussion.id,
-                                  expression: "dataHolder.id === discussion.id"
+                                  value:
+                                    _vm.dataItem ===
+                                    "discussion" + discussion.id,
+                                  expression:
+                                    "dataItem === 'discussion'+discussion.id"
                                 }
                               ]
                             },
