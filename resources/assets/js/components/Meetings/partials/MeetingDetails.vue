@@ -14,10 +14,10 @@
         <h4> Attendees</h4>
         <div v-for="user in orderedAttendees">
             <p>{{ user.full_name }}</p>
-            <p @click="removeUsers(user.id)">Remove</p>
+            <p @click.prevent="removeUsers(user.id)">Remove</p>
         </div>
         <label>Add Attendee</label>
-        <button @click="addUser(users.id)">Add</button>
+        <button @click.prevent="addUser(users.id)">Add</button>
 
         <!--Create agenda-->
         <br>
@@ -57,7 +57,7 @@
             <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
 
-                    <a href="#" @click="deleteAgenda(agenda.id)">Delete</a>
+                    <a href="#" @click.prevent="deleteAgenda(agenda.id)">Delete</a>
 
                     <div>
                         <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
@@ -66,7 +66,7 @@
 
                         <div>
                             <div v-show="dataHolder.id != agenda.id">
-                                <div @click="startAgendaEdit(agenda.id)">
+                                <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
                                     <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
@@ -78,7 +78,7 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
-                                    <div v-show="dataItem === 'followup'+agenda.id">
+                                    <div v-show="dataItem === 'followup'">
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
@@ -88,8 +88,8 @@
                                                 }}
                                             </option>
                                         </select>
-                                        <a href="#" @click="cancelFollowup">Cancel</a>
-                                        <a href="#" @click="saveFollowup">Save</a>
+                                        <a href="#" @click.prevent="cancelFollowup">Cancel</a>
+                                        <a href="#" @click.prevent="saveFollowup(agenda.id)">Save</a>
 
                                     </div>
                                 </div>
@@ -97,25 +97,25 @@
                                 <!--Read followup-->
 
                                 <div v-for="followup in agenda.followups">Follow Up
-                                    <div v-show="dataHolder.id !== followup.id">
+                                    <div v-show="dataItem !== 'followup'+followup.id">
                                         <div>
-                                            <div @click="startFollowupEdit(followup.id, agenda.id)">
+                                            <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
                                                 <li>Timeline {{followup.timeline}}</li>
                                                 <li>Status {{followup.status}}</li>
                                             </div>
                                             <div>
-                                                <button @click="startFollowupEdit(followup.id, agenda.id)">Edit
+                                                <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
                                                     Followup
                                                 </button>
-                                                <a href="#" @click="deleteFollowup(followup.id, agenda.id)">Delete</a>
+                                                <a href="#" @click.prevent="deleteFollowup(followup.id, agenda.id)">Delete</a>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!--Edit followup form-->
 
-                                    <div v-show="dataHolder.id === followup.id">
+                                    <div v-show="dataItem === 'followup'+followup.id">
                                         <form @click.prevent>
                                             <div>Action<input type="text" v-model="dataHolder.action"></div>
                                             <div>Timeline <input type="text" v-model="dataHolder.timeline"></div>
@@ -127,37 +127,39 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <button @click="saveFollowupEdit">Edit</button>
                                             <div>
-                                                <a href="#" @click="cancelFollowup">Cancel</a>
+                                                <a href="#" @click.prevent="cancelFollowup">Cancel</a>
+                                                <button @click.prevent="saveFollowupEdit(agenda.id, followup.id)">Edit</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
 
-                                <button @click='saveFollowup'>Save</button>
+
+                                <hr>
 
                                 <!--Create discussion form-->
 
                                 <div>
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
-                                    <div v-show="dataItem === 'discussion'+agenda.id">
+                                    <div v-show="dataItem === 'discussion'">
                                         Description<input type="text" v-model="dataHolder.description">
-                                        <a href="#" @click="cancelDiscussion">Cancel</a>
+                                        <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                     </div>
                                 </div>
 
                                 <!--Read discussions-->
 
-                                <div v-for="discussion in agenda.discussion"> Discussion
-                                    <div v-show="dataHolder.id !== discussion.id">
-                                        <div>
-                                            <div @click="startDiscussionEdit(discussion.id, agenda.id)">
+                                <div v-for="discussion in agenda.discussions"> Discussion
+                                    <div v-show="dataItem !== 'discussion'+ discussion.id">
+
+                                    <div>
+                                            <div @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
                                                 <li>Description {{discussion.description}}</li>
                                             </div>
                                             <div>
-                                                <button @click="startDiscussionEdit(discussion.id, agenda.id)">Edit
+                                                <button @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">Edit
                                                     Discussion
                                                 </button>
                                                 <a href="#"
@@ -168,19 +170,21 @@
 
                                     <!--Edit Discussion-->
 
-                                    <div v-show="dataHolder.id === discussion.id">
+                                    <div v-show="dataItem === 'discussion'+discussion.id">
                                         <form @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
-                                            <button @click="saveDiscussionEdit">Save Discussion</button>
-                                            <a href="#" @click="cancelDiscussion">Cancel</a>
+                                            <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save Discussion</button>
+                                            <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         </form>
                                     </div>
                                 </div>
 
+                                <hr>
+
                                 <!--Edit Agenda Button-->
 
                                 <div>
-                                    <button @click="startAgendaEdit(agenda.id)">Edit Agenda</button>
+                                    <button @click.prevent="startAgendaEdit(agenda.id)">Edit Agenda</button>
                                 </div>
                             </div>
                         </div>
@@ -219,10 +223,10 @@
                                 <div>Conclusion<input type="text"
                                                       v-model="dataHolder.conclusion"></div>
                                 <div>
-                                    <button @click="saveAgendaEdit">Save Edit</button>
+                                    <button @click.prevent="saveAgendaEdit">Save Edit</button>
                                 </div>
                                 <div>
-                                    <a href="#" @click="dataHolder = {}">Cancel</a>
+                                    <a href="#" @click.prevent="dataHolder = {}">Cancel</a>
                                 </div>
                             </div>
                         </form>
@@ -231,7 +235,7 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="dataItem='agenda'">Add Agenda</a>
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)">Add Agenda</a>
 
         <!--Second part of the form-->
 
@@ -315,16 +319,31 @@
                 axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                    });
-            },
-            saveAgendaCreate(meetingId) {
-                this.dataHolder.meeting_id = meetingId;
-                axios.post('/api/agendas', this.dataHolder)
-                    .then((response) => {
-                        this.dataHolder = {};
                         this.meeting.agendas.push(response.data);
                     });
                 this.dataItem = '';
+            },
+            saveAgendaCreate(meetingId) {
+                let meetingIndex = this.meeting.map(function (item) {
+                    return item.id;
+                }).indexOf(meetingId);
+                axios.post('/api/agendas', this.dataHolder)
+                    .then((response) => {
+                        this.dataHolder = {};
+                        this.meeting[meetingIndex].agendas.push(response.data);
+                        this.dataItem = '';
+                    });
+            },
+            saveDiscussion(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                axios.post('/api/discussions', this.dataHolder)
+                    .then((response) => {
+                        this.dataHolder = {};
+                        this.meeting.agendas[agendaIndex].discussions.push(response.data);
+                        this.dataItem = '';
+                    });
             },
             cancelAgenda() {
                 this.dataHolder = {};
@@ -339,8 +358,12 @@
                         this.meeting.agendas.splice(agendaindex, 1);
                     });
             },
+            showAgendaCreate(meetingId) {
+                this.dataItem='agenda';
+                this.dataHolder.meeting_id = meetingId;
+            },
             showFollowupCreate(agendaId) {
-                this.dataItem = 'followup' + agendaId;
+                this.dataItem = 'followup';
                 this.dataHolder.agenda_id = agendaId;
             },
             startFollowupEdit(followupId, agendaId) {
@@ -354,17 +377,30 @@
                     return item.id
                 }).indexOf(followupId);
 
+                this.dataItem = 'followup' + followupId;
+
                 //load the values of the followup from meeting into the dataHolder variable in data
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
             },
-            saveFollowupEdit() {
+            saveFollowupEdit(agendaId, followupId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
+                let followupIndex = this.meeting.agendas[agendaIndex].followups.map(function (item) {
+                    return item.id;
+                }).indexOf(followupId);
+
                 axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.dataHolder = {};
+                        this.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, this.dataHolder);
+                        this.dataItem = '';
                     });
             },
             cancelFollowup() {
                 this.dataHolder = {};
+                this.dataItem = '';
+
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -378,18 +414,25 @@
                         this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
                     });
             },
-            saveFollowup() {
+            saveFollowup(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
                 axios.post('/api/followups', this.dataHolder)
-                    .then(() => {
+                    .then((response) => {
                         this.dataHolder = {};
-                    })
+                        this.meeting.agendas[agendaIndex].followups.push(response.data);
+                        this.dataItem = '';
+                    });
             },
             showDiscussionCreate(agendaId) {
-                this.dataItem = 'discussion' + agendaId;
+                this.dataItem = 'discussion';
                 this.dataHolder.agenda_id = agendaId;
             },
             cancelDiscussion() {
-                this.dataHolder = {}
+                this.dataHolder = {};
+                this.dataItem = '';
+
             },
             saveDiscussion(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -398,39 +441,51 @@
                 axios.post('/api/discussions', this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                        this.meeting.agendas[agendaIndex].discussion.push(response.data);
+                        this.meeting.agendas[agendaIndex].discussions.push(response.data);
+                        this.dataItem = '';
                     });
-                this.dataItem = '';
             },
             startDiscussionEdit(discussionId, agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
                     return item.id
                 }).indexOf(agendaId);
 
-                let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                     return item.id
                 }).indexOf(discussionId);
 
-                this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussion[discussionIndex]);
+                this.dataItem = 'discussion' + discussionId;
+                this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
             },
-            saveDiscussionEdit() {
+
+            saveDiscussionEdit(agendaId, discussionId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
+                let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                    return item.id;
+                }).indexOf(discussionId);
+
                 axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.dataHolder = {};
-                    })
+                        this.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, this.dataHolder);
+                        this.dataItem = '';
+                    });
             },
+
             deleteDiscussion(discussionId, agendaId) {
                 axios.delete('api/discussions/' + discussionId)
                     .then((response) => {
-                        let agendaIndex = this.meeting.agendas.map(function(item) {
+                        let agendaIndex = this.meeting.agendas.map(function (item) {
                             return item.id
                         }).indexOf(agendaId);
 
-                        let discussionIndex = this.meeting.agendas[agendaIndex].discussion.map(function (item) {
+                        let discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                             return item.id;
                         }).indexOf(discussionId);
 
-                        this.meeting.agendas[agendaIndex].discussion.splice(discussionIndex, 1);
+                        this.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
                     });
             }
         }
