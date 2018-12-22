@@ -63129,10 +63129,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
             this.dataItem = 'discussion';
             this.dataHolder.agenda_id = agendaId;
+            this.showLink = !this.showLink;
         },
         cancelDiscussion: function cancelDiscussion() {
             this.dataHolder = {};
             this.dataItem = '';
+            this.showLink = !this.showLink;
         },
         saveDiscussion: function saveDiscussion(agendaId) {
             var _this9 = this;
@@ -63144,6 +63146,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this9.dataHolder = {};
                 _this9.meeting.agendas[agendaIndex].discussions.push(response.data);
                 _this9.dataItem = '';
+                _this9.showLink = !_this9.showLink;
             });
         },
         startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
@@ -63157,6 +63160,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             this.dataItem = 'discussion' + discussionId;
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
+            this.showLink = !this.showLink;
         },
         saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
             var _this10 = this;
@@ -64006,6 +64010,14 @@ var render = function() {
                         _c(
                           "a",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.showLink,
+                                expression: "showLink"
+                              }
+                            ],
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {

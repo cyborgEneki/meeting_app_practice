@@ -141,7 +141,7 @@
                                 <!--Create discussion form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
+                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) " v-show="showLink">Add Discussion</a>
                                     <div v-show="dataItem === 'discussion'">
                                         Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
@@ -416,11 +416,12 @@
             showDiscussionCreate(agendaId) {
                 this.dataItem = 'discussion';
                 this.dataHolder.agenda_id = agendaId;
+                this.showLink = !this.showLink;
             },
             cancelDiscussion() {
                 this.dataHolder = {};
                 this.dataItem = '';
-
+                this.showLink = !this.showLink;
             },
             saveDiscussion(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -431,6 +432,7 @@
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].discussions.push(response.data);
                         this.dataItem = '';
+                        this.showLink = !this.showLink;
                     });
             },
             startDiscussionEdit(discussionId, agendaId) {
@@ -444,6 +446,7 @@
 
                 this.dataItem = 'discussion' + discussionId;
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
+                this.showLink = !this.showLink;
             },
 
             saveDiscussionEdit(agendaId, discussionId) {
