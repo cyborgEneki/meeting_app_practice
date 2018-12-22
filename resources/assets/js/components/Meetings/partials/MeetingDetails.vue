@@ -44,7 +44,7 @@
                     </option>
                 </select>
             </div>
-            <button @click.prevent="saveAgendaCreate(meeting.id)">Save Agenda</button>
+            <button @click.prevent="saveAgendaCreate">Save Agenda</button>
             <div>
                 <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
@@ -319,20 +319,22 @@
                     .then((response) => {
                         this.dataHolder = {};
                         this.meeting.agendas.push(response.data);
+                        this.dataItem = '';
                     });
-                this.dataItem = '';
             },
             saveAgendaCreate() {
                 axios.post('/api/agendas', this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                        this.meeting[meetingIndex].agendas.push(response.data);
+                        this.meeting.agendas.push(response.data);
                         this.dataItem = '';
+                        this.showLink = !this.showLink;
                     });
             },
             cancelAgenda() {
                 this.dataHolder = {};
                 this.dataItem = '';
+                this.showLink = !this.showLink;
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)

@@ -63027,21 +63027,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
                 _this3.dataHolder = {};
                 _this3.meeting.agendas.push(response.data);
+                _this3.dataItem = '';
             });
-            this.dataItem = '';
         },
         saveAgendaCreate: function saveAgendaCreate() {
             var _this4 = this;
 
             axios.post('/api/agendas', this.dataHolder).then(function (response) {
                 _this4.dataHolder = {};
-                _this4.meeting[meetingIndex].agendas.push(response.data);
+                _this4.meeting.agendas.push(response.data);
                 _this4.dataItem = '';
+                _this4.showLink = !_this4.showLink;
             });
         },
         cancelAgenda: function cancelAgenda() {
             this.dataHolder = {};
             this.dataItem = '';
+            this.showLink = !this.showLink;
         },
         deleteAgenda: function deleteAgenda(agendaId) {
             var _this5 = this;
@@ -63438,7 +63440,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  _vm.saveAgendaCreate(_vm.meeting.id)
+                  return _vm.saveAgendaCreate($event)
                 }
               }
             },
