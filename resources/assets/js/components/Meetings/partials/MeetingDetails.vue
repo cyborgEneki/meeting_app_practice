@@ -77,7 +77,7 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
+                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)" v-show="showLink">Add Followup</a>
                                     <div v-show="dataItem === 'followup'">
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
@@ -354,6 +354,7 @@
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followup';
                 this.dataHolder.agenda_id = agendaId;
+                this.showLink = !this.showLink;
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
@@ -389,6 +390,7 @@
             cancelFollowup() {
                 this.dataHolder = {};
                 this.dataItem = '';
+                this.showLink = !this.showLink;
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -411,6 +413,7 @@
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].followups.push(response.data);
                         this.dataItem = '';
+                        this.showLink = !this.showLink;
                     });
             },
             showDiscussionCreate(agendaId) {

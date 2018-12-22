@@ -63064,6 +63064,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.dataItem = 'followup';
             this.dataHolder.agenda_id = agendaId;
+            this.showLink = !this.showLink;
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
             //get the index of the agenda you are editing in
@@ -63100,6 +63101,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         cancelFollowup: function cancelFollowup() {
             this.dataHolder = {};
             this.dataItem = '';
+            this.showLink = !this.showLink;
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
             var _this7 = this;
@@ -63124,6 +63126,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this8.dataHolder = {};
                 _this8.meeting.agendas[agendaIndex].followups.push(response.data);
                 _this8.dataItem = '';
+                _this8.showLink = !_this8.showLink;
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
@@ -63556,6 +63559,14 @@ var render = function() {
                         _c(
                           "a",
                           {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.showLink,
+                                expression: "showLink"
+                              }
+                            ],
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
