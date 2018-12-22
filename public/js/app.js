@@ -62976,6 +62976,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
+            showLink: true,
             dataItem: '',
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -63056,6 +63057,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = 'agenda';
             this.dataHolder.meeting_id = meetingId;
             this.dataHolder.agenda_status = 0;
+            this.showLink = !this.showLink;
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.dataItem = 'followup';
@@ -63262,6 +63264,14 @@ var render = function() {
       _c(
         "a",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showLink,
+              expression: "showLink"
+            }
+          ],
           attrs: { href: "#" },
           on: {
             click: function($event) {

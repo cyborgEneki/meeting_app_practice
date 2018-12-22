@@ -21,7 +21,7 @@
 
         <!--Create agenda-->
         <br>
-        <a href="#" @click.prevent="showAgendaCreate(meeting.id)">Add Agenda</a>
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="showLink">Add Agenda</a>
         <div v-show="dataItem === 'agenda'">
             <div>
                 Topic<input type="text" v-model="dataHolder.topic">
@@ -267,6 +267,7 @@
         },
         data() {
             return {
+                showLink: true,
                 dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -346,6 +347,7 @@
                 this.dataItem='agenda';
                 this.dataHolder.meeting_id = meetingId;
                 this.dataHolder.agenda_status = 0;
+                this.showLink = !this.showLink;
             },
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followup';
