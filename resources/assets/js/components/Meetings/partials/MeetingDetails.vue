@@ -78,7 +78,7 @@
 
                                 <div>
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
-                                    <div v-show="dataItem === 'followup'+agenda.id">
+                                    <div v-show="dataItem === 'followup'">
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
@@ -89,7 +89,7 @@
                                             </option>
                                         </select>
                                         <a href="#" @click.prevent="cancelFollowup">Cancel</a>
-                                        <a href="#" @click.prevent="saveFollowup">Save</a>
+                                        <a href="#" @click.prevent="saveFollowup(agenda.id)">Save</a>
 
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                 <!--Read followup-->
 
                                 <div v-for="followup in agenda.followups">Follow Up
-                                    <div v-show="dataHolder.id !== followup.id">
+                                    <div v-show="dataItem !== 'followup'+followup.id">
                                         <div>
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
@@ -115,7 +115,7 @@
 
                                     <!--Edit followup form-->
 
-                                    <div v-show="dataHolder.id === followup.id">
+                                    <div v-show="dataItem === 'followup'+followup.id">
                                         <form @click.prevent>
                                             <div>Action<input type="text" v-model="dataHolder.action"></div>
                                             <div>Timeline <input type="text" v-model="dataHolder.timeline"></div>
@@ -127,10 +127,9 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <button @click.prevent="saveFollowupEdit">Edit</button>
                                             <div>
                                                 <a href="#" @click.prevent="cancelFollowup">Cancel</a>
-                                                <button @click.prevent='saveFollowup'>Save</button>
+                                                <button @click.prevent="saveFollowupEdit(agenda.id, followup.id)">Edit</button>
                                             </div>
                                         </form>
                                     </div>
@@ -236,7 +235,7 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="dataItem='agenda'">Add Agenda</a>
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)">Add Agenda</a>
 
         <!--Second part of the form-->
 
@@ -325,13 +324,26 @@
                 this.dataItem = '';
             },
             saveAgendaCreate(meetingId) {
-                this.dataHolder.meeting_id = meetingId;
+                let meetingIndex = this.meeting.map(function (item) {
+                    return item.id;
+                }).indexOf(meetingId);
                 axios.post('/api/agendas', this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                        this.meeting.agendas.push(response.data);
+                        this.meeting[meetingIndex].agendas.push(response.data);
+                        this.dataItem = '';
                     });
-                this.dataItem = '';
+            },
+            saveDiscussion(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                axios.post('/api/discussions', this.dataHolder)
+                    .then((response) => {
+                        this.dataHolder = {};
+                        this.meeting.agendas[agendaIndex].discussions.push(response.data);
+                        this.dataItem = '';
+                    });
             },
             cancelAgenda() {
                 this.dataHolder = {};
@@ -346,8 +358,12 @@
                         this.meeting.agendas.splice(agendaindex, 1);
                     });
             },
+            showAgendaCreate(meetingId) {
+                this.dataItem='agenda';
+                this.dataHolder.meeting_id = meetingId;
+            },
             showFollowupCreate(agendaId) {
-                this.dataItem = 'followup' + agendaId;
+                this.dataItem = 'followup';
                 this.dataHolder.agenda_id = agendaId;
             },
             startFollowupEdit(followupId, agendaId) {
@@ -361,13 +377,24 @@
                     return item.id
                 }).indexOf(followupId);
 
+                this.dataItem = 'followup' + followupId;
+
                 //load the values of the followup from meeting into the dataHolder variable in data
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
             },
-            saveFollowupEdit() {
+            saveFollowupEdit(agendaId, followupId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
+                let followupIndex = this.meeting.agendas[agendaIndex].followups.map(function (item) {
+                    return item.id;
+                }).indexOf(followupId);
+
                 axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.dataHolder = {};
+                        this.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, this.dataHolder);
+                        this.dataItem = '';
                     });
             },
             cancelFollowup() {
@@ -387,16 +414,16 @@
                         this.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
                     });
             },
-            saveFollowup() {
+            saveFollowup(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
                 axios.post('/api/followups', this.dataHolder)
-                    .then(() => {
+                    .then((response) => {
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].followups.push(response.data);
+                        this.dataItem = '';
                     });
-                this.dataItem = '';
             },
             showDiscussionCreate(agendaId) {
                 this.dataItem = 'discussion';
@@ -432,7 +459,6 @@
             },
 
             saveDiscussionEdit(agendaId, discussionId) {
-
                 let agendaIndex = this.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
