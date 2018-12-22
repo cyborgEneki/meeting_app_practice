@@ -21,7 +21,7 @@
 
         <!--Create agenda-->
         <br>
-
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)">Add Agenda</a>
         <div v-show="dataItem === 'agenda'">
             <div>
                 Topic<input type="text" v-model="dataHolder.topic">
@@ -44,9 +44,9 @@
                     </option>
                 </select>
             </div>
-            <button @click="saveAgendaCreate(meeting.id)">Save Agenda</button>
+            <button @click.prevent="saveAgendaCreate(meeting.id)">Save Agenda</button>
             <div>
-                <a href="#" @click="cancelAgenda">Cancel</a>
+                <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                         <!--Start edit agenda-->
 
                         <div>
-                            <div v-show="dataHolder.id != agenda.id">
+                            <div v-show="dataItem !== 'agenda'+ agenda.id">
                                 <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
@@ -235,8 +235,6 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="showAgendaCreate(meeting.id)">Add Agenda</a>
-
         <!--Second part of the form-->
 
         <h4>Venue:</h4>
@@ -323,10 +321,7 @@
                     });
                 this.dataItem = '';
             },
-            saveAgendaCreate(meetingId) {
-                let meetingIndex = this.meeting.map(function (item) {
-                    return item.id;
-                }).indexOf(meetingId);
+            saveAgendaCreate() {
                 axios.post('/api/agendas', this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
@@ -334,20 +329,9 @@
                         this.dataItem = '';
                     });
             },
-            saveDiscussion(agendaId) {
-                let agendaIndex = this.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                axios.post('/api/discussions', this.dataHolder)
-                    .then((response) => {
-                        this.dataHolder = {};
-                        this.meeting.agendas[agendaIndex].discussions.push(response.data);
-                        this.dataItem = '';
-                    });
-            },
             cancelAgenda() {
                 this.dataHolder = {};
-                this.dataHolder = '';
+                this.dataItem = '';
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)
@@ -361,6 +345,7 @@
             showAgendaCreate(meetingId) {
                 this.dataItem='agenda';
                 this.dataHolder.meeting_id = meetingId;
+                this.dataHolder.agenda_status = 0;
             },
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followup';
@@ -400,7 +385,6 @@
             cancelFollowup() {
                 this.dataHolder = {};
                 this.dataItem = '';
-
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)

@@ -62706,14 +62706,8 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
-var _methods;
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
 //
 //
 //
@@ -62994,7 +62988,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(this.meeting.agendas);
     },
 
-    methods: (_methods = {
+    methods: {
         addUser: function addUser(id) {
             var _this = this;
 
@@ -63035,47 +63029,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
             this.dataItem = '';
         },
-        saveAgendaCreate: function saveAgendaCreate(meetingId) {
+        saveAgendaCreate: function saveAgendaCreate() {
             var _this4 = this;
 
-            var meetingIndex = this.meeting.map(function (item) {
-                return item.id;
-            }).indexOf(meetingId);
             axios.post('/api/agendas', this.dataHolder).then(function (response) {
                 _this4.dataHolder = {};
                 _this4.meeting[meetingIndex].agendas.push(response.data);
                 _this4.dataItem = '';
             });
         },
-        saveDiscussion: function saveDiscussion(agendaId) {
-            var _this5 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-            axios.post('/api/discussions', this.dataHolder).then(function (response) {
-                _this5.dataHolder = {};
-                _this5.meeting.agendas[agendaIndex].discussions.push(response.data);
-                _this5.dataItem = '';
-            });
-        },
         cancelAgenda: function cancelAgenda() {
             this.dataHolder = {};
-            this.dataHolder = '';
+            this.dataItem = '';
         },
         deleteAgenda: function deleteAgenda(agendaId) {
-            var _this6 = this;
+            var _this5 = this;
 
             axios.delete('/api/agendas/' + agendaId).then(function () {
-                var agendaindex = _this6.meeting.agendas.map(function (item) {
+                var agendaindex = _this5.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                _this6.meeting.agendas.splice(agendaindex, 1);
+                _this5.meeting.agendas.splice(agendaindex, 1);
             });
         },
         showAgendaCreate: function showAgendaCreate(meetingId) {
             this.dataItem = 'agenda';
             this.dataHolder.meeting_id = meetingId;
+            this.dataHolder.agenda_status = 0;
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.dataItem = 'followup';
@@ -63098,7 +63078,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
         },
         saveFollowupEdit: function saveFollowupEdit(agendaId, followupId) {
-            var _this7 = this;
+            var _this6 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
@@ -63109,8 +63089,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).indexOf(followupId);
 
             axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this7.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this7.dataHolder);
-                _this7.dataItem = '';
+                _this6.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this6.dataHolder);
+                _this6.dataItem = '';
             });
         },
         cancelFollowup: function cancelFollowup() {
@@ -63118,28 +63098,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.dataItem = '';
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this8 = this;
+            var _this7 = this;
 
             axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this8.meeting.agendas.map(function (item) {
+                var agendaindex = _this7.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                var followupindex = _this8.meeting.agendas[agendaindex].followups.map(function (item) {
+                var followupindex = _this7.meeting.agendas[agendaindex].followups.map(function (item) {
                     return item.id;
                 }).indexOf(followupId);
-                _this8.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+                _this7.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
             });
         },
         saveFollowup: function saveFollowup(agendaId) {
-            var _this9 = this;
+            var _this8 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
             axios.post('/api/followups', this.dataHolder).then(function (response) {
-                _this9.dataHolder = {};
-                _this9.meeting.agendas[agendaIndex].followups.push(response.data);
-                _this9.dataItem = '';
+                _this8.dataHolder = {};
+                _this8.meeting.agendas[agendaIndex].followups.push(response.data);
+                _this8.dataItem = '';
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
@@ -63149,59 +63129,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cancelDiscussion: function cancelDiscussion() {
             this.dataHolder = {};
             this.dataItem = '';
-        }
-    }, _defineProperty(_methods, 'saveDiscussion', function saveDiscussion(agendaId) {
-        var _this10 = this;
+        },
+        saveDiscussion: function saveDiscussion(agendaId) {
+            var _this9 = this;
 
-        var agendaIndex = this.meeting.agendas.map(function (item) {
-            return item.id;
-        }).indexOf(agendaId);
-        axios.post('/api/discussions', this.dataHolder).then(function (response) {
-            _this10.dataHolder = {};
-            _this10.meeting.agendas[agendaIndex].discussions.push(response.data);
-            _this10.dataItem = '';
-        });
-    }), _defineProperty(_methods, 'startDiscussionEdit', function startDiscussionEdit(discussionId, agendaId) {
-        var agendaIndex = this.meeting.agendas.map(function (item) {
-            return item.id;
-        }).indexOf(agendaId);
-
-        var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
-            return item.id;
-        }).indexOf(discussionId);
-
-        this.dataItem = 'discussion' + discussionId;
-        this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-    }), _defineProperty(_methods, 'saveDiscussionEdit', function saveDiscussionEdit(agendaId, discussionId) {
-        var _this11 = this;
-
-        var agendaIndex = this.meeting.agendas.map(function (item) {
-            return item.id;
-        }).indexOf(agendaId);
-
-        var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
-            return item.id;
-        }).indexOf(discussionId);
-
-        axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-            _this11.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this11.dataHolder);
-            _this11.dataItem = '';
-        });
-    }), _defineProperty(_methods, 'deleteDiscussion', function deleteDiscussion(discussionId, agendaId) {
-        var _this12 = this;
-
-        axios.delete('api/discussions/' + discussionId).then(function (response) {
-            var agendaIndex = _this12.meeting.agendas.map(function (item) {
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
+            axios.post('/api/discussions', this.dataHolder).then(function (response) {
+                _this9.dataHolder = {};
+                _this9.meeting.agendas[agendaIndex].discussions.push(response.data);
+                _this9.dataItem = '';
+            });
+        },
+        startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
+            var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
 
-            var discussionIndex = _this12.meeting.agendas[agendaIndex].discussions.map(function (item) {
+            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
                 return item.id;
             }).indexOf(discussionId);
 
-            _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
-        });
-    }), _methods)
+            this.dataItem = 'discussion' + discussionId;
+            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
+        },
+        saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
+            var _this10 = this;
+
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
+
+            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                return item.id;
+            }).indexOf(discussionId);
+
+            axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
+                _this10.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this10.dataHolder);
+                _this10.dataItem = '';
+            });
+        },
+        deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
+            var _this11 = this;
+
+            axios.delete('api/discussions/' + discussionId).then(function (response) {
+                var agendaIndex = _this11.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
+                var discussionIndex = _this11.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                    return item.id;
+                }).indexOf(discussionId);
+
+                _this11.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -63274,6 +63258,20 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("br"),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          attrs: { href: "#" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.showAgendaCreate(_vm.meeting.id)
+            }
+          }
+        },
+        [_vm._v("Add Agenda")]
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -63429,6 +63427,7 @@ var render = function() {
             {
               on: {
                 click: function($event) {
+                  $event.preventDefault()
                   _vm.saveAgendaCreate(_vm.meeting.id)
                 }
               }
@@ -63437,9 +63436,19 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", [
-            _c("a", { attrs: { href: "#" }, on: { click: _vm.cancelAgenda } }, [
-              _vm._v("Cancel")
-            ])
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.cancelAgenda($event)
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
           ])
         ]
       ),
@@ -63480,8 +63489,8 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.dataHolder.id != agenda.id,
-                          expression: "dataHolder.id != agenda.id"
+                          value: _vm.dataItem !== "agenda" + agenda.id,
+                          expression: "dataItem !== 'agenda'+ agenda.id"
                         }
                       ]
                     },
@@ -64579,20 +64588,6 @@ var render = function() {
             ])
           ])
         })
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: { href: "#" },
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              _vm.showAgendaCreate(_vm.meeting.id)
-            }
-          }
-        },
-        [_vm._v("Add Agenda")]
       ),
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
