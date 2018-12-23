@@ -21,7 +21,7 @@
 
         <!--Create agenda-->
         <br>
-
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="showLink">Add Agenda</a>
         <div v-show="dataItem === 'agenda'">
             <div>
                 Topic<input type="text" v-model="dataHolder.topic">
@@ -44,9 +44,9 @@
                     </option>
                 </select>
             </div>
-            <button @click="saveAgendaCreate(meeting.id)">Save Agenda</button>
+            <button @click.prevent="saveAgendaCreate">Save Agenda</button>
             <div>
-                <a href="#" @click="cancelAgenda">Cancel</a>
+                <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                         <!--Start edit agenda-->
 
                         <div>
-                            <div v-show="dataHolder.id != agenda.id">
+                            <div v-show="dataItem !== 'agenda'+ agenda.id">
                                 <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
@@ -77,7 +77,7 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)">Add Followup</a>
+                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)" v-show="showLink">Add Followup</a>
                                     <div v-show="dataItem === 'followup'">
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
@@ -141,7 +141,7 @@
                                 <!--Create discussion form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) ">Add Discussion</a>
+                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) " v-show="showLink">Add Discussion</a>
                                     <div v-show="dataItem === 'discussion'">
                                         Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
@@ -235,8 +235,6 @@
             </div>
         </div>
 
-        <a href="#" @click.prevent="showAgendaCreate(meeting.id)">Add Agenda</a>
-
         <!--Second part of the form-->
 
         <h4>Venue:</h4>
@@ -269,6 +267,7 @@
         },
         data() {
             return {
+                showLink: true,
                 dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -320,34 +319,22 @@
                     .then((response) => {
                         this.dataHolder = {};
                         this.meeting.agendas.push(response.data);
+                        this.dataItem = '';
                     });
-                this.dataItem = '';
             },
-            saveAgendaCreate(meetingId) {
-                let meetingIndex = this.meeting.map(function (item) {
-                    return item.id;
-                }).indexOf(meetingId);
+            saveAgendaCreate() {
                 axios.post('/api/agendas', this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                        this.meeting[meetingIndex].agendas.push(response.data);
+                        this.meeting.agendas.push(response.data);
                         this.dataItem = '';
-                    });
-            },
-            saveDiscussion(agendaId) {
-                let agendaIndex = this.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                axios.post('/api/discussions', this.dataHolder)
-                    .then((response) => {
-                        this.dataHolder = {};
-                        this.meeting.agendas[agendaIndex].discussions.push(response.data);
-                        this.dataItem = '';
+                        this.showLink = !this.showLink;
                     });
             },
             cancelAgenda() {
                 this.dataHolder = {};
-                this.dataHolder = '';
+                this.dataItem = '';
+                this.showLink = !this.showLink;
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)
@@ -361,10 +348,13 @@
             showAgendaCreate(meetingId) {
                 this.dataItem='agenda';
                 this.dataHolder.meeting_id = meetingId;
+                this.dataHolder.agenda_status = 0;
+                this.showLink = !this.showLink;
             },
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followup';
                 this.dataHolder.agenda_id = agendaId;
+                this.showLink = !this.showLink;
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
@@ -400,7 +390,7 @@
             cancelFollowup() {
                 this.dataHolder = {};
                 this.dataItem = '';
-
+                this.showLink = !this.showLink;
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -423,16 +413,18 @@
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].followups.push(response.data);
                         this.dataItem = '';
+                        this.showLink = !this.showLink;
                     });
             },
             showDiscussionCreate(agendaId) {
                 this.dataItem = 'discussion';
                 this.dataHolder.agenda_id = agendaId;
+                this.showLink = !this.showLink;
             },
             cancelDiscussion() {
                 this.dataHolder = {};
                 this.dataItem = '';
-
+                this.showLink = !this.showLink;
             },
             saveDiscussion(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -443,6 +435,7 @@
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].discussions.push(response.data);
                         this.dataItem = '';
+                        this.showLink = !this.showLink;
                     });
             },
             startDiscussionEdit(discussionId, agendaId) {
@@ -456,6 +449,7 @@
 
                 this.dataItem = 'discussion' + discussionId;
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
+                this.showLink = !this.showLink;
             },
 
             saveDiscussionEdit(agendaId, discussionId) {
