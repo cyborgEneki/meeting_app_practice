@@ -33,7 +33,7 @@ class DiscussionController extends Controller
         return $discussion;
     }
 
-    public function update(Request $request, Discussion $discussion)
+    public function update(DiscussionRequest $request, Discussion $discussion)
     {
         $this->discussionRepository->updateDiscussion($request, $discussion);
         return response()->json(['You have successfully updated your discussion.'], 200);
