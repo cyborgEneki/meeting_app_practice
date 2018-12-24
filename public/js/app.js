@@ -62976,7 +62976,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
-            showLink: true,
             dataItem: '',
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -63037,13 +63036,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this4.dataHolder = {};
                 _this4.meeting.agendas.push(response.data);
                 _this4.dataItem = '';
-                _this4.showLink = !_this4.showLink;
             });
         },
         cancelAgenda: function cancelAgenda() {
             this.dataHolder = {};
             this.dataItem = '';
-            this.showLink = !this.showLink;
         },
         deleteAgenda: function deleteAgenda(agendaId) {
             var _this5 = this;
@@ -63059,12 +63056,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = 'agenda';
             this.dataHolder.meeting_id = meetingId;
             this.dataHolder.agenda_status = 0;
-            this.showLink = !this.showLink;
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
-            this.dataItem = 'followup';
+            this.dataItem = 'followupCreate' + agendaId;
             this.dataHolder.agenda_id = agendaId;
-            this.showLink = !this.showLink;
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
             //get the index of the agenda you are editing in
@@ -63077,7 +63072,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return item.id;
             }).indexOf(followupId);
 
-            this.dataItem = 'followup' + followupId;
+            this.dataItem = 'followupEdit' + followupId;
 
             //load the values of the followup from meeting into the dataHolder variable in data
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
@@ -63101,7 +63096,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         cancelFollowup: function cancelFollowup() {
             this.dataHolder = {};
             this.dataItem = '';
-            this.showLink = !this.showLink;
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
             var _this7 = this;
@@ -63126,18 +63120,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this8.dataHolder = {};
                 _this8.meeting.agendas[agendaIndex].followups.push(response.data);
                 _this8.dataItem = '';
-                _this8.showLink = !_this8.showLink;
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
-            this.dataItem = 'discussion';
+            this.dataItem = 'discussionCreate' + agendaId;
             this.dataHolder.agenda_id = agendaId;
-            this.showLink = !this.showLink;
         },
         cancelDiscussion: function cancelDiscussion() {
             this.dataHolder = {};
             this.dataItem = '';
-            this.showLink = !this.showLink;
         },
         saveDiscussion: function saveDiscussion(agendaId) {
             var _this9 = this;
@@ -63149,7 +63140,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this9.dataHolder = {};
                 _this9.meeting.agendas[agendaIndex].discussions.push(response.data);
                 _this9.dataItem = '';
-                _this9.showLink = !_this9.showLink;
             });
         },
         startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
@@ -63161,9 +63151,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return item.id;
             }).indexOf(discussionId);
 
-            this.dataItem = 'discussion' + discussionId;
+            this.dataItem = 'discussionEdit' + discussionId;
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-            this.showLink = !this.showLink;
         },
         saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
             var _this10 = this;
@@ -63563,8 +63552,10 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem !== "followup",
-                                expression: "dataItem !== 'followup'"
+                                value:
+                                  _vm.dataItem !== "followupCreate" + agenda.id,
+                                expression:
+                                  "dataItem !== 'followupCreate'+agenda.id"
                               }
                             ],
                             attrs: { href: "#" },
@@ -63585,8 +63576,10 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem === "followup",
-                                expression: "dataItem === 'followup'"
+                                value:
+                                  _vm.dataItem === "followupCreate" + agenda.id,
+                                expression:
+                                  "dataItem === 'followupCreate'+agenda.id"
                               }
                             ]
                           },
@@ -63836,9 +63829,10 @@ var render = function() {
                                   name: "show",
                                   rawName: "v-show",
                                   value:
-                                    _vm.dataItem === "followup" + followup.id,
+                                    _vm.dataItem ===
+                                    "followupEdit" + followup.id,
                                   expression:
-                                    "dataItem === 'followup'+followup.id"
+                                    "dataItem === 'followupEdit'+followup.id"
                                 }
                               ]
                             },
@@ -64025,8 +64019,11 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem !== "discussion",
-                                expression: "dataItem !== 'discussion'"
+                                value:
+                                  _vm.dataItem !==
+                                  "discussionCreate" + agenda.id,
+                                expression:
+                                  "dataItem !== 'discussionCreate'+agenda.id"
                               }
                             ],
                             attrs: { href: "#" },
@@ -64047,8 +64044,11 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem === "discussion",
-                                expression: "dataItem === 'discussion'"
+                                value:
+                                  _vm.dataItem ===
+                                  "discussionCreate" + agenda.id,
+                                expression:
+                                  "dataItem === 'discussionCreate'+agenda.id"
                               }
                             ]
                           },
@@ -64208,9 +64208,9 @@ var render = function() {
                                   rawName: "v-show",
                                   value:
                                     _vm.dataItem ===
-                                    "discussion" + discussion.id,
+                                    "discussionEdit" + discussion.id,
                                   expression:
-                                    "dataItem === 'discussion'+discussion.id"
+                                    "dataItem === 'discussionEdit'+discussion.id"
                                 }
                               ]
                             },
