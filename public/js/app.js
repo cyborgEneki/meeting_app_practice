@@ -63058,7 +63058,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder.agenda_status = 0;
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
-            this.dataItem = 'followup';
+            this.dataItem = 'followup' + agendaId;
             this.dataHolder.agenda_id = agendaId;
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
@@ -63552,8 +63552,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem !== "followup",
-                                expression: "dataItem !== 'followup'"
+                                value: _vm.dataItem !== "followup" + agenda.id,
+                                expression: "dataItem !== 'followup'+agenda.id"
                               }
                             ],
                             attrs: { href: "#" },
@@ -63574,8 +63574,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem === "followup",
-                                expression: "dataItem === 'followup'"
+                                value: _vm.dataItem === "followup" + agenda.id,
+                                expression: "dataItem === 'followup'+agenda.id"
                               }
                             ]
                           },

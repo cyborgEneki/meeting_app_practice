@@ -77,8 +77,8 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)" v-show="dataItem !== 'followup'">Add Followup</a>
-                                    <div v-show="dataItem === 'followup'">
+                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)" v-show="dataItem !== 'followup'+agenda.id">Add Followup</a>
+                                    <div v-show="dataItem === 'followup'+agenda.id">
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
@@ -348,7 +348,7 @@
                 this.dataHolder.agenda_status = 0;
             },
             showFollowupCreate(agendaId) {
-                this.dataItem = 'followup';
+                this.dataItem = 'followup'+agendaId;
                 this.dataHolder.agenda_id = agendaId;
             },
             startFollowupEdit(followupId, agendaId) {
