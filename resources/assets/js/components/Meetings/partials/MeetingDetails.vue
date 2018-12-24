@@ -82,7 +82,7 @@
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
-                                        <select type="text" v-model="dataHolder.status">
+                                        <select type="text" v-model="dataHolder.status=0">
                                             <option value="">Select status</option>
                                             <option v-for="status in statuses" v-bind:value="status.id">{{ status.name
                                                 }}

@@ -63655,8 +63655,8 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.dataHolder.status,
-                                    expression: "dataHolder.status"
+                                    value: (_vm.dataHolder.status = 0),
+                                    expression: "dataHolder.status=0"
                                   }
                                 ],
                                 attrs: { type: "text" },
@@ -63673,7 +63673,7 @@ var render = function() {
                                       })
                                     _vm.$set(
                                       _vm.dataHolder,
-                                      "status",
+                                      "status=0",
                                       $event.target.multiple
                                         ? $$selectedVal
                                         : $$selectedVal[0]
