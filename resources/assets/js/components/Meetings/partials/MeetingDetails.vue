@@ -267,7 +267,6 @@
         },
         data() {
             return {
-                showLink: true,
                 dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -328,13 +327,11 @@
                         this.dataHolder = {};
                         this.meeting.agendas.push(response.data);
                         this.dataItem = '';
-                        this.showLink = !this.showLink;
                     });
             },
             cancelAgenda() {
                 this.dataHolder = {};
                 this.dataItem = '';
-                this.showLink = !this.showLink;
             },
             deleteAgenda(agendaId) {
                 axios.delete('/api/agendas/' + agendaId)
@@ -349,12 +346,10 @@
                 this.dataItem='agenda';
                 this.dataHolder.meeting_id = meetingId;
                 this.dataHolder.agenda_status = 0;
-                this.showLink = !this.showLink;
             },
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followup';
                 this.dataHolder.agenda_id = agendaId;
-                this.showLink = !this.showLink;
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
@@ -390,7 +385,6 @@
             cancelFollowup() {
                 this.dataHolder = {};
                 this.dataItem = '';
-                this.showLink = !this.showLink;
             },
             deleteFollowup(followupId, agendaId) {
                 axios.delete('/api/followups/' + followupId)
@@ -413,18 +407,15 @@
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].followups.push(response.data);
                         this.dataItem = '';
-                        this.showLink = !this.showLink;
                     });
             },
             showDiscussionCreate(agendaId) {
                 this.dataItem = 'discussion';
                 this.dataHolder.agenda_id = agendaId;
-                this.showLink = !this.showLink;
             },
             cancelDiscussion() {
                 this.dataHolder = {};
                 this.dataItem = '';
-                this.showLink = !this.showLink;
             },
             saveDiscussion(agendaId) {
                 let agendaIndex = this.meeting.agendas.map(function (item) {
@@ -435,7 +426,6 @@
                         this.dataHolder = {};
                         this.meeting.agendas[agendaIndex].discussions.push(response.data);
                         this.dataItem = '';
-                        this.showLink = !this.showLink;
                     });
             },
             startDiscussionEdit(discussionId, agendaId) {
@@ -449,7 +439,6 @@
 
                 this.dataItem = 'discussion' + discussionId;
                 this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-                this.showLink = !this.showLink;
             },
 
             saveDiscussionEdit(agendaId, discussionId) {
