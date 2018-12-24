@@ -141,8 +141,8 @@
                                 <!--Create discussion form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) " v-show="dataItem !== 'discussion'">Add Discussion</a>
-                                    <div v-show="dataItem === 'discussion'">
+                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) " v-show="dataItem !== 'discussion'+agenda.id">Add Discussion</a>
+                                    <div v-show="dataItem === 'discussion'+agenda.id">
                                         Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
@@ -410,7 +410,7 @@
                     });
             },
             showDiscussionCreate(agendaId) {
-                this.dataItem = 'discussion';
+                this.dataItem = 'discussion'+agendaId;
                 this.dataHolder.agenda_id = agendaId;
             },
             cancelDiscussion() {

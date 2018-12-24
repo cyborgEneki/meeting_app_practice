@@ -63123,7 +63123,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
-            this.dataItem = 'discussion';
+            this.dataItem = 'discussion' + agendaId;
             this.dataHolder.agenda_id = agendaId;
         },
         cancelDiscussion: function cancelDiscussion() {
@@ -64014,8 +64014,10 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem !== "discussion",
-                                expression: "dataItem !== 'discussion'"
+                                value:
+                                  _vm.dataItem !== "discussion" + agenda.id,
+                                expression:
+                                  "dataItem !== 'discussion'+agenda.id"
                               }
                             ],
                             attrs: { href: "#" },
@@ -64036,8 +64038,10 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem === "discussion",
-                                expression: "dataItem === 'discussion'"
+                                value:
+                                  _vm.dataItem === "discussion" + agenda.id,
+                                expression:
+                                  "dataItem === 'discussion'+agenda.id"
                               }
                             ]
                           },
