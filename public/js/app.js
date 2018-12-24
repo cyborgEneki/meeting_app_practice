@@ -63277,8 +63277,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.showLink,
-              expression: "showLink"
+              value: _vm.dataItem !== "agenda",
+              expression: "dataItem !=='agenda'"
             }
           ],
           attrs: { href: "#" },
@@ -63563,8 +63563,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.showLink,
-                                expression: "showLink"
+                                value: _vm.dataItem !== "followup",
+                                expression: "dataItem !== 'followup'"
                               }
                             ],
                             attrs: { href: "#" },
@@ -64025,8 +64025,8 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.showLink,
-                                expression: "showLink"
+                                value: _vm.dataItem !== "discussion",
+                                expression: "dataItem !== 'discussion'"
                               }
                             ],
                             attrs: { href: "#" },
