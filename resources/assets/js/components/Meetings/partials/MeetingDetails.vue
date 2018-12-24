@@ -21,7 +21,7 @@
 
         <!--Create agenda-->
         <br>
-        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="showLink">Add Agenda</a>
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agenda'">Add Agenda</a>
         <div v-show="dataItem === 'agenda'">
             <div>
                 Topic<input type="text" v-model="dataHolder.topic">
@@ -77,7 +77,7 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)" v-show="showLink">Add Followup</a>
+                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)" v-show="dataItem !== 'followup'">Add Followup</a>
                                     <div v-show="dataItem === 'followup'">
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
@@ -141,7 +141,7 @@
                                 <!--Create discussion form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) " v-show="showLink">Add Discussion</a>
+                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) " v-show="dataItem !== 'discussion'">Add Discussion</a>
                                     <div v-show="dataItem === 'discussion'">
                                         Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
