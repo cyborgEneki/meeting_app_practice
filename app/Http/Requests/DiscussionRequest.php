@@ -30,7 +30,7 @@ class DiscussionRequest extends FormRequest
     public function messages()
     {
         return [
-            'description.required' => 'You must enter a discussion before submission!',
+            'description.required' => 'You must enter a description before submission!',
         ];
     }
 }

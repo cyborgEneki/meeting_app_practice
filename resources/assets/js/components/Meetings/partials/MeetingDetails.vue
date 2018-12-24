@@ -21,8 +21,8 @@
 
         <!--Create agenda-->
         <br>
-        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agenda'">Add Agenda</a>
-        <div v-show="dataItem === 'agenda'">
+        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'">Add Agenda</a>
+        <div v-show="dataItem === 'agendaCreate'">
             <div>
                 Topic<input type="text" v-model="dataHolder.topic">
             </div>
@@ -65,7 +65,7 @@
                         <!--Start edit agenda-->
 
                         <div>
-                            <div v-show="dataItem !== 'agenda'+ agenda.id">
+                            <div v-show="dataItem !== 'agendaEdit'+ agenda.id">
                                 <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
@@ -97,7 +97,7 @@
                                 <!--Read followup-->
 
                                 <div v-for="followup in agenda.followups">Follow Up
-                                    <div v-show="dataItem !== 'followup'+followup.id">
+                                    <div v-show="dataItem !== 'followupEdit'+followup.id">
                                         <div>
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{followup.action}}</li>
@@ -152,7 +152,7 @@
                                 <!--Read discussions-->
 
                                 <div v-for="discussion in agenda.discussions"> Discussion
-                                    <div v-show="dataItem !== 'discussion'+ discussion.id">
+                                    <div v-show="dataItem !== 'discussionEdit'+ discussion.id">
 
                                     <div>
                                             <div @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
@@ -192,7 +192,7 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="dataHolder.id === agenda.id">
+                            <div v-show="dataItem === 'agendaEdit'+agenda.id">
                                 <div>Topic<input type="text" v-model="dataHolder.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="dataHolder.description">
@@ -223,7 +223,7 @@
                                 <div>Conclusion<input type="text"
                                                       v-model="dataHolder.conclusion"></div>
                                 <div>
-                                    <button @click.prevent="saveAgendaEdit">Save Edit</button>
+                                    <button @click.prevent="saveAgendaEdit(agenda.id)">Save Edit</button>
                                 </div>
                                 <div>
                                     <a href="#" @click.prevent="dataHolder = {}">Cancel</a>
@@ -308,16 +308,21 @@
                     });
             },
             startAgendaEdit(id) {
+                this.dataItem = 'agendaEdit'+id;
                 let index = this.meeting.agendas.map(function (item) {
                     return item.id
                 }).indexOf(id);
                 this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
             },
-            saveAgendaEdit() {
+            saveAgendaEdit(agendaId) {
+                let agendaIndex = this.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+
                 axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
                         this.dataHolder = {};
-                        this.meeting.agendas.push(response.data);
+                        this.meeting.agendas[agendaIndex] = Object.assign({}, this.dataHolder);
                         this.dataItem = '';
                     });
             },
@@ -343,7 +348,7 @@
                     });
             },
             showAgendaCreate(meetingId) {
-                this.dataItem='agenda';
+                this.dataItem='agendaCreate';
                 this.dataHolder.meeting_id = meetingId;
                 this.dataHolder.agenda_status = 0;
             },

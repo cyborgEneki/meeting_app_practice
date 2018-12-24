@@ -63015,17 +63015,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         startAgendaEdit: function startAgendaEdit(id) {
+            this.dataItem = 'agendaEdit' + id;
             var index = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(id);
             this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
         },
-        saveAgendaEdit: function saveAgendaEdit() {
+        saveAgendaEdit: function saveAgendaEdit(agendaId) {
             var _this3 = this;
+
+            var agendaIndex = this.meeting.agendas.map(function (item) {
+                return item.id;
+            }).indexOf(agendaId);
 
             axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
                 _this3.dataHolder = {};
-                _this3.meeting.agendas.push(response.data);
+                _this3.meeting.agendas[agendaIndex] = Object.assign({}, _this3.dataHolder);
                 _this3.dataItem = '';
             });
         },
@@ -63053,7 +63058,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         showAgendaCreate: function showAgendaCreate(meetingId) {
-            this.dataItem = 'agenda';
+            this.dataItem = 'agendaCreate';
             this.dataHolder.meeting_id = meetingId;
             this.dataHolder.agenda_status = 0;
         },
@@ -63266,8 +63271,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.dataItem !== "agenda",
-              expression: "dataItem !=='agenda'"
+              value: _vm.dataItem !== "agendaCreate",
+              expression: "dataItem !=='agendaCreate'"
             }
           ],
           attrs: { href: "#" },
@@ -63288,8 +63293,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.dataItem === "agenda",
-              expression: "dataItem === 'agenda'"
+              value: _vm.dataItem === "agendaCreate",
+              expression: "dataItem === 'agendaCreate'"
             }
           ]
         },
@@ -63497,8 +63502,8 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: _vm.dataItem !== "agenda" + agenda.id,
-                          expression: "dataItem !== 'agenda'+ agenda.id"
+                          value: _vm.dataItem !== "agendaEdit" + agenda.id,
+                          expression: "dataItem !== 'agendaEdit'+ agenda.id"
                         }
                       ]
                     },
@@ -63737,9 +63742,10 @@ var render = function() {
                                   name: "show",
                                   rawName: "v-show",
                                   value:
-                                    _vm.dataItem !== "followup" + followup.id,
+                                    _vm.dataItem !==
+                                    "followupEdit" + followup.id,
                                   expression:
-                                    "dataItem !== 'followup'+followup.id"
+                                    "dataItem !== 'followupEdit'+followup.id"
                                 }
                               ]
                             },
@@ -64126,9 +64132,9 @@ var render = function() {
                                   rawName: "v-show",
                                   value:
                                     _vm.dataItem !==
-                                    "discussion" + discussion.id,
+                                    "discussionEdit" + discussion.id,
                                   expression:
-                                    "dataItem !== 'discussion'+ discussion.id"
+                                    "dataItem !== 'discussionEdit'+ discussion.id"
                                 }
                               ]
                             },
@@ -64329,8 +64335,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.dataHolder.id === agenda.id,
-                            expression: "dataHolder.id === agenda.id"
+                            value: _vm.dataItem === "agendaEdit" + agenda.id,
+                            expression: "dataItem === 'agendaEdit'+agenda.id"
                           }
                         ]
                       },
@@ -64592,7 +64598,7 @@ var render = function() {
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
-                                  return _vm.saveAgendaEdit($event)
+                                  _vm.saveAgendaEdit(agenda.id)
                                 }
                               }
                             },
