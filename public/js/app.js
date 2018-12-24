@@ -63058,7 +63058,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder.agenda_status = 0;
         },
         showFollowupCreate: function showFollowupCreate(agendaId) {
-            this.dataItem = 'followup' + agendaId;
+            this.dataItem = 'followupCreate' + agendaId;
             this.dataHolder.agenda_id = agendaId;
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
@@ -63072,7 +63072,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return item.id;
             }).indexOf(followupId);
 
-            this.dataItem = 'followup' + followupId;
+            this.dataItem = 'followupEdit' + followupId;
 
             //load the values of the followup from meeting into the dataHolder variable in data
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
@@ -63123,7 +63123,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
-            this.dataItem = 'discussion' + agendaId;
+            this.dataItem = 'discussionCreate' + agendaId;
             this.dataHolder.agenda_id = agendaId;
         },
         cancelDiscussion: function cancelDiscussion() {
@@ -63151,7 +63151,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return item.id;
             }).indexOf(discussionId);
 
-            this.dataItem = 'discussion' + discussionId;
+            this.dataItem = 'discussionEdit' + discussionId;
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
         },
         saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
@@ -63552,8 +63552,10 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem !== "followup" + agenda.id,
-                                expression: "dataItem !== 'followup'+agenda.id"
+                                value:
+                                  _vm.dataItem !== "followupCreate" + agenda.id,
+                                expression:
+                                  "dataItem !== 'followupCreate'+agenda.id"
                               }
                             ],
                             attrs: { href: "#" },
@@ -63574,8 +63576,10 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.dataItem === "followup" + agenda.id,
-                                expression: "dataItem === 'followup'+agenda.id"
+                                value:
+                                  _vm.dataItem === "followupCreate" + agenda.id,
+                                expression:
+                                  "dataItem === 'followupCreate'+agenda.id"
                               }
                             ]
                           },
@@ -63825,9 +63829,10 @@ var render = function() {
                                   name: "show",
                                   rawName: "v-show",
                                   value:
-                                    _vm.dataItem === "followup" + followup.id,
+                                    _vm.dataItem ===
+                                    "followupEdit" + followup.id,
                                   expression:
-                                    "dataItem === 'followup'+followup.id"
+                                    "dataItem === 'followupEdit'+followup.id"
                                 }
                               ]
                             },
@@ -64015,9 +64020,10 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
-                                  _vm.dataItem !== "discussion" + agenda.id,
+                                  _vm.dataItem !==
+                                  "discussionCreate" + agenda.id,
                                 expression:
-                                  "dataItem !== 'discussion'+agenda.id"
+                                  "dataItem !== 'discussionCreate'+agenda.id"
                               }
                             ],
                             attrs: { href: "#" },
@@ -64039,9 +64045,10 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
-                                  _vm.dataItem === "discussion" + agenda.id,
+                                  _vm.dataItem ===
+                                  "discussionCreate" + agenda.id,
                                 expression:
-                                  "dataItem === 'discussion'+agenda.id"
+                                  "dataItem === 'discussionCreate'+agenda.id"
                               }
                             ]
                           },
@@ -64201,9 +64208,9 @@ var render = function() {
                                   rawName: "v-show",
                                   value:
                                     _vm.dataItem ===
-                                    "discussion" + discussion.id,
+                                    "discussionEdit" + discussion.id,
                                   expression:
-                                    "dataItem === 'discussion'+discussion.id"
+                                    "dataItem === 'discussionEdit'+discussion.id"
                                 }
                               ]
                             },
