@@ -62972,6 +62972,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         },
         orderedAttendees: function orderedAttendees() {
             return _.orderBy(this.meeting.users, 'first_name');
+        },
+        isAgendaComplete: function isAgendaComplete() {
+            return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.time_allocated && this.dataHolder.user_id;
+        },
+        isFollowupComplete: function isFollowupComplete() {
+            return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;
+        },
+        isDiscussionComplete: function isDiscussionComplete() {
+            return this.dataHolder.description;
         }
     }),
     data: function data() {
@@ -63029,8 +63038,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(agendaId);
 
             axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this3.dataHolder = {};
                 _this3.meeting.agendas[agendaIndex] = Object.assign({}, _this3.dataHolder);
+                _this3.dataHolder = {};
                 _this3.dataItem = '';
             });
             this.dataItem !== 'agendaEdit' + agendaId;
@@ -63096,6 +63105,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder).then(function (response) {
                 _this6.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this6.dataHolder);
+                _this6.dataHolder = {};
                 _this6.dataItem = '';
             });
         },
@@ -63173,6 +63183,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
                 _this10.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this10.dataHolder);
+                _this10.dataHolder = {};
                 _this10.dataItem = '';
             });
         },
@@ -63439,6 +63450,14 @@ var render = function() {
           _c(
             "button",
             {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isAgendaComplete,
+                  expression: "isAgendaComplete"
+                }
+              ],
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -63718,6 +63737,14 @@ var render = function() {
                             _c(
                               "a",
                               {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.isFollowupComplete,
+                                    expression: "isFollowupComplete"
+                                  }
+                                ],
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
@@ -64105,6 +64132,14 @@ var render = function() {
                             _c(
                               "a",
                               {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.isDiscussionComplete,
+                                    expression: "isDiscussionComplete"
+                                  }
+                                ],
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {

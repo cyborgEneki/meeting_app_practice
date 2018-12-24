@@ -44,7 +44,7 @@
                     </option>
                 </select>
             </div>
-            <button @click.prevent="saveAgendaCreate">Save Agenda</button>
+            <button v-show="isAgendaComplete" @click.prevent="saveAgendaCreate">Save Agenda</button>
             <div>
                 <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
@@ -89,7 +89,7 @@
                                             </option>
                                         </select>
                                         <a href="#" @click.prevent="cancelFollowup">Cancel</a>
-                                        <a href="#" @click.prevent="saveFollowup(agenda.id)">Save</a>
+                                        <a href="#" v-show="isFollowupComplete" @click.prevent="saveFollowup(agenda.id)">Save</a>
 
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
                                         Description<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
-                                        <a href="#" @click.prevent="saveDiscussion(agenda.id)">Save</a>
+                                        <a href="#" v-show="isDiscussionComplete" @click.prevent="saveDiscussion(agenda.id)">Save</a>
                                     </div>
                                 </div>
 
@@ -263,6 +263,15 @@
             },
             orderedAttendees() {
                 return _.orderBy(this.meeting.users, 'first_name');
+            },
+            isAgendaComplete() {
+                return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.time_allocated && this.dataHolder.user_id;
+            },
+            isFollowupComplete() {
+                return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;
+            },
+            isDiscussionComplete() {
+                return this.dataHolder.description;
             }
         },
         data() {
@@ -321,8 +330,8 @@
 
                 axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
-                        this.dataHolder = {};
                         this.meeting.agendas[agendaIndex] = Object.assign({}, this.dataHolder);
+                        this.dataHolder = {};
                         this.dataItem = '';
                     });
                 this.dataItem !== 'agendaEdit'+agendaId;
@@ -386,6 +395,7 @@
                 axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
                         this.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, this.dataHolder);
+                        this.dataHolder = {};
                         this.dataItem = '';
                     });
             },
@@ -460,6 +470,7 @@
                 axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder)
                     .then((response) => {
                         this.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, this.dataHolder);
+                        this.dataHolder = {};
                         this.dataItem = '';
                     });
             },
