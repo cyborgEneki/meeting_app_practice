@@ -325,6 +325,8 @@
                         this.meeting.agendas[agendaIndex] = Object.assign({}, this.dataHolder);
                         this.dataItem = '';
                     });
+                this.dataItem !== 'agendaEdit'+agendaId;
+
             },
             saveAgendaCreate() {
                 axios.post('/api/agendas', this.dataHolder)

@@ -63033,6 +63033,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this3.meeting.agendas[agendaIndex] = Object.assign({}, _this3.dataHolder);
                 _this3.dataItem = '';
             });
+            this.dataItem !== 'agendaEdit' + agendaId;
         },
         saveAgendaCreate: function saveAgendaCreate() {
             var _this4 = this;
