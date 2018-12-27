@@ -62973,7 +62973,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return _.orderBy(this.meeting.users, 'first_name');
         },
         isAgendaComplete: function isAgendaComplete() {
-            return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.time_allocated && this.dataHolder.user_id;
+            return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
         },
         isFollowupComplete: function isFollowupComplete() {
             return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;

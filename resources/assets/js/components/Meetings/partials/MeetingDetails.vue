@@ -264,7 +264,7 @@
                 return _.orderBy(this.meeting.users, 'first_name');
             },
             isAgendaComplete() {
-                return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.time_allocated && this.dataHolder.user_id;
+                return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
             },
             isFollowupComplete() {
                 return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;

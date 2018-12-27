@@ -26,7 +26,6 @@ class AgendaRequest extends FormRequest
         return [
             'topic' => 'required',
             'description' => 'required',
-            'time_allocated' => 'required',
         ];
     }
     public function messages()
@@ -34,7 +33,6 @@ class AgendaRequest extends FormRequest
         return [
             'topic.required' => 'Topic is required!',
             'description.required' => 'Description is required!',
-            'time_allocated.required' => 'The time allocated for this meeting is required!',
         ];
     }
 }
