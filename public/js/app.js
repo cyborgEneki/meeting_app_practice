@@ -28974,6 +28974,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('passport-personal-access-
 
 
 
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('multiselect', Multiselect);
+
 
 
 
@@ -62976,7 +62978,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
         },
         isFollowupComplete: function isFollowupComplete() {
-            return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;
+            return this.dataHolder.action && this.dataHolder.timeline;
         },
         isDiscussionComplete: function isDiscussionComplete() {
             return this.dataHolder.description;

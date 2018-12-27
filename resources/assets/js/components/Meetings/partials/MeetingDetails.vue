@@ -267,7 +267,7 @@
                 return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
             },
             isFollowupComplete() {
-                return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;
+                return this.dataHolder.action && this.dataHolder.timeline;
             },
             isDiscussionComplete() {
                 return this.dataHolder.description;

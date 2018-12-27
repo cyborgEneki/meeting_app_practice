@@ -26,6 +26,8 @@ import VueRouter from 'vue-router';
 
 import VeeValidate from 'vee-validate';
 
+Vue.component('multiselect', Multiselect);
+
 import VueNoty from 'vuejs-noty';
 
 import App from './components/App'
