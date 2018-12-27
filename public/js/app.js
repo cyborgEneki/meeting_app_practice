@@ -62958,7 +62958,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -63699,25 +63698,18 @@ var render = function() {
                                   }
                                 }
                               },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Select status")
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(_vm.statuses, function(status) {
-                                  return _c(
-                                    "option",
-                                    { domProps: { value: status.id } },
-                                    [
-                                      _vm._v(
-                                        _vm._s(status.name) +
-                                          "\n                                        "
-                                      )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
+                              _vm._l(_vm.statuses, function(status) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: status.id } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(status.name) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              })
                             ),
                             _vm._v(" "),
                             _c(

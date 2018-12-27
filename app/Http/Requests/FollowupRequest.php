@@ -26,7 +26,6 @@ class FollowupRequest extends FormRequest
         return [
             'action' => 'required',
             'timeline' => 'required',
-            'status' => 'required',
         ];
     }
 
@@ -35,7 +34,6 @@ class FollowupRequest extends FormRequest
         return [
             'action.required' => 'Action is required!',
             'timeline.required' => 'The timeline is required!',
-            'status.required' => 'Insert a status before continuing!',
         ];
     }
 }
