@@ -112,8 +112,8 @@
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{ followup.action }}</li>
                                                 <li>Timeline {{ followup.timeline }}</li>
-                                                <li>Status {{ followup.status }}</li>
-                                                <!--<li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>-->
+                                                <!--<li>Status {{ followup.status }}</li>-->
+                                                <li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
                                                 <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
