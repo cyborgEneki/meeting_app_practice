@@ -66,7 +66,7 @@
             </select>
         </div>
 
-        <button v-show="isMeetingComplete" @click="addNewMeeting">Save Meeting</button>
+        <button :disabled="errors.any() || !isMeetingComplete" @click="addNewMeeting">Save Meeting</button>
 
         <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>

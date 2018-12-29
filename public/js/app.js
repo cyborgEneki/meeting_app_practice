@@ -67601,14 +67601,7 @@ var render = function() {
     _c(
       "button",
       {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isMeetingComplete,
-            expression: "isMeetingComplete"
-          }
-        ],
+        attrs: { disabled: _vm.errors.any() || !_vm.isMeetingComplete },
         on: { click: _vm.addNewMeeting }
       },
       [_vm._v("Save Meeting")]
