@@ -38,7 +38,7 @@
             </div>
             <div>
                 Agenda Status
-                <select type="'text" v-model="dataHolder.agenda_status">
+                <select type="text" v-model="dataHolder.agenda_status">
                     <option value="">Select status</option>
                     <option v-for="agendaStatus in agendaStatuses" v-bind:value="agendaStatus.id">{{ agendaStatus.name
                         }}

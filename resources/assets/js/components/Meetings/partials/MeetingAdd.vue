@@ -16,7 +16,8 @@
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
         </div>
         <div>
-            End Time<input v-validate="'after:'+meeting.start_time+'|required'" name="end_time" v-model="meeting.end_time" type="time"/>
+            End Time<input v-validate="'after:'+meeting.start_time+'|required'" name="end_time"
+                           v-model="meeting.end_time" type="time"/>
             <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
@@ -64,38 +65,8 @@
                 </option>
             </select>
         </div>
-        <div v-for="(agenda,index) in meeting.agendas">
-            <div>
-                Agenda Topic<input type="text" v-model="meeting.agendas[index].topic">
-            </div>
-            <div>
-                Agenda Description<textarea type="text" v-model="meeting.agendas[index].description"></textarea>
-            </div>
-            <div>
-                Time Allocated
-                <select type="text" v-model="meeting.agendas[index].time_allocated">
-                    <option value="">Select time</option>
-                    <option v-for="time in timing">{{ time }}</option>
-                </select>
-            </div>
-            <div>
-                <label>User Assigned to Agenda</label>
-                <select v-model="meeting.agendas[index].user_id">
-                    <option value="">Select user</option>
-                    <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
-                </select>
-            </div>
-            <div>
-                Agenda Status
-                <select type="text" v-model="meeting.agendas[index].agenda_status">
-                    <option value="">Select status</option>
-                    <option v-for="status in statuses" v-bind:value="status.id">{{ status.name }}</option>
-                </select>
-            </div>
-        </div>
 
-        <button @click="addAgenda">Save Agenda</button>
-        <button @click="addNewMeeting">Save Meeting</button>
+        <button :disabled="errors.any() || !isMeetingComplete" @click="addNewMeeting">Save Meeting</button>
 
         <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
@@ -123,16 +94,6 @@
                     media_id: '',
                     meetingtype_id: '',
                     meetingseries_id: '',
-                    agendas: [
-                        {
-                            topic: '',
-                            description: '',
-                            time_allocated: '',
-                            user_id: '',
-                            agenda_status: '',
-                            conclusion: '',
-                        }
-                    ]
                 },
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 statuses:
@@ -151,26 +112,6 @@
                         this.$router.push('/meetings');
                         this.$noty.success("Your meeting has been saved!");
                     });
-            },
-            addAgenda() {
-                let items = this.meeting.agendas.length;
-                if (
-                    this.meeting.agendas[items - 1].topic !== '' &&
-                    this.meeting.agendas[items - 1].description !== '' &&
-                    this.meeting.agendas[items - 1].time_allocated !== '' &&
-                    this.meeting.agendas[items - 1].user_id !== '' &&
-                    this.meeting.agendas[items - 1].agenda_status !== '' &&
-                    this.meeting.agendas[items - 1].conclusion !== ''
-                ) {
-                    this.meeting.agendas.push({
-                        topic: '',
-                        description: '',
-                        time_allocated: '',
-                        user_id: '',
-                        agenda_status: '',
-                        conclusion: '',
-                    })
-                }
             },
         },
         computed: {
@@ -201,6 +142,9 @@
                     mm = '0' + mm;
                 }
                 return yyyy + '-' + mm + '-' + dd;
+            },
+            isMeetingComplete() {
+                return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
             }
         }
     }
