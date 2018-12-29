@@ -112,7 +112,8 @@
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{ followup.action }}</li>
                                                 <li>Timeline {{ followup.timeline }}</li>
-                                                <div v-if="followup.status">Status {{ statuses[followup.status].name }}</div>
+                                                <li>Status {{ followup.status }}</li>
+                                                <!--<li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>-->
                                             </div>
                                             <div>
                                                 <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
@@ -126,7 +127,7 @@
                                     <!--Edit followup form-->
 
                                     <div v-show="dataItem === 'followupEdit'+followup.id">
-                                        <form v-on:keyup.esc="cancelFollowup" @click.prevent>
+                                        <form @click.prevent>
                                             <div>Action<input type="text" v-model="dataHolder.action"></div>
                                             <div>Timeline <input type="text" v-model="dataHolder.timeline"></div>
                                             <div>Status
@@ -185,7 +186,7 @@
                                     <!--Edit Discussion-->
 
                                     <div v-show="dataItem === 'discussionEdit'+discussion.id">
-                                        <form v-on:keyup.esc="cancelDiscussion" @click.prevent>
+                                        <form @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
                                             <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save
                                                 Discussion
@@ -315,7 +316,11 @@
             }
         },
         mounted() {
-            console.log(this.meeting.agendas);
+            document.body.addEventListener('keyup', e => {
+                if (e.keyCode === 27) {
+                    this.dataItem = '';
+                }
+            })
         },
         methods: {
             addUser: function (id) {

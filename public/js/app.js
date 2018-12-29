@@ -62975,6 +62975,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -63011,12 +63012,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     },
     mounted: function mounted() {
-        console.log(this.meeting.agendas);
+        var _this = this;
+
+        document.body.addEventListener('keyup', function (e) {
+            if (e.keyCode === 27) {
+                _this.dataItem = '';
+            }
+        });
     },
 
     methods: {
         addUser: function addUser(id) {
-            var _this = this;
+            var _this2 = this;
 
             var checkMtg = this.meeting.users.filter(function (user) {
                 return user.id === id;
@@ -63024,20 +63031,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             //only add user if that user isn't already in the meeting
             if (!checkMtg.length) {
                 axios.get('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                    _this.meeting.users.push(response.data.user);
+                    _this2.meeting.users.push(response.data.user);
                 });
             } else {
                 alert('User already exists');
             }
         },
         removeUsers: function removeUsers(id) {
-            var _this2 = this;
+            var _this3 = this;
 
             axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this2.meeting.users.map(function (item) {
+                var index = _this3.meeting.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this2.meeting.users.splice(index, 1);
+                _this3.meeting.users.splice(index, 1);
             });
         },
         startAgendaEdit: function startAgendaEdit(id) {
@@ -63048,26 +63055,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
         },
         saveAgendaEdit: function saveAgendaEdit(agendaId) {
-            var _this3 = this;
+            var _this4 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
 
             axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this3.meeting.agendas[agendaIndex] = Object.assign({}, _this3.dataHolder);
-                _this3.dataHolder = {};
-                _this3.dataItem = '';
+                _this4.meeting.agendas[agendaIndex] = Object.assign({}, _this4.dataHolder);
+                _this4.dataHolder = {};
+                _this4.dataItem = '';
             });
             this.dataItem !== 'agendaEdit' + agendaId;
         },
         saveAgendaCreate: function saveAgendaCreate() {
-            var _this4 = this;
+            var _this5 = this;
 
             axios.post('/api/agendas', this.dataHolder).then(function (response) {
-                _this4.dataHolder = {};
-                _this4.meeting.agendas.push(response.data);
-                _this4.dataItem = '';
+                _this5.dataHolder = {};
+                _this5.meeting.agendas.push(response.data);
+                _this5.dataItem = '';
             });
         },
         cancelAgenda: function cancelAgenda() {
@@ -63075,13 +63082,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         deleteAgenda: function deleteAgenda(agendaId) {
-            var _this5 = this;
+            var _this6 = this;
 
             axios.delete('/api/agendas/' + agendaId).then(function () {
-                var agendaindex = _this5.meeting.agendas.map(function (item) {
+                var agendaindex = _this6.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                _this5.meeting.agendas.splice(agendaindex, 1);
+                _this6.meeting.agendas.splice(agendaindex, 1);
             });
         },
         showAgendaCreate: function showAgendaCreate(meetingId) {
@@ -63110,7 +63117,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
         },
         saveFollowupEdit: function saveFollowupEdit(agendaId, followupId) {
-            var _this6 = this;
+            var _this7 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
@@ -63121,9 +63128,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(followupId);
 
             axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this6.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this6.dataHolder);
-                _this6.dataHolder = {};
-                _this6.dataItem = '';
+                _this7.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this7.dataHolder);
+                _this7.dataHolder = {};
+                _this7.dataItem = '';
             });
         },
         cancelFollowup: function cancelFollowup() {
@@ -63131,28 +63138,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this7 = this;
+            var _this8 = this;
 
             axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this7.meeting.agendas.map(function (item) {
+                var agendaindex = _this8.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                var followupindex = _this7.meeting.agendas[agendaindex].followups.map(function (item) {
+                var followupindex = _this8.meeting.agendas[agendaindex].followups.map(function (item) {
                     return item.id;
                 }).indexOf(followupId);
-                _this7.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+                _this8.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
             });
         },
         saveFollowup: function saveFollowup(agendaId) {
-            var _this8 = this;
+            var _this9 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
             axios.post('/api/followups', this.dataHolder).then(function (response) {
-                _this8.dataHolder = {};
-                _this8.meeting.agendas[agendaIndex].followups.push(response.data);
-                _this8.dataItem = '';
+                _this9.dataHolder = {};
+                _this9.meeting.agendas[agendaIndex].followups.push(response.data);
+                _this9.dataItem = '';
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
@@ -63164,15 +63171,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         saveDiscussion: function saveDiscussion(agendaId) {
-            var _this9 = this;
+            var _this10 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
             axios.post('/api/discussions', this.dataHolder).then(function (response) {
-                _this9.dataHolder = {};
-                _this9.meeting.agendas[agendaIndex].discussions.push(response.data);
-                _this9.dataItem = '';
+                _this10.dataHolder = {};
+                _this10.meeting.agendas[agendaIndex].discussions.push(response.data);
+                _this10.dataItem = '';
             });
         },
         startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
@@ -63188,7 +63195,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
         },
         saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
-            var _this10 = this;
+            var _this11 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
@@ -63199,24 +63206,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(discussionId);
 
             axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this10.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this10.dataHolder);
-                _this10.dataHolder = {};
-                _this10.dataItem = '';
+                _this11.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this11.dataHolder);
+                _this11.dataHolder = {};
+                _this11.dataItem = '';
             });
         },
         deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
-            var _this11 = this;
+            var _this12 = this;
 
             axios.delete('api/discussions/' + discussionId).then(function (response) {
-                var agendaIndex = _this11.meeting.agendas.map(function (item) {
+                var agendaIndex = _this12.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
 
-                var discussionIndex = _this11.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                var discussionIndex = _this12.meeting.agendas[agendaIndex].discussions.map(function (item) {
                     return item.id;
                 }).indexOf(discussionId);
 
-                _this11.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
+                _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
         }
     }
@@ -63872,17 +63879,11 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    followup.status
-                                      ? _c("div", [
-                                          _vm._v(
-                                            "Status " +
-                                              _vm._s(
-                                                _vm.statuses[followup.status]
-                                                  .name
-                                              )
-                                          )
-                                        ])
-                                      : _vm._e()
+                                    _c("li", [
+                                      _vm._v(
+                                        "Status " + _vm._s(followup.status)
+                                      )
+                                    ])
                                   ]
                                 ),
                                 _vm._v(" "),
@@ -63948,21 +63949,6 @@ var render = function() {
                                 "form",
                                 {
                                   on: {
-                                    keyup: function($event) {
-                                      if (
-                                        !("button" in $event) &&
-                                        _vm._k(
-                                          $event.keyCode,
-                                          "esc",
-                                          27,
-                                          $event.key,
-                                          "Escape"
-                                        )
-                                      ) {
-                                        return null
-                                      }
-                                      return _vm.cancelFollowup($event)
-                                    },
                                     click: function($event) {
                                       $event.preventDefault()
                                     }
@@ -64353,21 +64339,6 @@ var render = function() {
                                 "form",
                                 {
                                   on: {
-                                    keyup: function($event) {
-                                      if (
-                                        !("button" in $event) &&
-                                        _vm._k(
-                                          $event.keyCode,
-                                          "esc",
-                                          27,
-                                          $event.key,
-                                          "Escape"
-                                        )
-                                      ) {
-                                        return null
-                                      }
-                                      return _vm.cancelDiscussion($event)
-                                    },
                                     click: function($event) {
                                       $event.preventDefault()
                                     }
