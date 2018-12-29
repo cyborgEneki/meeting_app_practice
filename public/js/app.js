@@ -63948,6 +63948,21 @@ var render = function() {
                                 "form",
                                 {
                                   on: {
+                                    keyup: function($event) {
+                                      if (
+                                        !("button" in $event) &&
+                                        _vm._k(
+                                          $event.keyCode,
+                                          "esc",
+                                          27,
+                                          $event.key,
+                                          "Escape"
+                                        )
+                                      ) {
+                                        return null
+                                      }
+                                      return _vm.cancelFollowup($event)
+                                    },
                                     click: function($event) {
                                       $event.preventDefault()
                                     }
@@ -64338,6 +64353,21 @@ var render = function() {
                                 "form",
                                 {
                                   on: {
+                                    keyup: function($event) {
+                                      if (
+                                        !("button" in $event) &&
+                                        _vm._k(
+                                          $event.keyCode,
+                                          "esc",
+                                          27,
+                                          $event.key,
+                                          "Escape"
+                                        )
+                                      ) {
+                                        return null
+                                      }
+                                      return _vm.cancelDiscussion($event)
+                                    },
                                     click: function($event) {
                                       $event.preventDefault()
                                     }
@@ -64455,7 +64485,24 @@ var render = function() {
                             value: _vm.dataItem === "agendaEdit" + agenda.id,
                             expression: "dataItem === 'agendaEdit'+agenda.id"
                           }
-                        ]
+                        ],
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "esc",
+                                27,
+                                $event.key,
+                                "Escape"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.cancelFollowup($event)
+                          }
+                        }
                       },
                       [
                         _c("div", [

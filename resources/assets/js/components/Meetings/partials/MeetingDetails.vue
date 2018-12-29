@@ -126,7 +126,7 @@
                                     <!--Edit followup form-->
 
                                     <div v-show="dataItem === 'followupEdit'+followup.id">
-                                        <form @click.prevent>
+                                        <form v-on:keyup.esc="cancelFollowup" @click.prevent>
                                             <div>Action<input type="text" v-model="dataHolder.action"></div>
                                             <div>Timeline <input type="text" v-model="dataHolder.timeline"></div>
                                             <div>Status
@@ -185,7 +185,7 @@
                                     <!--Edit Discussion-->
 
                                     <div v-show="dataItem === 'discussionEdit'+discussion.id">
-                                        <form @click.prevent>
+                                        <form v-on:keyup.esc="cancelDiscussion" @click.prevent>
                                             Description <input type="text" v-model="dataHolder.description">
                                             <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save
                                                 Discussion
@@ -208,7 +208,7 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="dataItem === 'agendaEdit'+agenda.id">
+                            <div v-on:keyup.esc="cancelFollowup" v-show="dataItem === 'agendaEdit'+agenda.id">
                                 <div>Topic<input type="text" v-model="dataHolder.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="dataHolder.description">
