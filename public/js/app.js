@@ -63432,7 +63432,7 @@ var render = function() {
                     expression: "dataHolder.agenda_status"
                   }
                 ],
-                attrs: { type: "'text" },
+                attrs: { type: "text" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -63948,6 +63948,21 @@ var render = function() {
                                 "form",
                                 {
                                   on: {
+                                    keyup: function($event) {
+                                      if (
+                                        !("button" in $event) &&
+                                        _vm._k(
+                                          $event.keyCode,
+                                          "esc",
+                                          27,
+                                          $event.key,
+                                          "Escape"
+                                        )
+                                      ) {
+                                        return null
+                                      }
+                                      return _vm.cancelFollowup($event)
+                                    },
                                     click: function($event) {
                                       $event.preventDefault()
                                     }
@@ -64338,6 +64353,21 @@ var render = function() {
                                 "form",
                                 {
                                   on: {
+                                    keyup: function($event) {
+                                      if (
+                                        !("button" in $event) &&
+                                        _vm._k(
+                                          $event.keyCode,
+                                          "esc",
+                                          27,
+                                          $event.key,
+                                          "Escape"
+                                        )
+                                      ) {
+                                        return null
+                                      }
+                                      return _vm.cancelDiscussion($event)
+                                    },
                                     click: function($event) {
                                       $event.preventDefault()
                                     }
@@ -64455,7 +64485,24 @@ var render = function() {
                             value: _vm.dataItem === "agendaEdit" + agenda.id,
                             expression: "dataItem === 'agendaEdit'+agenda.id"
                           }
-                        ]
+                        ],
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "esc",
+                                27,
+                                $event.key,
+                                "Escape"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.cancelFollowup($event)
+                          }
+                        }
                       },
                       [
                         _c("div", [
@@ -66545,7 +66592,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66558,6 +66605,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuejs_noty_dist_vuejs_noty_css__);
+//
 //
 //
 //
@@ -66697,6 +66745,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 mm = '0' + mm;
             }
             return yyyy + '-' + mm + '-' + dd;
+        },
+        isMeetingComplete: function isMeetingComplete() {
+            return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
         }
     }
 });
@@ -67594,9 +67645,14 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("button", { on: { click: _vm.addNewMeeting } }, [
-      _vm._v("Save Meeting")
-    ]),
+    _c(
+      "button",
+      {
+        attrs: { disabled: _vm.errors.any() || !_vm.isMeetingComplete },
+        on: { click: _vm.addNewMeeting }
+      },
+      [_vm._v("Save Meeting")]
+    ),
     _vm._v(" "),
     _c(
       "button",

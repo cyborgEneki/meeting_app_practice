@@ -48,9 +48,7 @@ class MeetingRepository implements MeetingRepositoryInterface
     {
         $request['creator_id'] = Auth::id();
         $meeting = Meeting::create($request->all());
-
         $meeting->users()->attach($request->users);
-
         return new MeetingResource($meeting);
     }
 

@@ -16,7 +16,8 @@
             Start Time<input name="start_time" v-model="meeting.start_time" type="time"/>
         </div>
         <div>
-            End Time<input v-validate="'after:'+meeting.start_time+'|required'" name="end_time" v-model="meeting.end_time" type="time"/>
+            End Time<input v-validate="'after:'+meeting.start_time+'|required'" name="end_time"
+                           v-model="meeting.end_time" type="time"/>
             <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
@@ -65,7 +66,7 @@
             </select>
         </div>
 
-        <button @click="addNewMeeting">Save Meeting</button>
+        <button :disabled="errors.any() || !isMeetingComplete" @click="addNewMeeting">Save Meeting</button>
 
         <button @click="$router.go(-1)">Go Back to Previous Page</button>
     </div>
@@ -141,6 +142,9 @@
                     mm = '0' + mm;
                 }
                 return yyyy + '-' + mm + '-' + dd;
+            },
+            isMeetingComplete() {
+                return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
             }
         }
     }
