@@ -63879,17 +63879,14 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    followup.status
-                                      ? _c("li", [
-                                          _vm._v(
-                                            "Status " +
-                                              _vm._s(
-                                                _vm.statuses[followup.status]
-                                                  .name
-                                              )
+                                    _c("li", [
+                                      _vm._v(
+                                        "Status " +
+                                          _vm._s(
+                                            _vm.statuses[followup.status].name
                                           )
-                                        ])
-                                      : _vm._e()
+                                      )
+                                    ])
                                   ]
                                 ),
                                 _vm._v(" "),
