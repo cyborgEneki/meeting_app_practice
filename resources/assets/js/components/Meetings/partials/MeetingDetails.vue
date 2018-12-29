@@ -92,7 +92,7 @@
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
-                                        <select type="text" v-model="dataHolder.status=0">
+                                        <select type="text" v-model="dataHolder.status">
                                             <option v-for="status in statuses" v-bind:value="status.id">{{ status.name
                                                 }}
                                             </option>
@@ -112,8 +112,7 @@
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{ followup.action }}</li>
                                                 <li>Timeline {{ followup.timeline }}</li>
-                                                <!--<li>Status {{ followup.status }}</li>-->
-                                                <li>Status {{ statuses[followup.status].name }}</li>
+                                                <li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
                                                 <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
@@ -396,6 +395,7 @@
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followupCreate' + agendaId;
                 this.dataHolder.agenda_id = agendaId;
+                this.dataHolder.status = 0;
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in

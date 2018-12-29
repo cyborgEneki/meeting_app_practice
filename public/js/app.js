@@ -62975,7 +62975,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -63099,6 +63098,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         showFollowupCreate: function showFollowupCreate(agendaId) {
             this.dataItem = 'followupCreate' + agendaId;
             this.dataHolder.agenda_id = agendaId;
+            this.dataHolder.status = 0;
         },
         startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
             //get the index of the agenda you are editing in
@@ -63754,8 +63754,8 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: (_vm.dataHolder.status = 0),
-                                    expression: "dataHolder.status=0"
+                                    value: _vm.dataHolder.status,
+                                    expression: "dataHolder.status"
                                   }
                                 ],
                                 attrs: { type: "text" },
@@ -63772,7 +63772,7 @@ var render = function() {
                                       })
                                     _vm.$set(
                                       _vm.dataHolder,
-                                      "status=0",
+                                      "status",
                                       $event.target.multiple
                                         ? $$selectedVal
                                         : $$selectedVal[0]
@@ -63879,14 +63879,17 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("li", [
-                                      _vm._v(
-                                        "Status " +
-                                          _vm._s(
-                                            _vm.statuses[followup.status].name
+                                    followup.status
+                                      ? _c("li", [
+                                          _vm._v(
+                                            "Status " +
+                                              _vm._s(
+                                                _vm.statuses[followup.status]
+                                                  .name
+                                              )
                                           )
-                                      )
-                                    ])
+                                        ])
+                                      : _vm._e()
                                   ]
                                 ),
                                 _vm._v(" "),
