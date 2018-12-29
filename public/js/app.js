@@ -62959,6 +62959,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62974,10 +62990,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return _.orderBy(this.meeting.users, 'first_name');
         },
         isAgendaComplete: function isAgendaComplete() {
-            return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.time_allocated && this.dataHolder.user_id;
+            return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
         },
         isFollowupComplete: function isFollowupComplete() {
-            return this.dataHolder.action && this.dataHolder.timeline && this.dataHolder.status;
+            return this.dataHolder.action && this.dataHolder.timeline;
         },
         isDiscussionComplete: function isDiscussionComplete() {
             return this.dataHolder.description;
@@ -62990,7 +63006,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             users: [],
             dataHolder: {},
             success: false,
-            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }]
+            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
+            agendaStatuses: [{ id: 0, name: 'Proposed' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }, { id: 3, name: 'Complete: discussed and finalized' }, { id: 4, name: 'Deferred: not yet discussed' }, { id: 5, name: 'Dropped: will not be discussed' }]
         };
     },
     mounted: function mounted() {
@@ -63403,6 +63420,55 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
+            _vm._v("\n            Agenda Status\n            "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dataHolder.agenda_status,
+                    expression: "dataHolder.agenda_status"
+                  }
+                ],
+                attrs: { type: "'text" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.dataHolder,
+                      "agenda_status",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Select status")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.agendaStatuses, function(agendaStatus) {
+                  return _c(
+                    "option",
+                    { domProps: { value: agendaStatus.id } },
+                    [_vm._v(_vm._s(agendaStatus.name) + "\n                ")]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", [
             _c("label", [_vm._v("User Assigned")]),
             _vm._v(" "),
             _c(
@@ -63559,9 +63625,17 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Status " + _vm._s(agenda.agenda_status))
-                          ]),
+                          agenda.agenda_status
+                            ? _c("div", [
+                                _vm._v(
+                                  "Agenda Status " +
+                                    _vm._s(
+                                      _vm.agendaStatuses[agenda.agenda_status]
+                                        .name
+                                    )
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("div", [
                             _vm._v("Conclusion " + _vm._s(agenda.conclusion))
@@ -63699,25 +63773,18 @@ var render = function() {
                                   }
                                 }
                               },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Select status")
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(_vm.statuses, function(status) {
-                                  return _c(
-                                    "option",
-                                    { domProps: { value: status.id } },
-                                    [
-                                      _vm._v(
-                                        _vm._s(status.name) +
-                                          "\n                                        "
-                                      )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
+                              _vm._l(_vm.statuses, function(status) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: status.id } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(status.name) +
+                                        "\n                                        "
+                                    )
+                                  ]
+                                )
+                              })
                             ),
                             _vm._v(" "),
                             _c(
@@ -63805,11 +63872,17 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("li", [
-                                      _vm._v(
-                                        "Status " + _vm._s(followup.status)
-                                      )
-                                    ])
+                                    followup.status
+                                      ? _c("div", [
+                                          _vm._v(
+                                            "Status " +
+                                              _vm._s(
+                                                _vm.statuses[followup.status]
+                                                  .name
+                                              )
+                                          )
+                                        ])
+                                      : _vm._e()
                                   ]
                                 ),
                                 _vm._v(" "),
@@ -64033,7 +64106,11 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v("Edit")]
+                                      [
+                                        _vm._v(
+                                          "Edit\n                                            "
+                                        )
+                                      ]
                                     )
                                   ])
                                 ]
@@ -64215,7 +64292,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "Edit\n                                                Discussion\n                                            "
+                                        "\n                                                Edit\n                                                Discussion\n                                            "
                                       )
                                     ]
                                   ),
@@ -64310,7 +64387,11 @@ var render = function() {
                                         }
                                       }
                                     },
-                                    [_vm._v("Save Discussion")]
+                                    [
+                                      _vm._v(
+                                        "Save\n                                            Discussion\n                                        "
+                                      )
+                                    ]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -64582,13 +64663,15 @@ var render = function() {
                                 _vm._v("Select status")
                               ]),
                               _vm._v(" "),
-                              _vm._l(_vm.statuses, function(status) {
+                              _vm._l(_vm.agendaStatuses, function(
+                                agendaStatus
+                              ) {
                                 return _c(
                                   "option",
-                                  { domProps: { value: status.id } },
+                                  { domProps: { value: agendaStatus.id } },
                                   [
                                     _vm._v(
-                                      _vm._s(status.name) +
+                                      _vm._s(agendaStatus.name) +
                                         "\n                                    "
                                     )
                                   ]
