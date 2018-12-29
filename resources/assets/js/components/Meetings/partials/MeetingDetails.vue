@@ -317,6 +317,7 @@
         mounted() {
             document.body.addEventListener('keyup', e => {
                 if (e.keyCode === 27) {
+                    this.dataHolder = {};
                     this.dataItem = '';
                 }
             })

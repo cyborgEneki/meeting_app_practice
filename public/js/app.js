@@ -63015,6 +63015,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
         document.body.addEventListener('keyup', function (e) {
             if (e.keyCode === 27) {
+                _this.dataHolder = {};
                 _this.dataItem = '';
             }
         });
