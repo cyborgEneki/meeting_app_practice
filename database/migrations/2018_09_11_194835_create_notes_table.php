@@ -19,7 +19,6 @@ class CreateNotesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedInteger('meeting_id');
             $table->foreign('meeting_id')->references('id')->on('meetings');
-            $table->string('topic');
             $table->text('description');
             $table->timestamps();
             $table->softDeletes();
