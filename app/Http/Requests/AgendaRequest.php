@@ -25,14 +25,12 @@ class AgendaRequest extends FormRequest
     {
         return [
             'topic' => 'required',
-            'description' => 'required',
         ];
     }
     public function messages()
     {
         return [
             'topic.required' => 'Topic is required!',
-            'description.required' => 'Description is required!',
         ];
     }
 }

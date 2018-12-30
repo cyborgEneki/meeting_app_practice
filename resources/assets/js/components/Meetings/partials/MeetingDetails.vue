@@ -92,7 +92,7 @@
                                         Action<input type="text" v-model="dataHolder.action">
                                         Timeline<input type="text" v-model="dataHolder.timeline">
                                         Followup Status
-                                        <select type="text" v-model="dataHolder.status=0">
+                                        <select type="text" v-model="dataHolder.status">
                                             <option v-for="status in statuses" v-bind:value="status.id">{{ status.name
                                                 }}
                                             </option>
@@ -112,7 +112,7 @@
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{ followup.action }}</li>
                                                 <li>Timeline {{ followup.timeline }}</li>
-                                                <div v-if="followup.status">Status {{ statuses[followup.status].name }}</div>
+                                                <li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
                                                 <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
@@ -208,7 +208,7 @@
                         <!--Edit agenda form-->
 
                         <form @click.prevent>
-                            <div v-show="dataItem === 'agendaEdit'+agenda.id">
+                            <div v-on:keyup.esc="cancelFollowup" v-show="dataItem === 'agendaEdit'+agenda.id">
                                 <div>Topic<input type="text" v-model="dataHolder.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="dataHolder.description">
@@ -281,7 +281,7 @@
                 return _.orderBy(this.meeting.users, 'first_name');
             },
             isAgendaComplete() {
-                return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
+                return this.dataHolder.topic  && this.dataHolder.user_id;
             },
             isFollowupComplete() {
                 return this.dataHolder.action && this.dataHolder.timeline;
@@ -315,7 +315,12 @@
             }
         },
         mounted() {
-            console.log(this.meeting.agendas);
+            document.body.addEventListener('keyup', e => {
+                if (e.keyCode === 27) {
+                    this.dataHolder = {};
+                    this.dataItem = '';
+                }
+            })
         },
         methods: {
             addUser: function (id) {
@@ -391,6 +396,7 @@
             showFollowupCreate(agendaId) {
                 this.dataItem = 'followupCreate' + agendaId;
                 this.dataHolder.agenda_id = agendaId;
+                this.dataHolder.status = 0;
             },
             startFollowupEdit(followupId, agendaId) {
                 //get the index of the agenda you are editing in
