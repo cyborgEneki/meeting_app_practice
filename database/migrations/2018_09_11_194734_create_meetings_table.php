@@ -29,10 +29,10 @@ class CreateMeetingsTable extends Migration
             $table->time('end_time');
             $table->unsignedInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->unsignedInteger('facilitator_id');
-            $table->foreign('facilitator_id')->references('id')->on('users');
-            $table->unsignedInteger('time_keeper_id');
-            $table->foreign('time_keeper_id')->references('id')->on('users');
+            $table->unsignedInteger('chair_id');
+            $table->foreign('chair_id')->references('id')->on('users');
+            $table->unsignedInteger('secretary_id');
+            $table->foreign('secretary_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });

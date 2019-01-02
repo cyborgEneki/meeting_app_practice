@@ -62975,6 +62975,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -63251,16 +63252,16 @@ var render = function() {
         _vm._v(_vm._s(_vm.choices.users[_vm.meeting.creator_id].full_name))
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("Facilitator:")]),
+      _c("h4", [_vm._v("Chair:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.facilitator_id].full_name))
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.chair_id].full_name))
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("Time Keeper:")]),
+      _c("h4", [_vm._v("Secretary:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].full_name))
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name))
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
@@ -63524,14 +63525,7 @@ var render = function() {
           _c(
             "button",
             {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isAgendaComplete,
-                  expression: "isAgendaComplete"
-                }
-              ],
+              attrs: { disabled: !_vm.isAgendaComplete },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -63622,16 +63616,24 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Description " + _vm._s(agenda.description))
-                          ]),
+                          _c("div", [_vm._v("Topic " + _vm._s(agenda.topic))]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v(
-                              "Time Allocated (minutes) " +
-                                _vm._s(agenda.time_allocated)
-                            )
-                          ]),
+                          agenda.description
+                            ? _c("div", [
+                                _vm._v(
+                                  "Description " + _vm._s(agenda.description)
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          agenda.time_allocated
+                            ? _c("div", [
+                                _vm._v(
+                                  "Time Allocated (minutes) " +
+                                    _vm._s(agenda.time_allocated)
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("div", [
                             _vm._v(
@@ -63642,9 +63644,13 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Conclusion " + _vm._s(agenda.conclusion))
-                          ])
+                          agenda.conclusion
+                            ? _c("div", [
+                                _vm._v(
+                                  "Conclusion " + _vm._s(agenda.conclusion)
+                                )
+                              ])
+                            : _vm._e()
                         ]
                       ),
                       _vm._v(" "),
@@ -63807,17 +63813,9 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isFollowupComplete,
-                                    expression: "isFollowupComplete"
-                                  }
-                                ],
-                                attrs: { href: "#" },
+                                attrs: { disabled: !_vm.isFollowupComplete },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -64209,17 +64207,9 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isDiscussionComplete,
-                                    expression: "isDiscussionComplete"
-                                  }
-                                ],
-                                attrs: { href: "#" },
+                                attrs: { disabled: !_vm.isDiscussionComplete },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -66564,7 +66554,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66667,8 +66657,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 start_time: '',
                 end_time: '',
                 creator_id: '',
-                facilitator_id: '',
-                time_keeper_id: '',
+                chair_id: '',
+                secretary_id: '',
                 venue_id: '',
                 media_id: '',
                 meetingtype_id: '',
@@ -66686,6 +66676,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/meetings', this.meeting).then(function (response) {
                 _this.$router.push('/meetings');
                 _this.$noty.success("Your meeting has been saved!");
+                _this.meeting = {};
             });
         }
     },
@@ -66719,7 +66710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return yyyy + '-' + mm + '-' + dd;
         },
         isMeetingComplete: function isMeetingComplete() {
-            return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
         }
     }
 });
@@ -67208,6 +67199,12 @@ var render = function() {
       _c("input", {
         directives: [
           {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          },
+          {
             name: "model",
             rawName: "v-model",
             value: _vm.meeting.name,
@@ -67344,7 +67341,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Time Keeper *")]),
+      _c("label", [_vm._v("Secretary *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67353,8 +67350,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.time_keeper_id,
-              expression: "meeting.time_keeper_id"
+              value: _vm.meeting.secretary_id,
+              expression: "meeting.secretary_id"
             }
           ],
           on: {
@@ -67369,7 +67366,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "time_keeper_id",
+                "secretary_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }
@@ -67389,7 +67386,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Facilitator *")]),
+      _c("label", [_vm._v("Chair *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67398,8 +67395,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.facilitator_id,
-              expression: "meeting.facilitator_id"
+              value: _vm.meeting.chair_id,
+              expression: "meeting.chair_id"
             }
           ],
           on: {
@@ -67414,7 +67411,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "facilitator_id",
+                "chair_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }
@@ -68869,7 +68866,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68992,6 +68989,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         editMeeting: function editMeeting(meeting) {
+            var _this = this;
+
             var currentMeeting = {};
 
             currentMeeting.name = meeting.name;
@@ -68999,15 +68998,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentMeeting.end_time = meeting.end_time;
             currentMeeting.date = meeting.date;
             currentMeeting.media_id = meeting.media_id;
-            currentMeeting.facilitator_id = meeting.facilitator_id;
-            currentMeeting.time_keeper_id = meeting.time_keeper_id;
+            currentMeeting.chair_id = meeting.chair_id;
+            currentMeeting.secretary_id = meeting.secretary_id;
             currentMeeting.venue_id = meeting.venue_id;
             currentMeeting.meetingseries_id = meeting.meetingseries_id;
             currentMeeting.meetingtype_id = meeting.meetingtype_id;
 
-            axios.put('/api/meetings/' + meeting.id, currentMeeting).then(function (response) {});
-            this.$router.push('/meetings');
-            this.$noty.success("This meeting has been edited!");
+            axios.put('/api/meetings/' + meeting.id, currentMeeting).then(function (response) {
+                _this.$router.push('/meetings');
+                _this.$noty.success("This meeting has been edited!");
+                _this.currentMeeting = {};
+            });
         }
     }
 });
@@ -69164,7 +69165,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Time Keeper *")]),
+      _c("label", [_vm._v("Secretary *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69173,8 +69174,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.time_keeper_id,
-              expression: "meeting.time_keeper_id"
+              value: _vm.meeting.secretary_id,
+              expression: "meeting.secretary_id"
             }
           ],
           on: {
@@ -69189,7 +69190,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "time_keeper_id",
+                "secretary_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }
@@ -69209,7 +69210,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Facilitator *")]),
+      _c("label", [_vm._v("Chair *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69218,8 +69219,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.facilitator_id,
-              expression: "meeting.facilitator_id"
+              value: _vm.meeting.chair_id,
+              expression: "meeting.chair_id"
             }
           ],
           on: {
@@ -69234,7 +69235,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "facilitator_id",
+                "chair_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }

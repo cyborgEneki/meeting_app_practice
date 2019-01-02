@@ -7,10 +7,10 @@
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
         <p>{{ choices.users[meeting.creator_id].full_name }}</p>
-        <h4>Facilitator:</h4>
-        <p>{{ choices.users[meeting.facilitator_id].full_name }}</p>
-        <h4>Time Keeper:</h4>
-        <p>{{ choices.users[meeting.time_keeper_id].full_name }}</p>
+        <h4>Chair:</h4>
+        <p>{{ choices.users[meeting.chair_id].full_name }}</p>
+        <h4>Secretary:</h4>
+        <p>{{ choices.users[meeting.secretary_id].full_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in orderedAttendees">
             <p>{{ user.full_name }}</p>
@@ -53,7 +53,7 @@
                     </option>
                 </select>
             </div>
-            <button v-show="isAgendaComplete" @click.prevent="saveAgendaCreate">Save Agenda</button>
+            <button :disabled="!isAgendaComplete" @click.prevent="saveAgendaCreate">Save Agenda</button>
             <div>
                 <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
@@ -77,10 +77,11 @@
                             <div v-show="dataItem !== 'agendaEdit'+ agenda.id">
                                 <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
-                                    <div>Description {{ agenda.description }}</div>
-                                    <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
+                                    <div>Topic {{ agenda.topic }}</div>
+                                    <div v-if="agenda.description">Description {{ agenda.description }}</div>
+                                    <div v-if="agenda.time_allocated">Time Allocated (minutes) {{ agenda.time_allocated }}</div>
                                     <div>Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
-                                    <div>Conclusion {{ agenda.conclusion }}</div>
+                                    <div v-if="agenda.conclusion">Conclusion {{ agenda.conclusion }}</div>
                                 </div>
 
                                 <!--Create followup form-->
@@ -98,8 +99,8 @@
                                             </option>
                                         </select>
                                         <a href="#" @click.prevent="cancelFollowup">Cancel</a>
-                                        <a href="#" v-show="isFollowupComplete"
-                                           @click.prevent="saveFollowup(agenda.id)">Save</a>
+                                        <button :disabled="!isFollowupComplete"
+                                           @click.prevent="saveFollowup(agenda.id)">Save</button>
 
                                     </div>
                                 </div>
@@ -157,8 +158,8 @@
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
                                         Description *<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
-                                        <a href="#" v-show="isDiscussionComplete"
-                                           @click.prevent="saveDiscussion(agenda.id)">Save</a>
+                                        <button :disabled="!isDiscussionComplete"
+                                           @click.prevent="saveDiscussion(agenda.id)">Save</button>
                                     </div>
                                 </div>
 
