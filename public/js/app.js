@@ -62990,7 +62990,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             return _.orderBy(this.meeting.users, 'first_name');
         },
         isAgendaComplete: function isAgendaComplete() {
-            return this.dataHolder.topic && this.dataHolder.description && this.dataHolder.user_id;
+            return this.dataHolder.topic && this.dataHolder.user_id;
         },
         isFollowupComplete: function isFollowupComplete() {
             return this.dataHolder.action && this.dataHolder.timeline;
@@ -63337,7 +63337,7 @@ var render = function() {
         },
         [
           _c("div", [
-            _vm._v("\n            Topic"),
+            _vm._v("\n            Topic *"),
             _c("input", {
               directives: [
                 {
@@ -63477,7 +63477,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _c("label", [_vm._v("User Assigned")]),
+            _c("label", [_vm._v("User Assigned *")]),
             _vm._v(" "),
             _c(
               "select",
@@ -63524,14 +63524,7 @@ var render = function() {
           _c(
             "button",
             {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isAgendaComplete,
-                  expression: "isAgendaComplete"
-                }
-              ],
+              attrs: { disabled: !_vm.isAgendaComplete },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -63633,17 +63626,14 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          agenda.agenda_status
-                            ? _c("div", [
-                                _vm._v(
-                                  "Agenda Status " +
-                                    _vm._s(
-                                      _vm.agendaStatuses[agenda.agenda_status]
-                                        .name
-                                    )
+                          _c("div", [
+                            _vm._v(
+                              "Agenda Status " +
+                                _vm._s(
+                                  _vm.agendaStatuses[agenda.agenda_status].name
                                 )
-                              ])
-                            : _vm._e(),
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("div", [
                             _vm._v("Conclusion " + _vm._s(agenda.conclusion))
@@ -63692,7 +63682,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Action"
+                              "\n                                    Action *"
                             ),
                             _c("input", {
                               directives: [
@@ -63719,7 +63709,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                    Timeline"
+                              "\n                                    Timeline *"
                             ),
                             _c("input", {
                               directives: [
@@ -63746,7 +63736,7 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "\n                                    Followup Status\n                                    "
+                              "\n                                    Status *\n                                    "
                             ),
                             _c(
                               "select",
@@ -63810,17 +63800,9 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isFollowupComplete,
-                                    expression: "isFollowupComplete"
-                                  }
-                                ],
-                                attrs: { href: "#" },
+                                attrs: { disabled: !_vm.isFollowupComplete },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -63880,17 +63862,14 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    followup.status
-                                      ? _c("li", [
-                                          _vm._v(
-                                            "Status " +
-                                              _vm._s(
-                                                _vm.statuses[followup.status]
-                                                  .name
-                                              )
+                                    _c("li", [
+                                      _vm._v(
+                                        "Status " +
+                                          _vm._s(
+                                            _vm.statuses[followup.status].name
                                           )
-                                        ])
-                                      : _vm._e()
+                                      )
+                                    ])
                                   ]
                                 ),
                                 _vm._v(" "),
@@ -63963,7 +63942,7 @@ var render = function() {
                                 },
                                 [
                                   _c("div", [
-                                    _vm._v("Action"),
+                                    _vm._v("Action *"),
                                     _c("input", {
                                       directives: [
                                         {
@@ -63993,7 +63972,7 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("div", [
-                                    _vm._v("Timeline "),
+                                    _vm._v("Timeline *"),
                                     _c("input", {
                                       directives: [
                                         {
@@ -64024,7 +64003,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("div", [
                                     _vm._v(
-                                      "Status\n                                            "
+                                      "Status *\n                                            "
                                     ),
                                     _c(
                                       "select",
@@ -64173,7 +64152,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                                    Description"
+                              "\n                                    Description *"
                             ),
                             _c("input", {
                               directives: [
@@ -64215,17 +64194,9 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isDiscussionComplete,
-                                    expression: "isDiscussionComplete"
-                                  }
-                                ],
-                                attrs: { href: "#" },
+                                attrs: { disabled: !_vm.isDiscussionComplete },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -64353,7 +64324,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                                        Description "
+                                    "\n                                        Description *"
                                   ),
                                   _c("input", {
                                     directives: [
@@ -64484,7 +64455,7 @@ var render = function() {
                       },
                       [
                         _c("div", [
-                          _vm._v("Topic"),
+                          _vm._v("Topic *"),
                           _c("input", {
                             directives: [
                               {
@@ -64590,7 +64561,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", [
-                          _c("label", [_vm._v("User Assigned")]),
+                          _c("label", [_vm._v("User Assigned *")]),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -66725,7 +66696,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return yyyy + '-' + mm + '-' + dd;
         },
         isMeetingComplete: function isMeetingComplete() {
-            return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
         }
     }
 });
@@ -67210,9 +67181,15 @@ var render = function() {
     _c("h3", [_vm._v("Add New Meeting")]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Meeting Name"),
+      _vm._v("\n        Meeting Name *"),
       _c("input", {
         directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          },
           {
             name: "model",
             rawName: "v-model",
@@ -67234,7 +67211,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Date\n        "),
+      _vm._v("\n        Date *\n        "),
       _c("input", {
         directives: [
           {
@@ -67294,7 +67271,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Start Time"),
+      _vm._v("\n        Start Time *"),
       _c("input", {
         directives: [
           {
@@ -67318,7 +67295,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        End Time"),
+      _vm._v("\n        End Time *"),
       _c("input", {
         directives: [
           {
@@ -67350,7 +67327,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Time Keeper")]),
+      _c("label", [_vm._v("Time Keeper *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67395,7 +67372,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Facilitator")]),
+      _c("label", [_vm._v("Facilitator *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67440,7 +67417,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Venue")]),
+      _c("label", [_vm._v("Venue *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67485,7 +67462,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Media")]),
+      _c("label", [_vm._v("Media *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67530,7 +67507,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Meeting Type")]),
+      _c("label", [_vm._v("Meeting Type *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67577,7 +67554,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Meeting Series")]),
+      _c("label", [_vm._v("Meeting Series *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69030,7 +69007,7 @@ var render = function() {
     _c("h3", [_vm._v("Edit Meeting")]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Meeting Name"),
+      _vm._v("\n        Meeting Name *"),
       _c("input", {
         directives: [
           {
@@ -69054,7 +69031,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Date"),
+      _vm._v("\n        Date *"),
       _c("input", {
         directives: [
           {
@@ -69114,7 +69091,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Start Time"),
+      _vm._v("\n        Start Time *"),
       _c("input", {
         directives: [
           {
@@ -69138,7 +69115,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        End Time"),
+      _vm._v("\n        End Time *"),
       _c("input", {
         directives: [
           {
@@ -69170,7 +69147,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Time Keeper")]),
+      _c("label", [_vm._v("Time Keeper *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69215,7 +69192,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Facilitator")]),
+      _c("label", [_vm._v("Facilitator *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69260,7 +69237,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Venue")]),
+      _c("label", [_vm._v("Venue *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69305,7 +69282,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Media")]),
+      _c("label", [_vm._v("Media *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69350,7 +69327,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Meeting Type")]),
+      _c("label", [_vm._v("Meeting Type *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69397,7 +69374,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Meeting Series")]),
+      _c("label", [_vm._v("Meeting Series *")]),
       _vm._v(" "),
       _c(
         "select",

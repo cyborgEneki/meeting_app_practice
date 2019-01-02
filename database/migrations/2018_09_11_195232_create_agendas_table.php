@@ -18,7 +18,7 @@ class CreateAgendasTable extends Migration
             $table->unsignedInteger('meeting_id');
             $table->foreign('meeting_id')->references('id')->on('meetings');
             $table->string('topic');
-            $table->text('description');
+            $table->text('description')->nullable($value = true);;
             $table->unsignedInteger('time_allocated')->nullable($value = true);
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
