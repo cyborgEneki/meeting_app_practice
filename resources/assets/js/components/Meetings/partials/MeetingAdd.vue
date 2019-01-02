@@ -3,7 +3,7 @@
         <h3>Add New Meeting</h3>
 
         <div>
-            Meeting Name *<input type="text" v-model="meeting.name"/>
+            Meeting Name *<input type="text" v-validate="'required'" v-model="meeting.name"/>
         </div>
         <div>
             Date *
@@ -144,7 +144,7 @@
                 return yyyy + '-' + mm + '-' + dd;
             },
             isMeetingComplete() {
-                return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+                return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
             }
         }
     }

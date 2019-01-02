@@ -53,7 +53,7 @@
                     </option>
                 </select>
             </div>
-            <button v-show="isAgendaComplete" @click.prevent="saveAgendaCreate">Save Agenda</button>
+            <button :disabled="!isAgendaComplete" @click.prevent="saveAgendaCreate">Save Agenda</button>
             <div>
                 <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
@@ -98,8 +98,8 @@
                                             </option>
                                         </select>
                                         <a href="#" @click.prevent="cancelFollowup">Cancel</a>
-                                        <a href="#" v-show="isFollowupComplete"
-                                           @click.prevent="saveFollowup(agenda.id)">Save</a>
+                                        <button :disabled="!isFollowupComplete"
+                                           @click.prevent="saveFollowup(agenda.id)">Save</button>
 
                                     </div>
                                 </div>
@@ -157,8 +157,8 @@
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
                                         Description *<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
-                                        <a href="#" v-show="isDiscussionComplete"
-                                           @click.prevent="saveDiscussion(agenda.id)">Save</a>
+                                        <button :disabled="!isDiscussionComplete"
+                                           @click.prevent="saveDiscussion(agenda.id)">Save</button>
                                     </div>
                                 </div>
 

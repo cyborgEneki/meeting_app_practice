@@ -63524,14 +63524,7 @@ var render = function() {
           _c(
             "button",
             {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isAgendaComplete,
-                  expression: "isAgendaComplete"
-                }
-              ],
+              attrs: { disabled: !_vm.isAgendaComplete },
               on: {
                 click: function($event) {
                   $event.preventDefault()
@@ -63807,17 +63800,9 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isFollowupComplete,
-                                    expression: "isFollowupComplete"
-                                  }
-                                ],
-                                attrs: { href: "#" },
+                                attrs: { disabled: !_vm.isFollowupComplete },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -64209,17 +64194,9 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.isDiscussionComplete,
-                                    expression: "isDiscussionComplete"
-                                  }
-                                ],
-                                attrs: { href: "#" },
+                                attrs: { disabled: !_vm.isDiscussionComplete },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
@@ -66719,7 +66696,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return yyyy + '-' + mm + '-' + dd;
         },
         isMeetingComplete: function isMeetingComplete() {
-            return this.meeting.name && this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
         }
     }
 });
@@ -67207,6 +67184,12 @@ var render = function() {
       _vm._v("\n        Meeting Name *"),
       _c("input", {
         directives: [
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          },
           {
             name: "model",
             rawName: "v-model",
