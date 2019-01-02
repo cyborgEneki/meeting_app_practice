@@ -126,6 +126,7 @@
                     });
                 this.$router.push('/meetings');
                 this.$noty.success("This meeting has been edited!");
+                this.meeting = {};
             }
         }
     }
