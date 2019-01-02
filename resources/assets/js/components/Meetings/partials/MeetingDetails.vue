@@ -24,7 +24,7 @@
         <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'">Add Agenda</a>
         <div v-show="dataItem === 'agendaCreate'">
             <div>
-                Topic<input type="text" v-model="dataHolder.topic">
+                Topic *<input type="text" v-model="dataHolder.topic">
             </div>
             <div>
                 Description<input type="text" v-model="dataHolder.description">
@@ -46,7 +46,7 @@
                 </select>
             </div>
             <div>
-                <label>User Assigned</label>
+                <label>User Assigned *</label>
                 <select v-model="dataHolder.user_id">
                     <option value="">Select user</option>
                     <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
@@ -79,7 +79,7 @@
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
                                     <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
-                                    <div v-if="agenda.agenda_status">Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
+                                    <div>Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
                                     <div>Conclusion {{ agenda.conclusion }}</div>
                                 </div>
 
@@ -89,9 +89,9 @@
                                     <a href="#" @click.prevent="showFollowupCreate(agenda.id)"
                                        v-show="dataItem !== 'followupCreate'+agenda.id">Add Followup</a>
                                     <div v-show="dataItem === 'followupCreate'+agenda.id">
-                                        Action<input type="text" v-model="dataHolder.action">
-                                        Timeline<input type="text" v-model="dataHolder.timeline">
-                                        Followup Status
+                                        Action *<input type="text" v-model="dataHolder.action">
+                                        Timeline *<input type="text" v-model="dataHolder.timeline">
+                                        Status *
                                         <select type="text" v-model="dataHolder.status">
                                             <option v-for="status in statuses" v-bind:value="status.id">{{ status.name
                                                 }}
@@ -112,7 +112,7 @@
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{ followup.action }}</li>
                                                 <li>Timeline {{ followup.timeline }}</li>
-                                                <li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>
+                                                <li>Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
                                                 <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
@@ -127,9 +127,9 @@
 
                                     <div v-show="dataItem === 'followupEdit'+followup.id">
                                         <form @click.prevent>
-                                            <div>Action<input type="text" v-model="dataHolder.action"></div>
-                                            <div>Timeline <input type="text" v-model="dataHolder.timeline"></div>
-                                            <div>Status
+                                            <div>Action *<input type="text" v-model="dataHolder.action"></div>
+                                            <div>Timeline *<input type="text" v-model="dataHolder.timeline"></div>
+                                            <div>Status *
                                                 <select v-model="dataHolder.status">
                                                     <option value="">Select status</option>
                                                     <option v-for="status in statuses" v-bind:value="status.id">
@@ -155,7 +155,7 @@
                                     <a href="#" @click.prevent="showDiscussionCreate(agenda.id) "
                                        v-show="dataItem !== 'discussionCreate'+agenda.id">Add Discussion</a>
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
-                                        Description<input type="text" v-model="dataHolder.description">
+                                        Description *<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         <a href="#" v-show="isDiscussionComplete"
                                            @click.prevent="saveDiscussion(agenda.id)">Save</a>
@@ -186,7 +186,7 @@
 
                                     <div v-show="dataItem === 'discussionEdit'+discussion.id">
                                         <form @click.prevent>
-                                            Description <input type="text" v-model="dataHolder.description">
+                                            Description *<input type="text" v-model="dataHolder.description">
                                             <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save
                                                 Discussion
                                             </button>
@@ -209,7 +209,7 @@
 
                         <form @click.prevent>
                             <div v-on:keyup.esc="cancelFollowup" v-show="dataItem === 'agendaEdit'+agenda.id">
-                                <div>Topic<input type="text" v-model="dataHolder.topic">
+                                <div>Topic *<input type="text" v-model="dataHolder.topic">
                                 </div>
                                 <div>Description<input type="text" v-model="dataHolder.description">
                                 </div>
@@ -221,7 +221,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <label>User Assigned</label>
+                                    <label>User Assigned *</label>
                                     <select v-model="dataHolder.user_id">
                                         <option value="">Select user</option>
                                         <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
