@@ -62975,6 +62975,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -63615,16 +63616,24 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Description " + _vm._s(agenda.description))
-                          ]),
+                          _c("div", [_vm._v("Topic " + _vm._s(agenda.topic))]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v(
-                              "Time Allocated (minutes) " +
-                                _vm._s(agenda.time_allocated)
-                            )
-                          ]),
+                          agenda.description
+                            ? _c("div", [
+                                _vm._v(
+                                  "Description " + _vm._s(agenda.description)
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          agenda.time_allocated
+                            ? _c("div", [
+                                _vm._v(
+                                  "Time Allocated (minutes) " +
+                                    _vm._s(agenda.time_allocated)
+                                )
+                              ])
+                            : _vm._e(),
                           _vm._v(" "),
                           _c("div", [
                             _vm._v(
@@ -63635,9 +63644,13 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Conclusion " + _vm._s(agenda.conclusion))
-                          ])
+                          agenda.conclusion
+                            ? _c("div", [
+                                _vm._v(
+                                  "Conclusion " + _vm._s(agenda.conclusion)
+                                )
+                              ])
+                            : _vm._e()
                         ]
                       ),
                       _vm._v(" "),
