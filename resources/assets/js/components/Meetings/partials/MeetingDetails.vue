@@ -79,7 +79,7 @@
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Description {{ agenda.description }}</div>
                                     <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
-                                    <div v-if="agenda.agenda_status">Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
+                                    <div>Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
                                     <div>Conclusion {{ agenda.conclusion }}</div>
                                 </div>
 
@@ -112,7 +112,7 @@
                                             <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 <li>Action {{ followup.action }}</li>
                                                 <li>Timeline {{ followup.timeline }}</li>
-                                                <li v-if="followup.status">Status {{ statuses[followup.status].name }}</li>
+                                                <li>Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
                                                 <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit

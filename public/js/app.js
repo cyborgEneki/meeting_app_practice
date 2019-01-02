@@ -63633,17 +63633,14 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          agenda.agenda_status
-                            ? _c("div", [
-                                _vm._v(
-                                  "Agenda Status " +
-                                    _vm._s(
-                                      _vm.agendaStatuses[agenda.agenda_status]
-                                        .name
-                                    )
+                          _c("div", [
+                            _vm._v(
+                              "Agenda Status " +
+                                _vm._s(
+                                  _vm.agendaStatuses[agenda.agenda_status].name
                                 )
-                              ])
-                            : _vm._e(),
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("div", [
                             _vm._v("Conclusion " + _vm._s(agenda.conclusion))
@@ -63880,17 +63877,14 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    followup.status
-                                      ? _c("li", [
-                                          _vm._v(
-                                            "Status " +
-                                              _vm._s(
-                                                _vm.statuses[followup.status]
-                                                  .name
-                                              )
+                                    _c("li", [
+                                      _vm._v(
+                                        "Status " +
+                                          _vm._s(
+                                            _vm.statuses[followup.status].name
                                           )
-                                        ])
-                                      : _vm._e()
+                                      )
+                                    ])
                                   ]
                                 ),
                                 _vm._v(" "),
