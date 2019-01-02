@@ -123,10 +123,11 @@
 
                 axios.put('/api/meetings/' + meeting.id, currentMeeting)
                     .then(response => {
+                        this.$router.push('/meetings');
+                        this.$noty.success("This meeting has been edited!");
+                        this.currentMeeting = {};
                     });
-                this.$router.push('/meetings');
-                this.$noty.success("This meeting has been edited!");
-                this.meeting = {};
+
             }
         }
     }

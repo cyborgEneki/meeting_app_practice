@@ -68866,7 +68866,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68989,6 +68989,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         editMeeting: function editMeeting(meeting) {
+            var _this = this;
+
             var currentMeeting = {};
 
             currentMeeting.name = meeting.name;
@@ -69002,10 +69004,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentMeeting.meetingseries_id = meeting.meetingseries_id;
             currentMeeting.meetingtype_id = meeting.meetingtype_id;
 
-            axios.put('/api/meetings/' + meeting.id, currentMeeting).then(function (response) {});
-            this.$router.push('/meetings');
-            this.$noty.success("This meeting has been edited!");
-            this.meeting = {};
+            axios.put('/api/meetings/' + meeting.id, currentMeeting).then(function (response) {
+                _this.$router.push('/meetings');
+                _this.$noty.success("This meeting has been edited!");
+                _this.currentMeeting = {};
+            });
         }
     }
 });
