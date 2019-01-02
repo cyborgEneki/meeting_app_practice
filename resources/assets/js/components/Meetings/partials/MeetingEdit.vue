@@ -3,52 +3,52 @@
         <h3>Edit Meeting</h3>
 
         <div>
-            Meeting Name<input type="text" v-model="meeting.name"/>
+            Meeting Name *<input type="text" v-model="meeting.name"/>
         </div>
         <div>
-            Date<input name='after_field' v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" v-model="meeting.date"
+            Date *<input name='after_field' v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" v-model="meeting.date"
                        type="text"/>
             <span>{{ errors.first('after_field') }}</span>
             <input v-show='false' ref="refDate" type="text" v-model="refDate">
         </div>
         <div>
-            Start Time<input v-model="meeting.start_time" type="time"/>
+            Start Time *<input v-model="meeting.start_time" type="time"/>
         </div>
         <div>
-            End Time<input name='end_time' v-validate="'after:'+meeting.start_time+'|required'"
+            End Time *<input name='end_time' v-validate="'after:'+meeting.start_time+'|required'"
                            v-model="meeting.end_time" type="time"/>
             <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
-            <label>Time Keeper</label>
+            <label>Time Keeper *</label>
             <select v-model="meeting.time_keeper_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
-            <label>Facilitator</label>
+            <label>Facilitator *</label>
             <select v-model="meeting.facilitator_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
-            <label>Venue</label>
+            <label>Venue *</label>
             <select v-model="meeting.venue_id">
                 <option value="">Select venue</option>
                 <option v-for="venue in orderedVenues" :value="venue.id">{{ venue.name }}</option>
             </select>
         </div>
         <div>
-            <label>Media</label>
+            <label>Media *</label>
             <select v-model="meeting.media_id">
                 <option value="">Select media</option>
                 <option v-for="eachmedia in orderedMedia" :value="eachmedia.id">{{ eachmedia.name }}</option>
             </select>
         </div>
         <div>
-            <label>Meeting Type</label>
+            <label>Meeting Type *</label>
             <select v-model="meeting.meetingtype_id">
                 <option value="">Select meeting type</option>
                 <option v-for="meetingtype in orderedMeetingTypes" :value="meetingtype.id">{{ meetingtype.name }}
@@ -56,7 +56,7 @@
             </select>
         </div>
         <div>
-            <label>Meeting Series</label>
+            <label>Meeting Series *</label>
             <select v-model="meeting.meetingseries_id">
                 <option value="">Select meeting series</option>
                 <option v-for="eachmeetingseries in orderedMeetingSeries" :value="eachmeetingseries.id">{{
