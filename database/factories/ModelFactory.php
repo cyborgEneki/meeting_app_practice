@@ -84,10 +84,10 @@ $factory->define(App\Meeting::class, function ($faker) {
         'creator_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'facilitator_id' => function () {
+        'chair_id' => function () {
             return factory('App\User')->create()->id;
         },
-        'time_keeper_id' => function () {
+        'secretary_id' => function () {
             return factory('App\User')->create()->id;
         },
     ];

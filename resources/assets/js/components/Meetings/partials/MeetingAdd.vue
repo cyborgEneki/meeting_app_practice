@@ -21,15 +21,15 @@
             <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
-            <label>Time Keeper *</label>
-            <select v-model="meeting.time_keeper_id">
+            <label>Secretary *</label>
+            <select v-model="meeting.secretary_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
-            <label>Facilitator *</label>
-            <select v-model="meeting.facilitator_id">
+            <label>Chair *</label>
+            <select v-model="meeting.chair_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
@@ -88,8 +88,8 @@
                     start_time: '',
                     end_time: '',
                     creator_id: '',
-                    facilitator_id: '',
-                    time_keeper_id: '',
+                    chair_id: '',
+                    secretary_id: '',
                     venue_id: '',
                     media_id: '',
                     meetingtype_id: '',
@@ -111,6 +111,7 @@
                     .then((response) => {
                         this.$router.push('/meetings');
                         this.$noty.success("Your meeting has been saved!");
+                        this.meeting = {};
                     });
             },
         },
@@ -144,7 +145,7 @@
                 return yyyy + '-' + mm + '-' + dd;
             },
             isMeetingComplete() {
-                return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+                return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
             }
         }
     }

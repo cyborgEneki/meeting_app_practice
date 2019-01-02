@@ -63252,16 +63252,16 @@ var render = function() {
         _vm._v(_vm._s(_vm.choices.users[_vm.meeting.creator_id].full_name))
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("Facilitator:")]),
+      _c("h4", [_vm._v("Chair:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.facilitator_id].full_name))
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.chair_id].full_name))
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("Time Keeper:")]),
+      _c("h4", [_vm._v("Secretary:")]),
       _vm._v(" "),
       _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.time_keeper_id].full_name))
+        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name))
       ]),
       _vm._v(" "),
       _c("h4", [_vm._v(" Attendees")]),
@@ -66554,7 +66554,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66657,8 +66657,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 start_time: '',
                 end_time: '',
                 creator_id: '',
-                facilitator_id: '',
-                time_keeper_id: '',
+                chair_id: '',
+                secretary_id: '',
                 venue_id: '',
                 media_id: '',
                 meetingtype_id: '',
@@ -66676,6 +66676,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/meetings', this.meeting).then(function (response) {
                 _this.$router.push('/meetings');
                 _this.$noty.success("Your meeting has been saved!");
+                _this.meeting = {};
             });
         }
     },
@@ -66709,7 +66710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return yyyy + '-' + mm + '-' + dd;
         },
         isMeetingComplete: function isMeetingComplete() {
-            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.time_keeper_id && this.meeting.facilitator_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
         }
     }
 });
@@ -67340,7 +67341,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Time Keeper *")]),
+      _c("label", [_vm._v("Secretary *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67349,8 +67350,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.time_keeper_id,
-              expression: "meeting.time_keeper_id"
+              value: _vm.meeting.secretary_id,
+              expression: "meeting.secretary_id"
             }
           ],
           on: {
@@ -67365,7 +67366,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "time_keeper_id",
+                "secretary_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }
@@ -67385,7 +67386,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Facilitator *")]),
+      _c("label", [_vm._v("Chair *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -67394,8 +67395,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.facilitator_id,
-              expression: "meeting.facilitator_id"
+              value: _vm.meeting.chair_id,
+              expression: "meeting.chair_id"
             }
           ],
           on: {
@@ -67410,7 +67411,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "facilitator_id",
+                "chair_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }
@@ -68995,8 +68996,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             currentMeeting.end_time = meeting.end_time;
             currentMeeting.date = meeting.date;
             currentMeeting.media_id = meeting.media_id;
-            currentMeeting.facilitator_id = meeting.facilitator_id;
-            currentMeeting.time_keeper_id = meeting.time_keeper_id;
+            currentMeeting.chair_id = meeting.chair_id;
+            currentMeeting.secretary_id = meeting.secretary_id;
             currentMeeting.venue_id = meeting.venue_id;
             currentMeeting.meetingseries_id = meeting.meetingseries_id;
             currentMeeting.meetingtype_id = meeting.meetingtype_id;
@@ -69160,7 +69161,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Time Keeper *")]),
+      _c("label", [_vm._v("Secretary *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69169,8 +69170,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.time_keeper_id,
-              expression: "meeting.time_keeper_id"
+              value: _vm.meeting.secretary_id,
+              expression: "meeting.secretary_id"
             }
           ],
           on: {
@@ -69185,7 +69186,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "time_keeper_id",
+                "secretary_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }
@@ -69205,7 +69206,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _c("label", [_vm._v("Facilitator *")]),
+      _c("label", [_vm._v("Chair *")]),
       _vm._v(" "),
       _c(
         "select",
@@ -69214,8 +69215,8 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.meeting.facilitator_id,
-              expression: "meeting.facilitator_id"
+              value: _vm.meeting.chair_id,
+              expression: "meeting.chair_id"
             }
           ],
           on: {
@@ -69230,7 +69231,7 @@ var render = function() {
                 })
               _vm.$set(
                 _vm.meeting,
-                "facilitator_id",
+                "chair_id",
                 $event.target.multiple ? $$selectedVal : $$selectedVal[0]
               )
             }

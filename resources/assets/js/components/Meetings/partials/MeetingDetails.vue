@@ -7,10 +7,10 @@
         <p>{{ meeting.name }}</p>
         <h4>Creator:</h4>
         <p>{{ choices.users[meeting.creator_id].full_name }}</p>
-        <h4>Facilitator:</h4>
-        <p>{{ choices.users[meeting.facilitator_id].full_name }}</p>
-        <h4>Time Keeper:</h4>
-        <p>{{ choices.users[meeting.time_keeper_id].full_name }}</p>
+        <h4>Chair:</h4>
+        <p>{{ choices.users[meeting.chair_id].full_name }}</p>
+        <h4>Secretary:</h4>
+        <p>{{ choices.users[meeting.secretary_id].full_name }}</p>
         <h4> Attendees</h4>
         <div v-for="user in orderedAttendees">
             <p>{{ user.full_name }}</p>

@@ -20,15 +20,15 @@
             <span>{{ errors.first('end_time') }}</span>
         </div>
         <div>
-            <label>Time Keeper *</label>
-            <select v-model="meeting.time_keeper_id">
+            <label>Secretary *</label>
+            <select v-model="meeting.secretary_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
         </div>
         <div>
-            <label>Facilitator *</label>
-            <select v-model="meeting.facilitator_id">
+            <label>Chair *</label>
+            <select v-model="meeting.chair_id">
                 <option value="">Select user</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
@@ -115,8 +115,8 @@
                 currentMeeting.end_time = meeting.end_time;
                 currentMeeting.date = meeting.date;
                 currentMeeting.media_id = meeting.media_id;
-                currentMeeting.facilitator_id = meeting.facilitator_id;
-                currentMeeting.time_keeper_id = meeting.time_keeper_id;
+                currentMeeting.chair_id = meeting.chair_id;
+                currentMeeting.secretary_id = meeting.secretary_id;
                 currentMeeting.venue_id = meeting.venue_id;
                 currentMeeting.meetingseries_id = meeting.meetingseries_id;
                 currentMeeting.meetingtype_id = meeting.meetingtype_id;
