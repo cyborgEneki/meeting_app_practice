@@ -77,10 +77,11 @@
                             <div v-show="dataItem !== 'agendaEdit'+ agenda.id">
                                 <div @click.prevent="startAgendaEdit(agenda.id)">
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
-                                    <div>Description {{ agenda.description }}</div>
-                                    <div>Time Allocated (minutes) {{ agenda.time_allocated }}</div>
+                                    <div>Topic {{ agenda.topic }}</div>
+                                    <div v-if="agenda.description">Description {{ agenda.description }}</div>
+                                    <div v-if="agenda.time_allocated">Time Allocated (minutes) {{ agenda.time_allocated }}</div>
                                     <div>Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
-                                    <div>Conclusion {{ agenda.conclusion }}</div>
+                                    <div v-if="agenda.conclusion">Conclusion {{ agenda.conclusion }}</div>
                                 </div>
 
                                 <!--Create followup form-->
