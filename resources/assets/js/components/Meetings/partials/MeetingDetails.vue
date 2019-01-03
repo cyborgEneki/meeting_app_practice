@@ -143,9 +143,11 @@
                                                 </select>
                                             </div>
                                             <div>
-                                                <a href="#" @click.prevent="cancelFollowup">Cancel</a>
-                                                <button @click.prevent="saveFollowupEdit(agenda.id, followup.id)">Edit
-                                                </button>
+                                                <el-button class="same-line" type="success" icon="el-icon-check" circle  @click.prevent="saveFollowupEdit(agenda.id, followup.id)">Save Edit
+                                                </el-button>
+                                                <div class="same-line">
+                                                    <a href="#" @click.prevent="cancelFollowup">Cancel</a>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -194,10 +196,12 @@
                                     <div v-show="dataItem === 'discussionEdit'+discussion.id">
                                         <form @click.prevent>
                                             Description *<input type="text" v-model="dataHolder.description">
-                                            <button @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save
+                                            <el-button class="same-line" type="success" icon="el-icon-check" circle  @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save
                                                 Discussion
-                                            </button>
-                                            <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
+                                            </el-button>
+                                            <div class="same-line">
+                                                <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -244,7 +248,7 @@
                                     <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="saveAgendaEdit(agenda.id)">Save Edit</el-button>
                                 </div>
                                 <div class="same-line">
-                                    <a href="#" @click.prevent="dataHolder = {}">Cancel</a>
+                                    <a href="#" @click.prevent="cancelAgenda">Cancel</a>
                                 </div>
                             </div>
                         </form>

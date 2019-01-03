@@ -62987,6 +62987,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -117409,41 +117413,59 @@ var render = function() {
                                       )
                                     ]),
                                     _vm._v(" "),
-                                    _c("div", [
-                                      _c(
-                                        "a",
-                                        {
-                                          attrs: { href: "#" },
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              return _vm.cancelFollowup($event)
+                                    _c(
+                                      "div",
+                                      [
+                                        _c(
+                                          "el-button",
+                                          {
+                                            staticClass: "same-line",
+                                            attrs: {
+                                              type: "success",
+                                              icon: "el-icon-check",
+                                              circle: ""
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                _vm.saveFollowupEdit(
+                                                  agenda.id,
+                                                  followup.id
+                                                )
+                                              }
                                             }
-                                          }
-                                        },
-                                        [_vm._v("Cancel")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              _vm.saveFollowupEdit(
-                                                agenda.id,
-                                                followup.id
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "Edit\n                                            "
-                                          )
-                                        ]
-                                      )
-                                    ])
+                                          },
+                                          [
+                                            _vm._v(
+                                              "Save Edit\n                                            "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "same-line" },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.cancelFollowup(
+                                                      $event
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("Cancel")]
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
                                   ]
                                 )
                               ]
@@ -117710,8 +117732,14 @@ var render = function() {
                                     }),
                                     _vm._v(" "),
                                     _c(
-                                      "button",
+                                      "el-button",
                                       {
+                                        staticClass: "same-line",
+                                        attrs: {
+                                          type: "success",
+                                          icon: "el-icon-check",
+                                          circle: ""
+                                        },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -117729,20 +117757,25 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "#" },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            return _vm.cancelDiscussion($event)
+                                    _c("div", { staticClass: "same-line" }, [
+                                      _c(
+                                        "a",
+                                        {
+                                          attrs: { href: "#" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.cancelDiscussion(
+                                                $event
+                                              )
+                                            }
                                           }
-                                        }
-                                      },
-                                      [_vm._v("Cancel")]
-                                    )
-                                  ]
+                                        },
+                                        [_vm._v("Cancel")]
+                                      )
+                                    ])
+                                  ],
+                                  1
                                 )
                               ]
                             )
@@ -118080,7 +118113,7 @@ var render = function() {
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
-                                    _vm.dataHolder = {}
+                                    return _vm.cancelAgenda($event)
                                   }
                                 }
                               },
