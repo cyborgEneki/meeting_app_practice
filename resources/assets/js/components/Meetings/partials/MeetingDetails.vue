@@ -12,16 +12,17 @@
         <h4>Secretary:</h4>
         <p>{{ choices.users[meeting.secretary_id].full_name }}</p>
         <h4> Attendees</h4>
+        <el-button icon="el-icon-circle-plus-outline" @click.prevent="addUser(users.id)">Add Attendee</el-button>
+        <br>
+        <br>
         <div v-for="user in orderedAttendees">
-            <p>{{ user.full_name }}</p>
-            <p @click.prevent="removeUsers(user.id)">Remove</p>
+            <p  class="same-line" >{{ user.full_name }}</p>
+            <i  class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
         </div>
-        <label>Add Attendee</label>
-        <button @click.prevent="addUser(users.id)">Add</button>
 
         <!--Create agenda-->
+        <el-button icon="el-icon-circle-plus-outline" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'">Add Agenda</el-button>
         <br>
-        <a href="#" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'">Add Agenda</a>
         <div v-show="dataItem === 'agendaCreate'">
             <div>
                 Topic *<input type="text" v-model="dataHolder.topic">
@@ -87,8 +88,9 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showFollowupCreate(agenda.id)"
-                                       v-show="dataItem !== 'followupCreate'+agenda.id">Add Followup</a>
+                                    <el-button icon="el-icon-circle-plus-outline"  @click.prevent="showFollowupCreate(agenda.id)"
+                                               v-show="dataItem !== 'followupCreate'+agenda.id">Add Followup</el-button>
+                                    <br>
                                     <div v-show="dataItem === 'followupCreate'+agenda.id">
                                         Action *<input type="text" v-model="dataHolder.action">
                                         Timeline *<input type="text" v-model="dataHolder.timeline">
@@ -153,8 +155,9 @@
                                 <!--Create discussion form-->
 
                                 <div>
-                                    <a href="#" @click.prevent="showDiscussionCreate(agenda.id) "
-                                       v-show="dataItem !== 'discussionCreate'+agenda.id">Add Discussion</a>
+                                    <el-button icon="el-icon-circle-plus-outline"  @click.prevent="showDiscussionCreate(agenda.id) "
+                                               v-show="dataItem !== 'discussionCreate'+agenda.id">Add Discussion</el-button>
+                                    <br>
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
                                         Description *<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
@@ -524,3 +527,9 @@
         }
     }
 </script>
+
+<style>
+    .same-line {
+        display: inline-block;
+    }
+</style>
