@@ -70,8 +70,8 @@
                 <fieldset>
                     <div>
                         <h4 class="same-line">Agenda {{ index + 1 }}: {{ agenda.topic }}</h4>
-                        <el-button icon="el-icon-delete same-line" @click.prevent="deleteAgenda(agenda.id)"></el-button>
                         <el-button icon="el-icon-edit same-line" @click.prevent="startAgendaEdit(agenda.id)"></el-button>
+                        <el-button icon="el-icon-delete same-line" @click.prevent="deleteAgenda(agenda.id)"></el-button>
 
                         <!--Start read agenda-->
 
@@ -120,10 +120,9 @@
                                                 <li>Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
-                                                <button @click.prevent="startFollowupEdit(followup.id, agenda.id)">Edit
-                                                    Followup
-                                                </button>
-                                                <a href="#" @click.prevent="deleteFollowup(followup.id, agenda.id)">Delete</a>
+                                                <el-button icon="el-icon-edit same-line" @click.prevent="startFollowupEdit(followup.id, agenda.id)">
+                                                </el-button>
+                                                <el-button icon="el-icon-delete same-line" @click.prevent="deleteFollowup(followup.id, agenda.id)"></el-button>
                                             </div>
                                         </div>
                                     </div>
@@ -181,12 +180,10 @@
                                                 <li>Description {{discussion.description}}</li>
                                             </div>
                                             <div>
-                                                <button @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
-                                                    Edit
-                                                    Discussion
-                                                </button>
-                                                <a href="#"
-                                                   @click.prevent="deleteDiscussion(discussion.id, agenda.id)">Delete</a>
+                                                <el-button icon="el-icon-edit same-line"  @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
+                                                </el-button>
+                                                <el-button icon="el-icon-delete same-line"
+                                                           @click.prevent="deleteDiscussion(discussion.id, agenda.id)"></el-button>
                                             </div>
                                         </div>
                                     </div>

@@ -62988,9 +62988,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
 
 
 
@@ -116872,21 +116869,21 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("el-button", {
-                    attrs: { icon: "el-icon-delete same-line" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.deleteAgenda(agenda.id)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("el-button", {
                     attrs: { icon: "el-icon-edit same-line" },
                     on: {
                       click: function($event) {
                         $event.preventDefault()
                         _vm.startAgendaEdit(agenda.id)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("el-button", {
+                    attrs: { icon: "el-icon-delete same-line" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.deleteAgenda(agenda.id)
                       }
                     }
                   }),
@@ -117215,10 +117212,13 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", [
-                                    _c(
-                                      "button",
-                                      {
+                                  _c(
+                                    "div",
+                                    [
+                                      _c("el-button", {
+                                        attrs: {
+                                          icon: "el-icon-edit same-line"
+                                        },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -117228,18 +117228,12 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "Edit\n                                                Followup\n                                            "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "#" },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("el-button", {
+                                        attrs: {
+                                          icon: "el-icon-delete same-line"
+                                        },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -117249,10 +117243,10 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      },
-                                      [_vm._v("Delete")]
-                                    )
-                                  ])
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ])
                               ]
                             ),
@@ -117633,10 +117627,13 @@ var render = function() {
                                     ]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", [
-                                    _c(
-                                      "button",
-                                      {
+                                  _c(
+                                    "div",
+                                    [
+                                      _c("el-button", {
+                                        attrs: {
+                                          icon: "el-icon-edit same-line"
+                                        },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -117646,18 +117643,12 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                                Edit\n                                                Discussion\n                                            "
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "#" },
+                                      }),
+                                      _vm._v(" "),
+                                      _c("el-button", {
+                                        attrs: {
+                                          icon: "el-icon-delete same-line"
+                                        },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -117667,10 +117658,10 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      },
-                                      [_vm._v("Delete")]
-                                    )
-                                  ])
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ])
                               ]
                             ),
