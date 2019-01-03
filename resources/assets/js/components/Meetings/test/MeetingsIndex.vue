@@ -3,7 +3,7 @@
         <table class="table striped table-bordered">
             <tr v-for="meeting in meetings" :key="meeting.id">
                 <td>
-                    <router-link :to="'/meetings/'+meeting.id+'/details'" >
+                    <router-link :to="'/meetings/'+meeting.id+'/details'">
                         {{ meeting.name }}
                     </router-link>
                 </td>
@@ -47,7 +47,5 @@
 </script>
 
 <style scoped>
-    .same-line {
-        display: inline-block;
-    }
+
 </style>
