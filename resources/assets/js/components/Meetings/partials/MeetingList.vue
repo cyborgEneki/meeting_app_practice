@@ -14,7 +14,7 @@
             <th>Actions</th>
             </thead>
             <tr v-for="meeting in meetings" :key="meeting.id">
-                <td @click="loadView(meeting)">{{meeting.name}}</td>
+                <td @click="loadView(meeting)" class="link">{{meeting.name}}</td>
                 <td>{{ meeting.date }}</td>
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
@@ -91,5 +91,8 @@
 <style scoped>
     .same-line {
         display: inline-block;
+    }
+    .link {
+        cursor: pointer;
     }
 </style>

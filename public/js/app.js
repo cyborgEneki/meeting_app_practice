@@ -63330,7 +63330,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-block;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-block;\n}\n.link[data-v-01d2bc68] {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -63597,6 +63597,7 @@ var render = function() {
               _c(
                 "td",
                 {
+                  staticClass: "link",
                   on: {
                     click: function($event) {
                       _vm.loadView(meeting)
