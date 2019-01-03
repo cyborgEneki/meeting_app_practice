@@ -64894,7 +64894,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64907,6 +64907,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__);
+//
+//
+//
+//
 //
 //
 //
@@ -65137,9 +65141,12 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("router-link", { attrs: { to: { name: "addMeeting" } } }, [
-        _vm._v("Create New Meeting")
-      ]),
+      _c(
+        "router-link",
+        { attrs: { to: { name: "addMeeting" } } },
+        [_c("el-button", { attrs: { icon: "el-icon-circle-plus-outline" } })],
+        1
+      ),
       _vm._v(" "),
       _c(
         "table",
@@ -65180,7 +65187,8 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Edit")]
+                    [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
+                    1
                   ),
                   _vm._v(" "),
                   _c(

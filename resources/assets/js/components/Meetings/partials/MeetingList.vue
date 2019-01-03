@@ -1,7 +1,9 @@
 <template>
     <div>
 
-        <router-link :to="{ name: 'addMeeting' }">Create New Meeting</router-link>
+        <router-link :to="{ name: 'addMeeting' }">
+            <el-button icon="el-icon-circle-plus-outline"></el-button>
+        </router-link>
 
         <table class="table striped table-bordered">
             <thead>
@@ -17,7 +19,9 @@
                 <td>{{ meeting.start_time }}</td>
                 <td>{{ meeting.end_time }}</td>
                 <td>
-                    <router-link :to="{ name: 'editMeeting' , params: { meeting }}">Edit</router-link>
+                    <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
+                        <el-button icon="el-icon-edit"></el-button>
+                    </router-link>
                     <div class="confirmation__button">
                         <vue-confirmation-button
                                 :messages="customMessages"
@@ -67,10 +71,10 @@
                     .catch(function () {
                         console.log('Clicked on cancel')
                     });
-                
-                axios.delete('/api/meetings/'+id)
+
+                axios.delete('/api/meetings/' + id)
                     .then(() => {
-                        let index = this.meetings.map(function(item){
+                        let index = this.meetings.map(function (item) {
                             return item.id
                         }).indexOf(id);
                         this.meetings.splice(index, 1);
