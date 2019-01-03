@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NoteRequest;
 use App\Note;
+use App\Repositories\NoteRepository;
 use App\Repositories\NoteRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class NoteController extends Controller
 {
     protected $notesRepository;
 
-    public function __construct(NoteRepositoryInterface $notesRepository)
+    public function __construct(NoteRepository $notesRepository)
     {
         $this->notesRepository = $notesRepository;
     }

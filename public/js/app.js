@@ -63037,6 +63037,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -63080,7 +63082,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this.dataHolder = {};
                 _this.dataItem = '';
             }
-        });
+        }), console.log(this.meeting);
     },
 
     methods: {
@@ -63456,7 +63458,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         }
     },
-    created: function created() {
+    mounted: function mounted() {
         this.getMeetings();
     }
 });
@@ -118157,7 +118159,11 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("hr")
+      _c("hr"),
+      _vm._v(" "),
+      _c("h4", [_vm._v("Notes")]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.meeting.notes.description))])
     ],
     2
   )

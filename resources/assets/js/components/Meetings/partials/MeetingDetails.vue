@@ -265,6 +265,8 @@
         <h4>Meeting Series:</h4>
         <p>{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
         <hr/>
+        <h4>Notes</h4>
+        <p>{{ meeting.notes.description }}</p>
     </div>
 </template>
 
@@ -323,7 +325,8 @@
                     this.dataHolder = {};
                     this.dataItem = '';
                 }
-            })
+            }),
+                console.log(this.meeting);
         },
         methods: {
             addUser: function (id) {

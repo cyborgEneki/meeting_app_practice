@@ -23,7 +23,7 @@ class NoteRepository implements NoteRepositoryInterface
 
     public function allMeetingNotes($meetingId)
     {
-        return Note::where('user_id', Auth::id())->where('meeting_id', $meetingId)->first();
+        return NoteResource::collection(Note::take(10)->get());
     }
 
     public function createNote(NoteRequest $request)

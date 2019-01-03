@@ -26,6 +26,6 @@
         components: {
             'meeting-details': MeetingDetails,
             'meeting-list': MeetingList
-        },
+        }
     }
 </script>
