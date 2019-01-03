@@ -65,8 +65,8 @@
             </select>
         </div>
 
-        <button @click="editMeeting(meeting)">Edit Meeting</button>
-        <button @click="$router.go(-1)">Go Back to Previous Page</button>
+        <el-button type="primary" icon="el-icon-edit" @click="editMeeting(meeting)"></el-button>
+        <el-button icon="el-icon-back" @click="$router.go(-1)"></el-button>
 
     </div>
 </template>
