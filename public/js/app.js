@@ -60108,7 +60108,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -60169,6 +60169,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "App",
@@ -60194,41 +60208,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("Promeet")]),
-    _vm._v(" "),
-    _c(
-      "p",
-      [
-        _c("router-link", { attrs: { to: { name: "meetings" } } }, [
-          _vm._v("Meetings")
-        ]),
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-2" }, [
+      _c("h1", [_vm._v("Promeet")]),
+      _vm._v(" "),
+      _c("ul", [
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "meetings" } } }, [
+              _vm._v("Meetings")
+            ])
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "venues" } } }, [
-          _vm._v("Venues")
-        ]),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "venues" } } }, [
+              _vm._v("Venues")
+            ])
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "users" } } }, [
-          _vm._v("User Management")
-        ]),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "users" } } }, [
+              _vm._v("User Management")
+            ])
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "meetingSeries" } } }, [
-          _vm._v("Meeting Series")
-        ]),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "meetingSeries" } } }, [
+              _vm._v("Meeting Series")
+            ])
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "meetingTypes" } } }, [
-          _vm._v("Meeting Types")
-        ]),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "meetingTypes" } } }, [
+              _vm._v("Meeting Types")
+            ])
+          ],
+          1
+        ),
         _vm._v(" "),
-        _c("router-link", { attrs: { to: { name: "medias" } } }, [
-          _vm._v("Media")
-        ])
-      ],
-      1
-    ),
+        _c(
+          "li",
+          [
+            _c("router-link", { attrs: { to: { name: "medias" } } }, [
+              _vm._v("Media")
+            ])
+          ],
+          1
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
+      { staticClass: "col-md-10" },
       [
         _c("router-view", {
           attrs: { choices: _vm.choices },
@@ -63330,7 +63379,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-block;\n}\n.link[data-v-01d2bc68] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-block;\n}\n.link[data-v-01d2bc68] {\n    cursor: pointer;\n}\n.meetingdiv[data-v-01d2bc68] {\n\n    border-radius: 5px;\n    margin-bottom: 10px;\n    padding: 10px;\n    background: #FFFFFF;\n    position: relative;\n}\n", ""]);
 
 // exports
 
@@ -63343,21 +63392,6 @@ exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-bl
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -63586,95 +63620,61 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "table",
-        { staticClass: "table striped table-bordered" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.meetings, function(meeting) {
-            return _c("tr", { key: meeting.id }, [
-              _c(
-                "td",
-                {
-                  staticClass: "link",
-                  on: {
-                    click: function($event) {
-                      _vm.loadView(meeting)
-                    }
+      _vm._l(_vm.meetings, function(meeting) {
+        return _c(
+          "div",
+          { key: meeting.id, staticClass: "meetingdiv" },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "link",
+                staticStyle: { "margin-top": "20px" },
+                on: {
+                  click: function($event) {
+                    _vm.loadView(meeting)
                   }
-                },
-                [_vm._v(_vm._s(meeting.name))]
-              ),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(meeting.date))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(meeting.start_time))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(meeting.end_time))]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: {
-                          name: "editMeeting",
-                          params: { meeting: meeting }
-                        }
-                      }
-                    },
-                    [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "confirmation__button" },
-                    [
-                      _c("vue-confirmation-button", {
-                        attrs: { messages: _vm.customMessages },
-                        on: {
-                          "confirmation-success": function($event) {
-                            _vm.deleteUser(meeting.id)
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ])
-          })
-        ],
-        2
-      )
+                }
+              },
+              [_vm._v(_vm._s(meeting.name))]
+            ),
+            _c("br"),
+            _vm._v("\n        " + _vm._s(meeting.date)),
+            _c("br"),
+            _vm._v("\n        " + _vm._s(meeting.start_time)),
+            _c("br"),
+            _vm._v("\n        " + _vm._s(meeting.end_time)),
+            _c("br"),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                attrs: {
+                  to: { name: "editMeeting", params: { meeting: meeting } }
+                }
+              },
+              [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
+              1
+            ),
+            _vm._v(" "),
+            _c("el-button", {
+              attrs: { icon: "el-icon-delete same-line" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.deleteUser(meeting.id)
+                }
+              }
+            })
+          ],
+          1
+        )
+      })
     ],
-    1
+    2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Date")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Start Time")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("End Time")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Actions")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -63692,12 +63692,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [_c("meeting-list")], 1),
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-md-3", attrs: { div: "" } },
+      [_c("meeting-list")],
+      1
+    ),
     _vm._v(" "),
     _vm.showMeetingDetails
       ? _c(
           "div",
+          { staticClass: "col-md-9" },
           [
             _c("meeting-details", {
               attrs: { choices: _vm.choices },

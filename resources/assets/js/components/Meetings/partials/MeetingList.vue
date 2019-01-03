@@ -5,32 +5,17 @@
             <el-button icon="el-icon-circle-plus-outline"></el-button>
         </router-link>
 
-        <table class="table striped table-bordered">
-            <thead>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Actions</th>
-            </thead>
-            <tr v-for="meeting in meetings" :key="meeting.id">
-                <td @click="loadView(meeting)" class="link">{{meeting.name}}</td>
-                <td>{{ meeting.date }}</td>
-                <td>{{ meeting.start_time }}</td>
-                <td>{{ meeting.end_time }}</td>
-                <td>
-                    <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
-                        <el-button icon="el-icon-edit"></el-button>
-                    </router-link>
-                    <div class="confirmation__button">
-                        <vue-confirmation-button
-                                :messages="customMessages"
-                                v-on:confirmation-success="deleteUser(meeting.id)">
-                        </vue-confirmation-button>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div v-for="meeting in meetings" :key="meeting.id" class="meetingdiv">
+            <span @click="loadView(meeting)" class="link" style="margin-top: 20px;">{{meeting.name}}</span><br>
+            {{ meeting.date }}<br>
+            {{ meeting.start_time }}<br>
+            {{ meeting.end_time }}<br>
+            <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
+                <el-button icon="el-icon-edit"></el-button>
+            </router-link>
+            <el-button icon="el-icon-delete same-line" @click.prevent="deleteUser(meeting.id)"></el-button>
+
+        </div>
     </div>
 </template>
 
@@ -92,7 +77,17 @@
     .same-line {
         display: inline-block;
     }
+
     .link {
         cursor: pointer;
+    }
+
+    .meetingdiv {
+
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background: #FFFFFF;
+        position: relative;
     }
 </style>
