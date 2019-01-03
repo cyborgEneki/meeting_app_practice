@@ -15,18 +15,19 @@ require('./bootstrap');
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueNoty);
+Vue.use(ElementUI, { locale });
 
 Vue.component('passport-clients', Clients);
 Vue.component('passport-authorized-clients', AuthorizedClients);
 Vue.component('passport-personal-access-tokens', PersonalAccessTokens);
 
 import Vue from 'vue';
-
 import VueRouter from 'vue-router';
-
 import VeeValidate from 'vee-validate';
-
 import VueNoty from 'vuejs-noty';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en'
 
 import App from './components/App'
 import Clients from './components/passport/Clients'

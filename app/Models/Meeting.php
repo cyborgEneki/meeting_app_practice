@@ -18,8 +18,8 @@ class Meeting extends Model
             'start_time',
             'end_time',
             'creator_id',
-            'facilitator_id',
-            'time_keeper_id',
+            'chair_id',
+            'secretary_id',
             'media_id',
             'venue_id',
             'meetingtype_id',
@@ -62,9 +62,9 @@ class Meeting extends Model
         return $this->belongsTo('App\Meetingseries');
     }
 
-    public function facilitator()
+    public function chair()
     {
-        return $this->belongsTo('App\User', 'facilitator_id');
+        return $this->belongsTo('App\User', 'chair_id');
     }
 
     public function creator()
@@ -72,9 +72,9 @@ class Meeting extends Model
         return $this->belongsTo('App\User', 'creator_id');
     }
 
-    public function time_keeper()
+    public function secretary()
     {
-        return $this->belongsTo('App\User', 'time_keeper_id');
+        return $this->belongsTo('App\User', 'secretary_id');
     }
 
     public function agendas()

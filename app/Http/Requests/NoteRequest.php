@@ -24,14 +24,12 @@ class NoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'topic' => 'required',
             'description' => 'required'
         ];
     }
     public function messages()
     {
         return [
-            'topic.required' => 'Topic is required!',
             'description.required' => 'Description is required!',
         ];
     }
