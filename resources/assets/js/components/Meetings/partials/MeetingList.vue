@@ -66,7 +66,7 @@
                     });
             },
         },
-        created() {
+        mounted() {
             this.getMeetings();
         },
 
