@@ -1,7 +1,6 @@
 <template>
     <div>
         <div>
-            <h2>Meetings</h2>
             <meeting-list></meeting-list>
         </div>
 

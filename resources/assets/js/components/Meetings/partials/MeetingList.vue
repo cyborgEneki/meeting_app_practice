@@ -1,7 +1,7 @@
 <template>
     <div>
-
-        <router-link :to="{ name: 'addMeeting' }">
+        <h2 class="same-line">Meetings</h2>
+        <router-link :to="{ name: 'addMeeting' }" class="same-line">
             <el-button icon="el-icon-circle-plus-outline"></el-button>
         </router-link>
 
@@ -89,5 +89,7 @@
 </script>
 
 <style scoped>
-
+    .same-line {
+        display: inline-block;
+    }
 </style>

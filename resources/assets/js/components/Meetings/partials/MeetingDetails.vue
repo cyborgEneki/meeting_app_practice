@@ -11,18 +11,17 @@
         <p>{{ choices.users[meeting.chair_id].full_name }}</p>
         <h4>Secretary:</h4>
         <p>{{ choices.users[meeting.secretary_id].full_name }}</p>
-        <h4> Attendees</h4>
-        <el-button icon="el-icon-circle-plus-outline" @click.prevent="addUser(users.id)">Add Attendee</el-button>
+        <h4 class="same-line"> Attendees</h4>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line"@click.prevent="addUser(users.id)"></el-button>
         <br>
         <br>
         <div v-for="user in orderedAttendees">
             <p  class="same-line" >{{ user.full_name }}</p>
             <i  class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
         </div>
+        <hr>
 
         <!--Create agenda-->
-        <el-button icon="el-icon-circle-plus-outline" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'">Add Agenda</el-button>
-        <br>
         <div v-show="dataItem === 'agendaCreate'">
             <div>
                 Topic *<input type="text" v-model="dataHolder.topic">
@@ -54,23 +53,25 @@
                     </option>
                 </select>
             </div>
-            <button :disabled="!isAgendaComplete" @click.prevent="saveAgendaCreate">Save Agenda</button>
-            <div>
+            <el-button class="same-line" type="success" icon="el-icon-check" circle :disabled="!isAgendaComplete" @click.prevent="saveAgendaCreate">Save</el-button>
+            <div class="same-line">
                 <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
         </div>
 
         <!--Read agendas-->
 
-        <h4>Agendas:</h4>
+        <h2  class="same-line">Agendas</h2>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'"></el-button>
+        <br>
+        <br>
         <div>
             <div v-for="(agenda, index) in meeting.agendas">
                 <fieldset>
-
-                    <a href="#" @click.prevent="deleteAgenda(agenda.id)">Delete</a>
-
                     <div>
-                        <h2>Agenda {{ index + 1 }}: {{ agenda.topic }}</h2>
+                        <h4 class="same-line">Agenda {{ index + 1 }}: {{ agenda.topic }}</h4>
+                        <el-button icon="el-icon-delete same-line" @click.prevent="deleteAgenda(agenda.id)"></el-button>
+                        <el-button icon="el-icon-edit same-line" @click.prevent="startAgendaEdit(agenda.id)"></el-button>
 
                         <!--Start read agenda-->
 
@@ -90,6 +91,7 @@
                                 <div>
                                     <el-button icon="el-icon-circle-plus-outline"  @click.prevent="showFollowupCreate(agenda.id)"
                                                v-show="dataItem !== 'followupCreate'+agenda.id">Add Followup</el-button>
+                                    <br>
                                     <br>
                                     <div v-show="dataItem === 'followupCreate'+agenda.id">
                                         Action *<input type="text" v-model="dataHolder.action">
@@ -158,6 +160,7 @@
                                     <el-button icon="el-icon-circle-plus-outline"  @click.prevent="showDiscussionCreate(agenda.id) "
                                                v-show="dataItem !== 'discussionCreate'+agenda.id">Add Discussion</el-button>
                                     <br>
+                                    <br>
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
                                         Description *<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
@@ -201,11 +204,6 @@
 
                                 <hr>
 
-                                <!--Edit Agenda Button-->
-
-                                <div>
-                                    <button @click.prevent="startAgendaEdit(agenda.id)">Edit Agenda</button>
-                                </div>
                             </div>
                         </div>
 
@@ -243,9 +241,9 @@
                                 <div>Conclusion<input type="text"
                                                       v-model="dataHolder.conclusion"></div>
                                 <div>
-                                    <button @click.prevent="saveAgendaEdit(agenda.id)">Save Edit</button>
+                                    <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="saveAgendaEdit(agenda.id)">Save Edit</el-button>
                                 </div>
-                                <div>
+                                <div class="same-line">
                                     <a href="#" @click.prevent="dataHolder = {}">Cancel</a>
                                 </div>
                             </div>
@@ -528,7 +526,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .same-line {
         display: inline-block;
     }

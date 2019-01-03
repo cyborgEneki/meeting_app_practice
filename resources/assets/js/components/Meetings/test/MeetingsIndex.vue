@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h2>Meetings</h2>
         <table class="table striped table-bordered">
             <tr v-for="meeting in meetings" :key="meeting.id">
                 <td>
@@ -48,5 +47,7 @@
 </script>
 
 <style scoped>
-
+    .same-line {
+        display: inline-block;
+    }
 </style>
