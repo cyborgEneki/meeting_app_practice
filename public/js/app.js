@@ -62760,639 +62760,9 @@ module.exports = Component.exports
 
 /***/ }),
 /* 74 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(7);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['choices'],
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        meeting: 'meeting'
-    }), {
-        orderedUsers: function orderedUsers() {
-            return _.orderBy(this.choices.users, 'first_name');
-        },
-        orderedAttendees: function orderedAttendees() {
-            return _.orderBy(this.meeting.users, 'first_name');
-        },
-        isAgendaComplete: function isAgendaComplete() {
-            return this.dataHolder.topic && this.dataHolder.user_id;
-        },
-        isFollowupComplete: function isFollowupComplete() {
-            return this.dataHolder.action && this.dataHolder.timeline;
-        },
-        isDiscussionComplete: function isDiscussionComplete() {
-            return this.dataHolder.description;
-        }
-    }),
-    data: function data() {
-        return {
-            dataItem: '',
-            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-            users: [],
-            dataHolder: {},
-            success: false,
-            noteIcons: true,
-            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
-            agendaStatuses: [{ id: 0, name: 'Proposed' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }, { id: 3, name: 'Complete: discussed and finalized' }, { id: 4, name: 'Deferred: not yet discussed' }, { id: 5, name: 'Dropped: will not be discussed' }]
-        };
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        document.body.addEventListener('keyup', function (e) {
-            if (e.keyCode === 27) {
-                _this.dataHolder = {};
-                _this.dataItem = '';
-            }
-        }), console.log(this.meeting);
-    },
-
-    methods: {
-        addUser: function addUser(id) {
-            var _this2 = this;
-
-            var checkMtg = this.meeting.users.filter(function (user) {
-                return user.id === id;
-            });
-            //only add user if that user isn't already in the meeting
-            if (!checkMtg.length) {
-                axios.get('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                    _this2.meeting.users.push(response.data.user);
-                });
-            } else {
-                alert('User already exists');
-            }
-        },
-        removeUsers: function removeUsers(id) {
-            var _this3 = this;
-
-            axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this3.meeting.users.map(function (item) {
-                    return item.id;
-                }).indexOf(id);
-                _this3.meeting.users.splice(index, 1);
-            });
-        },
-        startAgendaEdit: function startAgendaEdit(id) {
-            this.dataItem = 'agendaEdit' + id;
-            var index = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(id);
-            this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
-        },
-        saveAgendaEdit: function saveAgendaEdit(agendaId) {
-            var _this4 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this4.meeting.agendas[agendaIndex] = Object.assign({}, _this4.dataHolder);
-                _this4.dataHolder = {};
-                _this4.dataItem = '';
-            });
-            this.dataItem !== 'agendaEdit' + agendaId;
-        },
-        saveAgendaCreate: function saveAgendaCreate() {
-            var _this5 = this;
-
-            axios.post('/api/agendas', this.dataHolder).then(function (response) {
-                _this5.dataHolder = {};
-                _this5.meeting.agendas.push(response.data);
-                _this5.dataItem = '';
-            });
-        },
-        cancelAgenda: function cancelAgenda() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        deleteAgenda: function deleteAgenda(agendaId) {
-            var _this6 = this;
-
-            axios.delete('/api/agendas/' + agendaId).then(function () {
-                var agendaindex = _this6.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                _this6.meeting.agendas.splice(agendaindex, 1);
-            });
-        },
-        showAgendaCreate: function showAgendaCreate(meetingId) {
-            this.dataItem = 'agendaCreate';
-            this.dataHolder.meeting_id = meetingId;
-            this.dataHolder.agenda_status = 0;
-        },
-        showFollowupCreate: function showFollowupCreate(agendaId) {
-            this.dataItem = 'followupCreate' + agendaId;
-            this.dataHolder.agenda_id = agendaId;
-            this.dataHolder.status = 0;
-        },
-        startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
-            //get the index of the agenda you are editing in
-            var agendaindex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            //get the index of the followup to be edited
-            var followupindex = this.meeting.agendas[agendaindex].followups.map(function (item) {
-                return item.id;
-            }).indexOf(followupId);
-
-            this.dataItem = 'followupEdit' + followupId;
-
-            //load the values of the followup from meeting into the dataHolder variable in data
-            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
-        },
-        saveFollowupEdit: function saveFollowupEdit(agendaId, followupId) {
-            var _this7 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            var followupIndex = this.meeting.agendas[agendaIndex].followups.map(function (item) {
-                return item.id;
-            }).indexOf(followupId);
-
-            axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this7.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this7.dataHolder);
-                _this7.dataHolder = {};
-                _this7.dataItem = '';
-            });
-        },
-        cancelFollowup: function cancelFollowup() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this8 = this;
-
-            axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this8.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                var followupindex = _this8.meeting.agendas[agendaindex].followups.map(function (item) {
-                    return item.id;
-                }).indexOf(followupId);
-                _this8.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
-            });
-        },
-        saveFollowup: function saveFollowup(agendaId) {
-            var _this9 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-            axios.post('/api/followups', this.dataHolder).then(function (response) {
-                _this9.dataHolder = {};
-                _this9.meeting.agendas[agendaIndex].followups.push(response.data);
-                _this9.dataItem = '';
-            });
-        },
-        showDiscussionCreate: function showDiscussionCreate(agendaId) {
-            this.dataItem = 'discussionCreate' + agendaId;
-            this.dataHolder.agenda_id = agendaId;
-        },
-        cancelDiscussion: function cancelDiscussion() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        saveDiscussion: function saveDiscussion(agendaId) {
-            var _this10 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-            axios.post('/api/discussions', this.dataHolder).then(function (response) {
-                _this10.dataHolder = {};
-                _this10.meeting.agendas[agendaIndex].discussions.push(response.data);
-                _this10.dataItem = '';
-            });
-        },
-        startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
-                return item.id;
-            }).indexOf(discussionId);
-
-            this.dataItem = 'discussionEdit' + discussionId;
-            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-        },
-        saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
-            var _this11 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
-                return item.id;
-            }).indexOf(discussionId);
-
-            axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this11.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this11.dataHolder);
-                _this11.dataHolder = {};
-                _this11.dataItem = '';
-            });
-        },
-        deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
-            var _this12 = this;
-
-            axios.delete('api/discussions/' + discussionId).then(function (response) {
-                var agendaIndex = _this12.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-
-                var discussionIndex = _this12.meeting.agendas[agendaIndex].discussions.map(function (item) {
-                    return item.id;
-                }).indexOf(discussionId);
-
-                _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
-            });
-        },
-        showNoteCreate: function showNoteCreate(meetingId) {
-            this.dataItem = 'noteCreate';
-            this.dataHolder.meeting_id = meetingId;
-        },
-        saveNoteCreate: function saveNoteCreate(meetingId) {
-            var _this13 = this;
-
-            axios.post('api/notes', this.dataHolder).then(function (response) {
-                _this13.dataHolder = {};
-                _this13.meeting.notes = response.data;
-                _this13.dataItem = '';
-            });
-        },
-        startNoteEdit: function startNoteEdit(noteId) {
-            this.dataItem = 'noteEdit';
-            this.dataHolder = Object.assign({}, this.meeting.notes);
-        },
-        saveNoteEdit: function saveNoteEdit() {
-            var _this14 = this;
-
-            axios.put('api/notes/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this14.meeting.notes = Object.assign({}, _this14.dataHolder);
-                _this14.dataHolder = {};
-                _this14.dataItem = '';
-            });
-        },
-        cancelNote: function cancelNote() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        deleteNote: function deleteNote(noteId) {
-            var _this15 = this;
-
-            axios.delete('api/notes/' + noteId).then(function (response) {
-                _this15.meeting.notes = {};
-                _this15.noteIcons = false;
-            });
-        }
-    }
-});
+throw new Error("Module build failed: SyntaxError: Unexpected token (401:4)\n\n\u001b[0m \u001b[90m 399 | \u001b[39m            }\n \u001b[90m 400 | \u001b[39m        })\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 401 | \u001b[39m    }\u001b[33m,\u001b[39m\n \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 402 | \u001b[39m    methods\u001b[33m:\u001b[39m {\n \u001b[90m 403 | \u001b[39m        startSecretaryEdit() {\n \u001b[90m 404 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mdataItem \u001b[33m=\u001b[39m \u001b[32m'secretary'\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n");
 
 /***/ }),
 /* 75 */,
@@ -116657,9 +116027,113 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Secretary:")]),
       _vm._v(" "),
-      _c("p", [
-        _vm._v(_vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name))
-      ]),
+      _c(
+        "p",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "secretary",
+              expression: "dataItem !== 'secretary'"
+            }
+          ],
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              return _vm.startSecretaryEdit($event)
+            }
+          }
+        },
+        [_vm._v(_vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name))]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "secretary",
+              expression: "dataItem === 'secretary'"
+            }
+          ]
+        },
+        [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.secretary_id,
+                  expression: "dataHolder.secretary_id"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataHolder,
+                    "secretary_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("Select User")]),
+              _vm._v(" "),
+              _vm._l(_vm.choices.users, function(user) {
+                return _c("option", { domProps: { value: user.id } }, [
+                  _vm._v(_vm._s(user.full_name))
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { icon: "el-icon-check", type: "success", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.saveSecretaryEdit($event)
+                }
+              }
+            },
+            [_vm._v("Save")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.dataItem = ""
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("h4", { staticClass: "same-line" }, [_vm._v(" Attendees")]),
       _vm._v(" "),
@@ -116681,7 +116155,7 @@ var render = function() {
       _vm._l(_vm.orderedAttendees, function(user) {
         return _c("div", [
           _c("p", { staticClass: "same-line" }, [
-            _vm._v(_vm._s(user.full_name))
+            _vm._v("\n            " + _vm._s(user.full_name) + "\n        ")
           ]),
           _vm._v(" "),
           _c("i", {

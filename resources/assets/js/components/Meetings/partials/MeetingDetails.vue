@@ -10,13 +10,23 @@
         <h4>Chair:</h4>
         <p>{{ choices.users[meeting.chair_id].full_name }}</p>
         <h4>Secretary:</h4>
-        <p>{{ choices.users[meeting.secretary_id].full_name }}</p>
+        <p v-show="dataItem !== 'secretary'" @click.prevent="startSecretaryEdit">{{ choices.users[meeting.secretary_id].full_name }}</p>
+        <div v-show="dataItem === 'secretary'">
+            <select v-model="dataHolder.secretary_id">
+                <option value="">Select User</option>
+                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.full_name }}</option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveSecretaryEdit">Save</el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
         <h4 class="same-line"> Attendees</h4>
         <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="addUser(users.id)"></el-button>
         <br>
         <br>
         <div v-for="user in orderedAttendees">
-            <p class="same-line">{{ user.full_name }}</p>
+            <p class="same-line">
+                {{ user.full_name }}
+            </p>
             <i class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
         </div>
         <hr>
@@ -388,9 +398,27 @@
                     this.dataItem = '';
                 }
             }),
-                console.log(this.meeting);
         },
         methods: {
+            startSecretaryEdit() {
+                this.dataItem = 'secretary';
+                this.dataHolder.secretary_id = this.meeting.secretary_id;
+            },
+            saveSecretaryEdit() {
+              axios.put('api/meetings/' + this.meeting.id, this.dataHolder)
+                  .then((response) => {
+                      this.meeting.secretary_id = this.dataHolder.secretary_id;
+                      let userIndex = this.meeting.users.map(function (user) {
+                          return user.id;
+                      }).indexOf(this.dataHolder.secretary_id);
+
+                      if (userIndex === -1) {
+                          this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id])
+                      }
+                      this.dataHolder = {};
+                      this.dataItem = '';
+                  })
+            },
             addUser: function (id) {
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
