@@ -245,7 +245,8 @@
                                 <div>
                                     <label>User Assigned *</label>
                                     <select v-model="dataHolder.user_id">
-                                        <option value="">Select user</option>not
+                                        <option value="">Select user</option>
+                                        not
                                         <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
                                         </option>
                                     </select>
@@ -291,13 +292,28 @@
         <!--Read notes-->
 
         <h4>Notes</h4>
-        <div v-show="dataItem !== 'noteEdit'">{{ meeting.notes.description }} </div>
+        <div v-show="dataItem !== 'noteEdit'" v-if="meeting.notes">
+            <div>{{ meeting.notes.description }}</div>
+            <div  v-show="noteIcons">
+                <el-button icon="el-icon-edit same-line"
+                           @click.prevent="startNoteEdit(meeting.notes.id)">
+                </el-button>
+                <el-button icon="el-icon-delete same-line"
+                           @click.prevent="deleteNote(meeting.notes.id)"></el-button>
+            </div>
+        </div>
 
         <!--Edit notes-->
         <form @click.prevent>
             <div v-show="dataItem === 'noteEdit'">
                 <div>
                     <textarea v-model="dataHolder.description"></textarea>
+                </div>
+                <div>
+                    <el-button class="same-line" type="success" icon="el-icon-check" circle
+                               @click.prevent="saveNoteEdit()">Save Edit
+                    </el-button>
+                    <a href="#" class="same-line" @click.prevent="cancelNote">Cancel</a>
                 </div>
             </div>
         </form>
@@ -336,6 +352,7 @@
                 users: [],
                 dataHolder: {},
                 success: false,
+                noteIcons : true,
                 statuses:
                     [
                         {id: 0, name: 'Pending'},
@@ -560,13 +577,29 @@
                         this.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
                     });
             },
-            startNoteEdit() {
+            startNoteEdit(id) {
                 this.dataItem = 'noteEdit';
+                this.dataObject = Object.assign({}, this.meeting.notes);
+            },
+            saveNoteEdit() {
+                axios.put('api/notes/' + this.dataHolder.id, this.dataHolder)
+                    .then((response) => {
+                        this.meeting.notes = Object.assign({}, this.dataHolder);
+                        this.dataHolder = {};
+                        this.dataItem = '';
+                    })
             },
             cancelNote() {
                 this.dataHolder = {};
                 this.dataItem = '';
             },
+            deleteNote(noteId) {
+                axios.delete('api/notes/' + noteId)
+                    .then((response) => {
+                       this.meeting.notes = {};
+                       this.noteIcons = false;
+                    });
+            }
         }
     }
 </script>

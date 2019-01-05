@@ -63073,6 +63073,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63104,6 +63120,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             users: [],
             dataHolder: {},
             success: false,
+            noteIcons: true,
             statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
             agendaStatuses: [{ id: 0, name: 'Proposed' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }, { id: 3, name: 'Complete: discussed and finalized' }, { id: 4, name: 'Deferred: not yet discussed' }, { id: 5, name: 'Dropped: will not be discussed' }]
         };
@@ -63325,12 +63342,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
         },
-        startNoteEdit: function startNoteEdit() {
+        startNoteEdit: function startNoteEdit(id) {
             this.dataItem = 'noteEdit';
+            this.dataObject = Object.assign({}, this.meeting.notes);
+        },
+        saveNoteEdit: function saveNoteEdit() {
+            var _this13 = this;
+
+            axios.put('api/notes/' + this.dataHolder.id, this.dataHolder).then(function (response) {
+                _this13.meeting.notes = Object.assign({}, _this13.dataHolder);
+                _this13.dataHolder = {};
+                _this13.dataItem = '';
+            });
         },
         cancelNote: function cancelNote() {
             this.dataHolder = {};
             this.dataItem = '';
+        },
+        deleteNote: function deleteNote(noteId) {
+            var _this14 = this;
+
+            axios.delete('api/notes/' + noteId).then(function (response) {
+                _this14.meeting.notes = {};
+                _this14.noteIcons = false;
+            });
         }
     }
 });
@@ -118032,7 +118067,7 @@ var render = function() {
                                   _vm._v("Select user")
                                 ]),
                                 _vm._v(
-                                  "not\n                                    "
+                                  "\n                                    not\n                                    "
                                 ),
                                 _vm._l(_vm.orderedUsers, function(user) {
                                   return _c(
@@ -118227,20 +118262,60 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Notes")]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
+      _vm.meeting.notes
+        ? _c(
+            "div",
             {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.dataItem !== "noteEdit",
-              expression: "dataItem !== 'noteEdit'"
-            }
-          ]
-        },
-        [_vm._v(_vm._s(_vm.meeting.notes.description) + " ")]
-      ),
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.dataItem !== "noteEdit",
+                  expression: "dataItem !== 'noteEdit'"
+                }
+              ]
+            },
+            [
+              _c("div", [_vm._v(_vm._s(_vm.meeting.notes.description))]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.noteIcons,
+                      expression: "noteIcons"
+                    }
+                  ]
+                },
+                [
+                  _c("el-button", {
+                    attrs: { icon: "el-icon-edit same-line" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.startNoteEdit(_vm.meeting.notes.id)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("el-button", {
+                    attrs: { icon: "el-icon-delete same-line" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.deleteNote(_vm.meeting.notes.id)
+                      }
+                    }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "form",
@@ -118289,7 +118364,47 @@ var render = function() {
                     }
                   }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "same-line",
+                      attrs: {
+                        type: "success",
+                        icon: "el-icon-check",
+                        circle: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.saveNoteEdit()
+                        }
+                      }
+                    },
+                    [_vm._v("Save Edit\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "same-line",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.cancelNote($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ],
+                1
+              )
             ]
           )
         ]
