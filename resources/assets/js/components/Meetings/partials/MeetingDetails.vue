@@ -303,6 +303,14 @@
             </div>
         </div>
 
+        <!--Create note-->
+
+        <div v-else="meeting.notes">
+            <el-button icon="el-icon-circle-plus-outline"
+                       @click.prevent="showNoteCreate() ">
+            </el-button>
+        </div>
+
         <!--Edit notes-->
         <form @click.prevent>
             <div v-show="dataItem === 'noteEdit'">
@@ -577,8 +585,13 @@
                         this.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
                     });
             },
-            startNoteEdit(id) {
+            showNoteCreate(noteId) {
+              this.dataItem = 'noteCreate' + noteId;
+              this.dataHolder.notes.id = noteId;
+            },
+            startNoteEdit(noteId) {
                 this.dataItem = 'noteEdit';
+                console.log('Soso');
                 this.dataObject = Object.assign({}, this.meeting.notes);
             },
             saveNoteEdit() {

@@ -28,6 +28,7 @@ class NoteRepository implements NoteRepositoryInterface
 
     public function createNote(NoteRequest $request)
     {
+        $request['creator_id'] = Auth::id();
         return Note::create($request->all());
     }
 

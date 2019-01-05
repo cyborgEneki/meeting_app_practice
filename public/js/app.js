@@ -63089,6 +63089,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63342,8 +63350,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
         },
-        startNoteEdit: function startNoteEdit(id) {
+        showNoteCreate: function showNoteCreate(noteId) {
+            this.dataItem = 'noteCreate' + noteId;
+            this.dataHolder.notes.id = noteId;
+        },
+        startNoteEdit: function startNoteEdit(noteId) {
             this.dataItem = 'noteEdit';
+            console.log('Soso');
             this.dataObject = Object.assign({}, this.meeting.notes);
         },
         saveNoteEdit: function saveNoteEdit() {
@@ -118315,7 +118328,21 @@ var render = function() {
               )
             ]
           )
-        : _vm._e(),
+        : _c(
+            "div",
+            [
+              _c("el-button", {
+                attrs: { icon: "el-icon-circle-plus-outline" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.showNoteCreate()
+                  }
+                }
+              })
+            ],
+            1
+          ),
       _vm._v(" "),
       _c(
         "form",
