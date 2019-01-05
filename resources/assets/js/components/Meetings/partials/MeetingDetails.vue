@@ -305,10 +305,13 @@
 
         <!--Create note-->
 
-        <div v-else="meeting.notes">
             <el-button icon="el-icon-circle-plus-outline"
-                       @click.prevent="showNoteCreate() ">
+                       @click.prevent="showNoteCreate(meeting.id) " v-show="dataItem !== 'noteCreate' && !meeting.notes">
             </el-button>
+        <div v-show="dataItem === 'noteCreate'">
+            <textarea v-model="dataHolder.description"></textarea>
+            <a href="#" class="same-line" @click.prevent="cancelNote">Cancel</a>
+            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="saveNoteCreate(meeting.id)">Save</el-button>
         </div>
 
         <!--Edit notes-->
@@ -585,14 +588,21 @@
                         this.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
                     });
             },
-            showNoteCreate(noteId) {
-              this.dataItem = 'noteCreate' + noteId;
-              this.dataHolder.notes.id = noteId;
+            showNoteCreate(meetingId) {
+              this.dataItem = 'noteCreate';
+              this.dataHolder.meeting_id = meetingId;
+            },
+            saveNoteCreate(meetingId) {
+                axios.post('api/notes', this.dataHolder)
+                    .then((response) => {
+                        this.dataHolder = {};
+                        this.meeting.notes = response.data;
+                        this.dataItem = '';
+                    })
             },
             startNoteEdit(noteId) {
                 this.dataItem = 'noteEdit';
-                console.log('Soso');
-                this.dataObject = Object.assign({}, this.meeting.notes);
+                this.dataHolder = Object.assign({}, this.meeting.notes);
             },
             saveNoteEdit() {
                 axios.put('api/notes/' + this.dataHolder.id, this.dataHolder)

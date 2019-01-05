@@ -63097,6 +63097,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -63350,22 +63353,30 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
         },
-        showNoteCreate: function showNoteCreate(noteId) {
-            this.dataItem = 'noteCreate' + noteId;
-            this.dataHolder.notes.id = noteId;
+        showNoteCreate: function showNoteCreate(meetingId) {
+            this.dataItem = 'noteCreate';
+            this.dataHolder.meeting_id = meetingId;
+        },
+        saveNoteCreate: function saveNoteCreate(meetingId) {
+            var _this13 = this;
+
+            axios.post('api/notes', this.dataHolder).then(function (response) {
+                _this13.dataHolder = {};
+                _this13.meeting.notes = response.data;
+                _this13.dataItem = '';
+            });
         },
         startNoteEdit: function startNoteEdit(noteId) {
             this.dataItem = 'noteEdit';
-            console.log('Soso');
-            this.dataObject = Object.assign({}, this.meeting.notes);
+            this.dataHolder = Object.assign({}, this.meeting.notes);
         },
         saveNoteEdit: function saveNoteEdit() {
-            var _this13 = this;
+            var _this14 = this;
 
             axios.put('api/notes/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this13.meeting.notes = Object.assign({}, _this13.dataHolder);
-                _this13.dataHolder = {};
-                _this13.dataItem = '';
+                _this14.meeting.notes = Object.assign({}, _this14.dataHolder);
+                _this14.dataHolder = {};
+                _this14.dataItem = '';
             });
         },
         cancelNote: function cancelNote() {
@@ -63373,11 +63384,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         deleteNote: function deleteNote(noteId) {
-            var _this14 = this;
+            var _this15 = this;
 
             axios.delete('api/notes/' + noteId).then(function (response) {
-                _this14.meeting.notes = {};
-                _this14.noteIcons = false;
+                _this15.meeting.notes = {};
+                _this15.noteIcons = false;
             });
         }
     }
@@ -118328,21 +118339,91 @@ var render = function() {
               )
             ]
           )
-        : _c(
-            "div",
-            [
-              _c("el-button", {
-                attrs: { icon: "el-icon-circle-plus-outline" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.showNoteCreate()
-                  }
-                }
-              })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("el-button", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.dataItem !== "noteCreate" && !_vm.meeting.notes,
+            expression: "dataItem !== 'noteCreate' && !meeting.notes"
+          }
+        ],
+        attrs: { icon: "el-icon-circle-plus-outline" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            _vm.showNoteCreate(_vm.meeting.id)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "noteCreate",
+              expression: "dataItem === 'noteCreate'"
+            }
+          ]
+        },
+        [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataHolder.description,
+                expression: "dataHolder.description"
+              }
             ],
-            1
+            domProps: { value: _vm.dataHolder.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.dataHolder, "description", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.cancelNote($event)
+                }
+              }
+            },
+            [_vm._v("Cancel")]
           ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { type: "success", icon: "el-icon-check", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveNoteCreate(_vm.meeting.id)
+                }
+              }
+            },
+            [_vm._v("Save")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "form",
