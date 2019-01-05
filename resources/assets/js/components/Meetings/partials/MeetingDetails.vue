@@ -12,12 +12,12 @@
         <h4>Secretary:</h4>
         <p>{{ choices.users[meeting.secretary_id].full_name }}</p>
         <h4 class="same-line"> Attendees</h4>
-        <el-button icon="el-icon-circle-plus-outline" class="same-line"@click.prevent="addUser(users.id)"></el-button>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="addUser(users.id)"></el-button>
         <br>
         <br>
         <div v-for="user in orderedAttendees">
-            <p  class="same-line" >{{ user.full_name }}</p>
-            <i  class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
+            <p class="same-line">{{ user.full_name }}</p>
+            <i class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
         </div>
         <hr>
 
@@ -53,7 +53,9 @@
                     </option>
                 </select>
             </div>
-            <el-button class="same-line" type="success" icon="el-icon-check" circle :disabled="!isAgendaComplete" @click.prevent="saveAgendaCreate">Save</el-button>
+            <el-button class="same-line" type="success" icon="el-icon-check" circle :disabled="!isAgendaComplete"
+                       @click.prevent="saveAgendaCreate">Save
+            </el-button>
             <div class="same-line">
                 <a href="#" @click.prevent="cancelAgenda">Cancel</a>
             </div>
@@ -61,8 +63,9 @@
 
         <!--Read agendas-->
 
-        <h2  class="same-line">Agendas</h2>
-        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="showAgendaCreate(meeting.id)" v-show="dataItem !=='agendaCreate'"></el-button>
+        <h2 class="same-line">Agendas</h2>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="showAgendaCreate(meeting.id)"
+                   v-show="dataItem !=='agendaCreate'"></el-button>
         <br>
         <br>
         <div>
@@ -70,7 +73,8 @@
                 <fieldset>
                     <div>
                         <h4 class="same-line">Agenda {{ index + 1 }}: {{ agenda.topic }}</h4>
-                        <el-button icon="el-icon-edit same-line" @click.prevent="startAgendaEdit(agenda.id)"></el-button>
+                        <el-button icon="el-icon-edit same-line"
+                                   @click.prevent="startAgendaEdit(agenda.id)"></el-button>
                         <el-button icon="el-icon-delete same-line" @click.prevent="deleteAgenda(agenda.id)"></el-button>
 
                         <!--Start read agenda-->
@@ -81,7 +85,9 @@
                                     <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                                     <div>Topic {{ agenda.topic }}</div>
                                     <div v-if="agenda.description">Description {{ agenda.description }}</div>
-                                    <div v-if="agenda.time_allocated">Time Allocated (minutes) {{ agenda.time_allocated }}</div>
+                                    <div v-if="agenda.time_allocated">Time Allocated (minutes) {{ agenda.time_allocated
+                                        }}
+                                    </div>
                                     <div>Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
                                     <div v-if="agenda.conclusion">Conclusion {{ agenda.conclusion }}</div>
                                 </div>
@@ -89,8 +95,10 @@
                                 <!--Create followup form-->
 
                                 <div>
-                                    <el-button icon="el-icon-circle-plus-outline"  @click.prevent="showFollowupCreate(agenda.id)"
-                                               v-show="dataItem !== 'followupCreate'+agenda.id">Add Followup</el-button>
+                                    <el-button icon="el-icon-circle-plus-outline"
+                                               @click.prevent="showFollowupCreate(agenda.id)"
+                                               v-show="dataItem !== 'followupCreate'+agenda.id">Add Followup
+                                    </el-button>
                                     <br>
                                     <br>
                                     <div v-show="dataItem === 'followupCreate'+agenda.id">
@@ -104,7 +112,8 @@
                                         </select>
                                         <a href="#" @click.prevent="cancelFollowup">Cancel</a>
                                         <button :disabled="!isFollowupComplete"
-                                           @click.prevent="saveFollowup(agenda.id)">Save</button>
+                                                @click.prevent="saveFollowup(agenda.id)">Save
+                                        </button>
 
                                     </div>
                                 </div>
@@ -120,9 +129,11 @@
                                                 <li>Status {{ statuses[followup.status].name }}</li>
                                             </div>
                                             <div>
-                                                <el-button icon="el-icon-edit same-line" @click.prevent="startFollowupEdit(followup.id, agenda.id)">
+                                                <el-button icon="el-icon-edit same-line"
+                                                           @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                                                 </el-button>
-                                                <el-button icon="el-icon-delete same-line" @click.prevent="deleteFollowup(followup.id, agenda.id)"></el-button>
+                                                <el-button icon="el-icon-delete same-line"
+                                                           @click.prevent="deleteFollowup(followup.id, agenda.id)"></el-button>
                                             </div>
                                         </div>
                                     </div>
@@ -142,7 +153,9 @@
                                                 </select>
                                             </div>
                                             <div>
-                                                <el-button class="same-line" type="success" icon="el-icon-check" circle  @click.prevent="saveFollowupEdit(agenda.id, followup.id)">Save Edit
+                                                <el-button class="same-line" type="success" icon="el-icon-check" circle
+                                                           @click.prevent="saveFollowupEdit(agenda.id, followup.id)">
+                                                    Save Edit
                                                 </el-button>
                                                 <div class="same-line">
                                                     <a href="#" @click.prevent="cancelFollowup">Cancel</a>
@@ -158,15 +171,18 @@
                                 <!--Create discussion form-->
 
                                 <div>
-                                    <el-button icon="el-icon-circle-plus-outline"  @click.prevent="showDiscussionCreate(agenda.id) "
-                                               v-show="dataItem !== 'discussionCreate'+agenda.id">Add Discussion</el-button>
+                                    <el-button icon="el-icon-circle-plus-outline"
+                                               @click.prevent="showDiscussionCreate(agenda.id) "
+                                               v-show="dataItem !== 'discussionCreate'+agenda.id">Add Discussion
+                                    </el-button>
                                     <br>
                                     <br>
                                     <div v-show="dataItem === 'discussionCreate'+agenda.id">
                                         Description *<input type="text" v-model="dataHolder.description">
                                         <a href="#" @click.prevent="cancelDiscussion">Cancel</a>
                                         <button :disabled="!isDiscussionComplete"
-                                           @click.prevent="saveDiscussion(agenda.id)">Save</button>
+                                                @click.prevent="saveDiscussion(agenda.id)">Save
+                                        </button>
                                     </div>
                                 </div>
 
@@ -180,7 +196,8 @@
                                                 <li>Description {{discussion.description}}</li>
                                             </div>
                                             <div>
-                                                <el-button icon="el-icon-edit same-line"  @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
+                                                <el-button icon="el-icon-edit same-line"
+                                                           @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
                                                 </el-button>
                                                 <el-button icon="el-icon-delete same-line"
                                                            @click.prevent="deleteDiscussion(discussion.id, agenda.id)"></el-button>
@@ -193,7 +210,9 @@
                                     <div v-show="dataItem === 'discussionEdit'+discussion.id">
                                         <form @click.prevent>
                                             Description *<input type="text" v-model="dataHolder.description">
-                                            <el-button class="same-line" type="success" icon="el-icon-check" circle  @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">Save
+                                            <el-button class="same-line" type="success" icon="el-icon-check" circle
+                                                       @click.prevent="saveDiscussionEdit(agenda.id, discussion.id)">
+                                                Save
                                                 Discussion
                                             </el-button>
                                             <div class="same-line">
@@ -226,7 +245,7 @@
                                 <div>
                                     <label>User Assigned *</label>
                                     <select v-model="dataHolder.user_id">
-                                        <option value="">Select user</option>
+                                        <option value="">Select user</option>not
                                         <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}
                                         </option>
                                     </select>
@@ -235,14 +254,17 @@
                                     Status
                                     <select type="text" v-model="dataHolder.agenda_status">
                                         <option value="">Select status</option>
-                                        <option v-for="agendaStatus in agendaStatuses" v-bind:value="agendaStatus.id">{{ agendaStatus.name }}
+                                        <option v-for="agendaStatus in agendaStatuses" v-bind:value="agendaStatus.id">{{
+                                            agendaStatus.name }}
                                         </option>
                                     </select>
                                 </div>
                                 <div>Conclusion<input type="text"
                                                       v-model="dataHolder.conclusion"></div>
                                 <div>
-                                    <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="saveAgendaEdit(agenda.id)">Save Edit</el-button>
+                                    <el-button class="same-line" type="success" icon="el-icon-check" circle
+                                               @click.prevent="saveAgendaEdit(agenda.id)">Save Edit
+                                    </el-button>
                                 </div>
                                 <div class="same-line">
                                     <a href="#" @click.prevent="cancelAgenda">Cancel</a>
@@ -265,8 +287,20 @@
         <h4>Meeting Series:</h4>
         <p>{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
         <hr/>
+
+        <!--Read notes-->
+
         <h4>Notes</h4>
-        <p>{{ meeting.notes.description }}</p>
+        <div v-show="dataItem !== 'noteEdit'">{{ meeting.notes.description }} </div>
+
+        <!--Edit notes-->
+        <form @click.prevent>
+            <div v-show="dataItem === 'noteEdit'">
+                <div>
+                    <textarea v-model="dataHolder.description"></textarea>
+                </div>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -286,7 +320,7 @@
                 return _.orderBy(this.meeting.users, 'first_name');
             },
             isAgendaComplete() {
-                return this.dataHolder.topic  && this.dataHolder.user_id;
+                return this.dataHolder.topic && this.dataHolder.user_id;
             },
             isFollowupComplete() {
                 return this.dataHolder.action && this.dataHolder.timeline;
@@ -525,7 +559,14 @@
 
                         this.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
                     });
-            }
+            },
+            startNoteEdit() {
+                this.dataItem = 'noteEdit';
+            },
+            cancelNote() {
+                this.dataHolder = {};
+                this.dataItem = '';
+            },
         }
     }
 </script>

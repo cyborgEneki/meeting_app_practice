@@ -63039,6 +63039,40 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63290,6 +63324,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
                 _this12.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
+        },
+        startNoteEdit: function startNoteEdit() {
+            this.dataItem = 'noteEdit';
+        },
+        cancelNote: function cancelNote() {
+            this.dataHolder = {};
+            this.dataItem = '';
         }
     }
 });
@@ -116813,7 +116854,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save")]
+            [_vm._v("Save\n        ")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "same-line" }, [
@@ -116947,7 +116988,8 @@ var render = function() {
                               ? _c("div", [
                                   _vm._v(
                                     "Time Allocated (minutes) " +
-                                      _vm._s(agenda.time_allocated)
+                                      _vm._s(agenda.time_allocated) +
+                                      "\n                                "
                                   )
                                 ])
                               : _vm._e(),
@@ -116997,7 +117039,11 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Add Followup")]
+                              [
+                                _vm._v(
+                                  "Add Followup\n                                "
+                                )
+                              ]
                             ),
                             _vm._v(" "),
                             _c("br"),
@@ -117153,7 +117199,11 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("Save")]
+                                  [
+                                    _vm._v(
+                                      "Save\n                                    "
+                                    )
+                                  ]
                                 )
                               ]
                             )
@@ -117440,7 +117490,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "Save Edit\n                                            "
+                                              "\n                                                Save Edit\n                                            "
                                             )
                                           ]
                                         ),
@@ -117503,7 +117553,11 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("Add Discussion")]
+                              [
+                                _vm._v(
+                                  "Add Discussion\n                                "
+                                )
+                              ]
                             ),
                             _vm._v(" "),
                             _c("br"),
@@ -117583,7 +117637,11 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("Save")]
+                                  [
+                                    _vm._v(
+                                      "Save\n                                    "
+                                    )
+                                  ]
                                 )
                               ]
                             )
@@ -117752,7 +117810,7 @@ var render = function() {
                                       },
                                       [
                                         _vm._v(
-                                          "Save\n                                            Discussion\n                                        "
+                                          "\n                                            Save\n                                            Discussion\n                                        "
                                         )
                                       ]
                                     ),
@@ -117973,7 +118031,9 @@ var render = function() {
                                 _c("option", { attrs: { value: "" } }, [
                                   _vm._v("Select user")
                                 ]),
-                                _vm._v(" "),
+                                _vm._v(
+                                  "not\n                                    "
+                                ),
                                 _vm._l(_vm.orderedUsers, function(user) {
                                   return _c(
                                     "option",
@@ -118099,7 +118159,11 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_vm._v("Save Edit")]
+                                [
+                                  _vm._v(
+                                    "Save Edit\n                                "
+                                  )
+                                ]
                               )
                             ],
                             1
@@ -118163,7 +118227,73 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Notes")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.notes.description))])
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "noteEdit",
+              expression: "dataItem !== 'noteEdit'"
+            }
+          ]
+        },
+        [_vm._v(_vm._s(_vm.meeting.notes.description) + " ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.dataItem === "noteEdit",
+                  expression: "dataItem === 'noteEdit'"
+                }
+              ]
+            },
+            [
+              _c("div", [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.dataHolder.description,
+                      expression: "dataHolder.description"
+                    }
+                  ],
+                  domProps: { value: _vm.dataHolder.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.dataHolder,
+                        "description",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
+            ]
+          )
+        ]
+      )
     ],
     2
   )
