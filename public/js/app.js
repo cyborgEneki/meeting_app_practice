@@ -63171,21 +63171,23 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
-        startSecretaryEdit: function startSecretaryEdit() {
-            this.dataItem = 'secretary';
-            this.dataHolder.secretary_id = this.meeting.secretary_id;
+        startMeetingFieldEdit: function startMeetingFieldEdit(theField) {
+            this.dataItem = theField;
+            this.dataHolder[theField] = this.meeting[theField];
         },
-        saveSecretaryEdit: function saveSecretaryEdit() {
+        saveMeetingFieldEdit: function saveMeetingFieldEdit(theField) {
             var _this2 = this;
 
             axios.put('api/meetings/' + this.meeting.id, this.dataHolder).then(function (response) {
-                _this2.meeting.secretary_id = _this2.dataHolder.secretary_id;
-                var userIndex = _this2.meeting.users.map(function (user) {
-                    return user.id;
-                }).indexOf(_this2.dataHolder.secretary_id);
+                _this2.meeting[thefield] = _this2.dataHolder[thefield];
+                if (theField === 'secretary_id') {
+                    var userIndex = _this2.meeting.users.map(function (user) {
+                        return user.id;
+                    }).indexOf(_this2.dataHolder.secretary_id);
 
-                if (userIndex === -1) {
-                    _this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.secretary_id]);
+                    if (userIndex === -1) {
+                        _this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.secretary_id]);
+                    }
                 }
                 _this2.dataHolder = {};
                 _this2.dataItem = '';
@@ -116708,15 +116710,15 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.dataItem !== "secretary",
-              expression: "dataItem !== 'secretary'"
+              value: _vm.dataItem !== "secretary_id",
+              expression: "dataItem !== 'secretary_id'"
             }
           ],
           staticClass: "link",
           on: {
             click: function($event) {
               $event.preventDefault()
-              return _vm.startSecretaryEdit($event)
+              _vm.startMeetingFieldEdit("secretary_id")
             }
           }
         },
@@ -116730,8 +116732,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.dataItem === "secretary",
-              expression: "dataItem === 'secretary'"
+              value: _vm.dataItem === "secretary_id",
+              expression: "dataItem === 'secretary_id'"
             }
           ]
         },
@@ -116785,7 +116787,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.saveSecretaryEdit($event)
+                  return _vm.saveMeetingFieldEdit($event)
                 }
               }
             },

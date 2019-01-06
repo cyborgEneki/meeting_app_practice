@@ -11,13 +11,13 @@
         <p>{{ choices.users[meeting.chair_id].full_name }}</p>
 
         <h4>Secretary:</h4>
-        <p v-show="dataItem !== 'secretary'" @click.prevent="startSecretaryEdit" class="link">{{ choices.users[meeting.secretary_id].full_name }}</p>
-        <div v-show="dataItem === 'secretary'">
+        <p v-show="dataItem !== 'secretary_id'" @click.prevent="startMeetingFieldEdit('secretary_id')" class="link">{{ choices.users[meeting.secretary_id].full_name }}</p>
+        <div v-show="dataItem === 'secretary_id'">
             <select v-model="dataHolder.secretary_id">
                 <option value="">Select User</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
-            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveSecretaryEdit">Save</el-button>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveMeetingFieldEdit">Save</el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
 
@@ -413,20 +413,22 @@
             })
         },
         methods: {
-            startSecretaryEdit() {
-                this.dataItem = 'secretary';
-                this.dataHolder.secretary_id = this.meeting.secretary_id;
+            startMeetingFieldEdit(theField) {
+                this.dataItem = theField;
+                this.dataHolder[theField] = this.meeting[theField];
             },
-            saveSecretaryEdit() {
+            saveMeetingFieldEdit(theField) {
               axios.put('api/meetings/' + this.meeting.id, this.dataHolder)
                   .then((response) => {
-                      this.meeting.secretary_id = this.dataHolder.secretary_id;
-                      let userIndex = this.meeting.users.map(function (user) {
-                          return user.id;
-                      }).indexOf(this.dataHolder.secretary_id);
+                      this.meeting[thefield] = this.dataHolder[thefield];
+                      if (theField === 'secretary_id') {
+                          let userIndex = this.meeting.users.map(function (user) {
+                              return user.id;
+                          }).indexOf(this.dataHolder.secretary_id);
 
-                      if (userIndex === -1) {
-                          this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id])
+                          if (userIndex === -1) {
+                              this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id])
+                          }
                       }
                       this.dataHolder = {};
                       this.dataItem = '';
