@@ -63123,6 +63123,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63179,7 +63186,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             var _this2 = this;
 
             axios.put('api/meetings/' + this.meeting.id, this.dataHolder).then(function (response) {
-                _this2.meeting[thefield] = _this2.dataHolder[thefield];
+                _this2.meeting[theField] = _this2.dataHolder[theField];
                 if (theField === 'secretary_id') {
                     var userIndex = _this2.meeting.users.map(function (user) {
                         return user.id;
@@ -116687,7 +116694,94 @@ var render = function() {
     [
       _c("h4", [_vm._v("Meeting Name: ")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.meeting.name))]),
+      _c(
+        "p",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "name",
+              expression: "dataItem !== 'name'"
+            }
+          ],
+          staticClass: "link",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.startMeetingFieldEdit("name")
+            }
+          }
+        },
+        [_vm._v("\n        " + _vm._s(_vm.meeting.name) + "\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "name",
+              expression: "dataItem === 'name'"
+            }
+          ]
+        },
+        [
+          _vm._v("\n        Meeting Name "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataHolder.name,
+                expression: "dataHolder.name"
+              }
+            ],
+            domProps: { value: _vm.dataHolder.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.dataHolder, "name", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { icon: "el-icon-check", type: "success", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveMeetingFieldEdit("secretary_id")
+                }
+              }
+            },
+            [_vm._v("Save")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.dataItem = ""
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("h4", [_vm._v("Creator:")]),
       _vm._v(" "),
@@ -116787,7 +116881,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.saveMeetingFieldEdit($event)
+                  _vm.saveMeetingFieldEdit("secretary_id")
                 }
               }
             },

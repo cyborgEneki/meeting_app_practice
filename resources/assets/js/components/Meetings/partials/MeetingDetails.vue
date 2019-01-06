@@ -4,7 +4,14 @@
         <!--First part of the form-->
 
         <h4>Meeting Name: </h4>
-        <p>{{ meeting.name }}</p>
+        <p  v-show="dataItem !== 'name'" @click.prevent="startMeetingFieldEdit('name')" class="link">
+            {{ meeting.name }}
+        </p>
+        <div v-show="dataItem === 'name'">
+            Meeting Name <input v-model="dataHolder.name">
+            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveMeetingFieldEdit('secretary_id')">Save</el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
         <h4>Creator:</h4>
         <p>{{ choices.users[meeting.creator_id].full_name }}</p>
         <h4>Chair:</h4>
@@ -17,7 +24,7 @@
                 <option value="">Select User</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
-            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveMeetingFieldEdit">Save</el-button>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveMeetingFieldEdit('secretary_id')">Save</el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
 
@@ -420,7 +427,7 @@
             saveMeetingFieldEdit(theField) {
               axios.put('api/meetings/' + this.meeting.id, this.dataHolder)
                   .then((response) => {
-                      this.meeting[thefield] = this.dataHolder[thefield];
+                      this.meeting[theField] = this.dataHolder[theField];
                       if (theField === 'secretary_id') {
                           let userIndex = this.meeting.users.map(function (user) {
                               return user.id;
