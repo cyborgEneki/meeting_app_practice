@@ -9,25 +9,38 @@
         <p>{{ choices.users[meeting.creator_id].full_name }}</p>
         <h4>Chair:</h4>
         <p>{{ choices.users[meeting.chair_id].full_name }}</p>
+
         <h4>Secretary:</h4>
-        <p v-show="dataItem !== 'secretary'" @click.prevent="startSecretaryEdit">{{ choices.users[meeting.secretary_id].full_name }}</p>
+        <p v-show="dataItem !== 'secretary'" @click.prevent="startSecretaryEdit" class="link">{{ choices.users[meeting.secretary_id].full_name }}</p>
         <div v-show="dataItem === 'secretary'">
             <select v-model="dataHolder.secretary_id">
                 <option value="">Select User</option>
-                <option v-for="user in choices.users" v-bind:value="user.id">{{ user.full_name }}</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
             <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveSecretaryEdit">Save</el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
+
         <h4 class="same-line"> Attendees</h4>
-        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="addUser(users.id)"></el-button>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="dataItem = 'user'"></el-button>
         <br>
         <br>
         <div v-for="user in orderedAttendees">
             <p class="same-line">
                 {{ user.full_name }}
+                <span v-if="user.id == meeting.chair_id">(Chair)</span>
+                <span v-if="user.id == meeting.secretary_id">(Secretary)</span>
             </p>
-            <i class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
+            <i v-if="user.id !== meeting.chair_id && user.id !== meeting.secretary_id" class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
+        </div>
+
+        <div v-show="dataItem === 'user'">
+            <select v-model="dataHolder.id">
+                <option value="">Select Attendee</option>
+                <option v-for="attendee in choices.users" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
+            </select>
+            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="addUser">Save</el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
         <hr>
 
@@ -397,7 +410,7 @@
                     this.dataHolder = {};
                     this.dataItem = '';
                 }
-            }),
+            })
         },
         methods: {
             startSecretaryEdit() {
@@ -658,5 +671,8 @@
 <style scoped>
     .same-line {
         display: inline-block;
+    }
+    .link {
+        cursor: pointer;
     }
 </style>

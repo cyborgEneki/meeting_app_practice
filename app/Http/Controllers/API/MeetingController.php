@@ -12,6 +12,7 @@ use App\Repositories\MeetingRepository;
 use App\User;
 use App\Venue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
 use App\Events\MeetingAlert;
@@ -61,7 +62,7 @@ class MeetingController extends Controller
      * @param Meeting $meeting
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(EditMeetingRequest $request, Meeting $meeting)
+    public function update(Request $request, Meeting $meeting)
     {
         $this->meetingRepository->updateMeeting($request, $meeting);
         return response()->json(['You have successfully updated your meeting.'], 200);

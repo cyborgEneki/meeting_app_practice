@@ -58,7 +58,7 @@ class MeetingRepository implements MeetingRepositoryInterface
         return new MeetingResource($meeting);
     }
 
-    public function updateMeeting(EditMeetingRequest $request, Meeting $meeting)
+    public function updateMeeting(Request $request, Meeting $meeting)
     {
         $meeting = $meeting->update($request->all());
 //        $meeting->users()->sync($request->users);
