@@ -8,7 +8,7 @@
             {{ meeting.name }}
         </p>
         <div v-show="dataItem === 'name'">
-            Meeting Name <input v-model="dataHolder.name">
+            <input v-model="dataHolder.name">
             <el-button class="same-line" icon="el-icon-check" type="success" circle
                        @click.prevent="saveMeetingFieldEdit('name')">Save
             </el-button>
@@ -21,7 +21,7 @@
         </p>
         <div v-show="dataItem === 'date'">
             <input v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" name="after_field" type="text"
-                   placeholder="yyyy-mm-dd" v-model="meeting.date">
+                   placeholder="yyyy-mm-dd" v-model="dataHolder.date">
             <span>{{ errors.first('after_field') }}</span>
             <input v-show='false' ref="refDate" type="text" v-model="refDate">
             <el-button :disabled="errors.any()" class="same-line" icon="el-icon-check" type="success" circle
@@ -35,7 +35,7 @@
             {{ meeting.start_time }}
         </p>
         <div v-show="dataItem === 'start_time'">
-            <input name="start_time" v-model="meeting.start_time" type="time"/>
+            <input name="start_time" v-model="dataHolder.start_time" type="time"/>
             <el-button class="same-line" icon="el-icon-check" type="success" circle
                        @click.prevent="saveMeetingFieldEdit('start_time')">Save
             </el-button>
@@ -48,7 +48,7 @@
         </p>
         <div v-show="dataItem === 'end_time'">
             <input v-validate="'after:'+meeting.start_time+'|required'" name="end_time"
-                             v-model="meeting.end_time" type="time"/>
+                             v-model="dataHolder.end_time" type="time"/>
             <span>{{ errors.first('end_time') }}</span>
             <el-button class="same-line" icon="el-icon-check" type="success" circle
                        @click.prevent="saveMeetingFieldEdit('end_time')">Save
@@ -87,8 +87,9 @@
         </div>
 
         <h4>Secretary:</h4>
-        <p v-show="dataItem !== 'secretary_id'" @click.prevent="startMeetingFieldEdit('secretary_id')" class="link">{{
-            choices.users[meeting.secretary_id].full_name }}</p>
+        <p v-show="dataItem !== 'secretary_id'" @click.prevent="startMeetingFieldEdit('secretary_id')" class="link">
+            {{choices.users[meeting.secretary_id].full_name }}
+        </p>
         <div v-show="dataItem === 'secretary_id'">
             <select v-model="dataHolder.secretary_id">
                 <option value="">Select User</option>
@@ -384,13 +385,68 @@
         <!--Second part of the form-->
 
         <h4>Venue:</h4>
-        <p>{{ choices.venues[meeting.venue_id].name }}</p>
+        <p v-show="dataItem !== 'venue_id'" @click.prevent="startMeetingFieldEdit('venue_id')" class="link">
+            {{ choices.venues[meeting.venue_id].name }}
+        </p>
+        <div v-show="dataItem === 'venue_id'">
+            <select v-model="dataHolder.venue_id">
+                <option value="">Select venue</option>
+                <option v-for="venue in orderedVenues" :value="venue.id">{{ venue.name }}</option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('venue_id')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
         <h4>Media:</h4>
-        <p> {{ choices.media[meeting.media_id].name }}</p>
+        <p v-show="dataItem !== 'media_id'" @click.prevent="startMeetingFieldEdit('media_id')" class="link">
+            {{ choices.media[meeting.media_id].name }}
+        </p>
+        <div v-show="dataItem === 'media_id'">
+            <select v-model="dataHolder.media_id">
+                <option value="">Select media</option>
+                <option v-for="eachmedia in orderedMedia" :value="eachmedia.id">{{ eachmedia.name }}</option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('media_id')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
         <h4>Meeting Type:</h4>
-        <p> {{ choices.meetingtypes[meeting.meetingtype_id].name }}</p>
+        <p v-show="dataItem !== 'meetingtype_id'" @click.prevent="startMeetingFieldEdit('meetingtype_id')" class="link">
+            {{ choices.meetingtypes[meeting.meetingtype_id].name }}
+        </p>
+        <div v-show="dataItem === 'meetingtype_id'">
+            <select v-model="dataHolder.meetingtype_id">
+                <option value="">Select meeting type</option>
+                <option v-for="meetingtype in orderedMeetingTypes" :value="meetingtype.id">{{ meetingtype.name }}
+                </option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('meetingtype_id')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
         <h4>Meeting Series:</h4>
-        <p>{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
+        <p v-show="dataItem !== 'meetingseries_id'" @click.prevent="startMeetingFieldEdit('meetingseries_id')" class="link">
+            {{ choices.meetingseries[meeting.meetingseries_id].name }}
+        </p>
+        <div v-show="dataItem === 'meetingseries_id'">
+            <select v-model="dataHolder.meetingseries_id">
+                <option value="">Select meeting series</option>
+                <option v-for="eachmeetingseries in orderedMeetingSeries" :value="eachmeetingseries.id">{{
+                    eachmeetingseries.name }}
+                </option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('meetingseries_id')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
         <hr/>
 
         <!--Read notes-->
@@ -449,8 +505,20 @@
             orderedUsers() {
                 return _.orderBy(this.choices.users, 'first_name');
             },
+            orderedVenues() {
+                return _.orderBy(this.choices.venues, 'name');
+            },
             orderedAttendees() {
                 return _.orderBy(this.meeting.users, 'first_name');
+            },
+            orderedMedia() {
+                return _.orderBy(this.choices.media, 'media');
+            },
+            orderedMeetingTypes() {
+                return _.orderBy(this.choices.meetingtypes, 'name');
+            },
+            orderedMeetingSeries() {
+                return _.orderBy(this.choices.meetingseries, 'name');
             },
             isAgendaComplete() {
                 return this.dataHolder.topic && this.dataHolder.user_id;

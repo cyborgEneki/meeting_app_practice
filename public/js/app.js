@@ -111158,6 +111158,62 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -111169,8 +111225,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         orderedUsers: function orderedUsers() {
             return _.orderBy(this.choices.users, 'first_name');
         },
+        orderedVenues: function orderedVenues() {
+            return _.orderBy(this.choices.venues, 'name');
+        },
         orderedAttendees: function orderedAttendees() {
             return _.orderBy(this.meeting.users, 'first_name');
+        },
+        orderedMedia: function orderedMedia() {
+            return _.orderBy(this.choices.media, 'media');
+        },
+        orderedMeetingTypes: function orderedMeetingTypes() {
+            return _.orderBy(this.choices.meetingtypes, 'name');
+        },
+        orderedMeetingSeries: function orderedMeetingSeries() {
+            return _.orderBy(this.choices.meetingseries, 'name');
         },
         isAgendaComplete: function isAgendaComplete() {
             return this.dataHolder.topic && this.dataHolder.user_id;
@@ -111546,7 +111614,6 @@ var render = function() {
           ]
         },
         [
-          _vm._v("\n        Meeting Name "),
           _c("input", {
             directives: [
               {
@@ -111648,8 +111715,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.meeting.date,
-                expression: "meeting.date"
+                value: _vm.dataHolder.date,
+                expression: "dataHolder.date"
               }
             ],
             attrs: {
@@ -111657,13 +111724,13 @@ var render = function() {
               type: "text",
               placeholder: "yyyy-mm-dd"
             },
-            domProps: { value: _vm.meeting.date },
+            domProps: { value: _vm.dataHolder.date },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.meeting, "date", $event.target.value)
+                _vm.$set(_vm.dataHolder, "date", $event.target.value)
               }
             }
           }),
@@ -111778,18 +111845,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.meeting.start_time,
-                expression: "meeting.start_time"
+                value: _vm.dataHolder.start_time,
+                expression: "dataHolder.start_time"
               }
             ],
             attrs: { name: "start_time", type: "time" },
-            domProps: { value: _vm.meeting.start_time },
+            domProps: { value: _vm.dataHolder.start_time },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.meeting, "start_time", $event.target.value)
+                _vm.$set(_vm.dataHolder, "start_time", $event.target.value)
               }
             }
           }),
@@ -111875,18 +111942,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.meeting.end_time,
-                expression: "meeting.end_time"
+                value: _vm.dataHolder.end_time,
+                expression: "dataHolder.end_time"
               }
             ],
             attrs: { name: "end_time", type: "time" },
-            domProps: { value: _vm.meeting.end_time },
+            domProps: { value: _vm.dataHolder.end_time },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.meeting, "end_time", $event.target.value)
+                _vm.$set(_vm.dataHolder, "end_time", $event.target.value)
               }
             }
           }),
@@ -112181,7 +112248,13 @@ var render = function() {
             }
           }
         },
-        [_vm._v(_vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name))]
+        [
+          _vm._v(
+            "\n        " +
+              _vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name) +
+              "\n    "
+          )
+        ]
       ),
       _vm._v(" "),
       _c(
@@ -113968,30 +114041,481 @@ var render = function() {
       _vm._v(" "),
       _c("h4", [_vm._v("Venue:")]),
       _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.choices.venues[_vm.meeting.venue_id].name))]),
+      _c(
+        "p",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "venue_id",
+              expression: "dataItem !== 'venue_id'"
+            }
+          ],
+          staticClass: "link",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.startMeetingFieldEdit("venue_id")
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\n        " +
+              _vm._s(_vm.choices.venues[_vm.meeting.venue_id].name) +
+              "\n    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "venue_id",
+              expression: "dataItem === 'venue_id'"
+            }
+          ]
+        },
+        [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.venue_id,
+                  expression: "dataHolder.venue_id"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataHolder,
+                    "venue_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("Select venue")]),
+              _vm._v(" "),
+              _vm._l(_vm.orderedVenues, function(venue) {
+                return _c("option", { domProps: { value: venue.id } }, [
+                  _vm._v(_vm._s(venue.name))
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { icon: "el-icon-check", type: "success", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveMeetingFieldEdit("venue_id")
+                }
+              }
+            },
+            [_vm._v("Save\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.dataItem = ""
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("h4", [_vm._v("Media:")]),
       _vm._v(" "),
-      _c("p", [
-        _vm._v(" " + _vm._s(_vm.choices.media[_vm.meeting.media_id].name))
-      ]),
+      _c(
+        "p",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "media_id",
+              expression: "dataItem !== 'media_id'"
+            }
+          ],
+          staticClass: "link",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.startMeetingFieldEdit("media_id")
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\n        " +
+              _vm._s(_vm.choices.media[_vm.meeting.media_id].name) +
+              "\n    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "media_id",
+              expression: "dataItem === 'media_id'"
+            }
+          ]
+        },
+        [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.media_id,
+                  expression: "dataHolder.media_id"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataHolder,
+                    "media_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("Select media")]),
+              _vm._v(" "),
+              _vm._l(_vm.orderedMedia, function(eachmedia) {
+                return _c("option", { domProps: { value: eachmedia.id } }, [
+                  _vm._v(_vm._s(eachmedia.name))
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { icon: "el-icon-check", type: "success", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveMeetingFieldEdit("media_id")
+                }
+              }
+            },
+            [_vm._v("Save\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.dataItem = ""
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Type:")]),
       _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          " " +
-            _vm._s(_vm.choices.meetingtypes[_vm.meeting.meetingtype_id].name)
-        )
-      ]),
+      _c(
+        "p",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "meetingtype_id",
+              expression: "dataItem !== 'meetingtype_id'"
+            }
+          ],
+          staticClass: "link",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.startMeetingFieldEdit("meetingtype_id")
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\n        " +
+              _vm._s(
+                _vm.choices.meetingtypes[_vm.meeting.meetingtype_id].name
+              ) +
+              "\n    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "meetingtype_id",
+              expression: "dataItem === 'meetingtype_id'"
+            }
+          ]
+        },
+        [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.meetingtype_id,
+                  expression: "dataHolder.meetingtype_id"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataHolder,
+                    "meetingtype_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [
+                _vm._v("Select meeting type")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
+                return _c("option", { domProps: { value: meetingtype.id } }, [
+                  _vm._v(_vm._s(meetingtype.name) + "\n            ")
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { icon: "el-icon-check", type: "success", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveMeetingFieldEdit("meetingtype_id")
+                }
+              }
+            },
+            [_vm._v("Save\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.dataItem = ""
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("h4", [_vm._v("Meeting Series:")]),
       _vm._v(" "),
-      _c("p", [
-        _vm._v(
-          _vm._s(_vm.choices.meetingseries[_vm.meeting.meetingseries_id].name)
-        )
-      ]),
+      _c(
+        "p",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem !== "meetingseries_id",
+              expression: "dataItem !== 'meetingseries_id'"
+            }
+          ],
+          staticClass: "link",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.startMeetingFieldEdit("meetingseries_id")
+            }
+          }
+        },
+        [
+          _vm._v(
+            "\n        " +
+              _vm._s(
+                _vm.choices.meetingseries[_vm.meeting.meetingseries_id].name
+              ) +
+              "\n    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "meetingseries_id",
+              expression: "dataItem === 'meetingseries_id'"
+            }
+          ]
+        },
+        [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.meetingseries_id,
+                  expression: "dataHolder.meetingseries_id"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataHolder,
+                    "meetingseries_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [
+                _vm._v("Select meeting series")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
+                return _c(
+                  "option",
+                  { domProps: { value: eachmeetingseries.id } },
+                  [_vm._v(_vm._s(eachmeetingseries.name) + "\n            ")]
+                )
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { icon: "el-icon-check", type: "success", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveMeetingFieldEdit("meetingseries_id")
+                }
+              }
+            },
+            [_vm._v("Save\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.dataItem = ""
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
