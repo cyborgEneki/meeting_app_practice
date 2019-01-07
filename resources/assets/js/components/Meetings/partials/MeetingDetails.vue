@@ -3,32 +3,113 @@
 
         <!--First part of the form-->
 
-        <h4>Meeting Name: </h4>
-        <p  v-show="dataItem !== 'name'" @click.prevent="startMeetingFieldEdit('name')" class="link">
+        <h4>Meeting Name</h4>
+        <p v-show="dataItem !== 'name'" @click.prevent="startMeetingFieldEdit('name')" class="link">
             {{ meeting.name }}
         </p>
         <div v-show="dataItem === 'name'">
             Meeting Name <input v-model="dataHolder.name">
-            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveMeetingFieldEdit('secretary_id')">Save</el-button>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('name')">Save
+            </el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
+
+        <h4>Date</h4>
+        <p v-show="dataItem !== 'date'" @click.prevent="startMeetingFieldEdit('date')" class="link">
+            {{ meeting.date }}
+        </p>
+        <div v-show="dataItem === 'date'">
+            <input v-validate="'after:'+refDate+'|date_format:YYYY-MM-DD'" name="after_field" type="text"
+                   placeholder="yyyy-mm-dd" v-model="meeting.date">
+            <span>{{ errors.first('after_field') }}</span>
+            <input v-show='false' ref="refDate" type="text" v-model="refDate">
+            <el-button :disabled="errors.any()" class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('date')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
+        <h4> Start Time</h4>
+        <p v-show="dataItem !== 'start_time'" @click.prevent="startMeetingFieldEdit('start_time')" class="link">
+            {{ meeting.start_time }}
+        </p>
+        <div v-show="dataItem === 'start_time'">
+            <input name="start_time" v-model="meeting.start_time" type="time"/>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('start_time')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
+        <h4>End Time</h4>
+        <p v-show="dataItem !== 'end_time'" @click.prevent="startMeetingFieldEdit('end_time')" class="link">
+            {{ meeting.end_time }}
+        </p>
+        <div v-show="dataItem === 'end_time'">
+            <input v-validate="'after:'+meeting.start_time+'|required'" name="end_time"
+                             v-model="meeting.end_time" type="time"/>
+            <span>{{ errors.first('end_time') }}</span>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('end_time')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
         <h4>Creator:</h4>
-        <p>{{ choices.users[meeting.creator_id].full_name }}</p>
+        <p v-show="dataItem !=='creator_id'" @click.prevent="startMeetingFieldEdit('creator_id')" class="link">
+            {{ choices.users[meeting.creator_id].full_name }}
+        </p>
+        <div v-show="dataItem === 'creator_id'">
+            <select v-model="dataHolder.creator_id">
+                <option value="">Select User</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('creator_id')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+
         <h4>Chair:</h4>
-        <p>{{ choices.users[meeting.chair_id].full_name }}</p>
+        <p v-show="dataItem !=='chair_id'" @click.prevent="startMeetingFieldEdit('chair_id')" class="link">
+            {{ choices.users[meeting.chair_id].full_name }}
+        </p>
+        <div v-show="dataItem === 'chair_id'">
+            <select v-model="dataHolder.chair_id">
+                <option value="">Select User</option>
+                <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
+            </select>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('chair_id')">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
 
         <h4>Secretary:</h4>
-        <p v-show="dataItem !== 'secretary_id'" @click.prevent="startMeetingFieldEdit('secretary_id')" class="link">{{ choices.users[meeting.secretary_id].full_name }}</p>
+        <p v-show="dataItem !== 'secretary_id'" @click.prevent="startMeetingFieldEdit('secretary_id')" class="link">{{
+            choices.users[meeting.secretary_id].full_name }}</p>
         <div v-show="dataItem === 'secretary_id'">
             <select v-model="dataHolder.secretary_id">
                 <option value="">Select User</option>
                 <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
             </select>
-            <el-button class="same-line" icon="el-icon-check" type="success" circle @click.prevent="saveMeetingFieldEdit('secretary_id')">Save</el-button>
+            <el-button class="same-line" icon="el-icon-check" type="success" circle
+                       @click.prevent="saveMeetingFieldEdit('secretary_id')">Save
+            </el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
 
         <h4 class="same-line"> Attendees</h4>
+        <div v-show="dataItem === 'user'">
+            <select v-model="dataHolder.id">
+                <option value="">Select Attendee</option>
+                <option v-for="attendee in orderedUsers" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
+            </select>
+            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="addUser">Save
+            </el-button>
+            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
+        </div>
         <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="dataItem = 'user'"></el-button>
         <br>
         <br>
@@ -38,17 +119,10 @@
                 <span v-if="user.id == meeting.chair_id">(Chair)</span>
                 <span v-if="user.id == meeting.secretary_id">(Secretary)</span>
             </p>
-            <i v-if="user.id !== meeting.chair_id && user.id !== meeting.secretary_id" class="el-icon-delete same-line" @click.prevent="removeUsers(user.id)"></i>
+            <i v-if="user.id !== meeting.chair_id && user.id !== meeting.secretary_id" class="el-icon-delete same-line"
+               @click.prevent="removeUsers(user.id)"></i>
         </div>
 
-        <div v-show="dataItem === 'user'">
-            <select v-model="dataHolder.id">
-                <option value="">Select Attendee</option>
-                <option v-for="attendee in choices.users" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
-            </select>
-            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="addUser">Save</el-button>
-            <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
-        </div>
         <hr>
 
         <!--Create agenda-->
@@ -324,7 +398,7 @@
         <h4>Notes</h4>
         <div v-show="dataItem !== 'noteEdit'" v-if="meeting.notes">
             <div>{{ meeting.notes.description }}</div>
-            <div  v-show="noteIcons">
+            <div v-show="noteIcons">
                 <el-button icon="el-icon-edit same-line"
                            @click.prevent="startNoteEdit(meeting.notes.id)">
                 </el-button>
@@ -335,13 +409,15 @@
 
         <!--Create note-->
 
-            <el-button icon="el-icon-circle-plus-outline"
-                       @click.prevent="showNoteCreate(meeting.id) " v-show="dataItem !== 'noteCreate' && !meeting.notes">
-            </el-button>
+        <el-button icon="el-icon-circle-plus-outline"
+                   @click.prevent="showNoteCreate(meeting.id) " v-show="dataItem !== 'noteCreate' && !meeting.notes">
+        </el-button>
         <div v-show="dataItem === 'noteCreate'">
             <textarea v-model="dataHolder.description"></textarea>
             <a href="#" class="same-line" @click.prevent="cancelNote">Cancel</a>
-            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="saveNoteCreate(meeting.id)">Save</el-button>
+            <el-button class="same-line" type="success" icon="el-icon-check" circle
+                       @click.prevent="saveNoteCreate(meeting.id)">Save
+            </el-button>
         </div>
 
         <!--Edit notes-->
@@ -384,7 +460,20 @@
             },
             isDiscussionComplete() {
                 return this.dataHolder.description;
-            }
+            },
+            refDate() {
+                let today = new Date()
+                let dd = today.getDate();
+                let mm = today.getMonth() + 1;
+                let yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                return yyyy + '-' + mm + '-' + dd;
+            },
         },
         data() {
             return {
@@ -393,7 +482,7 @@
                 users: [],
                 dataHolder: {},
                 success: false,
-                noteIcons : true,
+                noteIcons: true,
                 statuses:
                     [
                         {id: 0, name: 'Pending'},
@@ -425,21 +514,31 @@
                 this.dataHolder[theField] = this.meeting[theField];
             },
             saveMeetingFieldEdit(theField) {
-              axios.put('api/meetings/' + this.meeting.id, this.dataHolder)
-                  .then((response) => {
-                      this.meeting[theField] = this.dataHolder[theField];
-                      if (theField === 'secretary_id') {
-                          let userIndex = this.meeting.users.map(function (user) {
-                              return user.id;
-                          }).indexOf(this.dataHolder.secretary_id);
+                axios.put('api/meetings/' + this.meeting.id, this.dataHolder)
+                    .then((response) => {
+                        this.meeting[theField] = this.dataHolder[theField];
+                        if (theField === 'secretary_id') {
+                            let userIndex = this.meeting.users.map(function (user) {
+                                return user.id;
+                            }).indexOf(this.dataHolder.secretary_id);
 
-                          if (userIndex === -1) {
-                              this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id])
-                          }
-                      }
-                      this.dataHolder = {};
-                      this.dataItem = '';
-                  })
+                            if (userIndex === -1) {
+                                this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id])
+                            }
+                        }
+                        if (theField === 'chair_id') {
+                            let userIndex = this.meeting.users.map(function (user) {
+                                return user.id;
+                            }).indexOf(this.dataHolder.chair_id);
+
+                            if (userIndex === -1) {
+                                this.meeting.users.push(this.choices.users[this.dataHolder.chair_id])
+                            }
+                        }
+
+                        this.dataHolder = {};
+                        this.dataItem = '';
+                    })
             },
             addUser: function (id) {
                 let checkMtg = this.meeting.users.filter(function (user) {
@@ -639,8 +738,8 @@
                     });
             },
             showNoteCreate(meetingId) {
-              this.dataItem = 'noteCreate';
-              this.dataHolder.meeting_id = meetingId;
+                this.dataItem = 'noteCreate';
+                this.dataHolder.meeting_id = meetingId;
             },
             saveNoteCreate(meetingId) {
                 axios.post('api/notes', this.dataHolder)
@@ -669,8 +768,8 @@
             deleteNote(noteId) {
                 axios.delete('api/notes/' + noteId)
                     .then((response) => {
-                       this.meeting.notes = {};
-                       this.noteIcons = false;
+                        this.meeting.notes = {};
+                        this.noteIcons = false;
                     });
             }
         }
@@ -681,6 +780,7 @@
     .same-line {
         display: inline-block;
     }
+
     .link {
         cursor: pointer;
     }
