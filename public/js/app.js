@@ -111214,6 +111214,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
 
 
 
@@ -111302,7 +111304,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     }).indexOf(_this2.dataHolder.secretary_id);
 
                     if (userIndex === -1) {
-                        _this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.secretary_id]);
+                        axios.post('api/meetings/attachuser', {
+                            meeting_id: _this2.meeting.id,
+                            user_id: _this2.dataHolder.secretary_id
+                        }).then(_this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.secretary_id]));
                     }
                 }
                 if (theField === 'chair_id') {
@@ -111311,7 +111316,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                     }).indexOf(_this2.dataHolder.chair_id);
 
                     if (_userIndex === -1) {
-                        _this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.chair_id]);
+                        axios.post('api/meetings/attachuser', {
+                            meeting_id: _this2.meeting.id,
+                            user_id: _this2.dataHolder.chair_id
+                        }).then(_this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.chair_id]));
                     }
                 }
 

@@ -79,9 +79,15 @@ class MeetingController extends Controller
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 
-    public function attachUser($meetingId, $userId)
+//    public function attachUser($meetingId, $userId)
+//    {
+//        $this->meetingRepository->addUser($meetingId, $userId);
+//        return response()->json(['success' => 'User added to meeting_user'], 200);
+//    }
+
+    public function attachUser(Request $request)
     {
-        $this->meetingRepository->addUser($meetingId, $userId);
+        $this->meetingRepository->addUser($request ->meeting_id, $request->user_id);
         return response()->json(['success' => 'User added to meeting_user'], 200);
     }
 

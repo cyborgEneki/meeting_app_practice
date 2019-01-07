@@ -48,7 +48,7 @@
         </p>
         <div v-show="dataItem === 'end_time'">
             <input v-validate="'after:'+meeting.start_time+'|required'" name="end_time"
-                             v-model="dataHolder.end_time" type="time"/>
+                   v-model="dataHolder.end_time" type="time"/>
             <span>{{ errors.first('end_time') }}</span>
             <el-button class="same-line" icon="el-icon-check" type="success" circle
                        @click.prevent="saveMeetingFieldEdit('end_time')">Save
@@ -121,7 +121,8 @@
                 <span v-if="user.id == meeting.secretary_id">(Secretary)</span>
             </p>
             <i v-if="user.id !== meeting.chair_id && user.id !== meeting.secretary_id" class="el-icon-delete same-line"
-               @click.prevent="removeUsers(user.id)"></i>
+               @click.prevent="removeUsers(user.id)">
+            </i>
         </div>
 
         <hr>
@@ -431,7 +432,8 @@
         </div>
 
         <h4>Meeting Series:</h4>
-        <p v-show="dataItem !== 'meetingseries_id'" @click.prevent="startMeetingFieldEdit('meetingseries_id')" class="link">
+        <p v-show="dataItem !== 'meetingseries_id'" @click.prevent="startMeetingFieldEdit('meetingseries_id')"
+           class="link">
             {{ choices.meetingseries[meeting.meetingseries_id].name }}
         </p>
         <div v-show="dataItem === 'meetingseries_id'">
@@ -591,7 +593,12 @@
                             }).indexOf(this.dataHolder.secretary_id);
 
                             if (userIndex === -1) {
-                                this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id])
+                                axios.post('api/meetings/attachuser', {
+                                    meeting_id: this.meeting.id,
+                                    user_id: this.dataHolder.secretary_id
+                                })
+                                    .then(
+                                        this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id]))
                             }
                         }
                         if (theField === 'chair_id') {
@@ -600,8 +607,14 @@
                             }).indexOf(this.dataHolder.chair_id);
 
                             if (userIndex === -1) {
-                                this.meeting.users.push(this.choices.users[this.dataHolder.chair_id])
+                                axios.post('api/meetings/attachuser', {
+                                    meeting_id: this.meeting.id,
+                                    user_id: this.dataHolder.chair_id
+                                })
+                                    .then(
+                                        this.meeting.users.push(this.choices.users[this.dataHolder.chair_id]))
                             }
+
                         }
 
                         this.dataHolder = {};
