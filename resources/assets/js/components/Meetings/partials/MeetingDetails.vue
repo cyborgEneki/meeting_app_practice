@@ -103,15 +103,15 @@
 
         <h4 class="same-line"> Attendees</h4>
         <div v-show="dataItem === 'user'">
-            <select v-model="dataHolder.id">
+            <select v-model="dataHolder.user_id">
                 <option value="">Select Attendee</option>
                 <option v-for="attendee in orderedUsers" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
             </select>
-            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="addUser">Save
+            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="addUser(dataHolder.user_id)">Save
             </el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
-        <el-button icon="el-icon-circle-plus-outline" class="same-line" @click.prevent="dataItem = 'user'"></el-button>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line" v-show="dataItem !== 'user'" @click.prevent="startUserEdit"></el-button>
         <br>
         <br>
         <div v-for="user in orderedAttendees">
@@ -624,16 +624,22 @@
             addUser: function (id) {
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
-                });
+                }).indexOf(id);
                 //only add user if that user isn't already in the meeting
                 if (!checkMtg.length) {
-                    axios.get('/api/meetings/' + this.meeting.id + '/users/' + id)
+                    this.dataHolder.user_id = id;
+                    axios.post('/api/meetings/attachuser', this.dataHolder)
                         .then((response) => {
-                            this.meeting.users.push(response.data.user);
+                            this.meeting.users.push(this.choices.users[id]);
+                            this.dataItem = '';
                         });
                 } else {
                     alert('User already exists');
                 }
+            },
+            startUserEdit() {
+                this.dataItem = 'user';
+                this.dataHolder.meeting_id = this.meeting.id;
             },
             removeUsers(id) {
                 axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id)
