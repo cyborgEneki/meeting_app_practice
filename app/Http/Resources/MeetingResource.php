@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class MeetingResource extends JsonResource
 {
@@ -30,6 +31,7 @@ class MeetingResource extends JsonResource
             'media_id' => $this->media_id,
             'meetingseries_id' => $this->meetingseries_id,
             'meetingtype_id' => $this->meetingtype_id,
+            'notes' => $this->notes->where('user_id', Auth::user()->id)->first(),
         ];
     }
 }

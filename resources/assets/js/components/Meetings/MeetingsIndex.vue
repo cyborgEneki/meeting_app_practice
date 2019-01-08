@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <div>
+    <div class="row">
+        <div div class="col-md-3">
             <meeting-list></meeting-list>
         </div>
 
-        <div v-if="showMeetingDetails">
+        <div class="col-md-9" v-if="showMeetingDetails">
             <meeting-details :choices.sync="choices"></meeting-details>
         </div>
 
@@ -26,6 +26,6 @@
         components: {
             'meeting-details': MeetingDetails,
             'meeting-list': MeetingList
-        },
+        }
     }
 </script>

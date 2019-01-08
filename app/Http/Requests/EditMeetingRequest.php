@@ -24,29 +24,18 @@ class EditMeetingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'date' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'chair_id' => 'required',
-            'secretary_id' => 'required',
-            'agendas.*.topic' => 'required',
-            'agendas.*.description' => 'required',
-            'agendas.*.time_allocated' => 'required',
+//            'name' => 'required',
+//            'date' => 'required',
+//            'start_time' => 'required',
+//            'end_time' => 'required',
+//            'chair_id' => 'required',
+//            'secretary_id' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'A name must be entered before continuing!',
-            'date.required' => 'Date is required!',
-            'start_time.required' => 'The start time for this meeting is required!',
-            'end_time.required' => 'An end time for this meeting is required!',
-            'chair.required' => 'A chair for this meeting is required!',
-            'secretary.required' => 'Please assign a secretary before continuing',
-            'agendas.*.topic.required' => 'Each agenda must have a topic',
-            'agendas.*.description.required' => 'Each agenda must have a description',
-            'agendas.*.time_allocated.required' => 'Each agenda must have a time allocated',
+
 
         ];
     }

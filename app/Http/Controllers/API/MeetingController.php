@@ -12,6 +12,7 @@ use App\Repositories\MeetingRepository;
 use App\User;
 use App\Venue;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
 use App\Events\MeetingAlert;
@@ -61,7 +62,7 @@ class MeetingController extends Controller
      * @param Meeting $meeting
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(EditMeetingRequest $request, Meeting $meeting)
+    public function update(Request $request, Meeting $meeting)
     {
         $this->meetingRepository->updateMeeting($request, $meeting);
         return response()->json(['You have successfully updated your meeting.'], 200);
@@ -78,9 +79,15 @@ class MeetingController extends Controller
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 
-    public function attachUser($meetingId, $userId)
+//    public function attachUser($meetingId, $userId)
+//    {
+//        $this->meetingRepository->addUser($meetingId, $userId);
+//        return response()->json(['success' => 'User added to meeting_user'], 200);
+//    }
+
+    public function attachUser(Request $request)
     {
-        $this->meetingRepository->addUser($meetingId, $userId);
+        $this->meetingRepository->addUser($request ->meeting_id, $request->user_id);
         return response()->json(['success' => 'User added to meeting_user'], 200);
     }
 
