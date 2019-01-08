@@ -624,7 +624,7 @@
             addUser: function (id) {
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
-                }).indexOf(id);
+                });
                 //only add user if that user isn't already in the meeting
                 if (!checkMtg.length) {
                     this.dataHolder.user_id = id;

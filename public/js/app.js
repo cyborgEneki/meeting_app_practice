@@ -111333,7 +111333,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
             var checkMtg = this.meeting.users.filter(function (user) {
                 return user.id === id;
-            }).indexOf(id);
+            });
             //only add user if that user isn't already in the meeting
             if (!checkMtg.length) {
                 this.dataHolder.user_id = id;
