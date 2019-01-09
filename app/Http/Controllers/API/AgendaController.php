@@ -54,6 +54,11 @@ class AgendaController extends Controller
         return response()->json(['You have successfully updated your agenda.'], 200);
     }
 
+    public function vote(Request $request)
+    {
+        return $this->agendaRepository->vote($request);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

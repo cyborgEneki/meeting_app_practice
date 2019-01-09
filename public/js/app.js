@@ -111267,6 +111267,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }),
     data: function data() {
         return {
+            upvoted: false,
+            downvoted: false,
             dataItem: '',
             timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
             users: [],
@@ -111289,6 +111291,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
+        upvote: function upvote() {
+            this.upvoted = !this.upvoted;
+            this.downvoted = false;
+        },
+
+        downvote: function downvote() {
+            this.downvoted = !this.downvoted;
+            this.upvoted = false;
+        },
         startMeetingFieldEdit: function startMeetingFieldEdit(theField) {
             this.dataItem = theField;
             this.dataHolder[theField] = this.meeting[theField];

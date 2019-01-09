@@ -547,6 +547,8 @@
         },
         data() {
             return {
+                upvoted: false,
+                downvoted: false,
                 dataItem: '',
                 timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
                 users: [],
@@ -579,6 +581,14 @@
             })
         },
         methods: {
+            upvote () {
+                this.upvoted = !this.upvoted;
+                this.downvoted = false;
+            },
+            downvote: function() {
+                this.downvoted = !this.downvoted;
+                this.upvoted = false;
+            },
             startMeetingFieldEdit(theField) {
                 this.dataItem = theField;
                 this.dataHolder[theField] = this.meeting[theField];
