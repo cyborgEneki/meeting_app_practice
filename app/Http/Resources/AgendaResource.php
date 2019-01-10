@@ -9,17 +9,15 @@ class AgendaResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return array
      */
     public function toArray($request)
     {
         $agenda = $this->uservotes->where('pivot.agenda_id', $this->id)->first();
-        if ($agenda) {
-            $vote = $this->uservotes->where('pivot.agenda_id', $this->id)->first()->pivot;
-        } else {
-            $vote = null;
-        }
+
+        $vote = ($agenda) ? $this->uservotes->where('pivot.agenda_id', $this->id)->first()->pivot : null;
+
         return
             [
                 'id' => $this->id,
@@ -32,7 +30,7 @@ class AgendaResource extends JsonResource
                 'conclusion' => $this->conclusion,
                 'followups' => FollowupResource::collection($this->followups),
                 'discussions' => DiscussionResource::collection($this->discussions),
-                'vote'=> $vote
+                'vote' => $vote
             ];
     }
 }
