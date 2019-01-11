@@ -1,6 +1,15 @@
 <template>
     <div class="row">
 
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search meeting" v-model="searchTerm">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" @click="searchMeeting">
+                    <i class="el-icon-search"></i>
+                </button>
+            </div>
+        </div>
+
         <div class="col-md-2"><h1>Promeet</h1>
             <ul>
                 <li>
@@ -34,7 +43,9 @@
         name: "App",
         data() {
             return {
-                choices: []
+                choices: [],
+                searchResults: null,
+                searchTerm: ''
             }
         },
         created() {
@@ -42,6 +53,14 @@
                 .then(response => {
                     this.choices = response.data;
                 })
+        },
+        methods: {
+            searchMeeting() {
+                axios.get('/api/meetings/search/?search='+this.NowsearchTerm)
+                    .then(response => {
+                        this.searchResults = response.data;
+                    })
+            }
         }
     }
 </script>

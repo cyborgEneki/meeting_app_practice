@@ -108020,7 +108020,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -108095,12 +108095,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "App",
     data: function data() {
         return {
-            choices: []
+            choices: [],
+            searchResults: null,
+            searchTerm: ''
         };
     },
     created: function created() {
@@ -108109,6 +108120,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get('/api/meetings/choices').then(function (response) {
             _this.choices = response.data;
         });
+    },
+
+    methods: {
+        searchMeeting: function searchMeeting() {
+            var _this2 = this;
+
+            axios.get('/api/meetings/search/?search=' + this.NowsearchTerm).then(function (response) {
+                _this2.searchResults = response.data;
+            });
+        }
     }
 });
 
@@ -108121,6 +108142,42 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "input-group" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchTerm,
+            expression: "searchTerm"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Search meeting" },
+        domProps: { value: _vm.searchTerm },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchTerm = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group-append" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-secondary",
+            attrs: { type: "button" },
+            on: { click: _vm.searchMeeting }
+          },
+          [_c("i", { staticClass: "el-icon-search" })]
+        )
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "col-md-2" }, [
       _c("h1", [_vm._v("Promeet")]),
       _vm._v(" "),
@@ -115027,7 +115084,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-block;\n}\n.link[data-v-01d2bc68] {\n    cursor: pointer;\n}\n.meetingdiv[data-v-01d2bc68] {\n\n    border-radius: 5px;\n    margin-bottom: 10px;\n    padding: 10px;\n    background: #FFFFFF;\n    position: relative;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n    display: inline-block;\n}\n.link[data-v-01d2bc68] {\n    cursor: pointer;\n}\n.meetingdiv[data-v-01d2bc68] {\n\n    border-radius: 5px;\n    margin-bottom: 10px;\n    padding: 10px;\n    background: #FFFFFF;\n    position: relative;\n}\n.has-search .form-control[data-v-01d2bc68] {\n    padding-left: 2.375rem;\n}\n.has-search .form-control-feedback[data-v-01d2bc68] {\n    position: absolute;\n    z-index: 2;\n    display: block;\n    width: 2.375rem;\n    height: 2.375rem;\n    line-height: 2.375rem;\n    text-align: center;\n    pointer-events: none;\n    color: #aaa;\n}\n\n", ""]);
 
 // exports
 

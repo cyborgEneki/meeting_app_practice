@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Requests\AgendaRequest;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Meeting extends Model
 {
     use SoftDeletes;
+    use SearchableTrait;
 
     protected $dates = ['deleted_at'];
     protected $fillable =
@@ -30,6 +32,12 @@ class Meeting extends Model
         [
             'created' => Events\MeetingAlert::class
         ];
+
+    protected $searchable = [
+        'columns' => [
+            'meetings.name' => 10
+        ],
+    ];
 
     public $appends =
         [
