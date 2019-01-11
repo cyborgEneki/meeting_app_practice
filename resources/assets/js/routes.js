@@ -17,6 +17,7 @@ import VenueEdit from './components/Meetings/partials/venues/VenueEdit'
 import MeetingSeriesEdit from './components/Meetings/partials/meetingSeries/MeetingSeriesEdit'
 import MediaEdit from './components/Meetings/partials/media/MediaEdit'
 import MeetingTypeEdit from './components/Meetings/partials/meetingTypes/MeetingTypeEdit'
+import SearchResults from './components/Meetings/partials/SearchResults'
 
 const router = new VueRouter({
     mode: 'history',
@@ -115,6 +116,12 @@ const router = new VueRouter({
             path:'/edit_meeting_type',
             name: 'editMeetingType',
             component: MeetingTypeEdit,
+            props: true
+        },
+        {
+            path:'/meetings/searchresults',
+            name: 'searchResults',
+            component: SearchResults,
             props: true
         }
     ],

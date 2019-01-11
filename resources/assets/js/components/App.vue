@@ -56,9 +56,10 @@
         },
         methods: {
             searchMeeting() {
-                axios.get('/api/meetings/search/?search='+this.NowsearchTerm)
+                axios.get('/api/meetings/search/?search='+this.searchTerm)
                     .then(response => {
                         this.searchResults = response.data;
+                        this.$router.push('/meetings/searchresults');
                     })
             }
         }
