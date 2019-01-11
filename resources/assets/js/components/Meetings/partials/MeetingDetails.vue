@@ -201,13 +201,22 @@
                                 </div>
 
                                 <div>
-                                    <button @click.prevent="startVoting">Vote</button>
-                                    <div v-if="voteOptions">
-                                        <button v-if="voteYes" @click.prevent="setVoteStatus(1, agenda.id)">Vote Yes
-                                        </button>
-                                        <button v-if="voteNo" @click.prevent="setVoteStatus(0, agenda.id)">Vote No
-                                        </button>
-                                    </div>
+                                    <!--<a href="#" v-show="!agenda.vote || !agenda.vote.vote"-->
+                                    <!--@click.prevent="voteAgenda(1, agenda.id)">Up</a>-->
+                                    <!--<span v-show="agenda.vote && agenda.vote.vote">Up</span>-->
+
+                                    <!--<a href="#" v-show="!agenda.vote || agenda.vote.vote"-->
+                                    <!--@click.prevent="voteAgenda(0, agenda.id)">Down</a>-->
+                                    <!--<span v-show="agenda.vote && !agenda.vote.vote">Down</span>-->
+
+                                    <a href="#" :class="{disabled: agenda.vote && agenda.vote.vote}"
+                                       @click.prevent="(!agenda.vote || !agenda.vote.vote) && voteAgenda(1, agenda.id)">Up</a>
+
+                                    <a href="#" :class="{disabled: agenda.vote && !agenda.vote.vote}"
+                                       @click.prevent="(!agenda.vote || agenda.vote.vote) && voteAgenda(0, agenda.id)">Down</a>
+
+                                    <a href="#" v-show="agenda.vote" @click.prevent="voteAgenda(null, agenda.id, true)">Abstain</a>
+
                                 </div>
 
                                 <!--Create followup form-->
@@ -600,6 +609,23 @@
             })
         },
         methods: {
+            voteAgenda(thevote, agendaId, abstain = false) {
+                axios.post('api/agendas/vote', {agenda_id: agendaId, vote: thevote, abstain: abstain})
+                    .then((response) => {
+                        let agendaIndex = this.meeting.agendas.map(function (item) {
+                            return item.id
+                        }).indexOf(agendaId);
+                        if (abstain) {
+                            this.meeting.agendas[agendaIndex].vote = null;
+                        } else {
+                            this.meeting.agendas[agendaIndex].vote =
+                                {
+                                    agenda_id: agendaId,
+                                    vote: thevote
+                                };
+                        }
+                    })
+            },
             startVoting() {
                 this.voteOptions = true;
                 this.showYes();
@@ -626,7 +652,7 @@
                 }
             },
 
-            setVoteStatus (status, id) {
+            setVoteStatus(status, id) {
                 let data = {
                     'vote': status,
                     'agenda_id': id,
@@ -937,5 +963,10 @@
 
     .link {
         cursor: pointer;
+    }
+
+    .disabled {
+        color: #CCCCCC;
+        text-decoration: none;
     }
 </style>

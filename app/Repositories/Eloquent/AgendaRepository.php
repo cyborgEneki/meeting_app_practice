@@ -42,7 +42,9 @@ class AgendaRepository implements AgendaRepositoryInterface
     {
         $agenda = Agenda::find($request->agenda_id);
         $agenda->uservotes()->detach(Auth::user()->id);
-        $agenda->uservotes()->attach(Auth::user()->id, ['vote'=>$request->vote]);
+        if (!$request->abstain) {
+            $agenda->uservotes()->attach(Auth::user()->id, ['vote'=>$request->vote]);
+        }
         return;
     }
 }
