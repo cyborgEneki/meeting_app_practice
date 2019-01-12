@@ -30,6 +30,7 @@
                 <li>
                     <router-link :to="{ name: 'medias'}">Media</router-link>
                 </li>
+            
             </ul>
         </div>
         <div class="col-md-10">
