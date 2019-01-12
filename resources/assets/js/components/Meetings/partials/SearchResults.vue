@@ -28,9 +28,13 @@
 </template>
 
 <script>
+
     export default {
         name: "SearchResults",
-        props: ['searchResults']
+        props: ['searchResults'],
+        created () {
+            console.log(this.meeting);
+        }
     }
 
 </script>
