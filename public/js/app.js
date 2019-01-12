@@ -108250,10 +108250,13 @@ var render = function() {
       { staticClass: "col-md-10" },
       [
         _c("router-view", {
-          attrs: { choices: _vm.choices },
+          attrs: { choices: _vm.choices, searchResults: _vm.searchResults },
           on: {
             "update:choices": function($event) {
               _vm.choices = $event
+            },
+            "update:searchResults": function($event) {
+              _vm.searchResults = $event
             }
           }
         })

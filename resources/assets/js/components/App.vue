@@ -33,7 +33,7 @@
             </ul>
         </div>
         <div class="col-md-10">
-            <router-view :choices.sync="choices"/>
+            <router-view :choices.sync="choices" :searchResults.sync="searchResults"/>
         </div>
     </div>
 </template>
