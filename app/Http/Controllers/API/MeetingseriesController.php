@@ -71,4 +71,16 @@ class MeetingseriesController extends Controller
         $meetingseries = $this->meetingseriesRepository->deleteMeetingseries($meetingseries);
         return response()->json(['You have successfully deleted the meeting series.'],  200);
     }
+
+    public function attachUser(Request $request)
+    {
+        $this->meetingseriesRepository->addUser($request->meetingseries_id, $request->user_id);
+        return response()->json(['success' => 'User added to meetingseries_user'], 200);
+    }
+
+    public function detachUser($meetingseriesId, $userId)
+    {
+        $this->meetingseriesRepository->removeUser($meetingseriesId, $userId);
+        return response()->json(['success' => 'User deleted from meetingseries_user'], 200);
+    }
 }
