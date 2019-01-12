@@ -3,9 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Agenda extends Model
 {
+    use SearchableTrait;
+
+    protected $searchable = [
+        'columns' => [
+            'agendas.topic' => 10,
+            'agendas.description' => 9,
+            'agendas.conclusion' => 8,
+        ],
+    ];
+
     protected $fillable =
         [
             'meeting_id',

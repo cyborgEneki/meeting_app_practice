@@ -120369,7 +120369,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -120380,6 +120380,27 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -120404,7 +120425,73 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("h1", [_vm._v("Results")]),
-    _vm._v("\n    " + _vm._s(_vm.searchResults) + "\n")
+    _vm._v(" "),
+    _c("h2", [_vm._v("Meetings")]),
+    _vm._v(" "),
+    _c(
+      "ol",
+      _vm._l(_vm.searchResults.meetings, function(meeting, index) {
+        return _c("li", [_vm._v(_vm._s(meeting.name))])
+      })
+    ),
+    _vm._v(" "),
+    _c("h2", [_vm._v("Agendas")]),
+    _vm._v(" "),
+    _c(
+      "ol",
+      _vm._l(_vm.searchResults.agendas, function(agenda, index) {
+        return _c("li", [
+          _vm._v("Topic -" + _vm._s(agenda.topic) + " "),
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: agenda.description,
+                  expression: "agenda.description"
+                }
+              ]
+            },
+            [_vm._v("Description -" + _vm._s(agenda.description))]
+          ),
+          _vm._v(" "),
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: agenda.conclusion,
+                  expression: "agenda.conclusion"
+                }
+              ]
+            },
+            [_vm._v("Conclusion -" + _vm._s(agenda.conclusion))]
+          )
+        ])
+      })
+    ),
+    _vm._v(" "),
+    _c("h2", [_vm._v("Discussions")]),
+    _vm._v(" "),
+    _c(
+      "ol",
+      _vm._l(_vm.searchResults.discussions, function(discussion, index) {
+        return _c("li", [_vm._v(_vm._s(discussion.description))])
+      })
+    ),
+    _vm._v(" "),
+    _c("h2", [_vm._v("Followups")]),
+    _vm._v(" "),
+    _c(
+      "ol",
+      _vm._l(_vm.searchResults.followups, function(followup, index) {
+        return _c("li", [_vm._v(_vm._s(followup.action))])
+      })
+    )
   ])
 }
 var staticRenderFns = []

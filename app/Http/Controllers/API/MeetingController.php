@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MeetingRequest;
 use App\Http\Requests\EditMeetingRequest;
 use App\Media;
+use App\Agenda;
+use App\Discussion;
+use App\Followup;
 use App\Meeting;
 use App\Meetingseries;
 use App\Meetingtype;
@@ -127,6 +130,18 @@ class MeetingController extends Controller
     public function search(Request $request)
     {
         $meetings = Meeting::search($request->get('search'))->get();
-        return response()->json($meetings, 200);
+        $meetings = ['meetings' => $meetings];
+
+        $agendas = Agenda::search($request->get('search'))->get();
+        $agendas = ['agendas' => $agendas];
+
+        $discussions = Discussion::search($request->get('search'))->get();
+        $discussions = ['discussions' => $discussions];
+
+        $followups = Followup::search($request->get('search'))->get();
+        $followups = ['followups' => $followups];
+
+        $results = array_merge($meetings, $agendas, $discussions, $followups);
+        return response()->json($results, 200);
     }
 }
