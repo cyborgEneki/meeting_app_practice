@@ -4,14 +4,16 @@
     <router-link :to="{ name: 'addMeetingSeries' }" class="same-line">
       <el-button icon="el-icon-circle-plus-outline"></el-button>
     </router-link>
-    <div div class="col-md-3">
+      <div class="row">
+
+    <div class="col-md-3">
       <div
         v-for="eachmeetingseries in orderedMeetingSeries"
         :key="eachmeetingseries.id"
         class="meetingdiv"
       >
         <span style="margin-top: 20px;">
-          <router-link @click="showMeetingSeriesDetailsFunction"
+          <router-link
             :to="{ name: 'meetingSeriesDetails', params: { name: eachmeetingseries.name, id: eachmeetingseries.id }}"
           >{{eachmeetingseries.name}}</router-link>
         </span>
@@ -27,9 +29,10 @@
         ></el-button>
       </div>
     </div>
-    <div >
-      <router-view class="col-md-9" v-if="showMeetingSeriesDetails"></router-view>
+    <div class="col-md-9">
+      <router-view></router-view>
     </div>
+      </div>
   </div>
 </template>
 
@@ -39,7 +42,6 @@ export default {
   props: ["choices"],
   data() {
     return {
-      showMeetingSeriesDetails: false,
       meetingseries: []
     };
   },
@@ -49,9 +51,6 @@ export default {
     }
   },
   methods: {
-      showMeetingSeriesDetailsFunction() {
-          this.showMeetingSeriesDetails = !this.showMeetingSeriesDetails
-      }
     // deleteMeetingSeries(id) {
     //   axios.delete("/api/meetingseries/" + id).then(() => {
     //     let index = this.meetingseries

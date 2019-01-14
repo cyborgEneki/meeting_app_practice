@@ -115423,12 +115423,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c(
-      "div",
-      { staticClass: "col-md-3", attrs: { div: "" } },
-      [_c("meeting-list")],
-      1
-    ),
+    _c("div", { staticClass: "col-md-3" }, [_c("meeting-list")], 1),
     _vm._v(" "),
     _vm.showMeetingDetails
       ? _c(
@@ -116548,13 +116543,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MeetingSeriesList",
   props: ["choices"],
   data: function data() {
     return {
-      showMeetingSeriesDetails: false,
       meetingseries: []
     };
   },
@@ -116565,9 +116562,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    showMeetingSeriesDetailsFunction: function showMeetingSeriesDetailsFunction() {
-      this.showMeetingSeriesDetails = !this.showMeetingSeriesDetails;
-    }
     // deleteMeetingSeries(id) {
     //   axios.delete("/api/meetingseries/" + id).then(() => {
     //     let index = this.meetingseries
@@ -116578,7 +116572,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //     this.meetingseries.splice(index, 1);
     //   });
     // }
-
   }
 });
 
@@ -116605,82 +116598,75 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-md-3", attrs: { div: "" } },
-        _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
-          return _c(
-            "div",
-            { key: eachmeetingseries.id, staticClass: "meetingdiv" },
-            [
-              _c(
-                "span",
-                { staticStyle: { "margin-top": "20px" } },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: {
-                          name: "meetingSeriesDetails",
-                          params: {
-                            name: eachmeetingseries.name,
-                            id: eachmeetingseries.id
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-3" },
+          _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
+            return _c(
+              "div",
+              { key: eachmeetingseries.id, staticClass: "meetingdiv" },
+              [
+                _c(
+                  "span",
+                  { staticStyle: { "margin-top": "20px" } },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "meetingSeriesDetails",
+                            params: {
+                              name: eachmeetingseries.name,
+                              id: eachmeetingseries.id
+                            }
                           }
                         }
                       },
-                      on: { click: _vm.showMeetingSeriesDetailsFunction }
-                    },
-                    [_vm._v(_vm._s(eachmeetingseries.name))]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(
-                "\n      " + _vm._s(eachmeetingseries.frequency) + "\n      "
-              ),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  attrs: {
-                    to: {
-                      name: "editMeetingSeries",
-                      params: { eachmeetingseries: eachmeetingseries }
+                      [_vm._v(_vm._s(eachmeetingseries.name))]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(
+                  "\n      " + _vm._s(eachmeetingseries.frequency) + "\n      "
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "router-link",
+                  {
+                    attrs: {
+                      to: {
+                        name: "editMeetingSeries",
+                        params: { eachmeetingseries: eachmeetingseries }
+                      }
+                    }
+                  },
+                  [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
+                  1
+                ),
+                _vm._v(" "),
+                _c("el-button", {
+                  attrs: { icon: "el-icon-delete same-line" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.deleteMeetingSeries(eachmeetingseries.id)
                     }
                   }
-                },
-                [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
-                1
-              ),
-              _vm._v(" "),
-              _c("el-button", {
-                attrs: { icon: "el-icon-delete same-line" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.deleteMeetingSeries(eachmeetingseries.id)
-                  }
-                }
-              })
-            ],
-            1
-          )
-        })
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _vm.showMeetingSeriesDetails
-            ? _c("router-view", { staticClass: "col-md-9" })
-            : _vm._e()
-        ],
-        1
-      )
+                })
+              ],
+              1
+            )
+          })
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9" }, [_c("router-view")], 1)
+      ])
     ],
     1
   )
