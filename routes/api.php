@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
     Route::post('meetings/attachuser', 'MeetingController@attachUser');
     Route::get('meetings/choices', 'MeetingController@choices');
+    Route::get('meetings/search', 'MeetingController@search');
     Route::apiResource('meetings', 'MeetingController');
     Route::post('agendas/vote', 'AgendaController@vote');
 });
