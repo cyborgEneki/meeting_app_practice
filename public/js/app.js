@@ -110583,7 +110583,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
         name: 'meetingSeries',
         component: __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingSeriesIndex___default.a,
         children: [{
-            path: '/meeting_series_details/:id',
+            path: '/meeting-series-details/:id',
             name: 'meetingSeriesDetails',
             component: __WEBPACK_IMPORTED_MODULE_7__components_Meetings_MeetingSeriesDetails___default.a
         }]
@@ -116564,15 +116564,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //     this.meetingseries.splice(index, 1);
     //   });
     // }
-  },
-  watch: {
-    $route: function $route(to, from) {
-      var _this = this;
-
-      axios.get("/#/meetingseries/" + this.$route.params.id).then(function (response) {
-        _this.meetingseries = response.data;
-      });
-    }
   }
 });
 
@@ -120650,21 +120641,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            meetingdetails: {},
-            editItem: '',
-            dataHolder: {},
-            choices: [],
-            mode: 'r',
-            content: this.$store.state.content
-        };
-    },
-    created: function created() {
-        this.dataHolder.eachmeetingseries;
+  data: function data() {
+    return {
+      meetingseriesdetails: {},
+      editItem: "",
+      dataHolder: {},
+      choices: [],
+      mode: "r",
+      content: this.$store.state.content
+    };
+  },
+
+  watch: {
+    $route: function $route(to, from) {
+      var _this = this;
+
+      axios.get("/#/meetingseries/" + this.$route.params.id).then(function (response) {
+        _this.meetingseriesdetails = response.data;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -120702,7 +120701,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -120715,16 +120714,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h2", [_vm._v("I")]),
+    _vm._v(" "),
+    _c("h2", [_vm._v(_vm._s(_vm.meetingseriesdetails))])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("I")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -44,7 +44,7 @@ const router = new VueRouter({
             component: MeetingSeriesIndex,
             children: [
                 {
-                    path: '/meeting_series_details/:id',
+                    path: '/meeting-series-details/:id',
                     name: 'meetingSeriesDetails',
                     component: MeetingSeriesDetails,
                 }

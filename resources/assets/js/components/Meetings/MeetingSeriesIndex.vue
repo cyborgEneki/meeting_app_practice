@@ -52,13 +52,6 @@ export default {
     //     this.meetingseries.splice(index, 1);
     //   });
     // }
-  },
-  watch: {
-    $route(to, from) {
-      axios.get("/#/meetingseries/" + this.$route.params.id).then(response => {
-        this.meetingseries = response.data;
-      });
-    }
   }
 };
 </script>
