@@ -5,15 +5,25 @@
       <el-button icon="el-icon-circle-plus-outline"></el-button>
     </router-link>
 
-    <div v-for="eachmeetingseries in orderedMeetingSeries" :key="eachmeetingseries.id" class="meetingdiv">
-      {{eachmeetingseries.name}}<br>
-      {{eachmeetingseries.frequency}}<br>
-      <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
+    <div
+      v-for="eachmeetingseries in orderedMeetingSeries"
+      :key="eachmeetingseries.id"
+      class="meetingdiv"
+    >
+      <router-link
+        :to="{ name: 'meetingSeriesDetails', params: { name: eachmeetingseries.name, id: eachmeetingseries.id }}"
+      >
+        {{eachmeetingseries.name}}
+        <br>
+      </router-link>
+      {{eachmeetingseries.frequency}}
+      <br>
+      <router-link :to="{ name: 'editMeetingSeries' , params: { eachmeetingseries }}">
         <el-button icon="el-icon-edit"></el-button>
       </router-link>
-      <el-button icon="el-icon-delete same-line" @click.prevent="deleteUser(meeting.id)"></el-button>
+      <el-button icon="el-icon-delete same-line" @click.prevent="deleteMeetingSeries(eachmeetingseries.id)"></el-button>
     </div>
-
+    <router-view></router-view>
   </div>
 </template>
 
@@ -32,14 +42,21 @@ export default {
     }
   },
   methods: {
-    deleteMeetingSeries(id) {
-      axios.delete("/api/meetings/" + id).then(() => {
-        let index = this.meetingseries
-          .map(item => {
-            return item.id;
-          })
-          .indexOf(id);
-        this.meetingseries.splice(index, 1);
+    // deleteMeetingSeries(id) {
+    //   axios.delete("/api/meetingseries/" + id).then(() => {
+    //     let index = this.meetingseries
+    //       .map(item => {
+    //         return item.id;
+    //       })
+    //       .indexOf(id);
+    //     this.meetingseries.splice(index, 1);
+    //   });
+    // }
+  },
+  watch: {
+    $route(to, from) {
+      axios.get("/#/meetingseries/" + this.$route.params.id).then(response => {
+        this.meetingseries = response.data;
       });
     }
   }
