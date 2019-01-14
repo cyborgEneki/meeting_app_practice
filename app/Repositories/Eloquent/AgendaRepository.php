@@ -37,4 +37,12 @@ class AgendaRepository implements AgendaRepositoryInterface
     {
         return $agenda->delete($agenda);
     }
+
+    public function vote(Request $request)
+    {
+        $agenda = Agenda::find($request->agenda_id);
+        $agenda->uservotes()->detach(Auth::user()->id);
+        $agenda->uservotes()->attach(Auth::user()->id, ['vote'=>$request->vote]);
+        return;
+    }
 }

@@ -19,4 +19,6 @@ interface AgendaRepositoryInterface
     public function createAgenda(AgendaRequest $request);
 
     public function deleteAgenda(Agenda $agenda);
+
+    public function vote(Request $request);
 }

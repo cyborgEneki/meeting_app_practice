@@ -17,7 +17,7 @@ interface MeetingRepositoryInterface
 
     public function showMeeting($id);
 
-    public function updateMeeting(EditMeetingRequest $request, Meeting $meeting);
+    public function updateMeeting(Request $request, Meeting $meeting);
 
     public function deleteMeeting($id);
 

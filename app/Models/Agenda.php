@@ -29,6 +29,11 @@ class Agenda extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function uservotes()
+    {
+        return $this->belongsToMany('App\User', 'agendas_uservoteWe a')->withPivot(['vote']);
+    }
+
     public function discussions()
     {
         return $this->hasMany('App\Discussion');
