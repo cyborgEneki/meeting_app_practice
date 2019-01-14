@@ -107,11 +107,13 @@
                 <option value="">Select Attendee</option>
                 <option v-for="attendee in orderedUsers" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
             </select>
-            <el-button class="same-line" type="success" icon="el-icon-check" circle @click.prevent="addUser(dataHolder.user_id)">Save
+            <el-button class="same-line" type="success" icon="el-icon-check" circle
+                       @click.prevent="addUser(dataHolder.user_id)">Save
             </el-button>
             <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
         </div>
-        <el-button icon="el-icon-circle-plus-outline" class="same-line" v-show="dataItem !== 'user'" @click.prevent="startUserEdit"></el-button>
+        <el-button icon="el-icon-circle-plus-outline" class="same-line" v-show="dataItem !== 'user'"
+                   @click.prevent="startUserEdit"></el-button>
         <br>
         <br>
         <div v-for="user in orderedAttendees">
@@ -196,6 +198,25 @@
                                     </div>
                                     <div>Agenda Status {{ agendaStatuses[agenda.agenda_status].name }}</div>
                                     <div v-if="agenda.conclusion">Conclusion {{ agenda.conclusion }}</div>
+                                </div>
+
+                                <div>
+                                    <!--<a href="#" v-show="!agenda.vote || !agenda.vote.vote"-->
+                                    <!--@click.prevent="voteAgenda(1, agenda.id)">Up</a>-->
+                                    <!--<span v-show="agenda.vote && agenda.vote.vote">Up</span>-->
+
+                                    <!--<a href="#" v-show="!agenda.vote || agenda.vote.vote"-->
+                                    <!--@click.prevent="voteAgenda(0, agenda.id)">Down</a>-->
+                                    <!--<span v-show="agenda.vote && !agenda.vote.vote">Down</span>-->
+
+                                    <a href="#" :class="{disabled: agenda.vote && agenda.vote.vote}"
+                                       @click.prevent="(!agenda.vote || !agenda.vote.vote) && voteAgenda(1, agenda.id)">Up</a>
+
+                                    <a href="#" :class="{disabled: agenda.vote && !agenda.vote.vote}"
+                                       @click.prevent="(!agenda.vote || agenda.vote.vote) && voteAgenda(0, agenda.id)">Down</a>
+
+                                    <a href="#" v-show="agenda.vote" @click.prevent="voteAgenda(null, agenda.id, true)">Abstain</a>
+
                                 </div>
 
                                 <!--Create followup form-->
@@ -492,6 +513,7 @@
                 </div>
             </div>
         </form>
+
     </div>
 </template>
 
@@ -555,6 +577,10 @@
                 dataHolder: {},
                 success: false,
                 noteIcons: true,
+                voteOptions: false,
+                voteYes: false,
+                voteNo: false,
+                voteStatus: null,
                 statuses:
                     [
                         {id: 0, name: 'Pending'},
@@ -573,6 +599,8 @@
             }
         },
         mounted() {
+            this.voteStatus = (this.meeting.agendas.flat());
+
             document.body.addEventListener('keyup', e => {
                 if (e.keyCode === 27) {
                     this.dataHolder = {};
@@ -581,14 +609,59 @@
             })
         },
         methods: {
-            upvote () {
-                this.upvoted = !this.upvoted;
-                this.downvoted = false;
+            voteAgenda(thevote, agendaId, abstain = false) {
+                axios.post('api/agendas/vote', {agenda_id: agendaId, vote: thevote, abstain: abstain})
+                    .then((response) => {
+                        let agendaIndex = this.meeting.agendas.map(function (item) {
+                            return item.id
+                        }).indexOf(agendaId);
+                        if (abstain) {
+                            this.meeting.agendas[agendaIndex].vote = null;
+                        } else {
+                            this.meeting.agendas[agendaIndex].vote =
+                                {
+                                    agenda_id: agendaId,
+                                    vote: thevote
+                                };
+                        }
+                    })
             },
-            downvote: function() {
-                this.downvoted = !this.downvoted;
-                this.upvoted = false;
+            startVoting() {
+                this.voteOptions = true;
+                this.showYes();
+                this.showNo();
             },
+
+            showYes() {
+                if (this.voteStatus[0].vote.vote == 1) {
+                    this.voteYes = true;
+                } else if (this.voteStatus[0].vote.vote == ' ') {
+                    this.voteYes = true;
+                } else {
+                    this.voteYes = false;
+                }
+            },
+
+            showNo() {
+                if (this.voteStatus[0].vote.vote == 0) {
+                    this.voteNo = true;
+                } else if (this.voteStatus[0].vote.vote == ' ') {
+                    this.voteNo = true;
+                } else {
+                    this.voteNo = false;
+                }
+            },
+
+            setVoteStatus(status, id) {
+                let data = {
+                    'vote': status,
+                    'agenda_id': id,
+                };
+                axios.post('api/agendas/vote', data).then((response) => {
+                    this.voteOptions = true;
+                });
+            },
+
             startMeetingFieldEdit(theField) {
                 this.dataItem = theField;
                 this.dataHolder[theField] = this.meeting[theField];
@@ -598,10 +671,18 @@
                     .then((response) => {
                         this.meeting[theField] = this.dataHolder[theField];
                         if (theField === 'secretary_id') {
+                            /*
+                              loops and gets back array of only users id &
+                              checks if the secretary id exists in that array
+                              */
                             let userIndex = this.meeting.users.map(function (user) {
                                 return user.id;
                             }).indexOf(this.dataHolder.secretary_id);
 
+                            /*
+                                if it ísn't there userIndex will have -1 value else
+                                 will have the index where the secretary id is located within array
+                              */
                             if (userIndex === -1) {
                                 axios.post('api/meetings/attachuser', {
                                     meeting_id: this.meeting.id,
@@ -611,6 +692,7 @@
                                         this.meeting.users.push(this.choices.users[this.dataHolder.secretary_id]))
                             }
                         }
+
                         if (theField === 'chair_id') {
                             let userIndex = this.meeting.users.map(function (user) {
                                 return user.id;
@@ -624,7 +706,6 @@
                                     .then(
                                         this.meeting.users.push(this.choices.users[this.dataHolder.chair_id]))
                             }
-
                         }
 
                         this.dataHolder = {};
@@ -632,9 +713,11 @@
                     })
             },
             addUser: function (id) {
+
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
                 });
+
                 //only add user if that user isn't already in the meeting
                 if (!checkMtg.length) {
                     this.dataHolder.user_id = id;
@@ -880,5 +963,10 @@
 
     .link {
         cursor: pointer;
+    }
+
+    .disabled {
+        color: #CCCCCC;
+        text-decoration: none;
     }
 </style>

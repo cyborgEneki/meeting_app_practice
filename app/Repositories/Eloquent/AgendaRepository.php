@@ -13,6 +13,7 @@ use App\Http\Requests\AgendaRequest;
 use App\Meeting;
 use App\Http\Resources\AgendaResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AgendaRepository implements AgendaRepositoryInterface
 {
@@ -29,7 +30,6 @@ class AgendaRepository implements AgendaRepositoryInterface
 
     /**
      * @param Agenda $agenda
-     * @param $meetingId
      * @return bool|null
      * @throws \Exception
      */
@@ -42,7 +42,9 @@ class AgendaRepository implements AgendaRepositoryInterface
     {
         $agenda = Agenda::find($request->agenda_id);
         $agenda->uservotes()->detach(Auth::user()->id);
-        $agenda->uservotes()->attach(Auth::user()->id, ['vote'=>$request->vote]);
+        if (!$request->abstain) {
+            $agenda->uservotes()->attach(Auth::user()->id, ['vote'=>$request->vote]);
+        }
         return;
     }
 }

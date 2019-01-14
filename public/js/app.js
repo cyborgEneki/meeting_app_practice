@@ -110705,7 +110705,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-70c50684] {\n    display: inline-block;\n}\n.link[data-v-70c50684] {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-70c50684] {\n    display: inline-block;\n}\n.link[data-v-70c50684] {\n    cursor: pointer;\n}\n.disabled[data-v-70c50684] {\n    color: #CCCCCC;\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -110719,6 +110719,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(51);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -111275,12 +111297,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             dataHolder: {},
             success: false,
             noteIcons: true,
+            voteOptions: false,
+            voteYes: false,
+            voteNo: false,
+            voteStatus: null,
             statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
             agendaStatuses: [{ id: 0, name: 'Proposed' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }, { id: 3, name: 'Complete: discussed and finalized' }, { id: 4, name: 'Deferred: not yet discussed' }, { id: 5, name: 'Dropped: will not be discussed' }]
         };
     },
     mounted: function mounted() {
         var _this = this;
+
+        this.voteStatus = this.meeting.agendas.flat();
 
         document.body.addEventListener('keyup', function (e) {
             if (e.keyCode === 27) {
@@ -111291,66 +111319,120 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     methods: {
-        upvote: function upvote() {
-            this.upvoted = !this.upvoted;
-            this.downvoted = false;
-        },
+        voteAgenda: function voteAgenda(thevote, agendaId) {
+            var _this2 = this;
 
-        downvote: function downvote() {
-            this.downvoted = !this.downvoted;
-            this.upvoted = false;
+            var abstain = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+            axios.post('api/agendas/vote', { agenda_id: agendaId, vote: thevote, abstain: abstain }).then(function (response) {
+                var agendaIndex = _this2.meeting.agendas.map(function (item) {
+                    return item.id;
+                }).indexOf(agendaId);
+                if (abstain) {
+                    _this2.meeting.agendas[agendaIndex].vote = null;
+                } else {
+                    _this2.meeting.agendas[agendaIndex].vote = {
+                        agenda_id: agendaId,
+                        vote: thevote
+                    };
+                }
+            });
+        },
+        startVoting: function startVoting() {
+            this.voteOptions = true;
+            this.showYes();
+            this.showNo();
+        },
+        showYes: function showYes() {
+            if (this.voteStatus[0].vote.vote == 1) {
+                this.voteYes = true;
+            } else if (this.voteStatus[0].vote.vote == ' ') {
+                this.voteYes = true;
+            } else {
+                this.voteYes = false;
+            }
+        },
+        showNo: function showNo() {
+            if (this.voteStatus[0].vote.vote == 0) {
+                this.voteNo = true;
+            } else if (this.voteStatus[0].vote.vote == ' ') {
+                this.voteNo = true;
+            } else {
+                this.voteNo = false;
+            }
+        },
+        setVoteStatus: function setVoteStatus(status, id) {
+            var _this3 = this;
+
+            var data = {
+                'vote': status,
+                'agenda_id': id
+            };
+            axios.post('api/agendas/vote', data).then(function (response) {
+                _this3.voteOptions = true;
+            });
         },
         startMeetingFieldEdit: function startMeetingFieldEdit(theField) {
             this.dataItem = theField;
             this.dataHolder[theField] = this.meeting[theField];
         },
         saveMeetingFieldEdit: function saveMeetingFieldEdit(theField) {
-            var _this2 = this;
+            var _this4 = this;
 
             axios.put('api/meetings/' + this.meeting.id, this.dataHolder).then(function (response) {
-                _this2.meeting[theField] = _this2.dataHolder[theField];
+                _this4.meeting[theField] = _this4.dataHolder[theField];
                 if (theField === 'secretary_id') {
-                    var userIndex = _this2.meeting.users.map(function (user) {
+                    /*
+                      loops and gets back array of only users id &
+                      checks if the secretary id exists in that array
+                      */
+                    var userIndex = _this4.meeting.users.map(function (user) {
                         return user.id;
-                    }).indexOf(_this2.dataHolder.secretary_id);
+                    }).indexOf(_this4.dataHolder.secretary_id);
 
+                    /*
+                        if it ísn't there userIndex will have -1 value else
+                         will have the index where the secretary id is located within array
+                      */
                     if (userIndex === -1) {
                         axios.post('api/meetings/attachuser', {
-                            meeting_id: _this2.meeting.id,
-                            user_id: _this2.dataHolder.secretary_id
-                        }).then(_this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.secretary_id]));
+                            meeting_id: _this4.meeting.id,
+                            user_id: _this4.dataHolder.secretary_id
+                        }).then(_this4.meeting.users.push(_this4.choices.users[_this4.dataHolder.secretary_id]));
                     }
                 }
+
                 if (theField === 'chair_id') {
-                    var _userIndex = _this2.meeting.users.map(function (user) {
+                    var _userIndex = _this4.meeting.users.map(function (user) {
                         return user.id;
-                    }).indexOf(_this2.dataHolder.chair_id);
+                    }).indexOf(_this4.dataHolder.chair_id);
 
                     if (_userIndex === -1) {
                         axios.post('api/meetings/attachuser', {
-                            meeting_id: _this2.meeting.id,
-                            user_id: _this2.dataHolder.chair_id
-                        }).then(_this2.meeting.users.push(_this2.choices.users[_this2.dataHolder.chair_id]));
+                            meeting_id: _this4.meeting.id,
+                            user_id: _this4.dataHolder.chair_id
+                        }).then(_this4.meeting.users.push(_this4.choices.users[_this4.dataHolder.chair_id]));
                     }
                 }
 
-                _this2.dataHolder = {};
-                _this2.dataItem = '';
+                _this4.dataHolder = {};
+                _this4.dataItem = '';
             });
         },
 
         addUser: function addUser(id) {
-            var _this3 = this;
+            var _this5 = this;
 
             var checkMtg = this.meeting.users.filter(function (user) {
                 return user.id === id;
             });
+
             //only add user if that user isn't already in the meeting
             if (!checkMtg.length) {
                 this.dataHolder.user_id = id;
                 axios.post('/api/meetings/attachuser', this.dataHolder).then(function (response) {
-                    _this3.meeting.users.push(_this3.choices.users[id]);
-                    _this3.dataItem = '';
+                    _this5.meeting.users.push(_this5.choices.users[id]);
+                    _this5.dataItem = '';
                 });
             } else {
                 alert('User already exists');
@@ -111361,13 +111443,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder.meeting_id = this.meeting.id;
         },
         removeUsers: function removeUsers(id) {
-            var _this4 = this;
+            var _this6 = this;
 
             axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this4.meeting.users.map(function (item) {
+                var index = _this6.meeting.users.map(function (item) {
                     return item.id;
                 }).indexOf(id);
-                _this4.meeting.users.splice(index, 1);
+                _this6.meeting.users.splice(index, 1);
             });
         },
         startAgendaEdit: function startAgendaEdit(id) {
@@ -111378,26 +111460,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
         },
         saveAgendaEdit: function saveAgendaEdit(agendaId) {
-            var _this5 = this;
+            var _this7 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
 
             axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this5.meeting.agendas[agendaIndex] = Object.assign({}, _this5.dataHolder);
-                _this5.dataHolder = {};
-                _this5.dataItem = '';
+                _this7.meeting.agendas[agendaIndex] = Object.assign({}, _this7.dataHolder);
+                _this7.dataHolder = {};
+                _this7.dataItem = '';
             });
             this.dataItem !== 'agendaEdit' + agendaId;
         },
         saveAgendaCreate: function saveAgendaCreate() {
-            var _this6 = this;
+            var _this8 = this;
 
             axios.post('/api/agendas', this.dataHolder).then(function (response) {
-                _this6.dataHolder = {};
-                _this6.meeting.agendas.push(response.data);
-                _this6.dataItem = '';
+                _this8.dataHolder = {};
+                _this8.meeting.agendas.push(response.data);
+                _this8.dataItem = '';
             });
         },
         cancelAgenda: function cancelAgenda() {
@@ -111405,13 +111487,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         deleteAgenda: function deleteAgenda(agendaId) {
-            var _this7 = this;
+            var _this9 = this;
 
             axios.delete('/api/agendas/' + agendaId).then(function () {
-                var agendaindex = _this7.meeting.agendas.map(function (item) {
+                var agendaindex = _this9.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                _this7.meeting.agendas.splice(agendaindex, 1);
+                _this9.meeting.agendas.splice(agendaindex, 1);
             });
         },
         showAgendaCreate: function showAgendaCreate(meetingId) {
@@ -111441,7 +111523,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
         },
         saveFollowupEdit: function saveFollowupEdit(agendaId, followupId) {
-            var _this8 = this;
+            var _this10 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
@@ -111452,9 +111534,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(followupId);
 
             axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this8.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this8.dataHolder);
-                _this8.dataHolder = {};
-                _this8.dataItem = '';
+                _this10.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this10.dataHolder);
+                _this10.dataHolder = {};
+                _this10.dataItem = '';
             });
         },
         cancelFollowup: function cancelFollowup() {
@@ -111462,28 +111544,28 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this9 = this;
+            var _this11 = this;
 
             axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this9.meeting.agendas.map(function (item) {
+                var agendaindex = _this11.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
-                var followupindex = _this9.meeting.agendas[agendaindex].followups.map(function (item) {
+                var followupindex = _this11.meeting.agendas[agendaindex].followups.map(function (item) {
                     return item.id;
                 }).indexOf(followupId);
-                _this9.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+                _this11.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
             });
         },
         saveFollowup: function saveFollowup(agendaId) {
-            var _this10 = this;
+            var _this12 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
             axios.post('/api/followups', this.dataHolder).then(function (response) {
-                _this10.dataHolder = {};
-                _this10.meeting.agendas[agendaIndex].followups.push(response.data);
-                _this10.dataItem = '';
+                _this12.dataHolder = {};
+                _this12.meeting.agendas[agendaIndex].followups.push(response.data);
+                _this12.dataItem = '';
             });
         },
         showDiscussionCreate: function showDiscussionCreate(agendaId) {
@@ -111495,15 +111577,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         saveDiscussion: function saveDiscussion(agendaId) {
-            var _this11 = this;
+            var _this13 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
             }).indexOf(agendaId);
             axios.post('/api/discussions', this.dataHolder).then(function (response) {
-                _this11.dataHolder = {};
-                _this11.meeting.agendas[agendaIndex].discussions.push(response.data);
-                _this11.dataItem = '';
+                _this13.dataHolder = {};
+                _this13.meeting.agendas[agendaIndex].discussions.push(response.data);
+                _this13.dataItem = '';
             });
         },
         startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
@@ -111519,7 +111601,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
         },
         saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
-            var _this12 = this;
+            var _this14 = this;
 
             var agendaIndex = this.meeting.agendas.map(function (item) {
                 return item.id;
@@ -111530,24 +111612,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }).indexOf(discussionId);
 
             axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this12.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this12.dataHolder);
-                _this12.dataHolder = {};
-                _this12.dataItem = '';
+                _this14.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this14.dataHolder);
+                _this14.dataHolder = {};
+                _this14.dataItem = '';
             });
         },
         deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
-            var _this13 = this;
+            var _this15 = this;
 
             axios.delete('api/discussions/' + discussionId).then(function (response) {
-                var agendaIndex = _this13.meeting.agendas.map(function (item) {
+                var agendaIndex = _this15.meeting.agendas.map(function (item) {
                     return item.id;
                 }).indexOf(agendaId);
 
-                var discussionIndex = _this13.meeting.agendas[agendaIndex].discussions.map(function (item) {
+                var discussionIndex = _this15.meeting.agendas[agendaIndex].discussions.map(function (item) {
                     return item.id;
                 }).indexOf(discussionId);
 
-                _this13.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
+                _this15.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
             });
         },
         showNoteCreate: function showNoteCreate(meetingId) {
@@ -111555,12 +111637,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder.meeting_id = meetingId;
         },
         saveNoteCreate: function saveNoteCreate(meetingId) {
-            var _this14 = this;
+            var _this16 = this;
 
             axios.post('api/notes', this.dataHolder).then(function (response) {
-                _this14.dataHolder = {};
-                _this14.meeting.notes = response.data;
-                _this14.dataItem = '';
+                _this16.dataHolder = {};
+                _this16.meeting.notes = response.data;
+                _this16.dataItem = '';
             });
         },
         startNoteEdit: function startNoteEdit(noteId) {
@@ -111568,12 +111650,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataHolder = Object.assign({}, this.meeting.notes);
         },
         saveNoteEdit: function saveNoteEdit() {
-            var _this15 = this;
+            var _this17 = this;
 
             axios.put('api/notes/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this15.meeting.notes = Object.assign({}, _this15.dataHolder);
-                _this15.dataHolder = {};
-                _this15.dataItem = '';
+                _this17.meeting.notes = Object.assign({}, _this17.dataHolder);
+                _this17.dataHolder = {};
+                _this17.dataItem = '';
             });
         },
         cancelNote: function cancelNote() {
@@ -111581,11 +111663,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.dataItem = '';
         },
         deleteNote: function deleteNote(noteId) {
-            var _this16 = this;
+            var _this18 = this;
 
             axios.delete('api/notes/' + noteId).then(function (response) {
-                _this16.meeting.notes = {};
-                _this16.noteIcons = false;
+                _this18.meeting.notes = {};
+                _this18.noteIcons = false;
             });
         }
     }
@@ -112889,6 +112971,66 @@ var render = function() {
                               : _vm._e()
                           ]
                         ),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "a",
+                            {
+                              class: {
+                                disabled: agenda.vote && agenda.vote.vote
+                              },
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  ;(!agenda.vote || !agenda.vote.vote) &&
+                                    _vm.voteAgenda(1, agenda.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Up")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              class: {
+                                disabled: agenda.vote && !agenda.vote.vote
+                              },
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  ;(!agenda.vote || agenda.vote.vote) &&
+                                    _vm.voteAgenda(0, agenda.id)
+                                }
+                              }
+                            },
+                            [_vm._v("Down")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: agenda.vote,
+                                  expression: "agenda.vote"
+                                }
+                              ],
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.voteAgenda(null, agenda.id, true)
+                                }
+                              }
+                            },
+                            [_vm._v("Abstain")]
+                          )
+                        ]),
                         _vm._v(" "),
                         _c(
                           "div",
