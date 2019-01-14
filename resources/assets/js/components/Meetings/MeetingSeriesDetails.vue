@@ -17,11 +17,18 @@ export default {
       content: this.$store.state.content
     };
   },
+  created() {
+    axios.get("/api/meetingseries/" + this.$route.params.id).then(response => {
+      this.meetingseriesdetails = response.data;
+    });
+  },
   watch: {
     $route(to, from) {
-      axios.get("/#/meetingseries/" + this.$route.params.id).then(response => {
-        this.meetingseriesdetails = response.data;
-      });
+      axios
+        .get("/api/meetingseries/" + this.$route.params.id)
+        .then(response => {
+          this.meetingseriesdetails = response.data;
+        });
     }
   }
 };

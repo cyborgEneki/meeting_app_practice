@@ -1,29 +1,35 @@
 <template>
   <div>
-    <h2>Meeting Series</h2>
+    <h2 class="same-line">Meeting Series</h2>
     <router-link :to="{ name: 'addMeetingSeries' }" class="same-line">
       <el-button icon="el-icon-circle-plus-outline"></el-button>
     </router-link>
-
-    <div
-      v-for="eachmeetingseries in orderedMeetingSeries"
-      :key="eachmeetingseries.id"
-      class="meetingdiv"
-    >
-      <router-link
-        :to="{ name: 'meetingSeriesDetails', params: { name: eachmeetingseries.name, id: eachmeetingseries.id }}"
+    <div div class="col-md-3">
+      <div
+        v-for="eachmeetingseries in orderedMeetingSeries"
+        :key="eachmeetingseries.id"
+        class="meetingdiv"
       >
-        {{eachmeetingseries.name}}
+        <span style="margin-top: 20px;">
+          <router-link @click="showMeetingSeriesDetailsFunction"
+            :to="{ name: 'meetingSeriesDetails', params: { name: eachmeetingseries.name, id: eachmeetingseries.id }}"
+          >{{eachmeetingseries.name}}</router-link>
+        </span>
         <br>
-      </router-link>
-      {{eachmeetingseries.frequency}}
-      <br>
-      <router-link :to="{ name: 'editMeetingSeries' , params: { eachmeetingseries }}">
-        <el-button icon="el-icon-edit"></el-button>
-      </router-link>
-      <el-button icon="el-icon-delete same-line" @click.prevent="deleteMeetingSeries(eachmeetingseries.id)"></el-button>
+        {{eachmeetingseries.frequency}}
+        <br>
+        <router-link :to="{ name: 'editMeetingSeries' , params: { eachmeetingseries }}">
+          <el-button icon="el-icon-edit"></el-button>
+        </router-link>
+        <el-button
+          icon="el-icon-delete same-line"
+          @click.prevent="deleteMeetingSeries(eachmeetingseries.id)"
+        ></el-button>
+      </div>
     </div>
-    <router-view></router-view>
+    <div >
+      <router-view class="col-md-9" v-if="showMeetingSeriesDetails"></router-view>
+    </div>
   </div>
 </template>
 
@@ -33,6 +39,7 @@ export default {
   props: ["choices"],
   data() {
     return {
+      showMeetingSeriesDetails: false,
       meetingseries: []
     };
   },
@@ -42,6 +49,9 @@ export default {
     }
   },
   methods: {
+      showMeetingSeriesDetailsFunction() {
+          this.showMeetingSeriesDetails = !this.showMeetingSeriesDetails
+      }
     // deleteMeetingSeries(id) {
     //   axios.delete("/api/meetingseries/" + id).then(() => {
     //     let index = this.meetingseries
