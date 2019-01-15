@@ -48,7 +48,13 @@ class MeetingRepository implements MeetingRepositoryInterface
     {
         $request['creator_id'] = Auth::id();
         $meeting = Meeting::create($request->all());
-        $meeting->users()->attach($request->users);
+
+        if ($meeting->meetingseries_id) { 
+        $meetingseries = Meetingseries::findOrFail($meeting->meetingseries_id);
+        $usersInSeries = $meetingseries->users()->get();
+        $meeting->users()->attach($usersInSeries);
+        };
+        
         return new MeetingResource($meeting);
     }
 
@@ -60,8 +66,13 @@ class MeetingRepository implements MeetingRepositoryInterface
 
     public function updateMeeting(Request $request, Meeting $meeting)
     {
-        $meeting = $meeting->update($request->all());
+        $meeting->update($request->all());
 //        $meeting->users()->sync($request->users);
+        if ($meeting->meetingseries_id) { 
+            $meetingseries = Meetingseries::findOrFail($meeting->meetingseries_id);
+            $usersInSeries = $meetingseries->users()->get();
+            $meeting->users()->syncWithoutDetaching($usersInSeries);
+        };
 
         return new MeetingResource($meeting);
     }
