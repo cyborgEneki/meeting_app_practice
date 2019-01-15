@@ -92,6 +92,7 @@ export default {
     };
   },
   created() {
+    console.log(this.meetingseriesdetails);
     axios.get("/api/meetingseries/" + this.$route.params.id).then(response => {
       this.meetingseriesdetails = response.data;
     });

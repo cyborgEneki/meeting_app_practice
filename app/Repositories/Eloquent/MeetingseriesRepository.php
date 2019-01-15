@@ -28,9 +28,17 @@ class MeetingseriesRepository implements MeetingseriesRepositoryInterface
         return Meetingseries::create($request->all());
     }
 
+    public function showMeetingseries($id)
+    {
+        $meetingseries = Meetingseries::findOrFail($id);
+        return new MeetingseriesResource($meetingseries);
+    }
+
     public function updateMeetingseries(MeetingseriesRequest $request, Meetingseries $meetingseries)
     {
-        return $meetingseries->update($request->all());
+        $meetingseries->update($request->all());
+        // return new MeetingseriesResource($meetingseries);
+        return MeetingseriesResource::collection;
     }
 
     /**
