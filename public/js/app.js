@@ -116665,7 +116665,21 @@ var render = function() {
           })
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-9" }, [_c("router-view")], 1)
+        _c(
+          "div",
+          { staticClass: "col-md-9" },
+          [
+            _c("router-view", {
+              attrs: { choices: _vm.choices },
+              on: {
+                "update:choices": function($event) {
+                  _vm.choices = $event
+                }
+              }
+            })
+          ],
+          1
+        )
       ])
     ],
     1
@@ -120662,8 +120676,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    orderedUsers: function orderedUsers() {
+      return _.orderBy(this.choices.users, "first_name");
+    }
+  },
   data: function data() {
     return {
       meetingseriesdetails: {},
@@ -120677,6 +120702,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this = this;
 
+    console.log(this.choices);
     axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
       _this.meetingseriesdetails = response.data;
     });
@@ -120728,7 +120754,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -120742,9 +120768,49 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h2", [_vm._v("I")]),
+    _c("h4", [_vm._v("Meeting Series Name")]),
     _vm._v(" "),
-    _c("h2", [_vm._v(_vm._s(_vm.meetingseriesdetails))])
+    _c("p", [_vm._v(_vm._s(_vm.meetingseriesdetails.name))]),
+    _vm._v(" "),
+    _c("h4", [_vm._v("Frequency")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.meetingseriesdetails.frequency))]),
+    _vm._v(" "),
+    _c("h4", [_vm._v("Members")]),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.dataHolder.user_id,
+            expression: "dataHolder.user_id"
+          }
+        ],
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.$set(
+              _vm.dataHolder,
+              "user_id",
+              $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+            )
+          }
+        }
+      },
+      _vm._l(_vm.orderedUsers, function(user) {
+        return _c("option", { key: user.id }, [_vm._v(_vm._s(user.full_name))])
+      })
+    )
   ])
 }
 var staticRenderFns = []
