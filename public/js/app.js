@@ -111497,7 +111497,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this4.dataItem = '';
             });
         },
-
         addUser: function addUser(id) {
             var _this5 = this;
 
@@ -112644,7 +112643,7 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _vm._l(_vm.orderedAttendees, function(user) {
-        return _c("div", [
+        return _c("div", { key: user.id }, [
           _c("p", { staticClass: "same-line" }, [
             _vm._v(
               "\n            " + _vm._s(user.full_name) + "\n            "
@@ -120682,11 +120681,74 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["choices"],
   computed: {
     orderedUsers: function orderedUsers() {
       return _.orderBy(this.choices.users, "first_name");
+    },
+    orderedMembers: function orderedMembers() {
+      return _.orderBy(this.meetingseriesdetails.users, "first_name");
     }
   },
   data: function data() {
@@ -120694,7 +120756,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       meetingseriesdetails: {},
       editItem: "",
       dataHolder: {},
-      choices: [],
+      dataItem: "",
       mode: "r",
       content: this.$store.state.content
     };
@@ -120702,7 +120764,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this = this;
 
-    console.log(this.choices);
     axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
       _this.meetingseriesdetails = response.data;
     });
@@ -120715,6 +120776,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
         _this2.meetingseriesdetails = response.data;
       });
+    }
+  },
+  methods: {
+    addUser: function addUser(id) {
+      var _this3 = this;
+
+      var checkMtgSeries = this.meetingseriesdetails.users.filter(function (user) {
+        return user.id === id;
+      });
+
+      if (!checkMtgSeries.length) {
+        this.dataHolder.user_id = id;
+        axios.post("/api/meetingseries/attachuser", this.dataHolder).then(function (response) {
+          _this3.meetingseriesdetails.users.push(_this3.choices.users[id]);
+          _this3.dataItem = "";
+        });
+      } else {
+        alert("User already exists");
+      }
+    },
+    startUserEdit: function startUserEdit() {
+      this.dataItem = "user";
+      this.dataHolder.meetingseries_id = this.meetingseriesdetails.id;
+    },
+    removeUsers: function removeUsers(id) {
+      var _this4 = this;
+
+      axios.delete("/api/meetingseries/" + this.meetingseriesdetails.id + "/users/" + id).then(function (response) {
+        var index = _this4.meetingseriesdetails.users.map(function (item) {
+          return item.id;
+        }).indexOf(id);
+        _this4.meetingseriesdetails.users.splice(index, 1);
+      });
+    },
+    startMeetingSeriesFieldEdit: function startMeetingSeriesFieldEdit(theField) {
+      this.dataItem = theField;
+      this.dataHolder[theField] = this.meetingseriesdetails[theField];
+    },
+    saveMeetingSeriesFieldEdit: function saveMeetingSeriesFieldEdit(theField) {
+      var _this5 = this;
+
+      axios.put("/api/meetingseries/" + this.meetingseriesdetails.id, this.dataHolder).then(function (response) {
+        _this5.meetingseriesdetails[theField] = _this5.dataHolder[theField];
+      }), this.dataHolder = {};
+      this.dataItem = "";
     }
   }
 });
@@ -120754,7 +120860,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -120767,51 +120873,329 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h4", [_vm._v("Meeting Series Name")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.meetingseriesdetails.name))]),
-    _vm._v(" "),
-    _c("h4", [_vm._v("Frequency")]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.meetingseriesdetails.frequency))]),
-    _vm._v(" "),
-    _c("h4", [_vm._v("Members")]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
+  return _c(
+    "div",
+    [
+      _c("div", [
+        _c("h4", [_vm._v("Meeting Series Name")]),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem !== "name",
+                expression: "dataItem !== 'name'"
+              }
+            ],
+            staticClass: "link",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.startMeetingSeriesFieldEdit("name")
+              }
+            }
+          },
+          [_vm._v(_vm._s(_vm.meetingseriesdetails.name))]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem === "name",
+                expression: "dataItem === 'name'"
+              }
+            ]
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.name,
+                  expression: "dataHolder.name"
+                }
+              ],
+              domProps: { value: _vm.dataHolder.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.dataHolder, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "same-line",
+                attrs: { icon: "el-icon-check", type: "success", circle: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.saveMeetingSeriesFieldEdit("name")
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "same-line",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.dataItem = ""
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("h4", [_vm._v("Frequency")]),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem !== "frequency",
+                expression: "dataItem !== 'frequency'"
+              }
+            ],
+            staticClass: "link",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.startMeetingSeriesFieldEdit("frequency")
+              }
+            }
+          },
+          [_vm._v(_vm._s(_vm.meetingseriesdetails.frequency))]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem === "frequency",
+                expression: "dataItem === 'frequency'"
+              }
+            ]
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.frequency,
+                  expression: "dataHolder.frequency"
+                }
+              ],
+              domProps: { value: _vm.dataHolder.frequency },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.dataHolder, "frequency", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "same-line",
+                attrs: { icon: "el-icon-check", type: "success", circle: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.saveMeetingSeriesFieldEdit("frequency")
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "same-line",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.dataItem = ""
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("h4", { staticClass: "same-line" }, [_vm._v("Members")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem == "user",
+                expression: "dataItem == 'user'"
+              }
+            ]
+          },
+          [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dataHolder.user_id,
+                    expression: "dataHolder.user_id"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.dataHolder,
+                      "user_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Select Members")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.orderedUsers, function(user) {
+                  return _c("option", { domProps: { value: user.id } }, [
+                    _vm._v(_vm._s(user.full_name))
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "same-line",
+                attrs: { type: "success", icon: "el-icon-check", circle: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.addUser(_vm.dataHolder.user_id)
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "same-line",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.dataItem = ""
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("el-button", {
         directives: [
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.dataHolder.user_id,
-            expression: "dataHolder.user_id"
+            name: "show",
+            rawName: "v-show",
+            value: _vm.dataItem !== "user",
+            expression: "dataItem !== 'user'"
           }
         ],
+        staticClass: "same-line",
+        attrs: { icon: "el-icon-circle-plus-outline" },
         on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.$set(
-              _vm.dataHolder,
-              "user_id",
-              $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-            )
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.startUserEdit($event)
           }
         }
-      },
-      _vm._l(_vm.orderedUsers, function(user) {
-        return _c("option", { key: user.id }, [_vm._v(_vm._s(user.full_name))])
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.orderedMembers, function(user) {
+        return _c("div", { key: user.id }, [
+          _c("p", { staticClass: "same-line" }, [
+            _vm._v(_vm._s(user.full_name))
+          ]),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "el-icon-delete same-line",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.removeUsers(user.id)
+              }
+            }
+          })
+        ])
       })
-    )
-  ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

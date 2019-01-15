@@ -27,7 +27,8 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('medias', 'MediaController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
     Route::delete('meetingseries/{meetingseriesId}/users/{userId}', 'MeetingseriesController@detachUser');
-    Route::get('meetingseries/{meetingseriesId}/users/{userId}', 'MeetingseriesController@attachUser');
+    Route::post('meetings/attachuser', 'MeetingController@attachUser');
+    // Route::get('meetingseries/{meetingseriesId}/users/{userId}', 'MeetingseriesController@attachUser');
     Route::apiResource('meetingseries', 'MeetingseriesController');
     Route::apiResource('followups', 'FollowupController');
     Route::apiResource('discussions', 'DiscussionController');
@@ -38,7 +39,6 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::get('meetings/{meetingId}/notes', 'NoteController@getMeetingNotes')->name('meetingUserNote');
     Route::delete('meetings/{meetingId}/users/{userId}', 'MeetingController@detachUser');
     Route::get('meetings/{meetingId}/users/{userId}', 'MeetingController@attachUser');
-    Route::post('meetings/attachuser', 'MeetingController@attachUser');
     Route::get('meetings/choices', 'MeetingController@choices');
     Route::get('meetings/search', 'MeetingController@search');
     Route::apiResource('meetings', 'MeetingController');

@@ -116,7 +116,7 @@
                    @click.prevent="startUserEdit"></el-button>
         <br>
         <br>
-        <div v-for="user in orderedAttendees">
+        <div v-for="user in orderedAttendees" v-bind:key="user.id">
             <p class="same-line">
                 {{ user.full_name }}
                 <span v-if="user.id == meeting.chair_id">(Chair)</span>
@@ -712,7 +712,7 @@
                         this.dataItem = '';
                     })
             },
-            addUser: function (id) {
+            addUser (id) {
 
                 let checkMtg = this.meeting.users.filter(function (user) {
                     return user.id === id;
