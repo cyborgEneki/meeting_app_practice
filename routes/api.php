@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('venues', 'VenueController');
     Route::apiResource('medias', 'MediaController');
     Route::apiResource('meetingtypes', 'MeetingtypeController');
+    Route::delete('meetingseries/{meetingseriesId}/users/{userId}', 'MeetingseriesController@detachUser');
+    Route::get('meetingseries/{meetingseriesId}/users/{userId}', 'MeetingseriesController@attachUser');
     Route::apiResource('meetingseries', 'MeetingseriesController');
     Route::apiResource('followups', 'FollowupController');
     Route::apiResource('discussions', 'DiscussionController');

@@ -42,4 +42,18 @@ class MeetingseriesRepository implements MeetingseriesRepositoryInterface
     {
         return $meetingseries->delete($meetingseries);
     }
+
+    public function addUser($meetingseriesId, $userId)
+    {
+        $meeting = Meetingseries::findOrFail($meetingseriesId);
+        $meeting->users()->attach($userId);
+        return $meetingseries;
+    }
+
+    public function removeUser($meetingseriesId, $userId)
+    {
+        $meeting = Meetingseries::findOrFail($meetingseriesId);
+        $meeting->users()->detach($userId);
+        return $meetingseries;
+    }
 }

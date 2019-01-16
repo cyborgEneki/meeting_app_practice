@@ -17,7 +17,8 @@ class MeetingseriesResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'frequency' => $this->frequency
+            'frequency' => $this->frequency,
+            'users' => $this->users
         ];
     }
 }

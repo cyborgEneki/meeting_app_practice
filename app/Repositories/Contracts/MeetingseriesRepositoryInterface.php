@@ -21,4 +21,8 @@ interface MeetingseriesRepositoryInterface
     public function updateMeetingseries(MeetingseriesRequest $request, Meetingseries $meetingseries);
 
     public function deleteMeetingseries(Meetingseries $meetingseries);
+
+    public function addUser($meetingseriesId, $userId);
+
+    public function removeUser($meetingseriesId, $userId);
 }
