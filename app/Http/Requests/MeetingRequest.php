@@ -30,9 +30,6 @@ class MeetingRequest extends FormRequest
             'end_time' => 'required',
             'chair_id' => 'required',
             'secretary_id' => 'required',
-//            'agendas.*.topic' => 'required',
-//            'agendas.*.description' => 'required',
-//            'agendas.*.time_allocated' => 'required',
         ];
     }
     public function messages()
@@ -43,11 +40,7 @@ class MeetingRequest extends FormRequest
             'start_time.required' => 'The start time for this meeting is required!',
             'end_time.required' => 'An end time for this meeting is required!',
             'chair_id.required' => 'A chair for this meeting is required!',
-            'secretary_id.required' => 'Please assign a secretary before continuing',
-//            'agendas.*.topic.required' => 'Each agenda must have a topic',
-//            'agendas.*.description.required' => 'Each agenda must have a description',
-//            'agendas.*.time_allocated.required' => 'Each agenda must have a time allocated',
-
+            'secretary_id.required' => 'Please assign a secretary before continuing'
         ];
     }
 }

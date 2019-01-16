@@ -42,8 +42,9 @@ class MeetingseriesController extends Controller
         return $meetingseries;
     }
 
-    public function show(Meetingseries $meetingseries)
+    public function show($id)
     {
+        $meetingseries = $this->meetingseriesRepository->showMeetingseries($id);
         return $meetingseries;
     }
 

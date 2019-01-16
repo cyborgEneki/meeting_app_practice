@@ -5,6 +5,7 @@ import UsersIndex from './components/Meetings/UsersIndex'
 import MediaIndex from './components/Meetings/MediaIndex'
 import MeetingTypeIndex from './components/Meetings/MeetingTypeIndex'
 import MeetingSeriesIndex from './components/Meetings/MeetingSeriesIndex'
+import MeetingSeriesDetails from './components/Meetings/MeetingSeriesDetails'
 import MeetingAdd from './components/Meetings/partials/MeetingAdd'
 import UserAdd  from './components/Meetings/partials/users/UserAdd'
 import VenueAdd from './components/Meetings/partials/venues/VenueAdd'
@@ -41,6 +42,13 @@ const router = new VueRouter({
             path: '/meeting_series',
             name: 'meetingSeries',
             component: MeetingSeriesIndex,
+            children: [
+                {
+                    path: '/meeting-series-details/:id',
+                    name: 'meetingSeriesDetails',
+                    component: MeetingSeriesDetails,
+                }
+            ]
         },
         {
             path: '/medias',

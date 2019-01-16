@@ -28,9 +28,17 @@ class MeetingseriesRepository implements MeetingseriesRepositoryInterface
         return Meetingseries::create($request->all());
     }
 
+    public function showMeetingseries($id)
+    {
+        $meetingseries = Meetingseries::findOrFail($id);
+        return new MeetingseriesResource($meetingseries);
+    }
+
     public function updateMeetingseries(MeetingseriesRequest $request, Meetingseries $meetingseries)
     {
-        return $meetingseries->update($request->all());
+        $meetingseries->update($request->all());
+        return new MeetingseriesResource($meetingseries);
+        // return MeetingseriesResource::collection;
     }
 
     /**
@@ -45,15 +53,15 @@ class MeetingseriesRepository implements MeetingseriesRepositoryInterface
 
     public function addUser($meetingseriesId, $userId)
     {
-        $meeting = Meetingseries::findOrFail($meetingseriesId);
-        $meeting->users()->attach($userId);
+        $meetingseries = Meetingseries::findOrFail($meetingseriesId);
+        $meetingseries->users()->attach($userId);
         return $meetingseries;
     }
 
     public function removeUser($meetingseriesId, $userId)
     {
-        $meeting = Meetingseries::findOrFail($meetingseriesId);
-        $meeting->users()->detach($userId);
+        $meetingseries = Meetingseries::findOrFail($meetingseriesId);
+        $meetingseries->users()->detach($userId);
         return $meetingseries;
     }
 }
