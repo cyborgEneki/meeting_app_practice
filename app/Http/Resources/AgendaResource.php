@@ -18,6 +18,14 @@ class AgendaResource extends JsonResource
 
         $vote = ($agenda) ? $this->uservotes->where('pivot.agenda_id', $this->id)->first()->pivot : null;
 
+        $agendaRelForward = $this->agendaRelForward->pluck('id');
+
+        $agendaRelBackward = $this->agendaRelBackward->pluck('id');
+
+        $agendas = $agendaRelForward->merge($agendaRelBackward);
+        
+        $agendas = $agendas->unique();
+        
         return
             [
                 'id' => $this->id,
@@ -30,7 +38,8 @@ class AgendaResource extends JsonResource
                 'conclusion' => $this->conclusion,
                 'followups' => FollowupResource::collection($this->followups),
                 'discussions' => DiscussionResource::collection($this->discussions),
-                'vote' => $vote
+                'vote' => $vote,
+                'related_agendas' => $agendas
             ];
     }
 }

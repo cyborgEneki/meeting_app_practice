@@ -111393,7 +111393,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this.dataHolder = {};
                 _this.dataItem = '';
             }
-        });
+        }), console.log(this.meeting);
     },
 
     methods: {

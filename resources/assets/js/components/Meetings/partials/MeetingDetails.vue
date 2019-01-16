@@ -606,7 +606,9 @@
                     this.dataHolder = {};
                     this.dataItem = '';
                 }
-            })
+            }),
+
+            console.log(this.meeting);
         },
         methods: {
             voteAgenda(thevote, agendaId, abstain = false) {
