@@ -67,6 +67,6 @@ class Agenda extends Model
     
     public function agendaRelBackward()
     {
-        return $this->belongsToMany('App\Agenda', 'agenda_self', 'agendatarge_id', 'agendatarget_id');
+        return $this->belongsToMany('App\Agenda', 'agenda_self', 'agendatarget_id', 'agendasource_id');
     }
 }
