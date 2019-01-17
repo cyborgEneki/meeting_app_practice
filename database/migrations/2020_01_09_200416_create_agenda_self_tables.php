@@ -19,7 +19,6 @@ class CreateAgendaSelfTables extends Migration
             $table->foreign('agendatarget_id')->references('id')->on('agendas');
             $table->unsignedInteger('agendasource_id');
             $table->foreign('agendasource_id')->references('id')->on('agendas');
-            $table->string('vote');
             $table->timestamps();
         });
     }

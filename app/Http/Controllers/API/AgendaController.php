@@ -70,4 +70,10 @@ class AgendaController extends Controller
         $this->agendaRepository->deleteAgenda($agenda);
         return response()->json(['You have successfully deleted your agenda.'],  200);
     }
+
+    public function relate(Request $request) 
+    {
+        $this->agendaRepository->relateAgenda($request);
+        return response()->json(['You have successfully linked your agenda.'], 200);
+    }
 }
