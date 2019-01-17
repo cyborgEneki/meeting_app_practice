@@ -122,9 +122,12 @@ class MeetingController extends Controller
         $meetingtypes = $meetingtypes->keyBy('id');
         $meetingtypes = ['meetingtypes' => $meetingtypes];
 
-        $choices = array_merge($users, $venues, $media, $meetingseries, $meetingtypes);
-        return response()->json($choices, 200);
+        $agendas = Agenda::take(10)->get();
+        $agendas = $agendas->keyBy('id');
+        $agendas = ['agendas' => $agendas];
 
+        $choices = array_merge($users, $venues, $media, $meetingseries, $meetingtypes, $agendas);
+        return response()->json($choices, 200);
     }
 
     public function search(Request $request)

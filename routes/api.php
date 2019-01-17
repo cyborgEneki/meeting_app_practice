@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:api'], function ()
     Route::apiResource('meetingseries', 'MeetingseriesController');
     Route::apiResource('followups', 'FollowupController');
     Route::apiResource('discussions', 'DiscussionController');
+    Route::post('agendas/relate', 'AgendaController@relate');
     Route::apiResource('agendas', 'AgendaController');
 //    Route::apiresource('roles', 'RoleController');
     Route::apiresource('users', 'UserController');

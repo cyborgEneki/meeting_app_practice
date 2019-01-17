@@ -59,4 +59,14 @@ class Agenda extends Model
     {
         return $this->user()->first();
     }
+
+    public function agendaRelForward()
+    {
+        return $this->belongsToMany('App\Agenda', 'agenda_self', 'agendasource_id', 'agendatarget_id');
+    }
+    
+    public function agendaRelBackward()
+    {
+        return $this->belongsToMany('App\Agenda', 'agenda_self', 'agendatarget_id', 'agendasource_id');
+    }
 }

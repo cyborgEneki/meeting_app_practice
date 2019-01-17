@@ -110783,7 +110783,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-70c50684] {\n    display: inline-block;\n}\n.link[data-v-70c50684] {\n    cursor: pointer;\n}\n.disabled[data-v-70c50684] {\n    color: #CCCCCC;\n    text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-70c50684] {\n  display: inline-block;\n}\n.link[data-v-70c50684] {\n  cursor: pointer;\n}\n.disabled[data-v-70c50684] {\n  color: #cccccc;\n  text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -111316,438 +111316,674 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['choices'],
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        meeting: 'meeting'
-    }), {
-        orderedUsers: function orderedUsers() {
-            return _.orderBy(this.choices.users, 'first_name');
-        },
-        orderedVenues: function orderedVenues() {
-            return _.orderBy(this.choices.venues, 'name');
-        },
-        orderedAttendees: function orderedAttendees() {
-            return _.orderBy(this.meeting.users, 'first_name');
-        },
-        orderedMedia: function orderedMedia() {
-            return _.orderBy(this.choices.media, 'media');
-        },
-        orderedMeetingTypes: function orderedMeetingTypes() {
-            return _.orderBy(this.choices.meetingtypes, 'name');
-        },
-        orderedMeetingSeries: function orderedMeetingSeries() {
-            return _.orderBy(this.choices.meetingseries, 'name');
-        },
-        isAgendaComplete: function isAgendaComplete() {
-            return this.dataHolder.topic && this.dataHolder.user_id;
-        },
-        isFollowupComplete: function isFollowupComplete() {
-            return this.dataHolder.action && this.dataHolder.timeline;
-        },
-        isDiscussionComplete: function isDiscussionComplete() {
-            return this.dataHolder.description;
-        },
-        refDate: function refDate() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            return yyyy + '-' + mm + '-' + dd;
-        }
-    }),
-    data: function data() {
-        return {
-            upvoted: false,
-            downvoted: false,
-            dataItem: '',
-            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-            users: [],
-            dataHolder: {},
-            success: false,
-            noteIcons: true,
-            voteOptions: false,
-            voteYes: false,
-            voteNo: false,
-            voteStatus: null,
-            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
-            agendaStatuses: [{ id: 0, name: 'Proposed' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }, { id: 3, name: 'Complete: discussed and finalized' }, { id: 4, name: 'Deferred: not yet discussed' }, { id: 5, name: 'Dropped: will not be discussed' }]
-        };
+  props: ["choices"],
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+    meeting: "meeting"
+  }), {
+    orderedUsers: function orderedUsers() {
+      return _.orderBy(this.choices.users, "first_name");
     },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.voteStatus = this.meeting.agendas.flat();
-
-        document.body.addEventListener('keyup', function (e) {
-            if (e.keyCode === 27) {
-                _this.dataHolder = {};
-                _this.dataItem = '';
-            }
-        });
+    orderedVenues: function orderedVenues() {
+      return _.orderBy(this.choices.venues, "name");
     },
-
-    methods: {
-        voteAgenda: function voteAgenda(thevote, agendaId) {
-            var _this2 = this;
-
-            var abstain = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-            axios.post('api/agendas/vote', { agenda_id: agendaId, vote: thevote, abstain: abstain }).then(function (response) {
-                var agendaIndex = _this2.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                if (abstain) {
-                    _this2.meeting.agendas[agendaIndex].vote = null;
-                } else {
-                    _this2.meeting.agendas[agendaIndex].vote = {
-                        agenda_id: agendaId,
-                        vote: thevote
-                    };
-                }
-            });
-        },
-        startVoting: function startVoting() {
-            this.voteOptions = true;
-            this.showYes();
-            this.showNo();
-        },
-        showYes: function showYes() {
-            if (this.voteStatus[0].vote.vote == 1) {
-                this.voteYes = true;
-            } else if (this.voteStatus[0].vote.vote == ' ') {
-                this.voteYes = true;
-            } else {
-                this.voteYes = false;
-            }
-        },
-        showNo: function showNo() {
-            if (this.voteStatus[0].vote.vote == 0) {
-                this.voteNo = true;
-            } else if (this.voteStatus[0].vote.vote == ' ') {
-                this.voteNo = true;
-            } else {
-                this.voteNo = false;
-            }
-        },
-        setVoteStatus: function setVoteStatus(status, id) {
-            var _this3 = this;
-
-            var data = {
-                'vote': status,
-                'agenda_id': id
-            };
-            axios.post('api/agendas/vote', data).then(function (response) {
-                _this3.voteOptions = true;
-            });
-        },
-        startMeetingFieldEdit: function startMeetingFieldEdit(theField) {
-            this.dataItem = theField;
-            this.dataHolder[theField] = this.meeting[theField];
-        },
-        saveMeetingFieldEdit: function saveMeetingFieldEdit(theField) {
-            var _this4 = this;
-
-            axios.put('api/meetings/' + this.meeting.id, this.dataHolder).then(function (response) {
-                _this4.meeting[theField] = _this4.dataHolder[theField];
-                if (theField === 'secretary_id') {
-                    /*
-                      loops and gets back array of only users id &
-                      checks if the secretary id exists in that array
-                      */
-                    var userIndex = _this4.meeting.users.map(function (user) {
-                        return user.id;
-                    }).indexOf(_this4.dataHolder.secretary_id);
-
-                    /*
-                        if it ísn't there userIndex will have -1 value else
-                         will have the index where the secretary id is located within array
-                      */
-                    if (userIndex === -1) {
-                        axios.post('api/meetings/attachuser', {
-                            meeting_id: _this4.meeting.id,
-                            user_id: _this4.dataHolder.secretary_id
-                        }).then(_this4.meeting.users.push(_this4.choices.users[_this4.dataHolder.secretary_id]));
-                    }
-                }
-
-                if (theField === 'chair_id') {
-                    var _userIndex = _this4.meeting.users.map(function (user) {
-                        return user.id;
-                    }).indexOf(_this4.dataHolder.chair_id);
-
-                    if (_userIndex === -1) {
-                        axios.post('api/meetings/attachuser', {
-                            meeting_id: _this4.meeting.id,
-                            user_id: _this4.dataHolder.chair_id
-                        }).then(_this4.meeting.users.push(_this4.choices.users[_this4.dataHolder.chair_id]));
-                    }
-                }
-
-                _this4.dataHolder = {};
-                _this4.dataItem = '';
-            });
-        },
-        addUser: function addUser(id) {
-            var _this5 = this;
-
-            var checkMtg = this.meeting.users.filter(function (user) {
-                return user.id === id;
-            });
-
-            //only add user if that user isn't already in the meeting
-            if (!checkMtg.length) {
-                this.dataHolder.user_id = id;
-                axios.post('/api/meetings/attachuser', this.dataHolder).then(function (response) {
-                    _this5.meeting.users.push(_this5.choices.users[id]);
-                    _this5.dataItem = '';
-                });
-            } else {
-                alert('User already exists');
-            }
-        },
-        startUserEdit: function startUserEdit() {
-            this.dataItem = 'user';
-            this.dataHolder.meeting_id = this.meeting.id;
-        },
-        removeUsers: function removeUsers(id) {
-            var _this6 = this;
-
-            axios.delete('/api/meetings/' + this.meeting.id + '/users/' + id).then(function (response) {
-                var index = _this6.meeting.users.map(function (item) {
-                    return item.id;
-                }).indexOf(id);
-                _this6.meeting.users.splice(index, 1);
-            });
-        },
-        startAgendaEdit: function startAgendaEdit(id) {
-            this.dataItem = 'agendaEdit' + id;
-            var index = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(id);
-            this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
-        },
-        saveAgendaEdit: function saveAgendaEdit(agendaId) {
-            var _this7 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            axios.put('/api/agendas/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this7.meeting.agendas[agendaIndex] = Object.assign({}, _this7.dataHolder);
-                _this7.dataHolder = {};
-                _this7.dataItem = '';
-            });
-            this.dataItem !== 'agendaEdit' + agendaId;
-        },
-        saveAgendaCreate: function saveAgendaCreate() {
-            var _this8 = this;
-
-            axios.post('/api/agendas', this.dataHolder).then(function (response) {
-                _this8.dataHolder = {};
-                _this8.meeting.agendas.push(response.data);
-                _this8.dataItem = '';
-            });
-        },
-        cancelAgenda: function cancelAgenda() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        deleteAgenda: function deleteAgenda(agendaId) {
-            var _this9 = this;
-
-            axios.delete('/api/agendas/' + agendaId).then(function () {
-                var agendaindex = _this9.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                _this9.meeting.agendas.splice(agendaindex, 1);
-            });
-        },
-        showAgendaCreate: function showAgendaCreate(meetingId) {
-            this.dataItem = 'agendaCreate';
-            this.dataHolder.meeting_id = meetingId;
-            this.dataHolder.agenda_status = 0;
-        },
-        showFollowupCreate: function showFollowupCreate(agendaId) {
-            this.dataItem = 'followupCreate' + agendaId;
-            this.dataHolder.agenda_id = agendaId;
-            this.dataHolder.status = 0;
-        },
-        startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
-            //get the index of the agenda you are editing in
-            var agendaindex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            //get the index of the followup to be edited
-            var followupindex = this.meeting.agendas[agendaindex].followups.map(function (item) {
-                return item.id;
-            }).indexOf(followupId);
-
-            this.dataItem = 'followupEdit' + followupId;
-
-            //load the values of the followup from meeting into the dataHolder variable in data
-            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
-        },
-        saveFollowupEdit: function saveFollowupEdit(agendaId, followupId) {
-            var _this10 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            var followupIndex = this.meeting.agendas[agendaIndex].followups.map(function (item) {
-                return item.id;
-            }).indexOf(followupId);
-
-            axios.put('/api/followups/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this10.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this10.dataHolder);
-                _this10.dataHolder = {};
-                _this10.dataItem = '';
-            });
-        },
-        cancelFollowup: function cancelFollowup() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        deleteFollowup: function deleteFollowup(followupId, agendaId) {
-            var _this11 = this;
-
-            axios.delete('/api/followups/' + followupId).then(function (response) {
-                var agendaindex = _this11.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-                var followupindex = _this11.meeting.agendas[agendaindex].followups.map(function (item) {
-                    return item.id;
-                }).indexOf(followupId);
-                _this11.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
-            });
-        },
-        saveFollowup: function saveFollowup(agendaId) {
-            var _this12 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-            axios.post('/api/followups', this.dataHolder).then(function (response) {
-                _this12.dataHolder = {};
-                _this12.meeting.agendas[agendaIndex].followups.push(response.data);
-                _this12.dataItem = '';
-            });
-        },
-        showDiscussionCreate: function showDiscussionCreate(agendaId) {
-            this.dataItem = 'discussionCreate' + agendaId;
-            this.dataHolder.agenda_id = agendaId;
-        },
-        cancelDiscussion: function cancelDiscussion() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        saveDiscussion: function saveDiscussion(agendaId) {
-            var _this13 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-            axios.post('/api/discussions', this.dataHolder).then(function (response) {
-                _this13.dataHolder = {};
-                _this13.meeting.agendas[agendaIndex].discussions.push(response.data);
-                _this13.dataItem = '';
-            });
-        },
-        startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
-                return item.id;
-            }).indexOf(discussionId);
-
-            this.dataItem = 'discussionEdit' + discussionId;
-            this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
-        },
-        saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
-            var _this14 = this;
-
-            var agendaIndex = this.meeting.agendas.map(function (item) {
-                return item.id;
-            }).indexOf(agendaId);
-
-            var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
-                return item.id;
-            }).indexOf(discussionId);
-
-            axios.put('/api/discussions/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this14.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this14.dataHolder);
-                _this14.dataHolder = {};
-                _this14.dataItem = '';
-            });
-        },
-        deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
-            var _this15 = this;
-
-            axios.delete('api/discussions/' + discussionId).then(function (response) {
-                var agendaIndex = _this15.meeting.agendas.map(function (item) {
-                    return item.id;
-                }).indexOf(agendaId);
-
-                var discussionIndex = _this15.meeting.agendas[agendaIndex].discussions.map(function (item) {
-                    return item.id;
-                }).indexOf(discussionId);
-
-                _this15.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
-            });
-        },
-        showNoteCreate: function showNoteCreate(meetingId) {
-            this.dataItem = 'noteCreate';
-            this.dataHolder.meeting_id = meetingId;
-        },
-        saveNoteCreate: function saveNoteCreate(meetingId) {
-            var _this16 = this;
-
-            axios.post('api/notes', this.dataHolder).then(function (response) {
-                _this16.dataHolder = {};
-                _this16.meeting.notes = response.data;
-                _this16.dataItem = '';
-            });
-        },
-        startNoteEdit: function startNoteEdit(noteId) {
-            this.dataItem = 'noteEdit';
-            this.dataHolder = Object.assign({}, this.meeting.notes);
-        },
-        saveNoteEdit: function saveNoteEdit() {
-            var _this17 = this;
-
-            axios.put('api/notes/' + this.dataHolder.id, this.dataHolder).then(function (response) {
-                _this17.meeting.notes = Object.assign({}, _this17.dataHolder);
-                _this17.dataHolder = {};
-                _this17.dataItem = '';
-            });
-        },
-        cancelNote: function cancelNote() {
-            this.dataHolder = {};
-            this.dataItem = '';
-        },
-        deleteNote: function deleteNote(noteId) {
-            var _this18 = this;
-
-            axios.delete('api/notes/' + noteId).then(function (response) {
-                _this18.meeting.notes = {};
-                _this18.noteIcons = false;
-            });
-        }
+    orderedAttendees: function orderedAttendees() {
+      return _.orderBy(this.meeting.users, "first_name");
+    },
+    orderedMedia: function orderedMedia() {
+      return _.orderBy(this.choices.media, "media");
+    },
+    orderedMeetingTypes: function orderedMeetingTypes() {
+      return _.orderBy(this.choices.meetingtypes, "name");
+    },
+    orderedMeetingSeries: function orderedMeetingSeries() {
+      return _.orderBy(this.choices.meetingseries, "name");
+    },
+    isAgendaComplete: function isAgendaComplete() {
+      return this.dataHolder.topic && this.dataHolder.user_id;
+    },
+    isFollowupComplete: function isFollowupComplete() {
+      return this.dataHolder.action && this.dataHolder.timeline;
+    },
+    isDiscussionComplete: function isDiscussionComplete() {
+      return this.dataHolder.description;
+    },
+    refDate: function refDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      return yyyy + "-" + mm + "-" + dd;
     }
+  }),
+  data: function data() {
+    return {
+      upvoted: false,
+      downvoted: false,
+      dataItem: "",
+      timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
+      users: [],
+      dataHolder: {},
+      success: false,
+      noteIcons: true,
+      voteOptions: false,
+      voteYes: false,
+      voteNo: false,
+      voteStatus: null,
+      statuses: [{ id: 0, name: "Pending" }, { id: 1, name: "Accepted" }, { id: 2, name: "Rejected" }],
+      agendaStatuses: [{ id: 0, name: "Proposed" }, { id: 1, name: "Accepted" }, { id: 2, name: "Rejected" }, { id: 3, name: "Complete: discussed and finalized" }, { id: 4, name: "Deferred: not yet discussed" }, { id: 5, name: "Dropped: will not be discussed" }]
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.voteStatus = this.meeting.agendas.flat();
+
+    document.body.addEventListener("keyup", function (e) {
+      if (e.keyCode === 27) {
+        _this.dataHolder = {};
+        _this.dataItem = "";
+      }
+    }), console.log(this.meeting);
+  },
+
+  methods: {
+    showAgendaRelate: function showAgendaRelate(agendaId) {
+      this.dataItem = "agendaRelate" + agendaId;
+      this.dataHolder.agendasource_id = agendaId;
+    },
+    saveAgendaRelation: function saveAgendaRelation() {
+      var _this2 = this;
+
+      this.dataHolder.action = "relate";
+      axios.post("/api/agendas/relate", this.dataHolder).then(function (response) {
+        _this2.dataItem = "";
+        //get the index of the source agenda (agenda you are linking from)
+        var agendaIndex = _this2.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(_this2.dataHolder.agendasource_id);
+        //update the list in the agenda you are working on (source)
+        _this2.meeting.agendas[agendaIndex].related_agendas.push(_this2.dataHolder.agendatarget_id);
+
+        //add to list of agenda linked to (target)
+        var agendaIndex = _this2.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(_this2.dataHolder.agendatarget_id);
+        //if agenda linked to is in this meeting, update it. Ideally we would update regardless
+        if (agendaIndex !== -1) {
+          _this2.meeting.agendas[agendaIndex].related_agendas.push(_this2.dataHolder.agendasource_id);
+        }
+        _this2.dataHolder = {};
+      });
+    },
+    deleteAgendaRelation: function deleteAgendaRelation(sourceId, targetId) {
+      var _this3 = this;
+
+      //set up data to send
+      this.dataHolder.agendasource_id = sourceId;
+      this.dataHolder.agendatarget_id = targetId;
+      this.dataHolder.action = "unrelate";
+      axios.post("/api/agendas/relate", this.dataHolder).then(function (response) {
+        _this3.dataHolder = {};
+        //remove from current agenda
+        var agendaIndex = _this3.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(sourceId);
+        var relAgendaIndex = _this3.meeting.agendas[agendaIndex].related_agendas.map(function (item) {
+          return item.id;
+        }).indexOf(targetId);
+        _this3.meeting.agendas[agendaIndex].related_agendas.splice(relAgendaIndex, 1);
+
+        //delete from related agenda (target) in current meeting
+        var agendaIndex = _this3.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(targetId);
+        var relAgendaIndex = _this3.meeting.agendas[agendaIndex].related_agendas.map(function (item) {
+          return item.id;
+        }).indexOf(sourceId);
+        _this3.meeting.agendas[agendaIndex].related_agendas.splice(relAgendaIndex, 1);
+      });
+    },
+    voteAgenda: function voteAgenda(thevote, agendaId) {
+      var _this4 = this;
+
+      var abstain = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      axios.post("api/agendas/vote", {
+        agenda_id: agendaId,
+        vote: thevote,
+        abstain: abstain
+      }).then(function (response) {
+        var agendaIndex = _this4.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(agendaId);
+        if (abstain) {
+          _this4.meeting.agendas[agendaIndex].vote = null;
+        } else {
+          _this4.meeting.agendas[agendaIndex].vote = {
+            agenda_id: agendaId,
+            vote: thevote
+          };
+        }
+      });
+    },
+    isAgendaRelationComplete: function isAgendaRelationComplete() {
+      return this.dataHolder.agendatarget_id;
+    },
+    startVoting: function startVoting() {
+      this.voteOptions = true;
+      this.showYes();
+      this.showNo();
+    },
+    showYes: function showYes() {
+      if (this.voteStatus[0].vote.vote == 1) {
+        this.voteYes = true;
+      } else if (this.voteStatus[0].vote.vote == " ") {
+        this.voteYes = true;
+      } else {
+        this.voteYes = false;
+      }
+    },
+    showNo: function showNo() {
+      if (this.voteStatus[0].vote.vote == 0) {
+        this.voteNo = true;
+      } else if (this.voteStatus[0].vote.vote == " ") {
+        this.voteNo = true;
+      } else {
+        this.voteNo = false;
+      }
+    },
+    setVoteStatus: function setVoteStatus(status, id) {
+      var _this5 = this;
+
+      var data = {
+        vote: status,
+        agenda_id: id
+      };
+      axios.post("api/agendas/vote", data).then(function (response) {
+        _this5.voteOptions = true;
+      });
+    },
+    startMeetingFieldEdit: function startMeetingFieldEdit(theField) {
+      this.dataItem = theField;
+      this.dataHolder[theField] = this.meeting[theField];
+    },
+    saveMeetingFieldEdit: function saveMeetingFieldEdit(theField) {
+      var _this6 = this;
+
+      axios.put("api/meetings/" + this.meeting.id, this.dataHolder).then(function (response) {
+        _this6.meeting[theField] = _this6.dataHolder[theField];
+        if (theField === "secretary_id") {
+          /*
+                            loops and gets back array of only users id &
+                            checks if the secretary id exists in that array
+                            */
+          var userIndex = _this6.meeting.users.map(function (user) {
+            return user.id;
+          }).indexOf(_this6.dataHolder.secretary_id);
+
+          /*
+                              if it ísn't there userIndex will have -1 value else
+                               will have the index where the secretary id is located within array
+                            */
+          if (userIndex === -1) {
+            axios.post("api/meetings/attachuser", {
+              meeting_id: _this6.meeting.id,
+              user_id: _this6.dataHolder.secretary_id
+            }).then(_this6.meeting.users.push(_this6.choices.users[_this6.dataHolder.secretary_id]));
+          }
+        }
+
+        if (theField === "chair_id") {
+          var _userIndex = _this6.meeting.users.map(function (user) {
+            return user.id;
+          }).indexOf(_this6.dataHolder.chair_id);
+
+          if (_userIndex === -1) {
+            axios.post("api/meetings/attachuser", {
+              meeting_id: _this6.meeting.id,
+              user_id: _this6.dataHolder.chair_id
+            }).then(_this6.meeting.users.push(_this6.choices.users[_this6.dataHolder.chair_id]));
+          }
+        }
+
+        _this6.dataHolder = {};
+        _this6.dataItem = "";
+      });
+    },
+    addUser: function addUser(id) {
+      var _this7 = this;
+
+      var checkMtg = this.meeting.users.filter(function (user) {
+        return user.id === id;
+      });
+
+      //only add user if that user isn't already in the meeting
+      if (!checkMtg.length) {
+        this.dataHolder.user_id = id;
+        axios.post("/api/meetings/attachuser", this.dataHolder).then(function (response) {
+          _this7.meeting.users.push(_this7.choices.users[id]);
+          _this7.dataItem = "";
+        });
+      } else {
+        alert("User already exists");
+      }
+    },
+    startUserEdit: function startUserEdit() {
+      this.dataItem = "user";
+      this.dataHolder.meeting_id = this.meeting.id;
+    },
+    removeUsers: function removeUsers(id) {
+      var _this8 = this;
+
+      axios.delete("/api/meetings/" + this.meeting.id + "/users/" + id).then(function (response) {
+        var index = _this8.meeting.users.map(function (item) {
+          return item.id;
+        }).indexOf(id);
+        _this8.meeting.users.splice(index, 1);
+      });
+    },
+    startAgendaEdit: function startAgendaEdit(id) {
+      this.dataItem = "agendaEdit" + id;
+      var index = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(id);
+      this.dataHolder = Object.assign({}, this.meeting.agendas[index]);
+    },
+    saveAgendaEdit: function saveAgendaEdit(agendaId) {
+      var _this9 = this;
+
+      var agendaIndex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+
+      axios.put("/api/agendas/" + this.dataHolder.id, this.dataHolder).then(function (response) {
+        _this9.meeting.agendas[agendaIndex] = Object.assign({}, _this9.dataHolder);
+        _this9.dataHolder = {};
+        _this9.dataItem = "";
+      });
+      this.dataItem !== "agendaEdit" + agendaId;
+    },
+    saveAgendaCreate: function saveAgendaCreate() {
+      var _this10 = this;
+
+      axios.post("/api/agendas", this.dataHolder).then(function (response) {
+        _this10.dataHolder = {};
+        _this10.meeting.agendas.push(response.data);
+        _this10.dataItem = "";
+      });
+    },
+    cancelAgenda: function cancelAgenda() {
+      this.dataHolder = {};
+      this.dataItem = "";
+    },
+    deleteAgenda: function deleteAgenda(agendaId) {
+      var _this11 = this;
+
+      axios.delete("/api/agendas/" + agendaId).then(function () {
+        var agendaindex = _this11.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(agendaId);
+        _this11.meeting.agendas.splice(agendaindex, 1);
+      });
+    },
+    showAgendaCreate: function showAgendaCreate(meetingId) {
+      this.dataItem = "agendaCreate";
+      this.dataHolder.meeting_id = meetingId;
+      this.dataHolder.agenda_status = 0;
+    },
+    showFollowupCreate: function showFollowupCreate(agendaId) {
+      this.dataItem = "followupCreate" + agendaId;
+      this.dataHolder.agenda_id = agendaId;
+      this.dataHolder.status = 0;
+    },
+    startFollowupEdit: function startFollowupEdit(followupId, agendaId) {
+      //get the index of the agenda you are editing in
+      var agendaindex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+
+      //get the index of the followup to be edited
+      var followupindex = this.meeting.agendas[agendaindex].followups.map(function (item) {
+        return item.id;
+      }).indexOf(followupId);
+
+      this.dataItem = "followupEdit" + followupId;
+
+      //load the values of the followup from meeting into the dataHolder variable in data
+      this.dataHolder = Object.assign({}, this.meeting.agendas[agendaindex].followups[followupindex]);
+    },
+    saveFollowupEdit: function saveFollowupEdit(agendaId, followupId) {
+      var _this12 = this;
+
+      var agendaIndex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+
+      var followupIndex = this.meeting.agendas[agendaIndex].followups.map(function (item) {
+        return item.id;
+      }).indexOf(followupId);
+
+      axios.put("/api/followups/" + this.dataHolder.id, this.dataHolder).then(function (response) {
+        _this12.meeting.agendas[agendaIndex].followups[followupIndex] = Object.assign({}, _this12.dataHolder);
+        _this12.dataHolder = {};
+        _this12.dataItem = "";
+      });
+    },
+    cancelFollowup: function cancelFollowup() {
+      this.dataHolder = {};
+      this.dataItem = "";
+    },
+    deleteFollowup: function deleteFollowup(followupId, agendaId) {
+      var _this13 = this;
+
+      axios.delete("/api/followups/" + followupId).then(function (response) {
+        var agendaindex = _this13.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(agendaId);
+        var followupindex = _this13.meeting.agendas[agendaindex].followups.map(function (item) {
+          return item.id;
+        }).indexOf(followupId);
+        _this13.meeting.agendas[agendaindex].followups.splice(followupindex, 1);
+      });
+    },
+    saveFollowup: function saveFollowup(agendaId) {
+      var _this14 = this;
+
+      var agendaIndex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+      axios.post("/api/followups", this.dataHolder).then(function (response) {
+        _this14.dataHolder = {};
+        _this14.meeting.agendas[agendaIndex].followups.push(response.data);
+        _this14.dataItem = "";
+      });
+    },
+    showDiscussionCreate: function showDiscussionCreate(agendaId) {
+      this.dataItem = "discussionCreate" + agendaId;
+      this.dataHolder.agenda_id = agendaId;
+    },
+    cancelDiscussion: function cancelDiscussion() {
+      this.dataHolder = {};
+      this.dataItem = "";
+    },
+    saveDiscussion: function saveDiscussion(agendaId) {
+      var _this15 = this;
+
+      var agendaIndex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+      axios.post("/api/discussions", this.dataHolder).then(function (response) {
+        _this15.dataHolder = {};
+        _this15.meeting.agendas[agendaIndex].discussions.push(response.data);
+        _this15.dataItem = "";
+      });
+    },
+    startDiscussionEdit: function startDiscussionEdit(discussionId, agendaId) {
+      var agendaIndex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+
+      var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
+        return item.id;
+      }).indexOf(discussionId);
+
+      this.dataItem = "discussionEdit" + discussionId;
+      this.dataHolder = Object.assign({}, this.meeting.agendas[agendaIndex].discussions[discussionIndex]);
+    },
+    saveDiscussionEdit: function saveDiscussionEdit(agendaId, discussionId) {
+      var _this16 = this;
+
+      var agendaIndex = this.meeting.agendas.map(function (item) {
+        return item.id;
+      }).indexOf(agendaId);
+
+      var discussionIndex = this.meeting.agendas[agendaIndex].discussions.map(function (item) {
+        return item.id;
+      }).indexOf(discussionId);
+
+      axios.put("/api/discussions/" + this.dataHolder.id, this.dataHolder).then(function (response) {
+        _this16.meeting.agendas[agendaIndex].discussions[discussionIndex] = Object.assign({}, _this16.dataHolder);
+        _this16.dataHolder = {};
+        _this16.dataItem = "";
+      });
+    },
+    deleteDiscussion: function deleteDiscussion(discussionId, agendaId) {
+      var _this17 = this;
+
+      axios.delete("api/discussions/" + discussionId).then(function (response) {
+        var agendaIndex = _this17.meeting.agendas.map(function (item) {
+          return item.id;
+        }).indexOf(agendaId);
+
+        var discussionIndex = _this17.meeting.agendas[agendaIndex].discussions.map(function (item) {
+          return item.id;
+        }).indexOf(discussionId);
+
+        _this17.meeting.agendas[agendaIndex].discussions.splice(discussionIndex, 1);
+      });
+    },
+    showNoteCreate: function showNoteCreate(meetingId) {
+      this.dataItem = "noteCreate";
+      this.dataHolder.meeting_id = meetingId;
+    },
+    saveNoteCreate: function saveNoteCreate(meetingId) {
+      var _this18 = this;
+
+      axios.post("api/notes", this.dataHolder).then(function (response) {
+        _this18.dataHolder = {};
+        _this18.meeting.notes = response.data;
+        _this18.dataItem = "";
+      });
+    },
+    startNoteEdit: function startNoteEdit(noteId) {
+      this.dataItem = "noteEdit";
+      this.dataHolder = Object.assign({}, this.meeting.notes);
+    },
+    saveNoteEdit: function saveNoteEdit() {
+      var _this19 = this;
+
+      axios.put("api/notes/" + this.dataHolder.id, this.dataHolder).then(function (response) {
+        _this19.meeting.notes = Object.assign({}, _this19.dataHolder);
+        _this19.dataHolder = {};
+        _this19.dataItem = "";
+      });
+    },
+    cancelNote: function cancelNote() {
+      this.dataHolder = {};
+      this.dataItem = "";
+    },
+    deleteNote: function deleteNote(noteId) {
+      var _this20 = this;
+
+      axios.delete("api/notes/" + noteId).then(function (response) {
+        _this20.meeting.notes = {};
+        _this20.noteIcons = false;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -111782,7 +112018,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\n        " + _vm._s(_vm.meeting.name) + "\n    ")]
+        [_vm._v(_vm._s(_vm.meeting.name))]
       ),
       _vm._v(" "),
       _c(
@@ -111830,7 +112066,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -111872,7 +112108,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\n        " + _vm._s(_vm.meeting.date) + "\n    ")]
+        [_vm._v(_vm._s(_vm.meeting.date))]
       ),
       _vm._v(" "),
       _c(
@@ -111966,7 +112202,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -111987,7 +112223,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("h4", [_vm._v(" Start Time")]),
+      _c("h4", [_vm._v("Start Time")]),
       _vm._v(" "),
       _c(
         "p",
@@ -112008,7 +112244,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\n        " + _vm._s(_vm.meeting.start_time) + "\n    ")]
+        [_vm._v(_vm._s(_vm.meeting.start_time))]
       ),
       _vm._v(" "),
       _c(
@@ -112057,7 +112293,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -112099,7 +112335,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\n        " + _vm._s(_vm.meeting.end_time) + "\n    ")]
+        [_vm._v(_vm._s(_vm.meeting.end_time))]
       ),
       _vm._v(" "),
       _c(
@@ -112156,7 +112392,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -112198,13 +112434,7 @@ var render = function() {
             }
           }
         },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.choices.users[_vm.meeting.creator_id].full_name) +
-              "\n    "
-          )
-        ]
+        [_vm._v(_vm._s(_vm.choices.users[_vm.meeting.creator_id].full_name))]
       ),
       _vm._v(" "),
       _c(
@@ -112273,7 +112503,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -112315,13 +112545,7 @@ var render = function() {
             }
           }
         },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.choices.users[_vm.meeting.chair_id].full_name) +
-              "\n    "
-          )
-        ]
+        [_vm._v(_vm._s(_vm.choices.users[_vm.meeting.chair_id].full_name))]
       ),
       _vm._v(" "),
       _c(
@@ -112390,7 +112614,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -112432,13 +112656,7 @@ var render = function() {
             }
           }
         },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name) +
-              "\n    "
-          )
-        ]
+        [_vm._v(_vm._s(_vm.choices.users[_vm.meeting.secretary_id].full_name))]
       ),
       _vm._v(" "),
       _c(
@@ -112507,7 +112725,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -112528,7 +112746,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("h4", { staticClass: "same-line" }, [_vm._v(" Attendees")]),
+      _c("h4", { staticClass: "same-line" }, [_vm._v("Attendees")]),
       _vm._v(" "),
       _c(
         "div",
@@ -112598,7 +112816,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -112645,9 +112863,7 @@ var render = function() {
       _vm._l(_vm.orderedAttendees, function(user) {
         return _c("div", { key: user.id }, [
           _c("p", { staticClass: "same-line" }, [
-            _vm._v(
-              "\n            " + _vm._s(user.full_name) + "\n            "
-            ),
+            _vm._v("\n      " + _vm._s(user.full_name) + "\n      "),
             user.id == _vm.meeting.chair_id
               ? _c("span", [_vm._v("(Chair)")])
               : _vm._e(),
@@ -112688,7 +112904,7 @@ var render = function() {
         },
         [
           _c("div", [
-            _vm._v("\n            Topic *"),
+            _vm._v("\n      Topic *\n      "),
             _c("input", {
               directives: [
                 {
@@ -112712,7 +112928,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Description"),
+            _vm._v("\n      Description\n      "),
             _c("input", {
               directives: [
                 {
@@ -112736,7 +112952,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Time Allocated (minutes)\n            "),
+            _vm._v("\n      Time Allocated (minutes)\n      "),
             _c(
               "select",
               {
@@ -112779,7 +112995,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", [
-            _vm._v("\n            Agenda Status\n            "),
+            _vm._v("\n      Agenda Status\n      "),
             _c(
               "select",
               {
@@ -112819,7 +113035,13 @@ var render = function() {
                   return _c(
                     "option",
                     { domProps: { value: agendaStatus.id } },
-                    [_vm._v(_vm._s(agendaStatus.name) + "\n                ")]
+                    [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(agendaStatus.name) +
+                          "\n        "
+                      )
+                    ]
                   )
                 })
               ],
@@ -112864,7 +113086,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm._l(_vm.orderedUsers, function(user) {
                   return _c("option", { domProps: { value: user.id } }, [
-                    _vm._v(_vm._s(user.full_name) + "\n                ")
+                    _vm._v(_vm._s(user.full_name))
                   ])
                 })
               ],
@@ -112889,7 +113111,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "same-line" }, [
@@ -112939,440 +113161,401 @@ var render = function() {
       _c(
         "div",
         _vm._l(_vm.meeting.agendas, function(agenda, index) {
-          return _c("div", [
-            _c("fieldset", [
-              _c(
-                "div",
-                [
-                  _c("h4", { staticClass: "same-line" }, [
-                    _vm._v(
-                      "Agenda " +
-                        _vm._s(index + 1) +
-                        ": " +
-                        _vm._s(agenda.topic)
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("el-button", {
-                    attrs: { icon: "el-icon-edit same-line" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.startAgendaEdit(agenda.id)
+          return _c(
+            "div",
+            { key: agenda.id },
+            [
+              _c("fieldset", [
+                _c(
+                  "div",
+                  [
+                    _c("h4", { staticClass: "same-line" }, [
+                      _vm._v(
+                        "Agenda " +
+                          _vm._s(index + 1) +
+                          ": " +
+                          _vm._s(agenda.topic)
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("el-button", {
+                      attrs: { icon: "el-icon-edit same-line" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.startAgendaEdit(agenda.id)
+                        }
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("el-button", {
-                    attrs: { icon: "el-icon-delete same-line" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.deleteAgenda(agenda.id)
+                    }),
+                    _vm._v(" "),
+                    _c("el-button", {
+                      attrs: { icon: "el-icon-delete same-line" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.deleteAgenda(agenda.id)
+                        }
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", [
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.dataItem !== "agendaEdit" + agenda.id,
-                            expression: "dataItem !== 'agendaEdit'+ agenda.id"
-                          }
-                        ]
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.startAgendaEdit(agenda.id)
-                              }
+                    }),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.dataItem !== "agendaEdit" + agenda.id,
+                              expression: "dataItem !== 'agendaEdit'+ agenda.id"
                             }
-                          },
-                          [
-                            _c("div", [
-                              _vm._v(
-                                "Assignee " +
-                                  _vm._s(
-                                    _vm.choices.users[agenda.user_id].full_name
-                                  )
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _vm._v("Topic " + _vm._s(agenda.topic))
-                            ]),
-                            _vm._v(" "),
-                            agenda.description
-                              ? _c("div", [
-                                  _vm._v(
-                                    "Description " + _vm._s(agenda.description)
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            agenda.time_allocated
-                              ? _c("div", [
-                                  _vm._v(
-                                    "Time Allocated (minutes) " +
-                                      _vm._s(agenda.time_allocated) +
-                                      "\n                                "
-                                  )
-                                ])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c("div", [
-                              _vm._v(
-                                "Agenda Status " +
-                                  _vm._s(
-                                    _vm.agendaStatuses[agenda.agenda_status]
-                                      .name
-                                  )
-                              )
-                            ]),
-                            _vm._v(" "),
-                            agenda.conclusion
-                              ? _c("div", [
-                                  _vm._v(
-                                    "Conclusion " + _vm._s(agenda.conclusion)
-                                  )
-                                ])
-                              : _vm._e()
                           ]
-                        ),
-                        _vm._v(" "),
-                        _c("div", [
+                        },
+                        [
                           _c(
-                            "a",
+                            "div",
                             {
-                              class: {
-                                disabled: agenda.vote && agenda.vote.vote
-                              },
-                              attrs: { href: "#" },
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
-                                  ;(!agenda.vote || !agenda.vote.vote) &&
-                                    _vm.voteAgenda(1, agenda.id)
+                                  _vm.startAgendaEdit(agenda.id)
                                 }
                               }
                             },
-                            [_vm._v("Up")]
+                            [
+                              _c("div", [
+                                _vm._v(
+                                  "Assignee " +
+                                    _vm._s(
+                                      _vm.choices.users[agenda.user_id]
+                                        .full_name
+                                    )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v("Topic " + _vm._s(agenda.topic))
+                              ]),
+                              _vm._v(" "),
+                              agenda.description
+                                ? _c("div", [
+                                    _vm._v(
+                                      "Description " +
+                                        _vm._s(agenda.description)
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              agenda.time_allocated
+                                ? _c("div", [
+                                    _vm._v(
+                                      "\n                  Time Allocated (minutes) " +
+                                        _vm._s(agenda.time_allocated) +
+                                        "\n                "
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("div", [
+                                _vm._v(
+                                  "Agenda Status " +
+                                    _vm._s(
+                                      _vm.agendaStatuses[agenda.agenda_status]
+                                        .name
+                                    )
+                                )
+                              ]),
+                              _vm._v(" "),
+                              agenda.conclusion
+                                ? _c("div", [
+                                    _vm._v(
+                                      "Conclusion " + _vm._s(agenda.conclusion)
+                                    )
+                                  ])
+                                : _vm._e()
+                            ]
                           ),
                           _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              class: {
-                                disabled: agenda.vote && !agenda.vote.vote
-                              },
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  ;(!agenda.vote || agenda.vote.vote) &&
-                                    _vm.voteAgenda(0, agenda.id)
-                                }
-                              }
-                            },
-                            [_vm._v("Down")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: agenda.vote,
-                                  expression: "agenda.vote"
-                                }
-                              ],
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.voteAgenda(null, agenda.id, true)
-                                }
-                              }
-                            },
-                            [_vm._v("Abstain")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          [
+                          _c("div", [
                             _c(
-                              "el-button",
+                              "a",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem !==
-                                      "followupCreate" + agenda.id,
-                                    expression:
-                                      "dataItem !== 'followupCreate'+agenda.id"
-                                  }
-                                ],
-                                attrs: { icon: "el-icon-circle-plus-outline" },
+                                class: {
+                                  disabled: agenda.vote && agenda.vote.vote
+                                },
+                                attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
                                     $event.preventDefault()
-                                    _vm.showFollowupCreate(agenda.id)
+                                    ;(!agenda.vote || !agenda.vote.vote) &&
+                                      _vm.voteAgenda(1, agenda.id)
                                   }
                                 }
                               },
-                              [
-                                _vm._v(
-                                  "Add Followup\n                                "
-                                )
-                              ]
+                              [_vm._v("Up")]
                             ),
                             _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("br"),
+                            _c(
+                              "a",
+                              {
+                                class: {
+                                  disabled: agenda.vote && !agenda.vote.vote
+                                },
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    ;(!agenda.vote || agenda.vote.vote) &&
+                                      _vm.voteAgenda(0, agenda.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Down")]
+                            ),
                             _vm._v(" "),
                             _c(
-                              "div",
+                              "a",
                               {
                                 directives: [
                                   {
                                     name: "show",
                                     rawName: "v-show",
-                                    value:
-                                      _vm.dataItem ===
-                                      "followupCreate" + agenda.id,
-                                    expression:
-                                      "dataItem === 'followupCreate'+agenda.id"
+                                    value: agenda.vote,
+                                    expression: "agenda.vote"
                                   }
-                                ]
+                                ],
+                                attrs: { href: "#" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.voteAgenda(null, agenda.id, true)
+                                  }
+                                }
                               },
-                              [
-                                _vm._v(
-                                  "\n                                    Action *"
-                                ),
-                                _c("input", {
+                              [_vm._v("Abstain")]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            [
+                              _c(
+                                "el-button",
+                                {
                                   directives: [
                                     {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.dataHolder.action,
-                                      expression: "dataHolder.action"
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem !==
+                                        "followupCreate" + agenda.id,
+                                      expression:
+                                        "dataItem !== 'followupCreate'+agenda.id"
                                     }
                                   ],
-                                  attrs: { type: "text" },
-                                  domProps: { value: _vm.dataHolder.action },
+                                  attrs: {
+                                    icon: "el-icon-circle-plus-outline"
+                                  },
                                   on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.dataHolder,
-                                        "action",
-                                        $event.target.value
-                                      )
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.showFollowupCreate(agenda.id)
                                     }
                                   }
-                                }),
-                                _vm._v(
-                                  "\n                                    Timeline *"
-                                ),
-                                _c("input", {
+                                },
+                                [_vm._v("Add Followup")]
+                              ),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
                                   directives: [
                                     {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.dataHolder.timeline,
-                                      expression: "dataHolder.timeline"
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem ===
+                                        "followupCreate" + agenda.id,
+                                      expression:
+                                        "dataItem === 'followupCreate'+agenda.id"
                                     }
-                                  ],
-                                  attrs: { type: "text" },
-                                  domProps: { value: _vm.dataHolder.timeline },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.dataHolder,
-                                        "timeline",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(
-                                  "\n                                    Status *\n                                    "
-                                ),
-                                _c(
-                                  "select",
-                                  {
+                                  ]
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  Action *\n                  "
+                                  ),
+                                  _c("input", {
                                     directives: [
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.dataHolder.status,
-                                        expression: "dataHolder.status"
+                                        value: _vm.dataHolder.action,
+                                        expression: "dataHolder.action"
                                       }
                                     ],
                                     attrs: { type: "text" },
+                                    domProps: { value: _vm.dataHolder.action },
                                     on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
                                         _vm.$set(
                                           _vm.dataHolder,
-                                          "status",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
+                                          "action",
+                                          $event.target.value
                                         )
                                       }
                                     }
-                                  },
-                                  _vm._l(_vm.statuses, function(status) {
-                                    return _c(
-                                      "option",
-                                      { domProps: { value: status.id } },
-                                      [
-                                        _vm._v(
-                                          _vm._s(status.name) +
-                                            "\n                                        "
-                                        )
-                                      ]
-                                    )
-                                  })
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.cancelFollowup($event)
+                                  }),
+                                  _vm._v(
+                                    "\n                  Timeline *\n                  "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.dataHolder.timeline,
+                                        expression: "dataHolder.timeline"
                                       }
-                                    }
-                                  },
-                                  [_vm._v("Cancel")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    attrs: {
-                                      disabled: !_vm.isFollowupComplete
+                                    ],
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.dataHolder.timeline
                                     },
                                     on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.saveFollowup(agenda.id)
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.dataHolder,
+                                          "timeline",
+                                          $event.target.value
+                                        )
                                       }
                                     }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Save\n                                    "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._l(agenda.followups, function(followup) {
-                          return _c("div", [
-                            _vm._v(
-                              "Follow Up\n                                "
-                            ),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem !==
-                                      "followupEdit" + followup.id,
-                                    expression:
-                                      "dataItem !== 'followupEdit'+followup.id"
-                                  }
-                                ]
-                              },
-                              [
-                                _c("div", [
+                                  }),
+                                  _vm._v(
+                                    "\n                  Status *\n                  "
+                                  ),
                                   _c(
-                                    "div",
+                                    "select",
                                     {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.dataHolder.status,
+                                          expression: "dataHolder.status"
+                                        }
+                                      ],
+                                      attrs: { type: "text" },
                                       on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.startFollowupEdit(
-                                            followup.id,
-                                            agenda.id
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.dataHolder,
+                                            "status",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
                                           )
                                         }
                                       }
                                     },
-                                    [
-                                      _c("li", [
-                                        _vm._v(
-                                          "Action " + _vm._s(followup.action)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _vm._v(
-                                          "Timeline " +
-                                            _vm._s(followup.timeline)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("li", [
-                                        _vm._v(
-                                          "Status " +
-                                            _vm._s(
-                                              _vm.statuses[followup.status].name
-                                            )
-                                        )
-                                      ])
-                                    ]
+                                    _vm._l(_vm.statuses, function(status) {
+                                      return _c(
+                                        "option",
+                                        { domProps: { value: status.id } },
+                                        [
+                                          _vm._v(
+                                            "\n                      " +
+                                              _vm._s(status.name) +
+                                              "\n                    "
+                                          )
+                                        ]
+                                      )
+                                    })
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "div",
-                                    [
-                                      _c("el-button", {
-                                        attrs: {
-                                          icon: "el-icon-edit same-line"
-                                        },
+                                    "a",
+                                    {
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          return _vm.cancelFollowup($event)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Cancel")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      attrs: {
+                                        disabled: !_vm.isFollowupComplete
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.saveFollowup(agenda.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Save")]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._l(agenda.followups, function(followup) {
+                            return _c("div", [
+                              _vm._v("Follow Up\n                "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem !==
+                                        "followupEdit" + followup.id,
+                                      expression:
+                                        "dataItem !== 'followupEdit'+followup.id"
+                                    }
+                                  ]
+                                },
+                                [
+                                  _c("div", [
+                                    _c(
+                                      "div",
+                                      {
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -113382,420 +113565,422 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("el-button", {
-                                        attrs: {
-                                          icon: "el-icon-delete same-line"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            _vm.deleteFollowup(
-                                              followup.id,
-                                              agenda.id
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem ===
-                                      "followupEdit" + followup.id,
-                                    expression:
-                                      "dataItem === 'followupEdit'+followup.id"
-                                  }
-                                ]
-                              },
-                              [
-                                _c(
-                                  "form",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("div", [
-                                      _vm._v("Action *"),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.dataHolder.action,
-                                            expression: "dataHolder.action"
-                                          }
-                                        ],
-                                        attrs: { type: "text" },
-                                        domProps: {
-                                          value: _vm.dataHolder.action
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.dataHolder,
-                                              "action",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", [
-                                      _vm._v("Timeline *"),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: _vm.dataHolder.timeline,
-                                            expression: "dataHolder.timeline"
-                                          }
-                                        ],
-                                        attrs: { type: "text" },
-                                        domProps: {
-                                          value: _vm.dataHolder.timeline
-                                        },
-                                        on: {
-                                          input: function($event) {
-                                            if ($event.target.composing) {
-                                              return
-                                            }
-                                            _vm.$set(
-                                              _vm.dataHolder,
-                                              "timeline",
-                                              $event.target.value
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", [
-                                      _vm._v(
-                                        "Status *\n                                            "
-                                      ),
-                                      _c(
-                                        "select",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: _vm.dataHolder.status,
-                                              expression: "dataHolder.status"
-                                            }
-                                          ],
-                                          on: {
-                                            change: function($event) {
-                                              var $$selectedVal = Array.prototype.filter
-                                                .call(
-                                                  $event.target.options,
-                                                  function(o) {
-                                                    return o.selected
-                                                  }
-                                                )
-                                                .map(function(o) {
-                                                  var val =
-                                                    "_value" in o
-                                                      ? o._value
-                                                      : o.value
-                                                  return val
-                                                })
-                                              _vm.$set(
-                                                _vm.dataHolder,
-                                                "status",
-                                                $event.target.multiple
-                                                  ? $$selectedVal
-                                                  : $$selectedVal[0]
+                                      },
+                                      [
+                                        _c("li", [
+                                          _vm._v(
+                                            "Action " + _vm._s(followup.action)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("li", [
+                                          _vm._v(
+                                            "Timeline " +
+                                              _vm._s(followup.timeline)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("li", [
+                                          _vm._v(
+                                            "Status " +
+                                              _vm._s(
+                                                _vm.statuses[followup.status]
+                                                  .name
                                               )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c(
-                                            "option",
-                                            { attrs: { value: "" } },
-                                            [_vm._v("Select status")]
-                                          ),
-                                          _vm._v(" "),
-                                          _vm._l(_vm.statuses, function(
-                                            status
-                                          ) {
-                                            return _c(
-                                              "option",
-                                              {
-                                                domProps: { value: status.id }
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                                                    " +
-                                                    _vm._s(status.name) +
-                                                    "\n                                                "
-                                                )
-                                              ]
-                                            )
-                                          })
-                                        ],
-                                        2
-                                      )
-                                    ]),
+                                          )
+                                        ])
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     _c(
                                       "div",
                                       [
+                                        _c("el-button", {
+                                          attrs: {
+                                            icon: "el-icon-edit same-line"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              _vm.startFollowupEdit(
+                                                followup.id,
+                                                agenda.id
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("el-button", {
+                                          attrs: {
+                                            icon: "el-icon-delete same-line"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              _vm.deleteFollowup(
+                                                followup.id,
+                                                agenda.id
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem ===
+                                        "followupEdit" + followup.id,
+                                      expression:
+                                        "dataItem === 'followupEdit'+followup.id"
+                                    }
+                                  ]
+                                },
+                                [
+                                  _c(
+                                    "form",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("div", [
+                                        _vm._v(
+                                          "\n                      Action *\n                      "
+                                        ),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.dataHolder.action,
+                                              expression: "dataHolder.action"
+                                            }
+                                          ],
+                                          attrs: { type: "text" },
+                                          domProps: {
+                                            value: _vm.dataHolder.action
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.dataHolder,
+                                                "action",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _vm._v(
+                                          "\n                      Timeline *\n                      "
+                                        ),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.dataHolder.timeline,
+                                              expression: "dataHolder.timeline"
+                                            }
+                                          ],
+                                          attrs: { type: "text" },
+                                          domProps: {
+                                            value: _vm.dataHolder.timeline
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.dataHolder,
+                                                "timeline",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", [
+                                        _vm._v(
+                                          "\n                      Status *\n                      "
+                                        ),
                                         _c(
-                                          "el-button",
+                                          "select",
                                           {
-                                            staticClass: "same-line",
-                                            attrs: {
-                                              type: "success",
-                                              icon: "el-icon-check",
-                                              circle: ""
-                                            },
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value: _vm.dataHolder.status,
+                                                expression: "dataHolder.status"
+                                              }
+                                            ],
                                             on: {
-                                              click: function($event) {
-                                                $event.preventDefault()
-                                                _vm.saveFollowupEdit(
-                                                  agenda.id,
-                                                  followup.id
+                                              change: function($event) {
+                                                var $$selectedVal = Array.prototype.filter
+                                                  .call(
+                                                    $event.target.options,
+                                                    function(o) {
+                                                      return o.selected
+                                                    }
+                                                  )
+                                                  .map(function(o) {
+                                                    var val =
+                                                      "_value" in o
+                                                        ? o._value
+                                                        : o.value
+                                                    return val
+                                                  })
+                                                _vm.$set(
+                                                  _vm.dataHolder,
+                                                  "status",
+                                                  $event.target.multiple
+                                                    ? $$selectedVal
+                                                    : $$selectedVal[0]
                                                 )
                                               }
                                             }
                                           },
                                           [
-                                            _vm._v(
-                                              "\n                                                Save Edit\n                                            "
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "same-line" },
-                                          [
                                             _c(
-                                              "a",
-                                              {
-                                                attrs: { href: "#" },
-                                                on: {
-                                                  click: function($event) {
-                                                    $event.preventDefault()
-                                                    return _vm.cancelFollowup(
-                                                      $event
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [_vm._v("Cancel")]
-                                            )
-                                          ]
+                                              "option",
+                                              { attrs: { value: "" } },
+                                              [_vm._v("Select status")]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._l(_vm.statuses, function(
+                                              status
+                                            ) {
+                                              return _c(
+                                                "option",
+                                                {
+                                                  domProps: { value: status.id }
+                                                },
+                                                [_vm._v(_vm._s(status.name))]
+                                              )
+                                            })
+                                          ],
+                                          2
                                         )
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem !==
-                                      "discussionCreate" + agenda.id,
-                                    expression:
-                                      "dataItem !== 'discussionCreate'+agenda.id"
-                                  }
-                                ],
-                                attrs: { icon: "el-icon-circle-plus-outline" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.showDiscussionCreate(agenda.id)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "Add Discussion\n                                "
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem ===
-                                      "discussionCreate" + agenda.id,
-                                    expression:
-                                      "dataItem === 'discussionCreate'+agenda.id"
-                                  }
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        [
+                                          _c(
+                                            "el-button",
+                                            {
+                                              staticClass: "same-line",
+                                              attrs: {
+                                                type: "success",
+                                                icon: "el-icon-check",
+                                                circle: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  $event.preventDefault()
+                                                  _vm.saveFollowupEdit(
+                                                    agenda.id,
+                                                    followup.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Save Edit")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "same-line" },
+                                            [
+                                              _c(
+                                                "a",
+                                                {
+                                                  attrs: { href: "#" },
+                                                  on: {
+                                                    click: function($event) {
+                                                      $event.preventDefault()
+                                                      return _vm.cancelFollowup(
+                                                        $event
+                                                      )
+                                                    }
+                                                  }
+                                                },
+                                                [_vm._v("Cancel")]
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
                                 ]
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    Description *"
-                                ),
-                                _c("input", {
+                              )
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            [
+                              _c(
+                                "el-button",
+                                {
                                   directives: [
                                     {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.dataHolder.description,
-                                      expression: "dataHolder.description"
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem !==
+                                        "discussionCreate" + agenda.id,
+                                      expression:
+                                        "dataItem !== 'discussionCreate'+agenda.id"
                                     }
                                   ],
-                                  attrs: { type: "text" },
-                                  domProps: {
-                                    value: _vm.dataHolder.description
+                                  attrs: {
+                                    icon: "el-icon-circle-plus-outline"
                                   },
                                   on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.dataHolder,
-                                        "description",
-                                        $event.target.value
-                                      )
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.showDiscussionCreate(agenda.id)
                                     }
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "a",
-                                  {
-                                    attrs: { href: "#" },
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        return _vm.cancelDiscussion($event)
-                                      }
+                                },
+                                [_vm._v("Add Discussion")]
+                              ),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem ===
+                                        "discussionCreate" + agenda.id,
+                                      expression:
+                                        "dataItem === 'discussionCreate'+agenda.id"
                                     }
-                                  },
-                                  [_vm._v("Cancel")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    attrs: {
-                                      disabled: !_vm.isDiscussionComplete
+                                  ]
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  Description *\n                  "
+                                  ),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.dataHolder.description,
+                                        expression: "dataHolder.description"
+                                      }
+                                    ],
+                                    attrs: { type: "text" },
+                                    domProps: {
+                                      value: _vm.dataHolder.description
                                     },
                                     on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.saveDiscussion(agenda.id)
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.dataHolder,
+                                          "description",
+                                          $event.target.value
+                                        )
                                       }
                                     }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Save\n                                    "
-                                    )
-                                  ]
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _vm._l(agenda.discussions, function(discussion) {
-                          return _c("div", [
-                            _vm._v(
-                              " Discussion\n                                "
-                            ),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem !==
-                                      "discussionEdit" + discussion.id,
-                                    expression:
-                                      "dataItem !== 'discussionEdit'+ discussion.id"
-                                  }
-                                ]
-                              },
-                              [
-                                _c("div", [
+                                  }),
+                                  _vm._v(" "),
                                   _c(
-                                    "div",
+                                    "a",
                                     {
+                                      attrs: { href: "#" },
                                       on: {
                                         click: function($event) {
                                           $event.preventDefault()
-                                          _vm.startDiscussionEdit(
-                                            discussion.id,
-                                            agenda.id
-                                          )
+                                          return _vm.cancelDiscussion($event)
                                         }
                                       }
                                     },
-                                    [
-                                      _c("li", [
-                                        _vm._v(
-                                          "Description " +
-                                            _vm._s(discussion.description)
-                                        )
-                                      ])
-                                    ]
+                                    [_vm._v("Cancel")]
                                   ),
                                   _vm._v(" "),
                                   _c(
-                                    "div",
-                                    [
-                                      _c("el-button", {
-                                        attrs: {
-                                          icon: "el-icon-edit same-line"
-                                        },
+                                    "button",
+                                    {
+                                      attrs: {
+                                        disabled: !_vm.isDiscussionComplete
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.saveDiscussion(agenda.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Save")]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._l(agenda.discussions, function(discussion) {
+                            return _c("div", [
+                              _vm._v("Discussion\n                "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem !==
+                                        "discussionEdit" + discussion.id,
+                                      expression:
+                                        "dataItem !== 'discussionEdit'+ discussion.id"
+                                    }
+                                  ]
+                                },
+                                [
+                                  _c("div", [
+                                    _c(
+                                      "div",
+                                      {
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -113805,489 +113990,669 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("el-button", {
-                                        attrs: {
-                                          icon: "el-icon-delete same-line"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            _vm.deleteDiscussion(
-                                              discussion.id,
-                                              agenda.id
-                                            )
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value:
-                                      _vm.dataItem ===
-                                      "discussionEdit" + discussion.id,
-                                    expression:
-                                      "dataItem === 'discussionEdit'+discussion.id"
-                                  }
-                                ]
-                              },
-                              [
-                                _c(
-                                  "form",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        Description *"
-                                    ),
-                                    _c("input", {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.dataHolder.description,
-                                          expression: "dataHolder.description"
-                                        }
-                                      ],
-                                      attrs: { type: "text" },
-                                      domProps: {
-                                        value: _vm.dataHolder.description
-                                      },
-                                      on: {
-                                        input: function($event) {
-                                          if ($event.target.composing) {
-                                            return
-                                          }
-                                          _vm.$set(
-                                            _vm.dataHolder,
-                                            "description",
-                                            $event.target.value
-                                          )
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "el-button",
-                                      {
-                                        staticClass: "same-line",
-                                        attrs: {
-                                          type: "success",
-                                          icon: "el-icon-check",
-                                          circle: ""
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            $event.preventDefault()
-                                            _vm.saveDiscussionEdit(
-                                              agenda.id,
-                                              discussion.id
-                                            )
-                                          }
-                                        }
                                       },
                                       [
-                                        _vm._v(
-                                          "\n                                            Save\n                                            Discussion\n                                        "
-                                        )
+                                        _c("li", [
+                                          _vm._v(
+                                            "Description " +
+                                              _vm._s(discussion.description)
+                                          )
+                                        ])
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c("div", { staticClass: "same-line" }, [
-                                      _c(
-                                        "a",
-                                        {
-                                          attrs: { href: "#" },
+                                    _c(
+                                      "div",
+                                      [
+                                        _c("el-button", {
+                                          attrs: {
+                                            icon: "el-icon-edit same-line"
+                                          },
                                           on: {
                                             click: function($event) {
                                               $event.preventDefault()
-                                              return _vm.cancelDiscussion(
-                                                $event
+                                              _vm.startDiscussionEdit(
+                                                discussion.id,
+                                                agenda.id
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("el-button", {
+                                          attrs: {
+                                            icon: "el-icon-delete same-line"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              _vm.deleteDiscussion(
+                                                discussion.id,
+                                                agenda.id
+                                              )
+                                            }
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.dataItem ===
+                                        "discussionEdit" + discussion.id,
+                                      expression:
+                                        "dataItem === 'discussionEdit'+discussion.id"
+                                    }
+                                  ]
+                                },
+                                [
+                                  _c(
+                                    "form",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                    Description *\n                    "
+                                      ),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.dataHolder.description,
+                                            expression: "dataHolder.description"
+                                          }
+                                        ],
+                                        attrs: { type: "text" },
+                                        domProps: {
+                                          value: _vm.dataHolder.description
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.dataHolder,
+                                              "description",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "el-button",
+                                        {
+                                          staticClass: "same-line",
+                                          attrs: {
+                                            type: "success",
+                                            icon: "el-icon-check",
+                                            circle: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              _vm.saveDiscussionEdit(
+                                                agenda.id,
+                                                discussion.id
                                               )
                                             }
                                           }
                                         },
-                                        [_vm._v("Cancel")]
-                                      )
-                                    ])
-                                  ],
-                                  1
-                                )
-                              ]
-                            )
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _c("hr")
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.dataItem === "agendaEdit" + agenda.id,
-                              expression: "dataItem === 'agendaEdit'+agenda.id"
-                            }
-                          ],
-                          on: {
-                            keyup: function($event) {
-                              if (
-                                !("button" in $event) &&
-                                _vm._k(
-                                  $event.keyCode,
-                                  "esc",
-                                  27,
-                                  $event.key,
-                                  "Escape"
-                                )
-                              ) {
-                                return null
-                              }
-                              return _vm.cancelFollowup($event)
-                            }
+                                        [
+                                          _vm._v(
+                                            "\n                      Save\n                      Discussion\n                    "
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "same-line" }, [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: { href: "#" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.cancelDiscussion(
+                                                  $event
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Cancel")]
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ])
+                          }),
+                          _vm._v(" "),
+                          _c("hr")
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
                           }
-                        },
-                        [
-                          _c("div", [
-                            _vm._v("Topic *"),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.dataHolder.topic,
-                                  expression: "dataHolder.topic"
-                                }
-                              ],
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.dataHolder.topic },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.dataHolder,
-                                    "topic",
-                                    $event.target.value
-                                  )
-                                }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value:
+                                  _vm.dataItem === "agendaEdit" + agenda.id,
+                                expression:
+                                  "dataItem === 'agendaEdit'+agenda.id"
                               }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Description"),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.dataHolder.description,
-                                  expression: "dataHolder.description"
-                                }
-                              ],
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.dataHolder.description },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.dataHolder,
-                                    "description",
-                                    $event.target.value
+                            ],
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !("button" in $event) &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "esc",
+                                    27,
+                                    $event.key,
+                                    "Escape"
                                   )
-                                }
-                              }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _vm._v(
-                              "\n                                Time Allocated (minutes)\n                                "
-                            ),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.dataHolder.time_allocated,
-                                    expression: "dataHolder.time_allocated"
-                                  }
-                                ],
-                                attrs: { type: "text" },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.dataHolder,
-                                      "time_allocated",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Select time")
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(_vm.timing, function(time) {
-                                  return _c("option", [_vm._v(_vm._s(time))])
-                                })
-                              ],
-                              2
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _c("label", [_vm._v("User Assigned *")]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.dataHolder.user_id,
-                                    expression: "dataHolder.user_id"
-                                  }
-                                ],
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.dataHolder,
-                                      "user_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Select user")
-                                ]),
-                                _vm._v(
-                                  "\n                                    not\n                                    "
-                                ),
-                                _vm._l(_vm.orderedUsers, function(user) {
-                                  return _c(
-                                    "option",
-                                    { domProps: { value: user.id } },
-                                    [
-                                      _vm._v(
-                                        _vm._s(user.full_name) +
-                                          "\n                                    "
-                                      )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _vm._v(
-                              "\n                                Status\n                                "
-                            ),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.dataHolder.agenda_status,
-                                    expression: "dataHolder.agenda_status"
-                                  }
-                                ],
-                                attrs: { type: "text" },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.dataHolder,
-                                      "agenda_status",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Select status")
-                                ]),
-                                _vm._v(" "),
-                                _vm._l(_vm.agendaStatuses, function(
-                                  agendaStatus
                                 ) {
-                                  return _c(
-                                    "option",
-                                    { domProps: { value: agendaStatus.id } },
-                                    [
-                                      _vm._v(
-                                        _vm._s(agendaStatus.name) +
-                                          "\n                                    "
-                                      )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", [
-                            _vm._v("Conclusion"),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.dataHolder.conclusion,
-                                  expression: "dataHolder.conclusion"
+                                  return null
                                 }
-                              ],
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.dataHolder.conclusion },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.dataHolder,
-                                    "conclusion",
-                                    $event.target.value
-                                  )
-                                }
+                                return _vm.cancelFollowup($event)
                               }
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            [
+                            }
+                          },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                Topic *\n                "
+                              ),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.dataHolder.topic,
+                                    expression: "dataHolder.topic"
+                                  }
+                                ],
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.dataHolder.topic },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.dataHolder,
+                                      "topic",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _vm._v(
+                                "\n                Description\n                "
+                              ),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.dataHolder.description,
+                                    expression: "dataHolder.description"
+                                  }
+                                ],
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.dataHolder.description },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.dataHolder,
+                                      "description",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _vm._v(
+                                "\n                Time Allocated (minutes)\n                "
+                              ),
                               _c(
-                                "el-button",
+                                "select",
                                 {
-                                  staticClass: "same-line",
-                                  attrs: {
-                                    type: "success",
-                                    icon: "el-icon-check",
-                                    circle: ""
-                                  },
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.dataHolder.time_allocated,
+                                      expression: "dataHolder.time_allocated"
+                                    }
+                                  ],
+                                  attrs: { type: "text" },
                                   on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.saveAgendaEdit(agenda.id)
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.dataHolder,
+                                        "time_allocated",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
                                     }
                                   }
                                 },
                                 [
-                                  _vm._v(
-                                    "Save Edit\n                                "
-                                  )
-                                ]
+                                  _c("option", { attrs: { value: "" } }, [
+                                    _vm._v("Select time")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.timing, function(time) {
+                                    return _c("option", [_vm._v(_vm._s(time))])
+                                  })
+                                ],
+                                2
                               )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "same-line" }, [
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("label", [_vm._v("User Assigned *")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.dataHolder.user_id,
+                                      expression: "dataHolder.user_id"
+                                    }
+                                  ],
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.dataHolder,
+                                        "user_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", { attrs: { value: "" } }, [
+                                    _vm._v("Select user")
+                                  ]),
+                                  _vm._v("not\n                  "),
+                                  _vm._l(_vm.orderedUsers, function(user) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: user.id } },
+                                      [_vm._v(_vm._s(user.full_name))]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _vm._v(
+                                "\n                Status\n                "
+                              ),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.dataHolder.agenda_status,
+                                      expression: "dataHolder.agenda_status"
+                                    }
+                                  ],
+                                  attrs: { type: "text" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.dataHolder,
+                                        "agenda_status",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", { attrs: { value: "" } }, [
+                                    _vm._v("Select status")
+                                  ]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.agendaStatuses, function(
+                                    agendaStatus
+                                  ) {
+                                    return _c(
+                                      "option",
+                                      { domProps: { value: agendaStatus.id } },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(agendaStatus.name) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _vm._v(
+                                "\n                Conclusion\n                "
+                              ),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.dataHolder.conclusion,
+                                    expression: "dataHolder.conclusion"
+                                  }
+                                ],
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.dataHolder.conclusion },
                                 on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.cancelAgenda($event)
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.dataHolder,
+                                      "conclusion",
+                                      $event.target.value
+                                    )
                                   }
                                 }
-                              },
-                              [_vm._v("Cancel")]
-                            )
-                          ])
-                        ]
-                      )
-                    ]
-                  )
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              [
+                                _c(
+                                  "el-button",
+                                  {
+                                    staticClass: "same-line",
+                                    attrs: {
+                                      type: "success",
+                                      icon: "el-icon-check",
+                                      circle: ""
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.saveAgendaEdit(agenda.id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Save Edit")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "same-line" }, [
+                              _c(
+                                "a",
+                                {
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.cancelAgenda($event)
+                                    }
+                                  }
+                                },
+                                [_vm._v("Cancel")]
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("h2", [_vm._v("Related Agendas")]),
+              _vm._v(" "),
+              _c(
+                "ol",
+                _vm._l(agenda.related_agendas, function(relagenda) {
+                  return _c("li", [
+                    _vm._v(
+                      "\n          " +
+                        _vm._s(_vm.choices.agendas[relagenda].topic) +
+                        "\n          "
+                    ),
+                    _c("i", {
+                      staticClass: "el-icon-delete same-line",
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.deleteAgendaRelation(agenda.id, relagenda)
+                        }
+                      }
+                    })
+                  ])
+                })
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.dataItem !== "agendaRelate" + agenda.id,
+                      expression: "dataItem !== 'agendaRelate'+agenda.id"
+                    }
+                  ],
+                  attrs: { icon: "el-icon-circle-plus-outline" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.showAgendaRelate(agenda.id)
+                    }
+                  }
+                },
+                [_vm._v("Add Related Agenda")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.dataItem === "agendaRelate" + agenda.id,
+                      expression: "dataItem === 'agendaRelate'+agenda.id"
+                    }
+                  ]
+                },
+                [
+                  _c("label", [_vm._v("Related Agenda")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.dataHolder.agendatarget_id,
+                          expression: "dataHolder.agendatarget_id"
+                        }
+                      ],
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.dataHolder,
+                            "agendatarget_id",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Select Agenda")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.choices.agendas, function(targetagenda) {
+                        return _c(
+                          "option",
+                          { domProps: { value: targetagenda.id } },
+                          [_vm._v(_vm._s(targetagenda.topic))]
+                        )
+                      })
+                    ],
+                    2
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "same-line",
+                      attrs: {
+                        type: "success",
+                        icon: "el-icon-check",
+                        circle: "",
+                        disabled: !_vm.isAgendaRelationComplete
+                      },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.saveAgendaRelation($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "same-line" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.cancelAgenda($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Cancel")]
+                    )
+                  ])
                 ],
                 1
               )
-            ])
-          ])
+            ],
+            1
+          )
         })
       ),
       _vm._v(" "),
@@ -114312,13 +114677,7 @@ var render = function() {
             }
           }
         },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.choices.venues[_vm.meeting.venue_id].name) +
-              "\n    "
-          )
-        ]
+        [_vm._v(_vm._s(_vm.choices.venues[_vm.meeting.venue_id].name))]
       ),
       _vm._v(" "),
       _c(
@@ -114387,7 +114746,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -114429,13 +114788,7 @@ var render = function() {
             }
           }
         },
-        [
-          _vm._v(
-            "\n        " +
-              _vm._s(_vm.choices.media[_vm.meeting.media_id].name) +
-              "\n    "
-          )
-        ]
+        [_vm._v(_vm._s(_vm.choices.media[_vm.meeting.media_id].name))]
       ),
       _vm._v(" "),
       _c(
@@ -114504,7 +114857,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -114548,11 +114901,7 @@ var render = function() {
         },
         [
           _vm._v(
-            "\n        " +
-              _vm._s(
-                _vm.choices.meetingtypes[_vm.meeting.meetingtype_id].name
-              ) +
-              "\n    "
+            _vm._s(_vm.choices.meetingtypes[_vm.meeting.meetingtype_id].name)
           )
         ]
       ),
@@ -114606,7 +114955,7 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
                 return _c("option", { domProps: { value: meetingtype.id } }, [
-                  _vm._v(_vm._s(meetingtype.name) + "\n            ")
+                  _vm._v(_vm._s(meetingtype.name))
                 ])
               })
             ],
@@ -114625,7 +114974,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -114669,11 +115018,7 @@ var render = function() {
         },
         [
           _vm._v(
-            "\n        " +
-              _vm._s(
-                _vm.choices.meetingseries[_vm.meeting.meetingseries_id].name
-              ) +
-              "\n    "
+            _vm._s(_vm.choices.meetingseries[_vm.meeting.meetingseries_id].name)
           )
         ]
       ),
@@ -114729,7 +115074,11 @@ var render = function() {
                 return _c(
                   "option",
                   { domProps: { value: eachmeetingseries.id } },
-                  [_vm._v(_vm._s(eachmeetingseries.name) + "\n            ")]
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(eachmeetingseries.name) + "\n      "
+                    )
+                  ]
                 )
               })
             ],
@@ -114748,7 +115097,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           ),
           _vm._v(" "),
           _c(
@@ -114906,7 +115255,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save\n        ")]
+            [_vm._v("Save")]
           )
         ],
         1
@@ -114980,7 +115329,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Save Edit\n                ")]
+                    [_vm._v("Save Edit")]
                   ),
                   _vm._v(" "),
                   _c(
