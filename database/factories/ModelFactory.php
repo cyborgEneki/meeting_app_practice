@@ -90,6 +90,7 @@ $factory->define(App\Meeting::class, function ($faker) {
         'secretary_id' => function () {
             return factory('App\User')->create()->id;
         },
+        'locked' => $faker->numberBetween($min = 0, $max = 1),
     ];
 });
 

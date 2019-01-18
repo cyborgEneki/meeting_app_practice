@@ -1,6 +1,39 @@
 <template>
   <div>
     <!--First part of the form-->
+    <!--Start meeting status -->
+    <div>
+      <h4>Meeting Status</h4>
+      <div>
+        <p  v-show="dataItem !== 'locked'"
+          @click.prevent="startMeetingFieldEdit('locked')"
+          class="link"
+        >{{ meetingStatuses[meeting.locked].name }}</p>
+      </div>
+      <div v-show="dataItem == 'locked'">
+        <select type="text" v-model="dataHolder.locked">
+          <option value>Select value</option>
+          <option
+            v-for="meetingStatus in meetingStatuses"
+            v-bind:value="meetingStatus.id"
+          >{{ meetingStatus.name }}</option>
+        </select>
+        <div>
+          <el-button
+            class="same-line"
+            type="success"
+            icon="el-icon-check"
+            circle
+            @click.prevent="saveMeetingFieldEdit('locked')"
+          >Save Edit</el-button>
+        </div>
+        <div class="same-line">
+          <a href="#" @click.prevent="dataItem=''">Cancel</a>
+        </div>
+      </div>
+    </div>
+
+    <!--End of meeting status -->
     <h4>Meeting Name</h4>
     <p
       v-show="dataItem !== 'name'"
@@ -270,12 +303,6 @@
                 </div>
 
                 <div>
-                  <!--<a href="#" v-show="!agenda.vote || !agenda.vote.vote"-->
-                  <!--@click.prevent="voteAgenda(1, agenda.id)">Up</a>-->
-                  <!--<span v-show="agenda.vote && agenda.vote.vote">Up</span>-->
-                  <!--<a href="#" v-show="!agenda.vote || agenda.vote.vote"-->
-                  <!--@click.prevent="voteAgenda(0, agenda.id)">Down</a>-->
-                  <!--<span v-show="agenda.vote && !agenda.vote.vote">Down</span>-->
                   <a
                     href="#"
                     :class="{disabled: agenda.vote && agenda.vote.vote}"
@@ -754,6 +781,7 @@ export default {
       voteYes: false,
       voteNo: false,
       voteStatus: null,
+      meetingStatuses: [{ id: 0, name: "Open" }, { id: 1, name: "Locked" }],
       statuses: [
         { id: 0, name: "Pending" },
         { id: 1, name: "Accepted" },
@@ -781,6 +809,9 @@ export default {
       console.log(this.meeting);
   },
   methods: {
+    saveMeetingStatusCreate() {},
+    saveMeetingStatusEdit() {},
+    cancelMeetingStatus() {},
     showAgendaRelate(agendaId) {
       this.dataItem = "agendaRelate" + agendaId;
       this.dataHolder.agendasource_id = agendaId;

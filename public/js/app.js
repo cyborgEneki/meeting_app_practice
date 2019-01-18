@@ -111489,6 +111489,33 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -111552,6 +111579,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       voteYes: false,
       voteNo: false,
       voteStatus: null,
+      meetingStatuses: [{ id: 0, name: "Open" }, { id: 1, name: "Locked" }],
       statuses: [{ id: 0, name: "Pending" }, { id: 1, name: "Accepted" }, { id: 2, name: "Rejected" }],
       agendaStatuses: [{ id: 0, name: "Proposed" }, { id: 1, name: "Accepted" }, { id: 2, name: "Rejected" }, { id: 3, name: "Complete: discussed and finalized" }, { id: 4, name: "Deferred: not yet discussed" }, { id: 5, name: "Dropped: will not be discussed" }]
     };
@@ -111570,6 +111598,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   methods: {
+    saveMeetingStatusCreate: function saveMeetingStatusCreate() {},
+    saveMeetingStatusEdit: function saveMeetingStatusEdit() {},
+    cancelMeetingStatus: function cancelMeetingStatus() {},
     showAgendaRelate: function showAgendaRelate(agendaId) {
       this.dataItem = "agendaRelate" + agendaId;
       this.dataHolder.agendasource_id = agendaId;
@@ -111997,6 +112028,136 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", [
+        _c("h4", [_vm._v("Meeting Status")]),
+        _vm._v(" "),
+        _c("div", [
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.dataItem !== "locked",
+                  expression: "dataItem !== 'locked'"
+                }
+              ],
+              staticClass: "link",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.startMeetingFieldEdit("locked")
+                }
+              }
+            },
+            [_vm._v(_vm._s(_vm.meetingStatuses[_vm.meeting.locked].name))]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem == "locked",
+                expression: "dataItem == 'locked'"
+              }
+            ]
+          },
+          [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dataHolder.locked,
+                    expression: "dataHolder.locked"
+                  }
+                ],
+                attrs: { type: "text" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.dataHolder,
+                      "locked",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Select value")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.meetingStatuses, function(meetingStatus) {
+                  return _c(
+                    "option",
+                    { domProps: { value: meetingStatus.id } },
+                    [_vm._v(_vm._s(meetingStatus.name))]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _c(
+                  "el-button",
+                  {
+                    staticClass: "same-line",
+                    attrs: {
+                      type: "success",
+                      icon: "el-icon-check",
+                      circle: ""
+                    },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.saveMeetingFieldEdit("locked")
+                      }
+                    }
+                  },
+                  [_vm._v("Save Edit")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "same-line" }, [
+              _c(
+                "a",
+                {
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.dataItem = ""
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
       _c("h4", [_vm._v("Meeting Name")]),
       _vm._v(" "),
       _c(

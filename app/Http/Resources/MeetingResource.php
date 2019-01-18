@@ -31,6 +31,7 @@ class MeetingResource extends JsonResource
             'media_id' => $this->media_id,
             'meetingseries_id' => $this->meetingseries_id,
             'meetingtype_id' => $this->meetingtype_id,
+            'locked' => $this->locked,
             'notes' => $this->notes->where('user_id', Auth::user()->id)->first(),
         ];
     }
