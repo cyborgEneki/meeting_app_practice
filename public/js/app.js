@@ -111516,6 +111516,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -112968,6 +112981,14 @@ var render = function() {
           _c(
             "el-button",
             {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.meeting.locked,
+                  expression: "!meeting.locked"
+                }
+              ],
               staticClass: "same-line",
               attrs: { type: "success", icon: "el-icon-check", circle: "" },
               on: {
@@ -113037,6 +113058,14 @@ var render = function() {
           user.id !== _vm.meeting.chair_id &&
           user.id !== _vm.meeting.secretary_id
             ? _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.meeting.locked,
+                    expression: "!meeting.locked"
+                  }
+                ],
                 staticClass: "el-icon-delete same-line",
                 on: {
                   click: function($event) {
@@ -113301,8 +113330,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.dataItem !== "agendaCreate",
-            expression: "dataItem !=='agendaCreate'"
+            value: _vm.dataItem !== "agendaCreate" && !_vm.meeting.locked,
+            expression: "dataItem !=='agendaCreate' && !meeting.locked"
           }
         ],
         staticClass: "same-line",
@@ -113340,6 +113369,14 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("el-button", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.meeting.locked,
+                          expression: "!meeting.locked"
+                        }
+                      ],
                       attrs: { icon: "el-icon-edit same-line" },
                       on: {
                         click: function($event) {
@@ -113350,6 +113387,14 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("el-button", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.meeting.locked,
+                          expression: "!meeting.locked"
+                        }
+                      ],
                       attrs: { icon: "el-icon-delete same-line" },
                       on: {
                         click: function($event) {
@@ -113509,9 +113554,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "followupCreate" + agenda.id,
+                                          "followupCreate" + agenda.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'followupCreate'+agenda.id"
+                                        "dataItem !== 'followupCreate'+agenda.id && !meeting.locked"
                                     }
                                   ],
                                   attrs: {
@@ -113706,9 +113752,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "followupEdit" + followup.id,
+                                          "followupEdit" + followup.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'followupEdit'+followup.id"
+                                        "dataItem !== 'followupEdit'+followup.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -113772,6 +113819,14 @@ var render = function() {
                                         }),
                                         _vm._v(" "),
                                         _c("el-button", {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: !_vm.meeting.locked,
+                                              expression: "!meeting.locked"
+                                            }
+                                          ],
                                           attrs: {
                                             icon: "el-icon-delete same-line"
                                           },
@@ -113801,9 +113856,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem ===
-                                        "followupEdit" + followup.id,
+                                          "followupEdit" + followup.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem === 'followupEdit'+followup.id"
+                                        "dataItem === 'followupEdit'+followup.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -114016,9 +114072,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "discussionCreate" + agenda.id,
+                                          "discussionCreate" + agenda.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'discussionCreate'+agenda.id"
+                                        "dataItem !== 'discussionCreate'+agenda.id && !meeting.locked"
                                     }
                                   ],
                                   attrs: {
@@ -114131,9 +114188,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "discussionEdit" + discussion.id,
+                                          "discussionEdit" + discussion.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'discussionEdit'+ discussion.id"
+                                        "dataItem !== 'discussionEdit'+ discussion.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -114181,6 +114239,14 @@ var render = function() {
                                         }),
                                         _vm._v(" "),
                                         _c("el-button", {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: !_vm.meeting.locked,
+                                              expression: "!meeting.locked"
+                                            }
+                                          ],
                                           attrs: {
                                             icon: "el-icon-delete same-line"
                                           },
@@ -114210,9 +114276,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem ===
-                                        "discussionEdit" + discussion.id,
+                                          "discussionEdit" + discussion.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem === 'discussionEdit'+discussion.id"
+                                        "dataItem === 'discussionEdit'+discussion.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -114332,9 +114399,10 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
-                                  _vm.dataItem === "agendaEdit" + agenda.id,
+                                  _vm.dataItem === "agendaEdit" + agenda.id &&
+                                  !_vm.meeting.locked,
                                 expression:
-                                  "dataItem === 'agendaEdit'+agenda.id"
+                                  "dataItem === 'agendaEdit'+agenda.id && !meeting.locked"
                               }
                             ],
                             on: {
@@ -114718,8 +114786,11 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.dataItem === "agendaRelate" + agenda.id,
-                      expression: "dataItem === 'agendaRelate'+agenda.id"
+                      value:
+                        _vm.dataItem === "agendaRelate" + agenda.id &&
+                        !_vm.meeting.locked,
+                      expression:
+                        "dataItem === 'agendaRelate'+agenda.id && !meeting.locked"
                     }
                   ]
                 },
@@ -115892,11 +115963,31 @@ var render = function() {
                   to: { name: "editMeeting", params: { meeting: meeting } }
                 }
               },
-              [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
+              [
+                _c("el-button", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !meeting.locked,
+                      expression: "!meeting.locked"
+                    }
+                  ],
+                  attrs: { icon: "el-icon-edit" }
+                })
+              ],
               1
             ),
             _vm._v(" "),
             _c("el-button", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !meeting.locked,
+                  expression: "!meeting.locked"
+                }
+              ],
               attrs: { icon: "el-icon-delete same-line" },
               on: {
                 click: function($event) {
@@ -117290,7 +117381,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -117378,77 +117469,102 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "MeetingAdd",
-    props: ['choices'],
-    data: function data() {
-        return {
-            meeting: {
-                id: '',
-                name: '',
-                date: '',
-                start_time: '',
-                end_time: '',
-                creator_id: '',
-                chair_id: '',
-                secretary_id: '',
-                venue_id: '',
-                media_id: '',
-                meetingtype_id: '',
-                meetingseries_id: ''
-            },
-            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
-            today: new Date()
-        };
-    },
-    methods: {
-        addNewMeeting: function addNewMeeting() {
-            var _this = this;
+  name: "MeetingAdd",
+  props: ["choices"],
+  data: function data() {
+    return {
+      meeting: {
+        id: "",
+        name: "",
+        date: "",
+        start_time: "",
+        end_time: "",
+        creator_id: "",
+        chair_id: "",
+        secretary_id: "",
+        venue_id: "",
+        media_id: "",
+        meetingtype_id: "",
+        meetingseries_id: ""
+      },
+      timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
+      statuses: [{ id: 0, name: "Pending" }, { id: 1, name: "Accepted" }, { id: 2, name: "Rejected" }],
+      meetingStatuses: [{ id: 0, name: "Open" }, { id: 1, name: "Locked" }],
+      today: new Date()
+    };
+  },
+  methods: {
+    addNewMeeting: function addNewMeeting() {
+      var _this = this;
 
-            axios.post('/api/meetings', this.meeting).then(function (response) {
-                _this.$router.push('/meetings');
-                _this.$noty.success("Your meeting has been saved!");
-                _this.meeting = {};
-            });
-        }
-    },
-    computed: {
-        orderedUsers: function orderedUsers() {
-            return _.orderBy(this.choices.users, 'first_name');
-        },
-        orderedVenues: function orderedVenues() {
-            return _.orderBy(this.choices.venues, 'name');
-        },
-        orderedMedia: function orderedMedia() {
-            return _.orderBy(this.choices.media, 'media');
-        },
-        orderedMeetingTypes: function orderedMeetingTypes() {
-            return _.orderBy(this.choices.meetingtypes, 'name');
-        },
-        orderedMeetingSeries: function orderedMeetingSeries() {
-            return _.orderBy(this.choices.meetingseries, 'name');
-        },
-        refDate: function refDate() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            return yyyy + '-' + mm + '-' + dd;
-        },
-        isMeetingComplete: function isMeetingComplete() {
-            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
-        }
+      axios.post("/api/meetings", this.meeting).then(function (response) {
+        _this.$router.push("/meetings");
+        _this.$noty.success("Your meeting has been saved!");
+        _this.meeting = {};
+      });
     }
+  },
+  computed: {
+    orderedUsers: function orderedUsers() {
+      return _.orderBy(this.choices.users, "first_name");
+    },
+    orderedVenues: function orderedVenues() {
+      return _.orderBy(this.choices.venues, "name");
+    },
+    orderedMedia: function orderedMedia() {
+      return _.orderBy(this.choices.media, "media");
+    },
+    orderedMeetingTypes: function orderedMeetingTypes() {
+      return _.orderBy(this.choices.meetingtypes, "name");
+    },
+    orderedMeetingSeries: function orderedMeetingSeries() {
+      return _.orderBy(this.choices.meetingseries, "name");
+    },
+    refDate: function refDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      return yyyy + "-" + mm + "-" + dd;
+    },
+    isMeetingComplete: function isMeetingComplete() {
+      return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+    }
+  }
 });
 
 /***/ }),
@@ -117477,7 +117593,52 @@ var render = function() {
     _c("h3", [_vm._v("Add New Meeting")]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Meeting Name *"),
+      _c("label", [_vm._v("Meeting Status *")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.meeting.locked,
+              expression: "meeting.locked"
+            }
+          ],
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.meeting,
+                "locked",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("Select status")]),
+          _vm._v(" "),
+          _vm._l(_vm.meetingStatuses, function(meetingStatus) {
+            return _c("option", { domProps: { value: meetingStatus.id } }, [
+              _vm._v(_vm._s(meetingStatus.name))
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _vm._v("\n    Meeting Name *\n    "),
       _c("input", {
         directives: [
           {
@@ -117507,7 +117668,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Date *\n        "),
+      _vm._v("\n    Date *\n    "),
       _c("input", {
         directives: [
           {
@@ -117567,7 +117728,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Start Time *"),
+      _vm._v("\n    Start Time *\n    "),
       _c("input", {
         directives: [
           {
@@ -117591,7 +117752,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        End Time *"),
+      _vm._v("\n    End Time *\n    "),
       _c("input", {
         directives: [
           {
@@ -117841,7 +118002,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
             return _c("option", { domProps: { value: meetingtype.id } }, [
-              _vm._v(_vm._s(meetingtype.name) + "\n            ")
+              _vm._v(_vm._s(meetingtype.name))
             ])
           })
         ],
@@ -117888,7 +118049,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
             return _c("option", { domProps: { value: eachmeetingseries.id } }, [
-              _vm._v(_vm._s(eachmeetingseries.name) + "\n            ")
+              _vm._v("\n        " + _vm._s(eachmeetingseries.name) + "\n      ")
             ])
           })
         ],

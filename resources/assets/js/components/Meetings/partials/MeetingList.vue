@@ -15,9 +15,9 @@
       {{ meeting.end_time }}
       <br>
       <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
-        <el-button icon="el-icon-edit"></el-button>
+        <el-button v-show="!meeting.locked" icon="el-icon-edit"></el-button>
       </router-link>
-      <el-button icon="el-icon-delete same-line" @click.prevent="deleteUser(meeting.id)"></el-button>
+      <el-button v-show="!meeting.locked" icon="el-icon-delete same-line" @click.prevent="deleteUser(meeting.id)"></el-button>
     </div>
   </div>
 </template>

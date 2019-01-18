@@ -5,7 +5,8 @@
     <div>
       <h4>Meeting Status</h4>
       <div>
-        <p  v-show="dataItem !== 'locked'"
+        <p
+          v-show="dataItem !== 'locked'"
           @click.prevent="startMeetingFieldEdit('locked')"
           class="link"
         >{{ meetingStatuses[meeting.locked].name }}</p>
@@ -191,6 +192,7 @@
         <option v-for="attendee in orderedUsers" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
       </select>
       <el-button
+        v-show="!meeting.locked"
         class="same-line"
         type="success"
         icon="el-icon-check"
@@ -200,9 +202,9 @@
       <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
     </div>
     <el-button
+      v-show="dataItem !== 'user'"
       icon="el-icon-circle-plus-outline"
       class="same-line"
-      v-show="dataItem !== 'user'"
       @click.prevent="startUserEdit"
     ></el-button>
     <br>
@@ -214,6 +216,7 @@
         <span v-if="user.id == meeting.secretary_id">(Secretary)</span>
       </p>
       <i
+        v-show="!meeting.locked"
         v-if="user.id !== meeting.chair_id && user.id !== meeting.secretary_id"
         class="el-icon-delete same-line"
         @click.prevent="removeUsers(user.id)"
@@ -272,10 +275,10 @@
     <!--Read agendas-->
     <h2 class="same-line">Agendas</h2>
     <el-button
+      v-show="dataItem !=='agendaCreate' && !meeting.locked"
       icon="el-icon-circle-plus-outline"
       class="same-line"
       @click.prevent="showAgendaCreate(meeting.id)"
-      v-show="dataItem !=='agendaCreate'"
     ></el-button>
     <br>
     <br>
@@ -284,8 +287,16 @@
         <fieldset>
           <div>
             <h4 class="same-line">Agenda {{ index + 1 }}: {{ agenda.topic }}</h4>
-            <el-button icon="el-icon-edit same-line" @click.prevent="startAgendaEdit(agenda.id)"></el-button>
-            <el-button icon="el-icon-delete same-line" @click.prevent="deleteAgenda(agenda.id)"></el-button>
+            <el-button
+              v-show="!meeting.locked"
+              icon="el-icon-edit same-line"
+              @click.prevent="startAgendaEdit(agenda.id)"
+            ></el-button>
+            <el-button
+              v-show="!meeting.locked"
+              icon="el-icon-delete same-line"
+              @click.prevent="deleteAgenda(agenda.id)"
+            ></el-button>
 
             <!--Start read agenda-->
             <div>
@@ -327,7 +338,7 @@
                   <el-button
                     icon="el-icon-circle-plus-outline"
                     @click.prevent="showFollowupCreate(agenda.id)"
-                    v-show="dataItem !== 'followupCreate'+agenda.id"
+                    v-show="dataItem !== 'followupCreate'+agenda.id && !meeting.locked""
                   >Add Followup</el-button>
                   <br>
                   <br>
@@ -353,7 +364,7 @@
 
                 <!--Read followup-->
                 <div v-for="followup in agenda.followups">Follow Up
-                  <div v-show="dataItem !== 'followupEdit'+followup.id">
+                  <div v-show="dataItem !== 'followupEdit'+followup.id && !meeting.locked">
                     <div>
                       <div @click.prevent="startFollowupEdit(followup.id, agenda.id)">
                         <li>Action {{ followup.action }}</li>
@@ -366,6 +377,7 @@
                           @click.prevent="startFollowupEdit(followup.id, agenda.id)"
                         ></el-button>
                         <el-button
+                        v-show="!meeting.locked"
                           icon="el-icon-delete same-line"
                           @click.prevent="deleteFollowup(followup.id, agenda.id)"
                         ></el-button>
@@ -374,7 +386,7 @@
                   </div>
 
                   <!--Edit followup form-->
-                  <div v-show="dataItem === 'followupEdit'+followup.id">
+                  <div v-show="dataItem === 'followupEdit'+followup.id && !meeting.locked">
                     <form @click.prevent>
                       <div>
                         Action *
@@ -417,7 +429,7 @@
                   <el-button
                     icon="el-icon-circle-plus-outline"
                     @click.prevent="showDiscussionCreate(agenda.id) "
-                    v-show="dataItem !== 'discussionCreate'+agenda.id"
+                    v-show="dataItem !== 'discussionCreate'+agenda.id && !meeting.locked"
                   >Add Discussion</el-button>
                   <br>
                   <br>
@@ -434,7 +446,7 @@
 
                 <!--Read discussions-->
                 <div v-for="discussion in agenda.discussions">Discussion
-                  <div v-show="dataItem !== 'discussionEdit'+ discussion.id">
+                  <div v-show="dataItem !== 'discussionEdit'+ discussion.id && !meeting.locked">
                     <div>
                       <div @click.prevent="startDiscussionEdit(discussion.id, agenda.id)">
                         <li>Description {{discussion.description}}</li>
@@ -445,6 +457,7 @@
                           @click.prevent="startDiscussionEdit(discussion.id, agenda.id)"
                         ></el-button>
                         <el-button
+                        v-show="!meeting.locked"
                           icon="el-icon-delete same-line"
                           @click.prevent="deleteDiscussion(discussion.id, agenda.id)"
                         ></el-button>
@@ -453,7 +466,7 @@
                   </div>
 
                   <!--Edit Discussion-->
-                  <div v-show="dataItem === 'discussionEdit'+discussion.id">
+                  <div v-show="dataItem === 'discussionEdit'+discussion.id && !meeting.locked">
                     <form @click.prevent>
                       Description *
                       <input type="text" v-model="dataHolder.description">
@@ -480,7 +493,7 @@
 
             <!--Edit agenda form-->
             <form @click.prevent>
-              <div v-on:keyup.esc="cancelFollowup" v-show="dataItem === 'agendaEdit'+agenda.id">
+              <div v-on:keyup.esc="cancelFollowup" v-show="dataItem === 'agendaEdit'+agenda.id && !meeting.locked">
                 <div>
                   Topic *
                   <input type="text" v-model="dataHolder.topic">
@@ -550,7 +563,7 @@
         >Add Related Agenda</el-button>
 
         <!--Add related agenda-->
-        <div v-show="dataItem === 'agendaRelate'+agenda.id">
+        <div v-show="dataItem === 'agendaRelate'+agenda.id && !meeting.locked">
           <label>Related Agenda</label>
           <select v-model="dataHolder.agendatarget_id">
             <option value>Select Agenda</option>
