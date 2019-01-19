@@ -1,17 +1,6 @@
 <template>
   <div>
     <h3>Add New Meeting</h3>
-
-    <div>
-      <label>Meeting Status *</label>
-      <select v-model="meeting.locked">
-        <option value>Select status</option>
-        <option
-          v-for="meetingStatus in meetingStatuses"
-          v-bind:value="meetingStatus.id"
-        >{{ meetingStatus.name }}</option>
-      </select>
-    </div>
     <div>
       Meeting Name *
       <input type="text" v-validate="'required'" v-model="meeting.name">
@@ -125,7 +114,6 @@ export default {
         { id: 1, name: "Accepted" },
         { id: 2, name: "Rejected" }
       ],
-      meetingStatuses: [{ id: 0, name: "Open" }, { id: 1, name: "Locked" }],
       today: new Date()
     };
   },

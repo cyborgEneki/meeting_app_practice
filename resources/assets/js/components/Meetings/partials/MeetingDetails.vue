@@ -1,40 +1,5 @@
 <template>
   <div>
-    <!--First part of the form-->
-    <!--Start meeting status -->
-    <div>
-      <h4>Meeting Status</h4>
-      <div>
-        <p
-          v-show="dataItem !== 'locked'"
-          @click.prevent="startMeetingFieldEdit('locked')"
-          class="link"
-        >{{ meetingStatuses[meeting.locked].name }}</p>
-      </div>
-      <div v-show="dataItem == 'locked'">
-        <select type="text" v-model="dataHolder.locked">
-          <option value>Select value</option>
-          <option
-            v-for="meetingStatus in meetingStatuses"
-            v-bind:value="meetingStatus.id"
-          >{{ meetingStatus.name }}</option>
-        </select>
-        <div>
-          <el-button
-            class="same-line"
-            type="success"
-            icon="el-icon-check"
-            circle
-            @click.prevent="saveMeetingFieldEdit('locked')"
-          >Save Edit</el-button>
-        </div>
-        <div class="same-line">
-          <a href="#" @click.prevent="dataItem=''">Cancel</a>
-        </div>
-      </div>
-    </div>
-
-    <!--End of meeting status -->
     <h4>Meeting Name</h4>
     <p
       v-show="dataItem !== 'name'"
@@ -192,7 +157,6 @@
         <option v-for="attendee in orderedUsers" v-bind:value="attendee.id">{{ attendee.full_name }}</option>
       </select>
       <el-button
-        v-show="!meeting.locked"
         class="same-line"
         type="success"
         icon="el-icon-check"
@@ -202,7 +166,7 @@
       <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
     </div>
     <el-button
-      v-show="dataItem !== 'user'"
+      v-show="dataItem !== 'user' && !meeting.locked"
       icon="el-icon-circle-plus-outline"
       class="same-line"
       @click.prevent="startUserEdit"
@@ -275,7 +239,7 @@
     <!--Read agendas-->
     <h2 class="same-line">Agendas</h2>
     <el-button
-      v-show="dataItem !=='agendaCreate'"
+      v-show="dataItem !=='agendaCreate' && !meeting.locked"
       icon="el-icon-circle-plus-outline"
       class="same-line"
       @click.prevent="showAgendaCreate(meeting.id)"
@@ -313,7 +277,7 @@
                   <div v-if="agenda.conclusion">Conclusion {{ agenda.conclusion }}</div>
                 </div>
 
-                <div>
+                <div v-show="!meeting.locked">
                   <a
                     href="#"
                     :class="{disabled: agenda.vote && agenda.vote.vote}"
@@ -338,7 +302,7 @@
                   <el-button
                     icon="el-icon-circle-plus-outline"
                     @click.prevent="showFollowupCreate(agenda.id)"
-                    v-show="dataItem !== 'followupCreate'+agenda.id && !meeting.locked""
+                    v-show="dataItem !== 'followupCreate'+agenda.id && !meeting.locked"
                   >Add Followup</el-button>
                   <br>
                   <br>
@@ -559,11 +523,11 @@
         <el-button
           icon="el-icon-circle-plus-outline"
           @click.prevent="showAgendaRelate(agenda.id)"
-          v-show="dataItem !== 'agendaRelate'+agenda.id"
+          v-show="dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
         >Add Related Agenda</el-button>
 
         <!--Add related agenda-->
-        <div v-show="dataItem === 'agendaRelate'+agenda.id && !meeting.locked">
+        <div v-show="dataItem === 'agendaRelate'+agenda.id">
           <label>Related Agenda</label>
           <select v-model="dataHolder.agendatarget_id">
             <option value>Select Agenda</option>
@@ -695,7 +659,7 @@
     <el-button
       icon="el-icon-circle-plus-outline"
       @click.prevent="showNoteCreate(meeting.id) "
-      v-show="dataItem !== 'noteCreate' && !meeting.notes"
+      v-show="dataItem !== 'noteCreate' && !meeting.notes && !meeting.locked"
     ></el-button>
     <div v-show="dataItem === 'noteCreate'">
       <textarea v-model="dataHolder.description"></textarea>
@@ -794,7 +758,6 @@ export default {
       voteYes: false,
       voteNo: false,
       voteStatus: null,
-      meetingStatuses: [{ id: 0, name: "Open" }, { id: 1, name: "Locked" }],
       statuses: [
         { id: 0, name: "Pending" },
         { id: 1, name: "Accepted" },

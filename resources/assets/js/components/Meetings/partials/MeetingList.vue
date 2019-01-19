@@ -17,7 +17,12 @@
       <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
         <el-button v-show="!meeting.locked" icon="el-icon-edit"></el-button>
       </router-link>
-      <el-button v-show="!meeting.locked" icon="el-icon-delete same-line" @click.prevent="deleteUser(meeting.id)"></el-button>
+      <el-button
+        v-show="!meeting.locked"
+        icon="el-icon-delete same-line"
+        @click.prevent="deleteUser(meeting.id)"
+      ></el-button>
+      <el-button v-if="isAdmin" @click.prevent="lockMeeting(meeting)">{{ lockText[meeting.locked] }}</el-button>
     </div>
   </div>
 </template>
@@ -32,10 +37,19 @@ export default {
   data() {
     return {
       meetings: [],
-      customMessages: ["Delete", "Are you sure?", "Ok!"]
+      customMessages: ["Delete", "Are you sure?", "Ok!"],
+      lockText: { 0: "Lock", 1: "Unlock" },
+      isAdmin: true,
     };
   },
   methods: {
+    lockMeeting(meeting) {
+      let lock = meeting.locked ? 0 : 1;
+      axios.put("/api/meetings/" + meeting.id, { locked: lock })
+      .then(() => {
+        meeting.locked = lock;
+      });
+    },
     getMeetings() {
       axios.get("/api/meetings").then(response => {
         this.meetings = response.data;
