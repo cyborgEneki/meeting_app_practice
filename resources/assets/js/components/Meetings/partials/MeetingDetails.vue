@@ -226,7 +226,7 @@
     <hr>
 
     <!--Create agenda-->
-    <div v-show="dataItem === 'agendaCreate'">
+    <div v-show="dataItem == 'agendaCreate'">
       <div>
         Topic *
         <input type="text" v-model="dataHolder.topic">
@@ -275,7 +275,7 @@
     <!--Read agendas-->
     <h2 class="same-line">Agendas</h2>
     <el-button
-      v-show="dataItem !=='agendaCreate' && !meeting.locked"
+      v-show="dataItem !=='agendaCreate'"
       icon="el-icon-circle-plus-outline"
       class="same-line"
       @click.prevent="showAgendaCreate(meeting.id)"
@@ -301,7 +301,7 @@
             <!--Start read agenda-->
             <div>
               <div v-show="dataItem !== 'agendaEdit'+ agenda.id">
-                <div @click.prevent="startAgendaEdit(agenda.id)">
+                <div @click.prevent="!meeting.locked && startAgendaEdit(agenda.id)">
                   <div>Assignee {{ choices.users[agenda.user_id].full_name }}</div>
                   <div>Topic {{ agenda.topic }}</div>
                   <div v-if="agenda.description">Description {{ agenda.description }}</div>

@@ -113087,8 +113087,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.dataItem === "agendaCreate",
-              expression: "dataItem === 'agendaCreate'"
+              value: _vm.dataItem == "agendaCreate",
+              expression: "dataItem == 'agendaCreate'"
             }
           ]
         },
@@ -113330,8 +113330,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.dataItem !== "agendaCreate" && !_vm.meeting.locked,
-            expression: "dataItem !=='agendaCreate' && !meeting.locked"
+            value: _vm.dataItem !== "agendaCreate",
+            expression: "dataItem !=='agendaCreate'"
           }
         ],
         staticClass: "same-line",
@@ -113424,7 +113424,8 @@ var render = function() {
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
-                                  _vm.startAgendaEdit(agenda.id)
+                                  !_vm.meeting.locked &&
+                                    _vm.startAgendaEdit(agenda.id)
                                 }
                               }
                             },
