@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
 use App\Events\MeetingAlert;
+use App\Notifications\MeetingCanceled;
+use Illuminate\Support\Facades\Mail;
 
 class MeetingController extends Controller
 {
@@ -67,6 +69,12 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
+        if (!($request->exists('date'))) {
+            if(!($meeting->date == $request->date)) {
+                Mail::to($request->users())->send(new AlertMail($meeting));
+            }
+        }
+
         //meeting is locked
         if ($meeting->locked) {
             //this is not admin so throw exception
@@ -106,6 +114,7 @@ class MeetingController extends Controller
     public function destroy($id)
     {
         $this->meetingRepository->deleteMeeting($id);
+        Mail::to($request->users())->send(new AlertMail($meeting));
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 
