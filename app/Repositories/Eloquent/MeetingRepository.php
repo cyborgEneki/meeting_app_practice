@@ -16,6 +16,7 @@ use App\Http\Resources\MeetingResource;
 use App\User;
 use App\Http\Resources\MeetingWithoutRelatedDataResource;
 use App\Meeting;
+use App\Meetingseries;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

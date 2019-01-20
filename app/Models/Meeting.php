@@ -26,6 +26,7 @@ class Meeting extends Model
             'venue_id',
             'meetingtype_id',
             'meetingseries_id',
+            'locked'
         ];
 
     protected $events =

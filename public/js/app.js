@@ -11997,7 +11997,7 @@ module.exports = {
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(270);
+var content = __webpack_require__(275);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -33190,7 +33190,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(86);
-module.exports = __webpack_require__(332);
+module.exports = __webpack_require__(337);
 
 
 /***/ }),
@@ -110514,33 +110514,33 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingTypeIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Meetings_MeetingTypeIndex__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingSeriesIndex__ = __webpack_require__(261);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingSeriesIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_Meetings_MeetingSeriesIndex__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Meetings_MeetingSeriesDetails__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Meetings_MeetingSeriesDetails__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Meetings_MeetingSeriesDetails___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Meetings_MeetingSeriesDetails__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Meetings_partials_MeetingAdd__ = __webpack_require__(266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Meetings_partials_MeetingAdd__ = __webpack_require__(271);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Meetings_partials_MeetingAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Meetings_partials_MeetingAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Meetings_partials_users_UserAdd__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Meetings_partials_users_UserAdd__ = __webpack_require__(277);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Meetings_partials_users_UserAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Meetings_partials_users_UserAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Meetings_partials_venues_VenueAdd__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Meetings_partials_venues_VenueAdd__ = __webpack_require__(282);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Meetings_partials_venues_VenueAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_Meetings_partials_venues_VenueAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_Meetings_partials_meetingSeries_MeetingSeriesAdd__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_Meetings_partials_meetingSeries_MeetingSeriesAdd__ = __webpack_require__(287);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_Meetings_partials_meetingSeries_MeetingSeriesAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_Meetings_partials_meetingSeries_MeetingSeriesAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_Meetings_partials_meetingTypes_MeetingTypeAdd__ = __webpack_require__(287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_Meetings_partials_meetingTypes_MeetingTypeAdd__ = __webpack_require__(292);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_Meetings_partials_meetingTypes_MeetingTypeAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_Meetings_partials_meetingTypes_MeetingTypeAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_Meetings_partials_media_MediaAdd__ = __webpack_require__(292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_Meetings_partials_media_MediaAdd__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_Meetings_partials_media_MediaAdd___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_Meetings_partials_media_MediaAdd__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_Meetings_partials_MeetingEdit__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_Meetings_partials_MeetingEdit__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_Meetings_partials_MeetingEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_Meetings_partials_MeetingEdit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_Meetings_partials_users_UserEdit__ = __webpack_require__(302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_Meetings_partials_users_UserEdit__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_Meetings_partials_users_UserEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_Meetings_partials_users_UserEdit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_Meetings_partials_venues_VenueEdit__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_Meetings_partials_venues_VenueEdit__ = __webpack_require__(312);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_Meetings_partials_venues_VenueEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_Meetings_partials_venues_VenueEdit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_Meetings_partials_meetingSeries_MeetingSeriesEdit__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_Meetings_partials_meetingSeries_MeetingSeriesEdit__ = __webpack_require__(317);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_Meetings_partials_meetingSeries_MeetingSeriesEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_Meetings_partials_meetingSeries_MeetingSeriesEdit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_Meetings_partials_media_MediaEdit__ = __webpack_require__(317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_Meetings_partials_media_MediaEdit__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_Meetings_partials_media_MediaEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_Meetings_partials_media_MediaEdit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_Meetings_partials_meetingTypes_MeetingTypeEdit__ = __webpack_require__(322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_Meetings_partials_meetingTypes_MeetingTypeEdit__ = __webpack_require__(327);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_Meetings_partials_meetingTypes_MeetingTypeEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_Meetings_partials_meetingTypes_MeetingTypeEdit__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_Meetings_partials_SearchResults__ = __webpack_require__(327);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_Meetings_partials_SearchResults__ = __webpack_require__(332);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_Meetings_partials_SearchResults___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20__components_Meetings_partials_SearchResults__);
 
 
@@ -111489,6 +111489,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -111570,6 +111574,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
 
   methods: {
+    saveMeetingStatusCreate: function saveMeetingStatusCreate() {},
+    saveMeetingStatusEdit: function saveMeetingStatusEdit() {},
+    cancelMeetingStatus: function cancelMeetingStatus() {},
     showAgendaRelate: function showAgendaRelate(agendaId) {
       this.dataItem = "agendaRelate" + agendaId;
       this.dataHolder.agendasource_id = agendaId;
@@ -112842,8 +112849,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.dataItem !== "user",
-            expression: "dataItem !== 'user'"
+            value: _vm.dataItem !== "user" && !_vm.meeting.locked,
+            expression: "dataItem !== 'user' && !meeting.locked"
           }
         ],
         staticClass: "same-line",
@@ -112876,6 +112883,14 @@ var render = function() {
           user.id !== _vm.meeting.chair_id &&
           user.id !== _vm.meeting.secretary_id
             ? _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.meeting.locked,
+                    expression: "!meeting.locked"
+                  }
+                ],
                 staticClass: "el-icon-delete same-line",
                 on: {
                   click: function($event) {
@@ -112897,8 +112912,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.dataItem === "agendaCreate",
-              expression: "dataItem === 'agendaCreate'"
+              value: _vm.dataItem == "agendaCreate",
+              expression: "dataItem == 'agendaCreate'"
             }
           ]
         },
@@ -113140,8 +113155,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.dataItem !== "agendaCreate",
-            expression: "dataItem !=='agendaCreate'"
+            value: _vm.dataItem !== "agendaCreate" && !_vm.meeting.locked,
+            expression: "dataItem !=='agendaCreate' && !meeting.locked"
           }
         ],
         staticClass: "same-line",
@@ -113179,6 +113194,14 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("el-button", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.meeting.locked,
+                          expression: "!meeting.locked"
+                        }
+                      ],
                       attrs: { icon: "el-icon-edit same-line" },
                       on: {
                         click: function($event) {
@@ -113189,6 +113212,14 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("el-button", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.meeting.locked,
+                          expression: "!meeting.locked"
+                        }
+                      ],
                       attrs: { icon: "el-icon-delete same-line" },
                       on: {
                         click: function($event) {
@@ -113218,7 +113249,8 @@ var render = function() {
                               on: {
                                 click: function($event) {
                                   $event.preventDefault()
-                                  _vm.startAgendaEdit(agenda.id)
+                                  !_vm.meeting.locked &&
+                                    _vm.startAgendaEdit(agenda.id)
                                 }
                               }
                             },
@@ -113276,65 +113308,78 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _c("div", [
-                            _c(
-                              "a",
-                              {
-                                class: {
-                                  disabled: agenda.vote && agenda.vote.vote
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !_vm.meeting.locked,
+                                  expression: "!meeting.locked"
+                                }
+                              ]
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  class: {
+                                    disabled: agenda.vote && agenda.vote.vote
+                                  },
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      ;(!agenda.vote || !agenda.vote.vote) &&
+                                        _vm.voteAgenda(1, agenda.id)
+                                    }
+                                  }
                                 },
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    ;(!agenda.vote || !agenda.vote.vote) &&
-                                      _vm.voteAgenda(1, agenda.id)
+                                [_vm._v("Up")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  class: {
+                                    disabled: agenda.vote && !agenda.vote.vote
+                                  },
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      ;(!agenda.vote || agenda.vote.vote) &&
+                                        _vm.voteAgenda(0, agenda.id)
+                                    }
                                   }
-                                }
-                              },
-                              [_vm._v("Up")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                class: {
-                                  disabled: agenda.vote && !agenda.vote.vote
                                 },
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    ;(!agenda.vote || agenda.vote.vote) &&
-                                      _vm.voteAgenda(0, agenda.id)
+                                [_vm._v("Down")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value: agenda.vote,
+                                      expression: "agenda.vote"
+                                    }
+                                  ],
+                                  attrs: { href: "#" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      _vm.voteAgenda(null, agenda.id, true)
+                                    }
                                   }
-                                }
-                              },
-                              [_vm._v("Down")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: agenda.vote,
-                                    expression: "agenda.vote"
-                                  }
-                                ],
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.voteAgenda(null, agenda.id, true)
-                                  }
-                                }
-                              },
-                              [_vm._v("Abstain")]
-                            )
-                          ]),
+                                },
+                                [_vm._v("Abstain")]
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -113348,9 +113393,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "followupCreate" + agenda.id,
+                                          "followupCreate" + agenda.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'followupCreate'+agenda.id"
+                                        "dataItem !== 'followupCreate'+agenda.id && !meeting.locked"
                                     }
                                   ],
                                   attrs: {
@@ -113545,9 +113591,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "followupEdit" + followup.id,
+                                          "followupEdit" + followup.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'followupEdit'+followup.id"
+                                        "dataItem !== 'followupEdit'+followup.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -113611,6 +113658,14 @@ var render = function() {
                                         }),
                                         _vm._v(" "),
                                         _c("el-button", {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: !_vm.meeting.locked,
+                                              expression: "!meeting.locked"
+                                            }
+                                          ],
                                           attrs: {
                                             icon: "el-icon-delete same-line"
                                           },
@@ -113640,9 +113695,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem ===
-                                        "followupEdit" + followup.id,
+                                          "followupEdit" + followup.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem === 'followupEdit'+followup.id"
+                                        "dataItem === 'followupEdit'+followup.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -113855,9 +113911,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "discussionCreate" + agenda.id,
+                                          "discussionCreate" + agenda.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'discussionCreate'+agenda.id"
+                                        "dataItem !== 'discussionCreate'+agenda.id && !meeting.locked"
                                     }
                                   ],
                                   attrs: {
@@ -113970,9 +114027,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem !==
-                                        "discussionEdit" + discussion.id,
+                                          "discussionEdit" + discussion.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem !== 'discussionEdit'+ discussion.id"
+                                        "dataItem !== 'discussionEdit'+ discussion.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -114020,6 +114078,14 @@ var render = function() {
                                         }),
                                         _vm._v(" "),
                                         _c("el-button", {
+                                          directives: [
+                                            {
+                                              name: "show",
+                                              rawName: "v-show",
+                                              value: !_vm.meeting.locked,
+                                              expression: "!meeting.locked"
+                                            }
+                                          ],
                                           attrs: {
                                             icon: "el-icon-delete same-line"
                                           },
@@ -114049,9 +114115,10 @@ var render = function() {
                                       rawName: "v-show",
                                       value:
                                         _vm.dataItem ===
-                                        "discussionEdit" + discussion.id,
+                                          "discussionEdit" + discussion.id &&
+                                        !_vm.meeting.locked,
                                       expression:
-                                        "dataItem === 'discussionEdit'+discussion.id"
+                                        "dataItem === 'discussionEdit'+discussion.id && !meeting.locked"
                                     }
                                   ]
                                 },
@@ -114171,9 +114238,10 @@ var render = function() {
                                 name: "show",
                                 rawName: "v-show",
                                 value:
-                                  _vm.dataItem === "agendaEdit" + agenda.id,
+                                  _vm.dataItem === "agendaEdit" + agenda.id &&
+                                  !_vm.meeting.locked,
                                 expression:
-                                  "dataItem === 'agendaEdit'+agenda.id"
+                                  "dataItem === 'agendaEdit'+agenda.id && !meeting.locked"
                               }
                             ],
                             on: {
@@ -114535,8 +114603,11 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.dataItem !== "agendaRelate" + agenda.id,
-                      expression: "dataItem !== 'agendaRelate'+agenda.id"
+                      value:
+                        _vm.dataItem !== "agendaRelate" + agenda.id &&
+                        !_vm.meeting.locked,
+                      expression:
+                        "dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
                     }
                   ],
                   attrs: { icon: "el-icon-circle-plus-outline" },
@@ -115182,8 +115253,12 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.dataItem !== "noteCreate" && !_vm.meeting.notes,
-            expression: "dataItem !== 'noteCreate' && !meeting.notes"
+            value:
+              _vm.dataItem !== "noteCreate" &&
+              !_vm.meeting.notes &&
+              !_vm.meeting.locked,
+            expression:
+              "dataItem !== 'noteCreate' && !meeting.notes && !meeting.locked"
           }
         ],
         attrs: { icon: "el-icon-circle-plus-outline" },
@@ -115490,6 +115565,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -115500,11 +115580,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       meetings: [],
-      customMessages: ["Delete", "Are you sure?", "Ok!"]
+      customMessages: ["Delete", "Are you sure?", "Ok!"],
+      lockText: { 0: "Lock", 1: "Unlock" },
+      isAdmin: false
     };
   },
 
   methods: {
+    lockMeeting: function lockMeeting(meeting) {
+      var lock = meeting.locked ? 0 : 1;
+      axios.put("/api/meetings/" + meeting.id, { locked: lock }).then(function () {
+        meeting.locked = lock;
+      });
+    },
     getMeetings: function getMeetings() {
       var _this = this;
 
@@ -115535,6 +115623,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getMeetings();
+  },
+  created: function created() {
+    var _this3 = this;
+
+    axios.get('/api/users/isadmin').then(function (response) {
+      _this3.isAdmin = response.data;
+    });
   }
 });
 
@@ -115731,11 +115826,31 @@ var render = function() {
                   to: { name: "editMeeting", params: { meeting: meeting } }
                 }
               },
-              [_c("el-button", { attrs: { icon: "el-icon-edit" } })],
+              [
+                _c("el-button", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !meeting.locked,
+                      expression: "!meeting.locked"
+                    }
+                  ],
+                  attrs: { icon: "el-icon-edit" }
+                })
+              ],
               1
             ),
             _vm._v(" "),
             _c("el-button", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !meeting.locked,
+                  expression: "!meeting.locked"
+                }
+              ],
               attrs: { icon: "el-icon-delete same-line" },
               on: {
                 click: function($event) {
@@ -115743,7 +115858,22 @@ var render = function() {
                   _vm.deleteUser(meeting.id)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.isAdmin
+              ? _c(
+                  "el-button",
+                  {
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        _vm.lockMeeting(meeting)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(_vm.lockText[meeting.locked]))]
+                )
+              : _vm._e()
           ],
           1
         )
@@ -117056,7 +117186,604 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(269)
 /* template */
-var __vue_template__ = __webpack_require__(271)
+var __vue_template__ = __webpack_require__(270)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-5afdf760"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Meetings/MeetingSeriesDetails.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5afdf760", Component.options)
+  } else {
+    hotAPI.reload("data-v-5afdf760", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(268);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("60dacd0b", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5afdf760\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MeetingSeriesDetails.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5afdf760\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MeetingSeriesDetails.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 269 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["choices"],
+  computed: {
+    orderedUsers: function orderedUsers() {
+      return _.orderBy(this.choices.users, "first_name");
+    },
+    orderedMembers: function orderedMembers() {
+      return _.orderBy(this.meetingseriesdetails.users, "first_name");
+    }
+  },
+  data: function data() {
+    return {
+      meetingseriesdetails: {},
+      editItem: "",
+      dataHolder: {},
+      dataItem: "",
+      mode: "r",
+      content: this.$store.state.content
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    console.log(this.meetingseriesdetails);
+    axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
+      _this.meetingseriesdetails = response.data;
+    });
+  },
+
+  watch: {
+    $route: function $route(to, from) {
+      var _this2 = this;
+
+      axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
+        _this2.meetingseriesdetails = response.data;
+      });
+    }
+  },
+  methods: {
+    addUser: function addUser(id) {
+      var _this3 = this;
+
+      var checkMtgSeries = this.meetingseriesdetails.users.filter(function (user) {
+        return user.id === id;
+      });
+
+      if (!checkMtgSeries.length) {
+        this.dataHolder.user_id = id;
+        axios.post("/api/meetingseries/attachuser", this.dataHolder).then(function (response) {
+          _this3.meetingseriesdetails.users.push(_this3.choices.users[id]);
+          _this3.dataItem = "";
+        });
+      } else {
+        alert("User already exists");
+      }
+    },
+    startUserEdit: function startUserEdit() {
+      this.dataItem = "user";
+      this.dataHolder.meetingseries_id = this.meetingseriesdetails.id;
+    },
+    removeUsers: function removeUsers(id) {
+      var _this4 = this;
+
+      axios.delete("/api/meetingseries/" + this.meetingseriesdetails.id + "/users/" + id).then(function (response) {
+        var index = _this4.meetingseriesdetails.users.map(function (item) {
+          return item.id;
+        }).indexOf(id);
+        _this4.meetingseriesdetails.users.splice(index, 1);
+      });
+    },
+    startMeetingSeriesFieldEdit: function startMeetingSeriesFieldEdit(theField) {
+      this.dataItem = theField;
+      this.dataHolder[theField] = this.meetingseriesdetails[theField];
+    },
+    saveMeetingSeriesFieldEdit: function saveMeetingSeriesFieldEdit(theField) {
+      var _this5 = this;
+
+      axios.put("/api/meetingseries/" + this.meetingseriesdetails.id, this.dataHolder).then(function (response) {
+        _this5.meetingseriesdetails[theField] = _this5.dataHolder[theField];
+      }), this.dataHolder = {};
+      this.dataItem = "";
+    }
+  }
+});
+
+/***/ }),
+/* 270 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("div", [
+        _c("h4", [_vm._v("Meeting Series Name")]),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem !== "name",
+                expression: "dataItem !== 'name'"
+              }
+            ],
+            staticClass: "link",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.startMeetingSeriesFieldEdit("name")
+              }
+            }
+          },
+          [_vm._v(_vm._s(_vm.meetingseriesdetails.name))]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem === "name",
+                expression: "dataItem === 'name'"
+              }
+            ]
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.name,
+                  expression: "dataHolder.name"
+                }
+              ],
+              domProps: { value: _vm.dataHolder.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.dataHolder, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "same-line",
+                attrs: { icon: "el-icon-check", type: "success", circle: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.saveMeetingSeriesFieldEdit("name")
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "same-line",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.dataItem = ""
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("h4", [_vm._v("Frequency")]),
+        _vm._v(" "),
+        _c(
+          "p",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem !== "frequency",
+                expression: "dataItem !== 'frequency'"
+              }
+            ],
+            staticClass: "link",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.startMeetingSeriesFieldEdit("frequency")
+              }
+            }
+          },
+          [_vm._v(_vm._s(_vm.meetingseriesdetails.frequency))]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem === "frequency",
+                expression: "dataItem === 'frequency'"
+              }
+            ]
+          },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.frequency,
+                  expression: "dataHolder.frequency"
+                }
+              ],
+              domProps: { value: _vm.dataHolder.frequency },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.dataHolder, "frequency", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "same-line",
+                attrs: { icon: "el-icon-check", type: "success", circle: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.saveMeetingSeriesFieldEdit("frequency")
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "same-line",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.dataItem = ""
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c("h4", { staticClass: "same-line" }, [_vm._v("Members")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.dataItem == "user",
+                expression: "dataItem == 'user'"
+              }
+            ]
+          },
+          [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.dataHolder.user_id,
+                    expression: "dataHolder.user_id"
+                  }
+                ],
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.dataHolder,
+                      "user_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Select Members")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.orderedUsers, function(user) {
+                  return _c("option", { domProps: { value: user.id } }, [
+                    _vm._v(_vm._s(user.full_name))
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "same-line",
+                attrs: { type: "success", icon: "el-icon-check", circle: "" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.addUser(_vm.dataHolder.user_id)
+                  }
+                }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "same-line",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.dataItem = ""
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("el-button", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.dataItem !== "user",
+            expression: "dataItem !== 'user'"
+          }
+        ],
+        staticClass: "same-line",
+        attrs: { icon: "el-icon-circle-plus-outline" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.startUserEdit($event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _vm._l(_vm.orderedMembers, function(user) {
+        return _c("div", { key: user.id }, [
+          _c("p", { staticClass: "same-line" }, [
+            _vm._v(_vm._s(user.full_name))
+          ]),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "el-icon-delete same-line",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.removeUsers(user.id)
+              }
+            }
+          })
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5afdf760", module.exports)
+  }
+}
+
+/***/ }),
+/* 271 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(272)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(274)
+/* template */
+var __vue_template__ = __webpack_require__(276)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -117095,13 +117822,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 267 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(268);
+var content = __webpack_require__(273);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -117121,7 +117848,7 @@ if(false) {
 }
 
 /***/ }),
-/* 268 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -117129,13 +117856,13 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 269 */
+/* 274 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117217,81 +117944,94 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "MeetingAdd",
-    props: ['choices'],
-    data: function data() {
-        return {
-            meeting: {
-                id: '',
-                name: '',
-                date: '',
-                start_time: '',
-                end_time: '',
-                creator_id: '',
-                chair_id: '',
-                secretary_id: '',
-                venue_id: '',
-                media_id: '',
-                meetingtype_id: '',
-                meetingseries_id: ''
-            },
-            timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
-            statuses: [{ id: 0, name: 'Pending' }, { id: 1, name: 'Accepted' }, { id: 2, name: 'Rejected' }],
-            today: new Date()
-        };
-    },
-    methods: {
-        addNewMeeting: function addNewMeeting() {
-            var _this = this;
+  name: "MeetingAdd",
+  props: ["choices"],
+  data: function data() {
+    return {
+      meeting: {
+        id: "",
+        name: "",
+        date: "",
+        start_time: "",
+        end_time: "",
+        creator_id: "",
+        chair_id: "",
+        secretary_id: "",
+        venue_id: "",
+        media_id: "",
+        meetingtype_id: "",
+        meetingseries_id: ""
+      },
+      timing: [5, 10, 15, 20, 25, 30, 45, 60, 75, 90],
+      statuses: [{ id: 0, name: "Pending" }, { id: 1, name: "Accepted" }, { id: 2, name: "Rejected" }],
+      today: new Date()
+    };
+  },
+  methods: {
+    addNewMeeting: function addNewMeeting() {
+      var _this = this;
 
-            axios.post('/api/meetings', this.meeting).then(function (response) {
-                _this.$router.push('/meetings');
-                _this.$noty.success("Your meeting has been saved!");
-                _this.meeting = {};
-            });
-        }
-    },
-    computed: {
-        orderedUsers: function orderedUsers() {
-            return _.orderBy(this.choices.users, 'first_name');
-        },
-        orderedVenues: function orderedVenues() {
-            return _.orderBy(this.choices.venues, 'name');
-        },
-        orderedMedia: function orderedMedia() {
-            return _.orderBy(this.choices.media, 'media');
-        },
-        orderedMeetingTypes: function orderedMeetingTypes() {
-            return _.orderBy(this.choices.meetingtypes, 'name');
-        },
-        orderedMeetingSeries: function orderedMeetingSeries() {
-            return _.orderBy(this.choices.meetingseries, 'name');
-        },
-        refDate: function refDate() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1;
-            var yyyy = today.getFullYear();
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-            return yyyy + '-' + mm + '-' + dd;
-        },
-        isMeetingComplete: function isMeetingComplete() {
-            return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
-        }
+      axios.post("/api/meetings", this.meeting).then(function (response) {
+        _this.$router.push("/meetings");
+        _this.$noty.success("Your meeting has been saved!");
+        _this.meeting = {};
+      });
     }
+  },
+  computed: {
+    orderedUsers: function orderedUsers() {
+      return _.orderBy(this.choices.users, "first_name");
+    },
+    orderedVenues: function orderedVenues() {
+      return _.orderBy(this.choices.venues, "name");
+    },
+    orderedMedia: function orderedMedia() {
+      return _.orderBy(this.choices.media, "media");
+    },
+    orderedMeetingTypes: function orderedMeetingTypes() {
+      return _.orderBy(this.choices.meetingtypes, "name");
+    },
+    orderedMeetingSeries: function orderedMeetingSeries() {
+      return _.orderBy(this.choices.meetingseries, "name");
+    },
+    refDate: function refDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+      return yyyy + "-" + mm + "-" + dd;
+    },
+    isMeetingComplete: function isMeetingComplete() {
+      return this.meeting.date && this.meeting.start_time && this.meeting.end_time && this.meeting.secretary_id && this.meeting.chair_id && this.meeting.venue_id && this.meeting.media_id && this.meeting.meetingtype_id && this.meeting.meetingseries_id;
+    }
+  }
 });
 
 /***/ }),
-/* 270 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -117305,7 +118045,7 @@ exports.push([module.i, ".noty_layout_mixin, #noty_layout__top, #noty_layout__to
 
 
 /***/ }),
-/* 271 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -117316,7 +118056,7 @@ var render = function() {
     _c("h3", [_vm._v("Add New Meeting")]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Meeting Name *"),
+      _vm._v("\n    Meeting Name *\n    "),
       _c("input", {
         directives: [
           {
@@ -117346,7 +118086,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Date *\n        "),
+      _vm._v("\n    Date *\n    "),
       _c("input", {
         directives: [
           {
@@ -117406,7 +118146,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        Start Time *"),
+      _vm._v("\n    Start Time *\n    "),
       _c("input", {
         directives: [
           {
@@ -117430,7 +118170,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", [
-      _vm._v("\n        End Time *"),
+      _vm._v("\n    End Time *\n    "),
       _c("input", {
         directives: [
           {
@@ -117680,7 +118420,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.orderedMeetingTypes, function(meetingtype) {
             return _c("option", { domProps: { value: meetingtype.id } }, [
-              _vm._v(_vm._s(meetingtype.name) + "\n            ")
+              _vm._v(_vm._s(meetingtype.name))
             ])
           })
         ],
@@ -117727,7 +118467,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.orderedMeetingSeries, function(eachmeetingseries) {
             return _c("option", { domProps: { value: eachmeetingseries.id } }, [
-              _vm._v(_vm._s(eachmeetingseries.name) + "\n            ")
+              _vm._v("\n        " + _vm._s(eachmeetingseries.name) + "\n      ")
             ])
           })
         ],
@@ -117768,19 +118508,19 @@ if (false) {
 }
 
 /***/ }),
-/* 272 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(273)
+  __webpack_require__(278)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(275)
+var __vue_script__ = __webpack_require__(280)
 /* template */
-var __vue_template__ = __webpack_require__(276)
+var __vue_template__ = __webpack_require__(281)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -117819,13 +118559,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 273 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(274);
+var content = __webpack_require__(279);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -117845,7 +118585,7 @@ if(false) {
 }
 
 /***/ }),
-/* 274 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -117859,7 +118599,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 275 */
+/* 280 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -117918,7 +118658,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 276 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -118123,19 +118863,19 @@ if (false) {
 }
 
 /***/ }),
-/* 277 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(278)
+  __webpack_require__(283)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(280)
+var __vue_script__ = __webpack_require__(285)
 /* template */
-var __vue_template__ = __webpack_require__(281)
+var __vue_template__ = __webpack_require__(286)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -118174,13 +118914,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 278 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(279);
+var content = __webpack_require__(284);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -118200,7 +118940,7 @@ if(false) {
 }
 
 /***/ }),
-/* 279 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -118214,7 +118954,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 280 */
+/* 285 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118253,7 +118993,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 281 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -118310,19 +119050,19 @@ if (false) {
 }
 
 /***/ }),
-/* 282 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(283)
+  __webpack_require__(288)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(285)
+var __vue_script__ = __webpack_require__(290)
 /* template */
-var __vue_template__ = __webpack_require__(286)
+var __vue_template__ = __webpack_require__(291)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -118361,13 +119101,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 283 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(284);
+var content = __webpack_require__(289);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -118387,7 +119127,7 @@ if(false) {
 }
 
 /***/ }),
-/* 284 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -118401,7 +119141,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 285 */
+/* 290 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118443,7 +119183,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 286 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -118525,19 +119265,19 @@ if (false) {
 }
 
 /***/ }),
-/* 287 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(288)
+  __webpack_require__(293)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(290)
+var __vue_script__ = __webpack_require__(295)
 /* template */
-var __vue_template__ = __webpack_require__(291)
+var __vue_template__ = __webpack_require__(296)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -118576,13 +119316,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 288 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(289);
+var content = __webpack_require__(294);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -118602,7 +119342,7 @@ if(false) {
 }
 
 /***/ }),
-/* 289 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -118616,7 +119356,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 290 */
+/* 295 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118656,7 +119396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 291 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -118715,19 +119455,19 @@ if (false) {
 }
 
 /***/ }),
-/* 292 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(293)
+  __webpack_require__(298)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(295)
+var __vue_script__ = __webpack_require__(300)
 /* template */
-var __vue_template__ = __webpack_require__(296)
+var __vue_template__ = __webpack_require__(301)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -118766,13 +119506,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 293 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(294);
+var content = __webpack_require__(299);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -118792,7 +119532,7 @@ if(false) {
 }
 
 /***/ }),
-/* 294 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -118806,7 +119546,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 295 */
+/* 300 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118845,7 +119585,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 296 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -118902,19 +119642,19 @@ if (false) {
 }
 
 /***/ }),
-/* 297 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(298)
+  __webpack_require__(303)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(300)
+var __vue_script__ = __webpack_require__(305)
 /* template */
-var __vue_template__ = __webpack_require__(301)
+var __vue_template__ = __webpack_require__(306)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -118953,13 +119693,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 298 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(299);
+var content = __webpack_require__(304);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -118979,7 +119719,7 @@ if(false) {
 }
 
 /***/ }),
-/* 299 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -118993,7 +119733,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 300 */
+/* 305 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119135,7 +119875,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 301 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -119595,19 +120335,19 @@ if (false) {
 }
 
 /***/ }),
-/* 302 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(303)
+  __webpack_require__(308)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(305)
+var __vue_script__ = __webpack_require__(310)
 /* template */
-var __vue_template__ = __webpack_require__(306)
+var __vue_template__ = __webpack_require__(311)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -119646,13 +120386,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 303 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(304);
+var content = __webpack_require__(309);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -119672,7 +120412,7 @@ if(false) {
 }
 
 /***/ }),
-/* 304 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -119686,7 +120426,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 305 */
+/* 310 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119734,7 +120474,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 306 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -119900,19 +120640,19 @@ if (false) {
 }
 
 /***/ }),
-/* 307 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(308)
+  __webpack_require__(313)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(310)
+var __vue_script__ = __webpack_require__(315)
 /* template */
-var __vue_template__ = __webpack_require__(311)
+var __vue_template__ = __webpack_require__(316)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -119951,13 +120691,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 308 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(309);
+var content = __webpack_require__(314);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -119977,7 +120717,7 @@ if(false) {
 }
 
 /***/ }),
-/* 309 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -119991,7 +120731,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 310 */
+/* 315 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120023,7 +120763,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 311 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120090,19 +120830,19 @@ if (false) {
 }
 
 /***/ }),
-/* 312 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(313)
+  __webpack_require__(318)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(315)
+var __vue_script__ = __webpack_require__(320)
 /* template */
-var __vue_template__ = __webpack_require__(316)
+var __vue_template__ = __webpack_require__(321)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120141,13 +120881,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 313 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(314);
+var content = __webpack_require__(319);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -120167,7 +120907,7 @@ if(false) {
 }
 
 /***/ }),
-/* 314 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -120181,7 +120921,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 315 */
+/* 320 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120215,7 +120955,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 316 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120305,19 +121045,19 @@ if (false) {
 }
 
 /***/ }),
-/* 317 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(318)
+  __webpack_require__(323)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(320)
+var __vue_script__ = __webpack_require__(325)
 /* template */
-var __vue_template__ = __webpack_require__(321)
+var __vue_template__ = __webpack_require__(326)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120356,13 +121096,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 318 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(319);
+var content = __webpack_require__(324);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -120382,7 +121122,7 @@ if(false) {
 }
 
 /***/ }),
-/* 319 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -120396,7 +121136,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 320 */
+/* 325 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120428,7 +121168,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 321 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120495,19 +121235,19 @@ if (false) {
 }
 
 /***/ }),
-/* 322 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(323)
+  __webpack_require__(328)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(325)
+var __vue_script__ = __webpack_require__(330)
 /* template */
-var __vue_template__ = __webpack_require__(326)
+var __vue_template__ = __webpack_require__(331)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120546,13 +121286,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 323 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(324);
+var content = __webpack_require__(329);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -120572,7 +121312,7 @@ if(false) {
 }
 
 /***/ }),
-/* 324 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -120586,7 +121326,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 325 */
+/* 330 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120618,7 +121358,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 326 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120686,19 +121426,20 @@ if (false) {
 
 /***/ }),
 
-/* 327 */
+/* 332 */
+
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(328)
+  __webpack_require__(333)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(330)
+var __vue_script__ = __webpack_require__(335)
 /* template */
-var __vue_template__ = __webpack_require__(331)
+var __vue_template__ = __webpack_require__(336)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -120737,13 +121478,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 328 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(329);
+var content = __webpack_require__(334);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -120763,7 +121504,7 @@ if(false) {
 }
 
 /***/ }),
-/* 329 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -120777,7 +121518,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 330 */
+/* 335 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -120846,7 +121587,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 331 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -120954,609 +121695,10 @@ if (false) {
 }
 
 /***/ }),
-/* 332 */
+/* 337 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 333 */,
-/* 334 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(337)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(336)
-/* template */
-var __vue_template__ = __webpack_require__(339)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-5afdf760"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Meetings/MeetingSeriesDetails.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5afdf760", Component.options)
-  } else {
-    hotAPI.reload("data-v-5afdf760", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 335 */,
-/* 336 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["choices"],
-  computed: {
-    orderedUsers: function orderedUsers() {
-      return _.orderBy(this.choices.users, "first_name");
-    },
-    orderedMembers: function orderedMembers() {
-      return _.orderBy(this.meetingseriesdetails.users, "first_name");
-    }
-  },
-  data: function data() {
-    return {
-      meetingseriesdetails: {},
-      editItem: "",
-      dataHolder: {},
-      dataItem: "",
-      mode: "r",
-      content: this.$store.state.content
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    console.log(this.meetingseriesdetails);
-    axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
-      _this.meetingseriesdetails = response.data;
-    });
-  },
-
-  watch: {
-    $route: function $route(to, from) {
-      var _this2 = this;
-
-      axios.get("/api/meetingseries/" + this.$route.params.id).then(function (response) {
-        _this2.meetingseriesdetails = response.data;
-      });
-    }
-  },
-  methods: {
-    addUser: function addUser(id) {
-      var _this3 = this;
-
-      var checkMtgSeries = this.meetingseriesdetails.users.filter(function (user) {
-        return user.id === id;
-      });
-
-      if (!checkMtgSeries.length) {
-        this.dataHolder.user_id = id;
-        axios.post("/api/meetingseries/attachuser", this.dataHolder).then(function (response) {
-          _this3.meetingseriesdetails.users.push(_this3.choices.users[id]);
-          _this3.dataItem = "";
-        });
-      } else {
-        alert("User already exists");
-      }
-    },
-    startUserEdit: function startUserEdit() {
-      this.dataItem = "user";
-      this.dataHolder.meetingseries_id = this.meetingseriesdetails.id;
-    },
-    removeUsers: function removeUsers(id) {
-      var _this4 = this;
-
-      axios.delete("/api/meetingseries/" + this.meetingseriesdetails.id + "/users/" + id).then(function (response) {
-        var index = _this4.meetingseriesdetails.users.map(function (item) {
-          return item.id;
-        }).indexOf(id);
-        _this4.meetingseriesdetails.users.splice(index, 1);
-      });
-    },
-    startMeetingSeriesFieldEdit: function startMeetingSeriesFieldEdit(theField) {
-      this.dataItem = theField;
-      this.dataHolder[theField] = this.meetingseriesdetails[theField];
-    },
-    saveMeetingSeriesFieldEdit: function saveMeetingSeriesFieldEdit(theField) {
-      var _this5 = this;
-
-      axios.put("/api/meetingseries/" + this.meetingseriesdetails.id, this.dataHolder).then(function (response) {
-        _this5.meetingseriesdetails[theField] = _this5.dataHolder[theField];
-      }), this.dataHolder = {};
-      this.dataItem = "";
-    }
-  }
-});
-
-/***/ }),
-/* 337 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(338);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(2)("60dacd0b", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5afdf760\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MeetingSeriesDetails.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5afdf760\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MeetingSeriesDetails.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 338 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 339 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", [
-        _c("h4", [_vm._v("Meeting Series Name")]),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.dataItem !== "name",
-                expression: "dataItem !== 'name'"
-              }
-            ],
-            staticClass: "link",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.startMeetingSeriesFieldEdit("name")
-              }
-            }
-          },
-          [_vm._v(_vm._s(_vm.meetingseriesdetails.name))]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.dataItem === "name",
-                expression: "dataItem === 'name'"
-              }
-            ]
-          },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.dataHolder.name,
-                  expression: "dataHolder.name"
-                }
-              ],
-              domProps: { value: _vm.dataHolder.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.dataHolder, "name", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                staticClass: "same-line",
-                attrs: { icon: "el-icon-check", type: "success", circle: "" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.saveMeetingSeriesFieldEdit("name")
-                  }
-                }
-              },
-              [_vm._v("Save")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "same-line",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.dataItem = ""
-                  }
-                }
-              },
-              [_vm._v("Cancel")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("h4", [_vm._v("Frequency")]),
-        _vm._v(" "),
-        _c(
-          "p",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.dataItem !== "frequency",
-                expression: "dataItem !== 'frequency'"
-              }
-            ],
-            staticClass: "link",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.startMeetingSeriesFieldEdit("frequency")
-              }
-            }
-          },
-          [_vm._v(_vm._s(_vm.meetingseriesdetails.frequency))]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.dataItem === "frequency",
-                expression: "dataItem === 'frequency'"
-              }
-            ]
-          },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.dataHolder.frequency,
-                  expression: "dataHolder.frequency"
-                }
-              ],
-              domProps: { value: _vm.dataHolder.frequency },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.dataHolder, "frequency", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                staticClass: "same-line",
-                attrs: { icon: "el-icon-check", type: "success", circle: "" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.saveMeetingSeriesFieldEdit("frequency")
-                  }
-                }
-              },
-              [_vm._v("Save")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "same-line",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.dataItem = ""
-                  }
-                }
-              },
-              [_vm._v("Cancel")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("h4", { staticClass: "same-line" }, [_vm._v("Members")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.dataItem == "user",
-                expression: "dataItem == 'user'"
-              }
-            ]
-          },
-          [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.dataHolder.user_id,
-                    expression: "dataHolder.user_id"
-                  }
-                ],
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.dataHolder,
-                      "user_id",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "" } }, [
-                  _vm._v("Select Members")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.orderedUsers, function(user) {
-                  return _c("option", { domProps: { value: user.id } }, [
-                    _vm._v(_vm._s(user.full_name))
-                  ])
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                staticClass: "same-line",
-                attrs: { type: "success", icon: "el-icon-check", circle: "" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.addUser(_vm.dataHolder.user_id)
-                  }
-                }
-              },
-              [_vm._v("Save")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "same-line",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    _vm.dataItem = ""
-                  }
-                }
-              },
-              [_vm._v("Cancel")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("el-button", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.dataItem !== "user",
-            expression: "dataItem !== 'user'"
-          }
-        ],
-        staticClass: "same-line",
-        attrs: { icon: "el-icon-circle-plus-outline" },
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            return _vm.startUserEdit($event)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _vm._l(_vm.orderedMembers, function(user) {
-        return _c("div", { key: user.id }, [
-          _c("p", { staticClass: "same-line" }, [
-            _vm._v(_vm._s(user.full_name))
-          ]),
-          _vm._v(" "),
-          _c("i", {
-            staticClass: "el-icon-delete same-line",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                _vm.removeUsers(user.id)
-              }
-            }
-          })
-        ])
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5afdf760", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

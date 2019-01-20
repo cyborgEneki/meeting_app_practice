@@ -33,6 +33,7 @@ class CreateMeetingsTable extends Migration
             $table->foreign('chair_id')->references('id')->on('users');
             $table->unsignedInteger('secretary_id');
             $table->foreign('secretary_id')->references('id')->on('users');
+            $table->tinyInteger('locked')->default('0'); 
             $table->timestamps();
             $table->softDeletes();
         });

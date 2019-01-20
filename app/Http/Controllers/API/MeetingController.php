@@ -67,10 +67,37 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
+        //meeting is locked
+        if ($meeting->locked) {
+            //this is not admin so throw exception
+            if (Auth::user()->access<>1) {
+                abort(403, 'Meeting is locked');
+            }
+
+            //this is admin but they are not trying to unlock
+            if (!($request->exists('locked') && $request->locked == 0)) {
+                abort(403, 'Meeting is locked');
+            }
+        }
+
+        //this is not the meeting creator and not an admin - deny permission to edit anything
+        if ($meeting->creator_id <> Auth::User()->id && Auth::User()->access <> 1) {
+            abort(403, 'Permission denied');
+        }
+
         $this->meetingRepository->updateMeeting($request, $meeting);
         return response()->json(['You have successfully updated your meeting.'], 200);
     }
 
+    public function lock(Request $request, Meeting $meeting)
+    {
+        //drop everything other than locked
+        //Loop through the request object and drop any field that’s not locked
+        $meeting = Meeting::findOrFail($request->meeting_id);
+        $this->meetingRepository->updateMeeting($request, $meeting);
+        return response()->json(['You have successfully updated your meeting.'], 200);
+    }
+    
     /**
      * @param Meeting $meeting
      * @return \Illuminate\Http\JsonResponse
