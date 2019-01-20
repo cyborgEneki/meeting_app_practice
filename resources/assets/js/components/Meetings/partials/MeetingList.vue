@@ -39,7 +39,7 @@ export default {
       meetings: [],
       customMessages: ["Delete", "Are you sure?", "Ok!"],
       lockText: { 0: "Lock", 1: "Unlock" },
-      isAdmin: true,
+      isAdmin: false
     };
   },
   methods: {
@@ -80,6 +80,11 @@ export default {
   },
   mounted() {
     this.getMeetings();
+  },
+  created() {
+    axios.get('/api/users/isadmin').then(response => {
+      this.isAdmin = response.data;
+    })
   }
 };
 </script>

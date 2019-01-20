@@ -115582,7 +115582,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       meetings: [],
       customMessages: ["Delete", "Are you sure?", "Ok!"],
       lockText: { 0: "Lock", 1: "Unlock" },
-      isAdmin: true
+      isAdmin: false
     };
   },
 
@@ -115623,6 +115623,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getMeetings();
+  },
+  created: function created() {
+    var _this3 = this;
+
+    axios.get('/api/users/isadmin').then(function (response) {
+      _this3.isAdmin = response.data;
+    });
   }
 });
 
