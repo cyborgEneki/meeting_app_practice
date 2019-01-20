@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Agenda;
+use App\Meeting;
 use App\Http\Requests\AgendaRequest;
 use App\Http\Resources\AgendaResource;
 use App\Repositories\AgendaRepositoryInterface;
@@ -31,6 +32,12 @@ class AgendaController extends Controller
 
     public function store(AgendaRequest $request)
     {
+        $meeting = Meeting::findOrFail($request->meeting_id);
+
+        if($meeting->locked) {
+            abort(403, "Meeting is locked.");
+        }
+
         $agenda = $this->agendaRepository->createAgenda($request);
 
         return response()->json($agenda, 201);
@@ -50,6 +57,12 @@ class AgendaController extends Controller
      */
     public function update(AgendaRequest $request, Agenda $agenda)
     {
+        $meeting = Meeting::findOrFail($request->meeting_id);
+        
+        if($meeting->locked) {
+            abort(403, "Meeting is locked.");
+        }
+
         $this->agendaRepository->updateAgenda($request, $agenda);
         return response()->json(['You have successfully updated your agenda.'], 200);
     }
@@ -67,6 +80,12 @@ class AgendaController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
+        $meeting = Meeting::findOrFail($request->meeting_id);
+        
+        if($meeting->locked) {
+            abort(403, "Meeting is locked.");
+        }
+        
         $this->agendaRepository->deleteAgenda($agenda);
         return response()->json(['You have successfully deleted your agenda.'],  200);
     }
