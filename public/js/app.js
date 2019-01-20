@@ -112021,7 +112021,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("name")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("name")
             }
           }
         },
@@ -112111,7 +112111,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("date")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("date")
             }
           }
         },
@@ -112247,7 +112247,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("start_time")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("start_time")
             }
           }
         },
@@ -112338,7 +112338,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("end_time")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("end_time")
             }
           }
         },
@@ -112437,7 +112437,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("creator_id")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("creator_id")
             }
           }
         },
@@ -112548,7 +112548,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("chair_id")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("chair_id")
             }
           }
         },
@@ -112659,7 +112659,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("secretary_id")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("secretary_id")
             }
           }
         },
@@ -114744,7 +114744,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("venue_id")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("venue_id")
             }
           }
         },
@@ -114855,7 +114855,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("media_id")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("media_id")
             }
           }
         },
@@ -114966,7 +114966,7 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("meetingtype_id")
+              !_vm.meeting.locked && _vm.startMeetingFieldEdit("meetingtype_id")
             }
           }
         },
@@ -115083,7 +115083,8 @@ var render = function() {
           on: {
             click: function($event) {
               $event.preventDefault()
-              _vm.startMeetingFieldEdit("meetingseries_id")
+              !_vm.meeting.locked &&
+                _vm.startMeetingFieldEdit("meetingseries_id")
             }
           }
         },
@@ -115201,8 +115202,8 @@ var render = function() {
                 {
                   name: "show",
                   rawName: "v-show",
-                  value: _vm.dataItem !== "noteEdit",
-                  expression: "dataItem !== 'noteEdit'"
+                  value: _vm.dataItem !== "noteEdit" && !_vm.meeting.locked,
+                  expression: "dataItem !== 'noteEdit' && !meeting.locked"
                 }
               ]
             },
@@ -115223,6 +115224,14 @@ var render = function() {
                 },
                 [
                   _c("el-button", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.meeting.locked,
+                        expression: "!meeting.locked"
+                      }
+                    ],
                     attrs: { icon: "el-icon-edit same-line" },
                     on: {
                       click: function($event) {
@@ -115233,6 +115242,14 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-button", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.meeting.locked,
+                        expression: "!meeting.locked"
+                      }
+                    ],
                     attrs: { icon: "el-icon-delete same-line" },
                     on: {
                       click: function($event) {

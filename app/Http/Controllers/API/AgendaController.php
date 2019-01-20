@@ -80,12 +80,12 @@ class AgendaController extends Controller
      */
     public function destroy(Agenda $agenda)
     {
-        $meeting = Meeting::findOrFail($request->meeting_id);
+        $meeting = Meeting::findOrFail($agenda->meeting_id);
         
         if($meeting->locked) {
             abort(403, "Meeting is locked.");
         }
-        
+
         $this->agendaRepository->deleteAgenda($agenda);
         return response()->json(['You have successfully deleted your agenda.'],  200);
     }

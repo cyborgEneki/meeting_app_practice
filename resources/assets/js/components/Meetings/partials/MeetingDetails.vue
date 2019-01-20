@@ -3,7 +3,7 @@
     <h4>Meeting Name</h4>
     <p
       v-show="dataItem !== 'name'"
-      @click.prevent="startMeetingFieldEdit('name')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('name')"
       class="link"
     >{{ meeting.name }}</p>
     <div v-show="dataItem === 'name'">
@@ -21,7 +21,7 @@
     <h4>Date</h4>
     <p
       v-show="dataItem !== 'date'"
-      @click.prevent="startMeetingFieldEdit('date')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('date')"
       class="link"
     >{{ meeting.date }}</p>
     <div v-show="dataItem === 'date'">
@@ -48,7 +48,7 @@
     <h4>Start Time</h4>
     <p
       v-show="dataItem !== 'start_time'"
-      @click.prevent="startMeetingFieldEdit('start_time')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('start_time')"
       class="link"
     >{{ meeting.start_time }}</p>
     <div v-show="dataItem === 'start_time'">
@@ -66,7 +66,7 @@
     <h4>End Time</h4>
     <p
       v-show="dataItem !== 'end_time'"
-      @click.prevent="startMeetingFieldEdit('end_time')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('end_time')"
       class="link"
     >{{ meeting.end_time }}</p>
     <div v-show="dataItem === 'end_time'">
@@ -90,7 +90,7 @@
     <h4>Creator:</h4>
     <p
       v-show="dataItem !=='creator_id'"
-      @click.prevent="startMeetingFieldEdit('creator_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('creator_id')"
       class="link"
     >{{ choices.users[meeting.creator_id].full_name }}</p>
     <div v-show="dataItem === 'creator_id'">
@@ -111,7 +111,7 @@
     <h4>Chair:</h4>
     <p
       v-show="dataItem !=='chair_id'"
-      @click.prevent="startMeetingFieldEdit('chair_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('chair_id')"
       class="link"
     >{{ choices.users[meeting.chair_id].full_name }}</p>
     <div v-show="dataItem === 'chair_id'">
@@ -132,7 +132,7 @@
     <h4>Secretary:</h4>
     <p
       v-show="dataItem !== 'secretary_id'"
-      @click.prevent="startMeetingFieldEdit('secretary_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('secretary_id')"
       class="link"
     >{{choices.users[meeting.secretary_id].full_name }}</p>
     <div v-show="dataItem === 'secretary_id'">
@@ -556,7 +556,7 @@
     <h4>Venue:</h4>
     <p
       v-show="dataItem !== 'venue_id'"
-      @click.prevent="startMeetingFieldEdit('venue_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('venue_id')"
       class="link"
     >{{ choices.venues[meeting.venue_id].name }}</p>
     <div v-show="dataItem === 'venue_id'">
@@ -577,7 +577,7 @@
     <h4>Media:</h4>
     <p
       v-show="dataItem !== 'media_id'"
-      @click.prevent="startMeetingFieldEdit('media_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('media_id')"
       class="link"
     >{{ choices.media[meeting.media_id].name }}</p>
     <div v-show="dataItem === 'media_id'">
@@ -598,7 +598,7 @@
     <h4>Meeting Type:</h4>
     <p
       v-show="dataItem !== 'meetingtype_id'"
-      @click.prevent="startMeetingFieldEdit('meetingtype_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('meetingtype_id')"
       class="link"
     >{{ choices.meetingtypes[meeting.meetingtype_id].name }}</p>
     <div v-show="dataItem === 'meetingtype_id'">
@@ -622,7 +622,7 @@
     <h4>Meeting Series:</h4>
     <p
       v-show="dataItem !== 'meetingseries_id'"
-      @click.prevent="startMeetingFieldEdit('meetingseries_id')"
+      @click.prevent="!meeting.locked && startMeetingFieldEdit('meetingseries_id')"
       class="link"
     >{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
     <div v-show="dataItem === 'meetingseries_id'">
@@ -647,11 +647,11 @@
 
     <!--Read notes-->
     <h4>Notes</h4>
-    <div v-show="dataItem !== 'noteEdit'" v-if="meeting.notes">
+    <div v-show="dataItem !== 'noteEdit' && !meeting.locked" v-if="meeting.notes">
       <div>{{ meeting.notes.description }}</div>
       <div v-show="noteIcons">
-        <el-button icon="el-icon-edit same-line" @click.prevent="startNoteEdit(meeting.notes.id)"></el-button>
-        <el-button icon="el-icon-delete same-line" @click.prevent="deleteNote(meeting.notes.id)"></el-button>
+        <el-button v-show="!meeting.locked" icon="el-icon-edit same-line" @click.prevent="startNoteEdit(meeting.notes.id)"></el-button>
+        <el-button v-show="!meeting.locked" icon="el-icon-delete same-line" @click.prevent="deleteNote(meeting.notes.id)"></el-button>
       </div>
     </div>
 
