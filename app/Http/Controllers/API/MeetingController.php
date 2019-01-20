@@ -67,7 +67,7 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        if ($meeting->locked) {
+        if ($meeting->locked && Auth::user()->access<>1) {
             abort(403, 'Meeting is locked');
         }
 
@@ -78,8 +78,8 @@ class MeetingController extends Controller
         //     abort(403, 'Permission denied');
         // }
         
-        if ($request->exists(‘locked’) && Auth::user()->access<>1) {
-            unset($request[‘locked’]);
+        if ($request->exists('locked') && Auth::user()->access<>1) {
+            unset($request['locked']);
         }
         $lockRequest = new Request;
         $this->meetingRepository->updateMeeting($lockRequest['locked'] = $request->locked, $meeting);
