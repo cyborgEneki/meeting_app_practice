@@ -37,6 +37,14 @@ class FollowupController extends Controller
      */
     public function store(FollowupRequest $request)
     {
+        $agenda = Agenda::findOrFail($request->agenda_id);
+
+        $meeting = Meeting::findOrFail($agenda->meeting_id);
+
+        if($meeting->locked) {
+            abort(403, "Meeting is locked.");
+        }
+        
         $followups = $this->followupRepository->createFollowup($request);
 
         return response()->json($followups, 201);
@@ -62,6 +70,14 @@ class FollowupController extends Controller
      */
     public function update(FollowupRequest $request, Followup $followup)
     {
+        $agenda = Agenda::findOrFail($request->agenda_id);
+
+        $meeting = Meeting::findOrFail($agenda->meeting_id);
+
+        if($meeting->locked) {
+            abort(403, "Meeting is locked.");
+        }
+
         $this->followupRepository->updateFollowup($request, $followup);
         return response()->json(['You have successfully updated your followup.'], 200);
     }
@@ -74,6 +90,14 @@ class FollowupController extends Controller
      */
     public function destroy(Followup $followup)
     {
+        $agenda = Agenda::findOrFail($followup->agenda_id);
+
+        $meeting = Meeting::findOrFail($agenda->meeting_id);
+
+        if($meeting->locked) {
+            abort(403, "Meeting is locked.");
+        }
+
         $this->followupRepository->deleteFollowup($followup);
         return response()->json(['You have successfully deleted the followup.'],  200);
     }
