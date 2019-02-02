@@ -189,52 +189,16 @@
 
     <hr>
 
-    <!--Create agenda-->
-    <div v-show="dataItem == 'agendaCreate'">
-      <div>
-        Topic *
-        <input type="text" v-model="dataHolder.topic">
-      </div>
-      <div>
-        Description
-        <input type="text" v-model="dataHolder.description">
-      </div>
-      <div>
-        Time Allocated (minutes)
-        <select type="text" v-model="dataHolder.time_allocated">
-          <option value>Select time</option>
-          <option v-for="time in timing">{{ time }}</option>
-        </select>
-      </div>
-      <div>
-        Agenda Status
-        <select type="text" v-model="dataHolder.agenda_status">
-          <option value>Select status</option>
-          <option v-for="agendaStatus in agendaStatuses" v-bind:value="agendaStatus.id">
-            {{ agendaStatus.name
-            }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <label>User Assigned *</label>
-        <select v-model="dataHolder.user_id">
-          <option value>Select user</option>
-          <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
-        </select>
-      </div>
-      <el-button
-        class="same-line"
-        type="success"
-        icon="el-icon-check"
-        circle
-        :disabled="!isAgendaComplete"
-        @click.prevent="saveAgendaCreate"
-      >Save</el-button>
-      <div class="same-line">
-        <a href="#" @click.prevent="cancelAgenda">Cancel</a>
-      </div>
-    </div>
+    <agendacreate
+      :dataItem="dataItem"
+      :dataHolder="dataHolder"
+      :timing="timing"
+      :agendaStatuses="agendaStatuses"
+      :orderedUsers="orderedUsers"
+      :isAgendaComplete="isAgendaComplete"
+      @saveAgendaCreate = "saveAgendaCreate"
+      @cancelAgenda = "saveAgendaCreate"
+    ></agendacreate>
 
     <!--Read agendas-->
     <h2 class="same-line">Agendas</h2>
@@ -341,7 +305,7 @@
                           @click.prevent="startFollowupEdit(followup.id, agenda.id)"
                         ></el-button>
                         <el-button
-                        v-show="!meeting.locked"
+                          v-show="!meeting.locked"
                           icon="el-icon-delete same-line"
                           @click.prevent="deleteFollowup(followup.id, agenda.id)"
                         ></el-button>
@@ -421,7 +385,7 @@
                           @click.prevent="startDiscussionEdit(discussion.id, agenda.id)"
                         ></el-button>
                         <el-button
-                        v-show="!meeting.locked"
+                          v-show="!meeting.locked"
                           icon="el-icon-delete same-line"
                           @click.prevent="deleteDiscussion(discussion.id, agenda.id)"
                         ></el-button>
@@ -457,7 +421,10 @@
 
             <!--Edit agenda form-->
             <form @click.prevent>
-              <div v-on:keyup.esc="cancelFollowup" v-show="dataItem === 'agendaEdit'+agenda.id && !meeting.locked">
+              <div
+                v-on:keyup.esc="cancelFollowup"
+                v-show="dataItem === 'agendaEdit'+agenda.id && !meeting.locked"
+              >
                 <div>
                   Topic *
                   <input type="text" v-model="dataHolder.topic">
@@ -650,8 +617,16 @@
     <div v-show="dataItem !== 'noteEdit' && !meeting.locked" v-if="meeting.notes">
       <div>{{ meeting.notes.description }}</div>
       <div v-show="noteIcons">
-        <el-button v-show="!meeting.locked" icon="el-icon-edit same-line" @click.prevent="startNoteEdit(meeting.notes.id)"></el-button>
-        <el-button v-show="!meeting.locked" icon="el-icon-delete same-line" @click.prevent="deleteNote(meeting.notes.id)"></el-button>
+        <el-button
+          v-show="!meeting.locked"
+          icon="el-icon-edit same-line"
+          @click.prevent="startNoteEdit(meeting.notes.id)"
+        ></el-button>
+        <el-button
+          v-show="!meeting.locked"
+          icon="el-icon-delete same-line"
+          @click.prevent="deleteNote(meeting.notes.id)"
+        ></el-button>
       </div>
     </div>
 
@@ -696,9 +671,11 @@
 
 <script>
 import { mapGetters } from "vuex";
+import AgendaCreate from "./MeetingDetails/AgendaCreate";
 
 export default {
   props: ["choices"],
+  components: { agendacreate: AgendaCreate },
   computed: {
     ...mapGetters({
       meeting: "meeting"
