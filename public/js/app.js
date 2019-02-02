@@ -110799,6 +110799,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MeetingDetails_RelatedAgenda__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MeetingDetails_RelatedAgenda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__MeetingDetails_RelatedAgenda__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -111436,32 +111438,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -111469,7 +111446,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["choices"],
-  components: { "create-agenda": __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda___default.a, "create-note": __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote___default.a },
+  components: {
+    "create-agenda": __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda___default.a,
+    "create-note": __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote___default.a,
+    "related-agenda": __WEBPACK_IMPORTED_MODULE_3__MeetingDetails_RelatedAgenda___default.a
+  },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
     meeting: "meeting"
   }), {
@@ -112877,7 +112858,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("createagenda", {
+      _c("create-agenda", {
         attrs: {
           dataItem: _vm.dataItem,
           dataHolder: _vm.dataHolder,
@@ -114316,155 +114297,22 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("h2", [_vm._v("Related Agendas")]),
-              _vm._v(" "),
-              _c(
-                "ol",
-                _vm._l(agenda.related_agendas, function(relagenda) {
-                  return _c("li", [
-                    _vm._v(
-                      "\n          " +
-                        _vm._s(_vm.choices.agendas[relagenda].topic) +
-                        "\n          "
-                    ),
-                    _c("i", {
-                      staticClass: "el-icon-delete same-line",
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.deleteAgendaRelation(agenda.id, relagenda)
-                        }
-                      }
-                    })
-                  ])
-                })
-              ),
-              _vm._v(" "),
-              _c(
-                "el-button",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value:
-                        _vm.dataItem !== "agendaRelate" + agenda.id &&
-                        !_vm.meeting.locked,
-                      expression:
-                        "dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
-                    }
-                  ],
-                  attrs: { icon: "el-icon-circle-plus-outline" },
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      _vm.showAgendaRelate(agenda.id)
-                    }
-                  }
+              _c("related-agenda", {
+                attrs: {
+                  dataItem: _vm.dataItem,
+                  dataHolder: _vm.dataHolder,
+                  choices: _vm.choices,
+                  isAgendaRelationComplete: _vm.isAgendaRelationComplete,
+                  agenda: agenda,
+                  meeting: _vm.meeting
                 },
-                [_vm._v("Add Related Agenda")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.dataItem === "agendaRelate" + agenda.id,
-                      expression: "dataItem === 'agendaRelate'+agenda.id"
-                    }
-                  ]
-                },
-                [
-                  _c("label", [_vm._v("Related Agenda")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.dataHolder.agendatarget_id,
-                          expression: "dataHolder.agendatarget_id"
-                        }
-                      ],
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.dataHolder,
-                            "agendatarget_id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("Select Agenda")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.choices.agendas, function(targetagenda) {
-                        return _c(
-                          "option",
-                          { domProps: { value: targetagenda.id } },
-                          [_vm._v(_vm._s(targetagenda.topic))]
-                        )
-                      })
-                    ],
-                    2
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-button",
-                    {
-                      staticClass: "same-line",
-                      attrs: {
-                        type: "success",
-                        icon: "el-icon-check",
-                        circle: "",
-                        disabled: !_vm.isAgendaRelationComplete
-                      },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.saveAgendaRelation($event)
-                        }
-                      }
-                    },
-                    [_vm._v("Save")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "same-line" }, [
-                    _c(
-                      "a",
-                      {
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.cancelAgenda($event)
-                          }
-                        }
-                      },
-                      [_vm._v("Cancel")]
-                    )
-                  ])
-                ],
-                1
-              )
+                on: {
+                  saveAgendaRelation: _vm.saveAgendaRelation,
+                  cancelAgenda: _vm.cancelAgenda,
+                  deleteAgendaRelation: _vm.deleteAgendaRelation,
+                  showAgendaRelate: _vm.showAgendaRelate
+                }
+              })
             ],
             1
           )
@@ -121480,7 +121328,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -121541,24 +121389,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        dataItem: String,
-        dataHolder: Object,
-        timing: Array,
-        agendaStatuses: Array,
-        orderedUsers: Array,
-        isAgendaComplete: Boolean
+  props: {
+    dataItem: String,
+    dataHolder: Object,
+    timing: Array,
+    agendaStatuses: Array,
+    orderedUsers: Array,
+    isAgendaComplete: Boolean
+  },
+  methods: {
+    saveAgendaCreate: function saveAgendaCreate() {
+      this.$emit("saveAgendaCreate");
     },
-    methods: {
-        saveAgendaCreate: function saveAgendaCreate() {
-            this.$emit('saveAgendaCreate');
-        },
-        cancelAgenda: function cancelAgenda() {
-            this.$emit('cancelAgenda');
-        }
+    cancelAgenda: function cancelAgenda() {
+      this.$emit("cancelAgenda");
     }
+  }
 });
 
 /***/ }),
@@ -121667,7 +121519,7 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Select time")]),
               _vm._v(" "),
               _vm._l(_vm.timing, function(time) {
-                return _c("option", [_vm._v(_vm._s(time))])
+                return _c("option", { key: time.id }, [_vm._v(_vm._s(time))])
               })
             ],
             2
@@ -121710,11 +121562,18 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Select status")]),
               _vm._v(" "),
               _vm._l(_vm.agendaStatuses, function(agendaStatus) {
-                return _c("option", { domProps: { value: agendaStatus.id } }, [
-                  _vm._v(
-                    "\n          " + _vm._s(agendaStatus.name) + "\n        "
-                  )
-                ])
+                return _c(
+                  "option",
+                  {
+                    key: agendaStatus.id,
+                    domProps: { value: agendaStatus.id }
+                  },
+                  [
+                    _vm._v(
+                      "\n          " + _vm._s(agendaStatus.name) + "\n        "
+                    )
+                  ]
+                )
               })
             ],
             2
@@ -121757,9 +121616,11 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Select user")]),
               _vm._v(" "),
               _vm._l(_vm.orderedUsers, function(user) {
-                return _c("option", { domProps: { value: user.id } }, [
-                  _vm._v(_vm._s(user.full_name))
-                ])
+                return _c(
+                  "option",
+                  { key: user.id, domProps: { value: user.id } },
+                  [_vm._v(_vm._s(user.full_name))]
+                )
               })
             ],
             2
@@ -122063,6 +121924,352 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-7fadf149", module.exports)
+  }
+}
+
+/***/ }),
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(365)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(367)
+/* template */
+var __vue_template__ = __webpack_require__(368)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Meetings/partials/MeetingDetails/RelatedAgenda.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-660f31ac", Component.options)
+  } else {
+    hotAPI.reload("data-v-660f31ac", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 365 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(366);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("3ce349bc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-660f31ac\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RelatedAgenda.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-660f31ac\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./RelatedAgenda.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 366 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 367 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    dataItem: String,
+    dataHolder: Object,
+    choices: Object,
+    isAgendaRelationComplete: Function,
+    agenda: Object,
+    meeting: Object
+  },
+  methods: {
+    saveAgendaRelation: function saveAgendaRelation() {
+      this.$emit("saveAgendaRelation");
+    },
+    cancelAgenda: function cancelAgenda() {
+      this.$emit("cancelAgenda");
+    },
+    deleteAgendaRelation: function deleteAgendaRelation(id, relagenda) {
+      this.$emit("deleteAgendaRelation", this.agenda.id, this.relagenda);
+    },
+    showAgendaRelate: function showAgendaRelate(id) {
+      this.$emit("showAgendaRelate", this.agenda.id);
+    }
+  }
+});
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v("Related Agendas")]),
+      _vm._v(" "),
+      _c(
+        "ol",
+        _vm._l(_vm.agenda.related_agendas, function(relagenda) {
+          return _c("li", { key: relagenda.id }, [
+            _vm._v(
+              "\n      " +
+                _vm._s(_vm.choices.agendas[relagenda].topic) +
+                "\n      "
+            ),
+            _c("i", {
+              staticClass: "el-icon-delete same-line",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.deleteAgendaRelation(_vm.agenda.id, relagenda)
+                }
+              }
+            })
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _c(
+        "el-button",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value:
+                _vm.dataItem !== "agendaRelate" + _vm.agenda.id &&
+                !_vm.meeting.locked,
+              expression:
+                "dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
+            }
+          ],
+          attrs: { icon: "el-icon-circle-plus-outline" },
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              _vm.showAgendaRelate($event)
+            }
+          }
+        },
+        [_vm._v("Add Related Agenda")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "agendaRelate" + _vm.agenda.id,
+              expression: "dataItem === 'agendaRelate'+agenda.id"
+            }
+          ]
+        },
+        [
+          _c("label", [_vm._v("Related Agenda")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.dataHolder.agendatarget_id,
+                  expression: "dataHolder.agendatarget_id"
+                }
+              ],
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.dataHolder,
+                    "agendatarget_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("Select Agenda")]),
+              _vm._v(" "),
+              _vm._l(_vm.choices.agendas, function(targetagenda) {
+                return _c(
+                  "option",
+                  {
+                    key: targetagenda.id,
+                    domProps: { value: targetagenda.id }
+                  },
+                  [_vm._v(_vm._s(targetagenda.topic))]
+                )
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: {
+                type: "success",
+                icon: "el-icon-check",
+                circle: "",
+                disabled: !_vm.isAgendaRelationComplete
+              },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.saveAgendaRelation($event)
+                }
+              }
+            },
+            [_vm._v("Save")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "same-line" }, [
+            _c(
+              "a",
+              {
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.cancelAgenda($event)
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-660f31ac", module.exports)
   }
 }
 

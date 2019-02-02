@@ -189,7 +189,7 @@
 
     <hr>
 
-    <createagenda
+    <create-agenda
       :dataItem="dataItem"
       :dataHolder="dataHolder"
       :timing="timing"
@@ -198,7 +198,7 @@
       :isAgendaComplete="isAgendaComplete"
       @saveAgendaCreate="saveAgendaCreate"
       @cancelAgenda="saveAgendaCreate"
-    ></createagenda>
+    ></create-agenda>
 
     <!--Read agendas-->
     <h2 class="same-line">Agendas</h2>
@@ -477,45 +477,19 @@
             </form>
           </div>
         </fieldset>
-        <h2>Related Agendas</h2>
-        <ol>
-          <li v-for="relagenda in agenda.related_agendas">
-            {{ choices.agendas[relagenda].topic }}
-            <i
-              class="el-icon-delete same-line"
-              @click.prevent="deleteAgendaRelation(agenda.id, relagenda)"
-            ></i>
-          </li>
-        </ol>
-        <el-button
-          icon="el-icon-circle-plus-outline"
-          @click.prevent="showAgendaRelate(agenda.id)"
-          v-show="dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
-        >Add Related Agenda</el-button>
 
-        <!--Add related agenda-->
-        <div v-show="dataItem === 'agendaRelate'+agenda.id">
-          <label>Related Agenda</label>
-          <select v-model="dataHolder.agendatarget_id">
-            <option value>Select Agenda</option>
-            <option
-              v-for="targetagenda in choices.agendas"
-              v-bind:value="targetagenda.id"
-            >{{ targetagenda.topic }}</option>
-          </select>
-
-          <el-button
-            class="same-line"
-            type="success"
-            icon="el-icon-check"
-            circle
-            :disabled="!isAgendaRelationComplete"
-            @click.prevent="saveAgendaRelation"
-          >Save</el-button>
-          <div class="same-line">
-            <a href="#" @click.prevent="cancelAgenda">Cancel</a>
-          </div>
-        </div>
+        <related-agenda
+          :dataItem="dataItem"
+          :dataHolder="dataHolder"
+          :choices="choices"
+          :isAgendaRelationComplete="isAgendaRelationComplete"
+          :agenda="agenda"
+          :meeting="meeting"
+          @saveAgendaRelation="saveAgendaRelation"
+          @cancelAgenda="cancelAgenda"
+          @deleteAgendaRelation="deleteAgendaRelation"
+          @showAgendaRelate="showAgendaRelate"
+        ></related-agenda>
       </div>
     </div>
 
@@ -663,10 +637,15 @@
 import { mapGetters } from "vuex";
 import CreateAgenda from "./MeetingDetails/CreateAgenda";
 import CreateNote from "./MeetingDetails/CreateNote";
+import RelatedAgenda from "./MeetingDetails/RelatedAgenda";
 
 export default {
   props: ["choices"],
-  components: { "create-agenda": CreateAgenda, "create-note": CreateNote },
+  components: {
+    "create-agenda": CreateAgenda,
+    "create-note": CreateNote,
+    "related-agenda": RelatedAgenda
+  },
   computed: {
     ...mapGetters({
       meeting: "meeting"

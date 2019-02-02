@@ -13,14 +13,18 @@
         Time Allocated (minutes)
         <select type="text" v-model="dataHolder.time_allocated">
           <option value>Select time</option>
-          <option v-for="time in timing">{{ time }}</option>
+          <option v-for="time in timing" :key="time.id">{{ time }}</option>
         </select>
       </div>
       <div>
         Agenda Status
         <select type="text" v-model="dataHolder.agenda_status">
           <option value>Select status</option>
-          <option v-for="agendaStatus in agendaStatuses" v-bind:value="agendaStatus.id">
+          <option
+            v-for="agendaStatus in agendaStatuses"
+            :value="agendaStatus.id"
+            :key="agendaStatus.id"
+          >
             {{ agendaStatus.name
             }}
           </option>
@@ -30,7 +34,7 @@
         <label>User Assigned *</label>
         <select v-model="dataHolder.user_id">
           <option value>Select user</option>
-          <option v-for="user in orderedUsers" v-bind:value="user.id">{{ user.full_name }}</option>
+          <option v-for="user in orderedUsers" :value="user.id" :key="user.id">{{ user.full_name }}</option>
         </select>
       </div>
       <el-button
@@ -50,22 +54,22 @@
 
 <script>
 export default {
-    props: {
-        dataItem: String,
-        dataHolder: Object,
-        timing: Array,
-        agendaStatuses: Array,
-        orderedUsers: Array,
-        isAgendaComplete: Boolean
+  props: {
+    dataItem: String,
+    dataHolder: Object,
+    timing: Array,
+    agendaStatuses: Array,
+    orderedUsers: Array,
+    isAgendaComplete: Boolean
+  },
+  methods: {
+    saveAgendaCreate() {
+      this.$emit("saveAgendaCreate");
     },
-    methods: {
-        saveAgendaCreate () {
-            this.$emit('saveAgendaCreate');
-        },
-        cancelAgenda () {
-            this.$emit('cancelAgenda');
-        }
+    cancelAgenda() {
+      this.$emit("cancelAgenda");
     }
+  }
 };
 </script>
 
