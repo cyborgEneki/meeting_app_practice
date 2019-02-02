@@ -110795,8 +110795,10 @@ exports.push([module.i, "\n.same-line[data-v-70c50684] {\n  display: inline-bloc
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_AgendaCreate__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_AgendaCreate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__MeetingDetails_AgendaCreate__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote__ = __webpack_require__(354);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -111460,23 +111462,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["choices"],
-  components: { agendacreate: __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_AgendaCreate___default.a },
+  components: { "create-agenda": __WEBPACK_IMPORTED_MODULE_1__MeetingDetails_CreateAgenda___default.a, "create-note": __WEBPACK_IMPORTED_MODULE_2__MeetingDetails_CreateNote___default.a },
   computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
     meeting: "meeting"
   }), {
@@ -111499,13 +111492,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return _.orderBy(this.choices.meetingseries, "name");
     },
     isAgendaComplete: function isAgendaComplete() {
-      return this.dataHolder.topic && this.dataHolder.user_id;
+      return Boolean(this.dataHolder.topic && this.dataHolder.user_id);
     },
     isFollowupComplete: function isFollowupComplete() {
-      return this.dataHolder.action && this.dataHolder.timeline;
+      return Boolean(this.dataHolder.action && this.dataHolder.timeline);
     },
     isDiscussionComplete: function isDiscussionComplete() {
-      return this.dataHolder.description;
+      return Boolean(this.dataHolder.description);
     },
     refDate: function refDate() {
       var today = new Date();
@@ -112884,7 +112877,7 @@ var render = function() {
       _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
-      _c("agendacreate", {
+      _c("createagenda", {
         attrs: {
           dataItem: _vm.dataItem,
           dataHolder: _vm.dataHolder,
@@ -115016,93 +115009,17 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("el-button", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value:
-              _vm.dataItem !== "noteCreate" &&
-              !_vm.meeting.notes &&
-              !_vm.meeting.locked,
-            expression:
-              "dataItem !== 'noteCreate' && !meeting.notes && !meeting.locked"
-          }
-        ],
-        attrs: { icon: "el-icon-circle-plus-outline" },
+      _c("create-note", {
+        attrs: {
+          dataItem: _vm.dataItem,
+          dataHolder: _vm.dataHolder,
+          meeting: _vm.meeting
+        },
         on: {
-          click: function($event) {
-            $event.preventDefault()
-            _vm.showNoteCreate(_vm.meeting.id)
-          }
+          showNoteCreate: _vm.showNoteCreate,
+          saveNoteCreate: _vm.saveNoteCreate
         }
       }),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.dataItem === "noteCreate",
-              expression: "dataItem === 'noteCreate'"
-            }
-          ]
-        },
-        [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.dataHolder.description,
-                expression: "dataHolder.description"
-              }
-            ],
-            domProps: { value: _vm.dataHolder.description },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.dataHolder, "description", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "same-line",
-              attrs: { href: "#" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.cancelNote($event)
-                }
-              }
-            },
-            [_vm._v("Cancel")]
-          ),
-          _vm._v(" "),
-          _c(
-            "el-button",
-            {
-              staticClass: "same-line",
-              attrs: { type: "success", icon: "el-icon-check", circle: "" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  _vm.saveNoteCreate(_vm.meeting.id)
-                }
-              }
-            },
-            [_vm._v("Save")]
-          )
-        ],
-        1
-      ),
       _vm._v(" "),
       _c(
         "form",
@@ -121468,19 +121385,29 @@ if (false) {
 
 /***/ }),
 /* 338 */,
-/* 339 */
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(340)
+  __webpack_require__(350)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(342)
+var __vue_script__ = __webpack_require__(352)
 /* template */
-var __vue_template__ = __webpack_require__(343)
+var __vue_template__ = __webpack_require__(353)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -121497,7 +121424,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Meetings/partials/MeetingDetails/AgendaCreate.vue"
+Component.options.__file = "resources/assets/js/components/Meetings/partials/MeetingDetails/CreateAgenda.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -121506,9 +121433,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-76c37eba", Component.options)
+    hotAPI.createRecord("data-v-62dccca3", Component.options)
   } else {
-    hotAPI.reload("data-v-76c37eba", Component.options)
+    hotAPI.reload("data-v-62dccca3", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -121519,23 +121446,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 340 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(341);
+var content = __webpack_require__(351);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("17d97da8", content, false, {});
+var update = __webpack_require__(2)("34530019", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-76c37eba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AgendaCreate.vue", function() {
-     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-76c37eba\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./AgendaCreate.vue");
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62dccca3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateAgenda.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-62dccca3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateAgenda.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -121545,7 +121472,7 @@ if(false) {
 }
 
 /***/ }),
-/* 341 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -121559,7 +121486,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 342 */
+/* 352 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -121635,7 +121562,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 343 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -121885,7 +121812,257 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-76c37eba", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-62dccca3", module.exports)
+  }
+}
+
+/***/ }),
+/* 354 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(355)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(357)
+/* template */
+var __vue_template__ = __webpack_require__(358)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Meetings/partials/MeetingDetails/CreateNote.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7fadf149", Component.options)
+  } else {
+    hotAPI.reload("data-v-7fadf149", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 355 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(356);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("439bc1ce", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7fadf149\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateNote.vue", function() {
+     var newContent = require("!!../../../../../../../node_modules/css-loader/index.js!../../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7fadf149\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./CreateNote.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 356 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 357 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(29);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    dataItem: String,
+    dataHolder: Object,
+    meeting: Object
+  },
+  methods: {
+    showNoteCreate: function showNoteCreate(id) {
+      this.$emit("showNoteCreate", this.meeting.id);
+    },
+    saveNoteCreate: function saveNoteCreate(id) {
+      this.$emit("saveNoteCreate", this.meeting.id);
+    }
+  }
+});
+
+/***/ }),
+/* 358 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("el-button", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value:
+              _vm.dataItem !== "noteCreate" &&
+              !_vm.meeting.notes &&
+              !_vm.meeting.locked,
+            expression:
+              "dataItem !== 'noteCreate' && !meeting.notes && !meeting.locked"
+          }
+        ],
+        attrs: { icon: "el-icon-circle-plus-outline" },
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            _vm.showNoteCreate($event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.dataItem === "noteCreate",
+              expression: "dataItem === 'noteCreate'"
+            }
+          ]
+        },
+        [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.dataHolder.description,
+                expression: "dataHolder.description"
+              }
+            ],
+            domProps: { value: _vm.dataHolder.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.dataHolder, "description", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "same-line",
+              attrs: { href: "#" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.cancelNote($event)
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              staticClass: "same-line",
+              attrs: { type: "success", icon: "el-icon-check", circle: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.saveNoteCreate($event)
+                }
+              }
+            },
+            [_vm._v("Save")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7fadf149", module.exports)
   }
 }
 

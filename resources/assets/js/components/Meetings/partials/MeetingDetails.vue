@@ -189,16 +189,16 @@
 
     <hr>
 
-    <agendacreate
+    <createagenda
       :dataItem="dataItem"
       :dataHolder="dataHolder"
       :timing="timing"
       :agendaStatuses="agendaStatuses"
       :orderedUsers="orderedUsers"
       :isAgendaComplete="isAgendaComplete"
-      @saveAgendaCreate = "saveAgendaCreate"
-      @cancelAgenda = "saveAgendaCreate"
-    ></agendacreate>
+      @saveAgendaCreate="saveAgendaCreate"
+      @cancelAgenda="saveAgendaCreate"
+    ></createagenda>
 
     <!--Read agendas-->
     <h2 class="same-line">Agendas</h2>
@@ -630,23 +630,13 @@
       </div>
     </div>
 
-    <!--Create note-->
-    <el-button
-      icon="el-icon-circle-plus-outline"
-      @click.prevent="showNoteCreate(meeting.id) "
-      v-show="dataItem !== 'noteCreate' && !meeting.notes && !meeting.locked"
-    ></el-button>
-    <div v-show="dataItem === 'noteCreate'">
-      <textarea v-model="dataHolder.description"></textarea>
-      <a href="#" class="same-line" @click.prevent="cancelNote">Cancel</a>
-      <el-button
-        class="same-line"
-        type="success"
-        icon="el-icon-check"
-        circle
-        @click.prevent="saveNoteCreate(meeting.id)"
-      >Save</el-button>
-    </div>
+    <create-note
+      :dataItem="dataItem"
+      :dataHolder="dataHolder"
+      :meeting="meeting"
+      @showNoteCreate="showNoteCreate"
+      @saveNoteCreate="saveNoteCreate"
+    ></create-note>
 
     <!--Edit notes-->
     <form @click.prevent>
@@ -671,11 +661,12 @@
 
 <script>
 import { mapGetters } from "vuex";
-import AgendaCreate from "./MeetingDetails/AgendaCreate";
+import CreateAgenda from "./MeetingDetails/CreateAgenda";
+import CreateNote from "./MeetingDetails/CreateNote";
 
 export default {
   props: ["choices"],
-  components: { agendacreate: AgendaCreate },
+  components: { "create-agenda": CreateAgenda, "create-note": CreateNote },
   computed: {
     ...mapGetters({
       meeting: "meeting"
@@ -699,13 +690,13 @@ export default {
       return _.orderBy(this.choices.meetingseries, "name");
     },
     isAgendaComplete() {
-      return this.dataHolder.topic && this.dataHolder.user_id;
+      return Boolean(this.dataHolder.topic && this.dataHolder.user_id);
     },
     isFollowupComplete() {
-      return this.dataHolder.action && this.dataHolder.timeline;
+      return Boolean(this.dataHolder.action && this.dataHolder.timeline);
     },
     isDiscussionComplete() {
-      return this.dataHolder.description;
+      return Boolean(this.dataHolder.description);
     },
     refDate() {
       let today = new Date();
