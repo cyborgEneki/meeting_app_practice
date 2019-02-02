@@ -560,49 +560,23 @@
       <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
     </div>
 
-    <h4>Meeting Series:</h4>
-    <p
-      v-show="dataItem !== 'meetingseries_id'"
-      @click.prevent="!meeting.locked && startMeetingFieldEdit('meetingseries_id')"
-      class="link"
-    >{{ choices.meetingseries[meeting.meetingseries_id].name }}</p>
-    <div v-show="dataItem === 'meetingseries_id'">
-      <select v-model="dataHolder.meetingseries_id">
-        <option value>Select meeting series</option>
-        <option v-for="eachmeetingseries in orderedMeetingSeries" :value="eachmeetingseries.id">
-          {{
-          eachmeetingseries.name }}
-        </option>
-      </select>
-      <el-button
-        class="same-line"
-        icon="el-icon-check"
-        type="success"
-        circle
-        @click.prevent="saveMeetingFieldEdit('meetingseries_id')"
-      >Save</el-button>
-      <a href="#" class="same-line" @click.prevent="dataItem=''">Cancel</a>
-    </div>
+    <meeting-series
+      :dataItem="dataItem"
+      :meeting="meeting"
+      :choices="choices"
+      :dataHolder="dataHolder"
+      :orderedMeetingSeries="orderedMeetingSeries"
+      @startMeetingFieldEdit="startMeetingFieldEdit"
+      @saveMeetingFieldEdit="saveMeetingFieldEdit"
+    ></meeting-series>
 
-    <hr>
-
-    <!--Read notes-->
-    <h4>Notes</h4>
-    <div v-show="dataItem !== 'noteEdit' && !meeting.locked" v-if="meeting.notes">
-      <div>{{ meeting.notes.description }}</div>
-      <div v-show="noteIcons">
-        <el-button
-          v-show="!meeting.locked"
-          icon="el-icon-edit same-line"
-          @click.prevent="startNoteEdit(meeting.notes.id)"
-        ></el-button>
-        <el-button
-          v-show="!meeting.locked"
-          icon="el-icon-delete same-line"
-          @click.prevent="deleteNote(meeting.notes.id)"
-        ></el-button>
-      </div>
-    </div>
+    <read-delete-note
+      :dataItem="dataItem"
+      :noteIcons="noteIcons"
+      :meeting="meeting"
+      @startNoteEdit="startNoteEdit"
+      @deleteNote="deleteNote"
+    ></read-delete-note>
 
     <create-note
       :dataItem="dataItem"
@@ -612,24 +586,12 @@
       @saveNoteCreate="saveNoteCreate"
     ></create-note>
 
-    <!--Edit notes-->
-    <form @click.prevent>
-      <div v-show="dataItem === 'noteEdit'">
-        <div>
-          <textarea v-model="dataHolder.description"></textarea>
-        </div>
-        <div>
-          <el-button
-            class="same-line"
-            type="success"
-            icon="el-icon-check"
-            circle
-            @click.prevent="saveNoteEdit()"
-          >Save Edit</el-button>
-          <a href="#" class="same-line" @click.prevent="cancelNote">Cancel</a>
-        </div>
-      </div>
-    </form>
+    <edit-note
+      :dataItem="dataItem"
+      :dataHolder="dataHolder"
+      @saveNoteEdit="saveNoteEdit"
+      @cancelNote="cancelNote"
+    ></edit-note>
   </div>
 </template>
 
@@ -638,13 +600,19 @@ import { mapGetters } from "vuex";
 import CreateAgenda from "./MeetingDetails/CreateAgenda";
 import CreateNote from "./MeetingDetails/CreateNote";
 import RelatedAgenda from "./MeetingDetails/RelatedAgenda";
+import ReadDeleteNote from "./MeetingDetails/ReadDeleteNote";
+import EditNote from "./MeetingDetails/EditNote";
+import MeetingSeries from "./MeetingDetails/MeetingSeries";
 
 export default {
   props: ["choices"],
   components: {
     "create-agenda": CreateAgenda,
     "create-note": CreateNote,
-    "related-agenda": RelatedAgenda
+    "related-agenda": RelatedAgenda,
+    "read-delete-note": ReadDeleteNote,
+    "edit-note": EditNote,
+    "meeting-series": MeetingSeries,
   },
   computed: {
     ...mapGetters({

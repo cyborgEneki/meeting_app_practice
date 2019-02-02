@@ -1,22 +1,23 @@
 <template>
   <div>
-    <h2>Related Agendas</h2>
-    <ol>
-      <li v-for="relagenda in agenda.related_agendas" :key="relagenda.id">
-        {{ choices.agendas[relagenda].topic }}
-        <i
-          class="el-icon-delete same-line"
-          @click.prevent="deleteAgendaRelation(agenda.id, relagenda)"
-        ></i>
-      </li>
-    </ol>
-    <el-button
-      icon="el-icon-circle-plus-outline"
-      @click.prevent="showAgendaRelate($event)"
-      v-show="dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
-    >Add Related Agenda</el-button>
+    <div>
+      <h2>Related Agendas</h2>
+      <ol>
+        <li v-for="relagenda in agenda.related_agendas" :key="relagenda.id">
+          {{ choices.agendas[relagenda].topic }}
+          <i
+            class="el-icon-delete same-line"
+            @click.prevent="deleteAgendaRelation(agenda.id, relagenda)"
+          ></i>
+        </li>
+      </ol>
+      <el-button
+        icon="el-icon-circle-plus-outline"
+        @click.prevent="showAgendaRelate($event)"
+        v-show="dataItem !== 'agendaRelate'+agenda.id && !meeting.locked"
+      >Add Related Agenda</el-button>
+    </div>
 
-    <!--Add related agenda-->
     <div v-show="dataItem === 'agendaRelate'+agenda.id">
       <label>Related Agenda</label>
       <select v-model="dataHolder.agendatarget_id">
@@ -40,6 +41,7 @@
         <a href="#" @click.prevent="cancelAgenda">Cancel</a>
       </div>
     </div>
+    
   </div>
 </template>
 
