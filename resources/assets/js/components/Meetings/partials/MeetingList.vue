@@ -15,9 +15,10 @@
       {{ meeting.end_time }}
       <br>
       <router-link :to="{ name: 'editMeeting' , params: { meeting }}">
-        <el-button v-show="!meeting.locked" icon="el-icon-edit"></el-button>
+        <el-button v-show="!meeting.locked && (isAdmin || meeting.creator_id==choices.authuser)" icon="el-icon-edit"></el-button>
       </router-link>
       <el-button
+        v-if="isAdmin"
         v-show="!meeting.locked"
         icon="el-icon-delete same-line"
         @click.prevent="deleteMeeting(meeting.id)"
@@ -31,6 +32,7 @@
 import vueConfirmationButton from "vue-confirmation-button";
 
 export default {
+  props: ["choices"],
   components: {
     "vue-confirmation-button": vueConfirmationButton
   },
@@ -45,8 +47,7 @@ export default {
   methods: {
     lockMeeting(meeting) {
       let lock = meeting.locked ? 0 : 1;
-      axios.put("/api/meetings/" + meeting.id, { locked: lock })
-      .then(() => {
+      axios.put("/api/meetings/" + meeting.id, { locked: lock }).then(() => {
         meeting.locked = lock;
       });
     },
@@ -80,11 +81,13 @@ export default {
   },
   mounted() {
     this.getMeetings();
+
+    console.log(this.choices);
   },
   created() {
-    axios.get('/api/users/isadmin').then(response => {
+    axios.get("/api/users/isadmin").then(response => {
       this.isAdmin = response.data;
-    })
+    });
   }
 };
 </script>

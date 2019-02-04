@@ -23,6 +23,8 @@ use App\Events\MeetingCanceledAlert;
 use App\Events\MeetingRescheduledAlert;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MeetingCanceledAlertMail;
+use App\Mail\MeetingRescheduledAlertMail;
+use App\Http\Resources\MeetingResource;
 
 class MeetingController extends Controller
 {
@@ -74,7 +76,7 @@ class MeetingController extends Controller
         if ($request->exists('date')) { //date is being modified
             if (!($meeting->date == $request->date)) { //the new date is different than (US English!) the date currently in meeting
                 //raise event
-                event(new MeetingRescheduledAlert($meeting));
+                Mail::to($meeting->users()->get()->pluck('email'))->send(new MeetingRescheduledAlertMail(new MeetingResource($meeting)));
             }
         }
 
@@ -145,6 +147,8 @@ class MeetingController extends Controller
         $users = $users->keyBy('id');
         $users = ['users' => $users];
 
+        $auth_user = ['authuser' => Auth::User()->id];
+        
         $venues = Venue::take(10)->get();
         $venues = $venues->keyBy('id');
         $venues = ['venues' => $venues];
@@ -165,7 +169,7 @@ class MeetingController extends Controller
         $agendas = $agendas->keyBy('id');
         $agendas = ['agendas' => $agendas];
 
-        $choices = array_merge($users, $venues, $media, $meetingseries, $meetingtypes, $agendas);
+        $choices = array_merge($users, $auth_user, $venues, $media, $meetingseries, $meetingtypes, $agendas);
         return response()->json($choices, 200);
     }
 
