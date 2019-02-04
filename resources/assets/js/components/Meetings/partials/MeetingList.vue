@@ -20,7 +20,7 @@
       <el-button
         v-show="!meeting.locked"
         icon="el-icon-delete same-line"
-        @click.prevent="deleteUser(meeting.id)"
+        @click.prevent="deleteMeeting(meeting.id)"
       ></el-button>
       <el-button v-if="isAdmin" @click.prevent="lockMeeting(meeting)">{{ lockText[meeting.locked] }}</el-button>
     </div>

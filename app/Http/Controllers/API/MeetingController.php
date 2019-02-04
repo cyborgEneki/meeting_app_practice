@@ -19,7 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\MeetingRepositoryInterface;
 use App\Events\MeetingAlert;
-use App\Notifications\MeetingCanceled;
+use App\Events\MeetingCanceledAlert;
+use App\Events\MeetingRescheduledAlert;
 use Illuminate\Support\Facades\Mail;
 
 class MeetingController extends Controller
@@ -69,9 +70,10 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        if (!($request->exists('date'))) {
-            if(!($meeting->date == $request->date)) {
-                Mail::to($request->users())->send(new AlertMail($meeting));
+        if ($request->exists('date')) { //date is being modified
+            if (!($meeting->date == $request->date)) { //the new date is different than (US English!) the date currently in meeting
+                //raise event
+                event(new MeetingRescheduledAlert($meeting));
             }
         }
 
@@ -114,7 +116,7 @@ class MeetingController extends Controller
     public function destroy($id)
     {
         $this->meetingRepository->deleteMeeting($id);
-        Mail::to($request->users())->send(new AlertMail($meeting));
+        Mail::to($request->users())->send(new MeetingCanceledAlertMail($meeting));
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 

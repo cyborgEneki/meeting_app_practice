@@ -1,5 +1,8 @@
 <template>
+
   <div>
+    <button type="button" class="success button">Save</button>
+
     <h4>Meeting Name</h4>
     <p
       v-show="dataItem !== 'name'"

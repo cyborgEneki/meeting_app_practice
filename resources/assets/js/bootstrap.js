@@ -9,9 +9,16 @@ window.Popper = require('popper.js').default;
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
+    // window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    //Comment out line one. Comment out line 3 and 4 for bootstrap.
+
+    require('../../../node_modules/foundation-sites/dist/js/foundation');
+
+    require('../../../node_modules/jquery/dist/jquery');
+
 } catch (e) {}
 
 /**
