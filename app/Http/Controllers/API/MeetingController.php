@@ -22,6 +22,7 @@ use App\Events\MeetingAlert;
 use App\Events\MeetingCanceledAlert;
 use App\Events\MeetingRescheduledAlert;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\MeetingCanceledAlertMail;
 
 class MeetingController extends Controller
 {
@@ -115,8 +116,8 @@ class MeetingController extends Controller
      */
     public function destroy($id)
     {
-        $this->meetingRepository->deleteMeeting($id);
-        Mail::to($request->users())->send(new MeetingCanceledAlertMail($meeting));
+        $meeting = $this->meetingRepository->deleteMeeting($id);
+        event(new MeetingCanceledAlert($meeting));
         return response()->json(['success' => 'You have successfully deleted your meeting.'], 200);
     }
 
