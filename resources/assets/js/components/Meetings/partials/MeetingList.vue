@@ -59,14 +59,14 @@ export default {
       this.$store.commit("GET_MEETING_DETAILS", meeting);
     },
     deleteMeeting(id) {
-      this.$dialog
-        .confirm("Please confirm to continue")
-        .then(function(dialog) {
-          console.log("Clicked on proceed");
-        })
-        .catch(function() {
-          console.log("Clicked on cancel");
-        });
+      // this.$dialog
+      //   .confirm("Please confirm to continue")
+      //   .then(function(dialog) {
+      //     console.log("Clicked on proceed");
+      //   })
+      //   .catch(function() {
+      //     console.log("Clicked on cancel");
+      //   });
 
       axios.delete("/api/meetings/" + id).then(() => {
         let index = this.meetings
