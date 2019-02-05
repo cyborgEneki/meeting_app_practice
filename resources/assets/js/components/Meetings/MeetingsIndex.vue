@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-md-3">
-            <meeting-list></meeting-list>
+            <meeting-list :choices.sync="choices"></meeting-list>
         </div>
 
         <div class="col-md-9" v-if="showMeetingDetails">

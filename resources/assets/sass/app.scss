@@ -6,11 +6,11 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 //Replace the above with the below. The one below will be executed
 
-// @import '../../../node_modules/foundation-sites/assets/foundation.scss';
+@import '../../../node_modules/foundation-sites/assets/foundation.scss';
 
 .navbar-laravel {
   background-color: #fff;
