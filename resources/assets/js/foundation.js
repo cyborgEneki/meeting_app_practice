@@ -1,5 +1,5 @@
-
 window._ = require('lodash');
+
 window.Popper = require('popper.js').default;
 
 /**
@@ -9,17 +9,14 @@ window.Popper = require('popper.js').default;
  */
 
 try {
-    // window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require('jquery');
 
-    // require('bootstrap');
+    require('foundation-sites');
+} catch (e) { }
 
-    //Comment out line one. Comment out line 3 and 4 for bootstrap.
 
-    require('../../../node_modules/foundation-sites/dist/js/foundation');
 
-    require('../../../node_modules/jquery/dist/jquery');
-
-} catch (e) {}
+$(document).foundation();
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

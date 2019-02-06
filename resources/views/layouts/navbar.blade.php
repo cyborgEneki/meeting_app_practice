@@ -19,7 +19,7 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
+                <ul class="menu align-right">
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -29,6 +29,15 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @else
+                    <ul class="dropdown menu" data-dropdown-menu>
+                                <li>
+                                  <a href="#">Item 1</a>
+                                  <ul class="menu">
+                                    <li><a href="#">Item 1A</a></li>
+                                    <!-- ... -->
+                                  </ul>
+                                </li>
+                              </ul>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

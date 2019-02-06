@@ -3,14 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+@import 'settings';
 
 // Bootstrap
 // @import '~bootstrap/scss/bootstrap';
 
 //Replace the above with the below. The one below will be executed
 
-@import '../../../node_modules/foundation-sites/assets/foundation.scss';
+@import "node_modules/foundation-sites/assets/foundation";
 
 .navbar-laravel {
   background-color: #fff;
