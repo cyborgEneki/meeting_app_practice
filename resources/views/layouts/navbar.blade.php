@@ -1,3 +1,4 @@
+@extends('layouts.sidebar')
 <div>
 
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
@@ -12,6 +13,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            <div class="small 12 columns">
+                <div class="button-group">
+                  <a class="secondary button">View</a>
+                  <a class="success button">Edit</a>
+                  <a class="warning button">Share</a>
+                  <a class="alert button">Delete</a>
+                </div>
+              </div>
+
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <a href="#">Item 1</a>
+                  <ul class="menu">
+                    <li><a href="#">Item 1A</a></li>
+                    <!-- ... -->
+                  </ul>
+                </li>
+                <li><a href="#">Item 2</a></li>
+                <li><a href="#">Item 3</a></li>
+                <li><a href="#">Item 4</a></li>
+              </ul>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
