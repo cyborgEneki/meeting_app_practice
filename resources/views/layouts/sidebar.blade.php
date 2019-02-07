@@ -7,14 +7,17 @@
 
     
 
-    <div id="main" class="row">
+    <div id="main" class="grid-x">
 
         <!-- sidebar content -->
         <ul class="side-nav">
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-            <li><a href="#">Link 4</a></li>
+            <li>
+                <button>
+                <a class="success button">New Meeting</a></li>
+                </button>
+            <li><a href="#">Meetings</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Venues</a></li>
           </ul>
 
     </div>

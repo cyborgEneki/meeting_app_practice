@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="meetingcontainer">
+
     <h2 class="same-line">Meetings</h2>
     <router-link :to="{ name: 'addMeeting' }" class="same-line">
-      <el-button icon="el-icon-circle-plus-outline"></el-button>
+      <!-- <el-button icon="el-icon-circle-plus-outline"></el-button> -->
+      <button>
+                <a class="success button">New Meeting</a>
+                </button>
     </router-link>
 
     <div v-for="meeting in meetings" :key="meeting.id" class="meetingdiv">
@@ -123,5 +127,14 @@ export default {
   text-align: center;
   pointer-events: none;
   color: #aaa;
+}
+
+.meetingcontainer {
+  overflow: scroll;
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  background: #ECF0F0;
+  padding: 10px;
 }
 </style>

@@ -1,10 +1,10 @@
 <template>
-    <div class="row">
-        <div class="col-md-3">
+    <div class="grid-x">
+        <div class="cell small-3">
             <meeting-list :choices.sync="choices"></meeting-list>
         </div>
 
-        <div class="col-md-9" v-if="showMeetingDetails">
+        <div class="cell small-9" v-if="showMeetingDetails">
             <meeting-details :choices.sync="choices"></meeting-details>
         </div>
 

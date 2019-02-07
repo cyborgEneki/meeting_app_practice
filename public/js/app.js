@@ -120416,7 +120416,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#mainmenu a.router-link-active[data-v-8142f38c] {\n  color: #1bd67c;\n  background: #f5f6f7;\n}\n#mainmenu a[data-v-8142f38c] {\n  padding: 10px;\n}\n#mainmenu[data-v-8142f38c] {\n  padding: 10px;\n}\n.links[data-v-8142f38c] {\n  display: block;\n}\n.list[data-v-8142f38c] {\n  text-align: left;\n  max-width: 500px;\n  margin: auto;\n}\n.newbutton[data-v-8142f38c] {\n  margin: 10px 0;\n}\n.head[data-v-8142f38c] {\n  margin-top: 10px;\n}\n", ""]);
 
 // exports
 
@@ -120492,43 +120492,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "App",
-    data: function data() {
-        return {
-            choices: [],
-            searchResults: null,
-            searchTerm: ''
-        };
-    },
-    created: function created() {
-        var _this = this;
+  name: "App",
+  data: function data() {
+    return {
+      choices: [],
+      searchResults: null,
+      searchTerm: ""
+    };
+  },
+  created: function created() {
+    var _this = this;
 
-        axios.get('/api/meetings/choices').then(function (response) {
-            _this.choices = response.data;
-        });
-    },
+    axios.get("/api/meetings/choices").then(function (response) {
+      _this.choices = response.data;
+    });
+  },
 
-    methods: {
-        searchMeeting: function searchMeeting() {
-            var _this2 = this;
+  methods: {
+    searchMeeting: function searchMeeting() {
+      var _this2 = this;
 
-            axios.get('/api/meetings/search/?search=' + this.searchTerm).then(function (response) {
-                _this2.searchResults = response.data;
-                _this2.$router.push('/meetings/searchresults');
-            });
-        }
+      axios.get("/api/meetings/search/?search=" + this.searchTerm).then(function (response) {
+        _this2.searchResults = response.data;
+        _this2.$router.push("/meetings/searchresults");
+      });
     }
+  }
 });
 
 /***/ }),
@@ -120540,129 +120531,130 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "input-group" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.searchTerm,
-            expression: "searchTerm"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Search meeting" },
-        domProps: { value: _vm.searchTerm },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "cell small-6" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchTerm,
+                expression: "searchTerm"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Search meeting" },
+            domProps: { value: _vm.searchTerm },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchTerm = $event.target.value
+              }
             }
-            _vm.searchTerm = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "input-group-append" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary",
-            attrs: { type: "button" },
-            on: { click: _vm.searchMeeting }
-          },
-          [_c("i", { staticClass: "el-icon-search" })]
-        )
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button" },
+                on: { click: _vm.searchMeeting }
+              },
+              [_c("i", { staticClass: "el-icon-search" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "grid-x" }, [
+          _c(
+            "div",
+            { staticClass: "cell small-2", attrs: { id: "mainmenu" } },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "button newbutton",
+                  attrs: { href: "#/create" }
+                },
+                [_vm._v("New Meeting")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "links", attrs: { to: { name: "meetings" } } },
+                [_vm._v("Meetings")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "links", attrs: { to: { name: "venues" } } },
+                [_vm._v("Venues")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "links", attrs: { to: { name: "users" } } },
+                [_vm._v("User Management")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "links",
+                  attrs: { to: { name: "meetingSeries" } }
+                },
+                [_vm._v("Meeting Series")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "links",
+                  attrs: { to: { name: "meetingTypes" } }
+                },
+                [_vm._v("Meeting Types")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "links", attrs: { to: { name: "medias" } } },
+                [_vm._v("Media")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "cell small-10" },
+            [
+              _c("router-view", {
+                attrs: {
+                  choices: _vm.choices,
+                  searchResults: _vm.searchResults
+                },
+                on: {
+                  "update:choices": function($event) {
+                    _vm.choices = $event
+                  },
+                  "update:searchResults": function($event) {
+                    _vm.searchResults = $event
+                  },
+                  "update:search-results": function($event) {
+                    _vm.searchResults = $event
+                  }
+                }
+              })
+            ],
+            1
+          )
+        ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-2" }, [
-      _c("h1", [_vm._v("Promeet")]),
-      _vm._v(" "),
-      _c("ul", [
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "meetings" } } }, [
-              _vm._v("Meetings")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "venues" } } }, [
-              _vm._v("Venues")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "users" } } }, [
-              _vm._v("User Management")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "meetingSeries" } } }, [
-              _vm._v("Meeting Series")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "meetingTypes" } } }, [
-              _vm._v("Meeting Types")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          [
-            _c("router-link", { attrs: { to: { name: "medias" } } }, [
-              _vm._v("Media")
-            ])
-          ],
-          1
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "col-md-10" },
-      [
-        _c("router-view", {
-          attrs: { choices: _vm.choices, searchResults: _vm.searchResults },
-          on: {
-            "update:choices": function($event) {
-              _vm.choices = $event
-            },
-            "update:searchResults": function($event) {
-              _vm.searchResults = $event
-            },
-            "update:search-results": function($event) {
-              _vm.searchResults = $event
-            }
-          }
-        })
-      ],
-      1
-    )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -123138,7 +123130,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-70c50684] {\n  display: inline-block;\n}\n.link[data-v-70c50684] {\n  cursor: pointer;\n}\n.disabled[data-v-70c50684] {\n  color: #cccccc;\n  text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-70c50684] {\n  display: inline-block;\n}\n.link[data-v-70c50684] {\n  cursor: pointer;\n}\n.disabled[data-v-70c50684] {\n  color: #cccccc;\n  text-decoration: none;\n}\n.padding-15[data-v-70c50684] {\n  padding: 15px;\n}\n", ""]);
 
 // exports
 
@@ -126086,6 +126078,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "padding-15" },
     [
       _c(
         "button",
@@ -128939,7 +128932,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n  display: inline-block;\n}\n.link[data-v-01d2bc68] {\n  cursor: pointer;\n}\n.meetingdiv[data-v-01d2bc68] {\n  border-radius: 5px;\n  margin-bottom: 10px;\n  padding: 10px;\n  background: #ffffff;\n  position: relative;\n}\n.has-search .form-control[data-v-01d2bc68] {\n  padding-left: 2.375rem;\n}\n.has-search .form-control-feedback[data-v-01d2bc68] {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n}\n", ""]);
+exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n  display: inline-block;\n}\n.link[data-v-01d2bc68] {\n  cursor: pointer;\n}\n.meetingdiv[data-v-01d2bc68] {\n  border-radius: 5px;\n  margin-bottom: 10px;\n  padding: 10px;\n  background: #ffffff;\n  position: relative;\n}\n.has-search .form-control[data-v-01d2bc68] {\n  padding-left: 2.375rem;\n}\n.has-search .form-control-feedback[data-v-01d2bc68] {\n  position: absolute;\n  z-index: 2;\n  display: block;\n  width: 2.375rem;\n  height: 2.375rem;\n  line-height: 2.375rem;\n  text-align: center;\n  pointer-events: none;\n  color: #aaa;\n}\n.meetingcontainer[data-v-01d2bc68] {\n  overflow: scroll;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column;\n          flex-flow: column;\n  height: 100vh;\n  background: #ECF0F0;\n  padding: 10px;\n}\n", ""]);
 
 // exports
 
@@ -128952,6 +128945,10 @@ exports.push([module.i, "\n.same-line[data-v-01d2bc68] {\n  display: inline-bloc
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_confirmation_button__);
+//
+//
+//
+//
 //
 //
 //
@@ -129200,14 +129197,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "meetingcontainer" },
     [
       _c("h2", { staticClass: "same-line" }, [_vm._v("Meetings")]),
       _vm._v(" "),
       _c(
         "router-link",
         { staticClass: "same-line", attrs: { to: { name: "addMeeting" } } },
-        [_c("el-button", { attrs: { icon: "el-icon-circle-plus-outline" } })],
-        1
+        [
+          _c("button", [
+            _c("a", { staticClass: "success button" }, [_vm._v("New Meeting")])
+          ])
+        ]
       ),
       _vm._v(" "),
       _vm._l(_vm.meetings, function(meeting) {
@@ -129324,10 +129325,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
+  return _c("div", { staticClass: "grid-x" }, [
     _c(
       "div",
-      { staticClass: "col-md-3" },
+      { staticClass: "cell small-3" },
       [
         _c("meeting-list", {
           attrs: { choices: _vm.choices },
@@ -129344,7 +129345,7 @@ var render = function() {
     _vm.showMeetingDetails
       ? _c(
           "div",
-          { staticClass: "col-md-9" },
+          { staticClass: "cell small-9" },
           [
             _c("meeting-details", {
               attrs: { choices: _vm.choices },

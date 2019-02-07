@@ -1,6 +1,51 @@
-@extends('layouts.sidebar')
+<div class="top-bar">
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">Site Title</li>
+            <li>
+              <a href="#"></a>
+              <ul class="menu vertical">
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+          </ul>
+        </div>
+        <div class="top-bar-right">
+          <ul class="menu">
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+          </ul>
+        </div>
+      </div>
+
+{{--  @extends('layouts.sidebar')
 <div>
 
+        <div class="top-bar">
+                <div class="top-bar-left cell columns-2">
+                  <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="menu-text"><i class="fas fa-headphones"></i>Promeet</li>
+                    <li><input type="search" placeholder="Search"></li>
+                    <li><button type="button" class="button">Search</button></li>
+                  </ul>
+                </div>
+                <div class="top-bar-right">
+                  <ul class="dropdown menu" data-dropdown-menu>
+                        <li>
+                            <a href="#">Joan Eneki<i class="fas fa-user-circle"></i></a>
+                            <ul class="menu">
+                                <li><a href="#"></a></li>
+                                <!-- ... -->
+                            </ul>
+                        </li>
+                        <li></li>
+                  </ul>
+                </div>
+              </div>
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/home') }}">
@@ -13,27 +58,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="small 12 columns">
-                <div class="button-group">
-                  <a class="secondary button">View</a>
-                  <a class="success button">Edit</a>
-                  <a class="warning button">Share</a>
-                  <a class="alert button">Delete</a>
-                </div>
-              </div>
-
-              <ul class="dropdown menu" data-dropdown-menu>
-                <li>
-                  <a href="#">Item 1</a>
-                  <ul class="menu">
-                    <li><a href="#">Item 1A</a></li>
-                    <!-- ... -->
-                  </ul>
-                </li>
-                <li><a href="#">Item 2</a></li>
-                <li><a href="#">Item 3</a></li>
-                <li><a href="#">Item 4</a></li>
-              </ul>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
@@ -51,15 +75,7 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @else
-                    <ul class="dropdown menu" data-dropdown-menu>
-                                <li>
-                                  <a href="#">Item 1</a>
-                                  <ul class="menu">
-                                    <li><a href="#">Item 1A</a></li>
-                                    <!-- ... -->
-                                  </ul>
-                                </li>
-                              </ul>
+                    
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -84,4 +100,4 @@
             </div>
         </div>
     </nav>
-</div>
+</div>  --}}

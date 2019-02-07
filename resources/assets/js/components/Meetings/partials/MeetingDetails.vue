@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <div class="padding-15">
     <button type="button" class="success button">Save</button>
 
     <h4>Meeting Name</h4>
@@ -1209,5 +1209,9 @@ export default {
 .disabled {
   color: #cccccc;
   text-decoration: none;
+}
+
+.padding-15 {
+  padding: 15px;
 }
 </style>
