@@ -10,21 +10,21 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="grid-x">
-          <div class="cell small-2" id="mainmenu">
-            <a class="button newbutton" href="#/create">New Meeting</a>
-            <router-link :to="{ name: 'meetings'}" class="links">Meetings</router-link>
-            <router-link :to="{ name: 'venues' }" class="links">Venues</router-link>
-            <router-link :to="{ name: 'users'}" class="links">User Management</router-link>
-            <router-link :to="{ name: 'meetingSeries'}" class="links">Meeting Series</router-link>
-            <router-link :to="{ name: 'meetingTypes'}" class="links">Meeting Types</router-link>
-            <router-link :to="{ name: 'medias'}" class="links">Media</router-link>
-          </div>
-          <div class="cell small-10">
-            <router-view :choices.sync="choices" :searchResults.sync="searchResults"/>
-          </div>
-        </div>
+    <div class="grid-x">
+      <div class="cell small-2" id="mainmenu">
+        <a class="button newbutton" href="#/create">New Meeting</a>
+        <router-link :to="{ name: 'meetings'}" class="links">Meetings</router-link>
+        <router-link :to="{ name: 'venues' }" class="links">Venues</router-link>
+        <router-link :to="{ name: 'users'}" class="links">User Management</router-link>
+        <router-link :to="{ name: 'meetingSeries'}" class="links">Meeting Series</router-link>
+        <router-link :to="{ name: 'meetingTypes'}" class="links">Meeting Types</router-link>
+        <router-link :to="{ name: 'medias'}" class="links">Media</router-link>
+      </div>
+      <div class="cell small-10">
+        <router-view :choices.sync="choices" :searchResults.sync="searchResults"/>
       </div>
     </div>
   </div>

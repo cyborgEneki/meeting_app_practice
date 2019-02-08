@@ -19385,6 +19385,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   router: __WEBPACK_IMPORTED_MODULE_12__routes_js__["a" /* default */]
 });
 
+$(document).foundation();
+
 /***/ }),
 /* 86 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -19404,8 +19406,6 @@ try {
 
   __webpack_require__(90);
 } catch (e) {}
-
-$(document).foundation();
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -120567,93 +120567,81 @@ var render = function() {
               [_c("i", { staticClass: "el-icon-search" })]
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "grid-x" }, [
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "grid-x" }, [
+      _c(
+        "div",
+        { staticClass: "cell small-2", attrs: { id: "mainmenu" } },
+        [
           _c(
-            "div",
-            { staticClass: "cell small-2", attrs: { id: "mainmenu" } },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "button newbutton",
-                  attrs: { href: "#/create" }
-                },
-                [_vm._v("New Meeting")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                { staticClass: "links", attrs: { to: { name: "meetings" } } },
-                [_vm._v("Meetings")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                { staticClass: "links", attrs: { to: { name: "venues" } } },
-                [_vm._v("Venues")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                { staticClass: "links", attrs: { to: { name: "users" } } },
-                [_vm._v("User Management")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "links",
-                  attrs: { to: { name: "meetingSeries" } }
-                },
-                [_vm._v("Meeting Series")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "links",
-                  attrs: { to: { name: "meetingTypes" } }
-                },
-                [_vm._v("Meeting Types")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                { staticClass: "links", attrs: { to: { name: "medias" } } },
-                [_vm._v("Media")]
-              )
-            ],
-            1
+            "a",
+            { staticClass: "button newbutton", attrs: { href: "#/create" } },
+            [_vm._v("New Meeting")]
           ),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "cell small-10" },
-            [
-              _c("router-view", {
-                attrs: {
-                  choices: _vm.choices,
-                  searchResults: _vm.searchResults
-                },
-                on: {
-                  "update:choices": function($event) {
-                    _vm.choices = $event
-                  },
-                  "update:searchResults": function($event) {
-                    _vm.searchResults = $event
-                  },
-                  "update:search-results": function($event) {
-                    _vm.searchResults = $event
-                  }
-                }
-              })
-            ],
-            1
+            "router-link",
+            { staticClass: "links", attrs: { to: { name: "meetings" } } },
+            [_vm._v("Meetings")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "links", attrs: { to: { name: "venues" } } },
+            [_vm._v("Venues")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "links", attrs: { to: { name: "users" } } },
+            [_vm._v("User Management")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "links", attrs: { to: { name: "meetingSeries" } } },
+            [_vm._v("Meeting Series")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "links", attrs: { to: { name: "meetingTypes" } } },
+            [_vm._v("Meeting Types")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { staticClass: "links", attrs: { to: { name: "medias" } } },
+            [_vm._v("Media")]
           )
-        ])
-      ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "cell small-10" },
+        [
+          _c("router-view", {
+            attrs: { choices: _vm.choices, searchResults: _vm.searchResults },
+            on: {
+              "update:choices": function($event) {
+                _vm.choices = $event
+              },
+              "update:searchResults": function($event) {
+                _vm.searchResults = $event
+              },
+              "update:search-results": function($event) {
+                _vm.searchResults = $event
+              }
+            }
+          })
+        ],
+        1
+      )
     ])
   ])
 }
